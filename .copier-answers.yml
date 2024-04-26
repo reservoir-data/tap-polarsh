@@ -1,0 +1,23 @@
+# Changes here will be overwritten by Copier
+_commit: v0.1.5
+_src_path: gh:edgarrmondragon/singer-tap-copier-template
+author_email: edgarrmondragon@hey.com
+author_fullname: Edgar Ramírez-Mondragón
+author_username: edgarrmondragon
+dependabot_update_time: '10:00'
+dependabot_update_timezone: Etc/UTC
+python_main_version: '3.12'
+repository_name: tap-polarsh
+repository_namespace: edgarrmondragon
+repository_provider: github.com
+repository_visibility: private
+tap_auth_method: Bearer Token
+tap_id: tap-polarsh
+tap_package_command_line_name: tap-polarsh
+tap_package_distribution_name: tap-polarsh
+tap_package_import_name: tap_polarsh
+tap_source_description: Polar is the creator platform for developers
+tap_source_id: Polar
+tap_source_name: Polar
+tap_stream_type: REST
+vscode_files: true
