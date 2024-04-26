@@ -21,7 +21,7 @@ class Organizations(PolarStream):
         self,
         record: dict[str, t.Any],
         context: dict[str, t.Any] | None,  # noqa: ARG002
-    ) -> t.Iterable[dict | None]:
+    ) -> t.Iterable[dict[str, t.Any] | None]:
         """Generate child contexts."""
         yield {
             "organization_id": record["id"],
@@ -61,6 +61,6 @@ class Issues(PolarStream):
         """Get URL query parameters."""
         return {
             **super().get_url_params(context, next_page_token),
-            "platform": context["platform"],
-            "organization_name": context["organization_name"],
+            "platform": context["platform"] if context else None,
+            "organization_name": context["organization_name"] if context else None,
         }

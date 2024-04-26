@@ -15,7 +15,7 @@ if t.TYPE_CHECKING:
     from tap_polarsh.client import PolarStream
 
 OPENAPI_URL = "https://api.polar.sh/openapi.json"
-STREAMS: list[PolarStream] = [
+STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
     streams.Repositories,
     streams.Issues,
@@ -55,7 +55,7 @@ class TapPolar(Tap):
         Returns:
             A list of Neon Serverless Postgres streams.
         """
-        streams: list[PolarStream[str]] = []
+        streams: list[PolarStream] = []
         openapi_schema = self.get_openapi_schema()
 
         for stream_type in STREAMS:
