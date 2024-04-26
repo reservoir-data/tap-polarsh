@@ -31,7 +31,7 @@ dynamic = [
 ]
 dependencies = [
   "requests~=2.31",
-  "singer-sdk~=0.37.0a3",
+  "singer-sdk~=0.37.0a4",
 ]
 optional-dependencies.dev = [
   "tap-polarsh[testing,typing]",
