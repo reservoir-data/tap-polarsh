@@ -18,7 +18,8 @@ OPENAPI_URL = "https://api.polar.sh/openapi.json"
 STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
     streams.Repositories,
-    streams.Issues,
+    streams.Articles,
+    streams.OrganizationCustomers,
 ]
 
 
@@ -33,6 +34,15 @@ class TapPolar(Tap):
             th.StringType,
             required=True,
             description="API Token for Polar",
+        ),
+        th.Property(
+            "is_member",
+            th.BooleanType,
+            description=(
+                "Whether to only query organizations the user is a member of. "
+                "Defaults to True."
+            ),
+            default=True,
         ),
         th.Property(
             "start_date",

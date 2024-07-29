@@ -58,9 +58,13 @@ settings:
   name: flattening_max_depth
 - description: API Token for Polar
   kind: password
-  name: token
   label: API Token
+  name: token
   sensitive: true
+- description: Whether to only query organizations the user is a member of. Defaults to true.
+  kind: boolean
+  label: Is Member
+  name: is_member
 - description: Earliest date to get data from
   kind: date_iso8601
   label: Start Date
