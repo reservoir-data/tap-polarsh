@@ -19,6 +19,7 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 | Setting                           | Required | Default | Description                                                                                                                                                                                                                                              |
 | :-------------------------------- | :------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | token                             | True     | None    | API Token for Polar                                                                                                                                                                                                                                      |
+| is_member                         | False    | true    | Whether to only query organizations the user is a member of. Defaults to True.                                                                                                                                                                           |
 | start_date                        | False    | None    | Earliest datetime to get data from                                                                                                                                                                                                                       |
 
 <details>
@@ -64,7 +65,7 @@ Get a [Personal Access Token](https://polar.sh/settings) and provide it as the `
 #### Using a direct reference
 
 ```bash
-meltano add extractor tap-streakcrm --from-ref=https://raw.githubusercontent.com/reservoir-data/tap-streakcrm/main/plugin.yaml
+meltano add extractor tap-polarsh --from-ref=https://raw.githubusercontent.com/reservoir-data/tap-polarsh/main/plugin.yaml
 ```
 
 Requires Meltano v3.1.0+.

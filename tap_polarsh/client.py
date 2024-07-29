@@ -6,6 +6,7 @@ import typing as t
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
+from singer_sdk.pagination import BasePageNumberPaginator
 
 
 class PolarStream(RESTStream[t.Any]):
@@ -16,6 +17,9 @@ class PolarStream(RESTStream[t.Any]):
 
     swagger_ref: str
     """OpenAPI schema reference for this stream."""
+
+    page_size = 100
+    """Number of records to request per API call."""
 
     @property
     def authenticator(self) -> BearerTokenAuthenticator:
@@ -39,10 +43,14 @@ class PolarStream(RESTStream[t.Any]):
         """
         return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
 
+    def get_new_paginator(self) -> BasePageNumberPaginator:
+        """Get a new paginator object."""
+        return BasePageNumberPaginator(start_value=1)
+
     def get_url_params(
         self,
         context: dict[str, t.Any] | None,  # noqa: ARG002
-        next_page_token: t.Any | None,  # noqa: ARG002, ANN401
+        next_page_token: int | None,
     ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
@@ -53,5 +61,7 @@ class PolarStream(RESTStream[t.Any]):
         Returns:
             Mapping of URL query parameters.
         """
-        params: dict[str, t.Any] = {}
-        return params
+        return {
+            "page": next_page_token,
+            "limit": self.page_size,
+        }
