@@ -8,6 +8,9 @@ from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
 from singer_sdk.pagination import BasePageNumberPaginator
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 
 class PolarStream(RESTStream[t.Any]):
     """Polar stream class."""
@@ -49,7 +52,7 @@ class PolarStream(RESTStream[t.Any]):
 
     def get_url_params(
         self,
-        context: dict[str, t.Any] | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
         """Get URL query parameters.
