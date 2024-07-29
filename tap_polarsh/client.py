@@ -12,7 +12,6 @@ from singer_sdk.pagination import BasePageNumberPaginator
 class PolarStream(RESTStream[t.Any]):
     """Polar stream class."""
 
-
     url_base = "https://api.polar.sh"
     records_jsonpath = "$.items[*]"
 
