@@ -58,7 +58,7 @@ class Repositories(PolarStream):
         """Get URL query parameters."""
         return {
             **super().get_url_params(context, next_page_token),
-            "organization_id": context["organization_id"],
+            "organization_id": context["organization_id"] if context else None,
         }
 
 
@@ -105,5 +105,5 @@ class Articles(PolarStream):
         """Get URL query parameters."""
         return {
             **super().get_url_params(context, next_page_token),
-            "organization_id": context["organization_id"],
+            "organization_id": context["organization_id"] if context else None,
         }
