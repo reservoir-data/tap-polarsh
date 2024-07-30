@@ -6,6 +6,9 @@ import typing as t
 
 from tap_polarsh.client import PolarStream
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 
 class Organizations(PolarStream):
     """Organizations stream."""
@@ -19,7 +22,7 @@ class Organizations(PolarStream):
 
     def get_url_params(
         self,
-        context: dict[str, t.Any] | None,
+        context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
         """Get URL query parameters."""
@@ -30,7 +33,7 @@ class Organizations(PolarStream):
     def generate_child_contexts(
         self,
         record: dict[str, t.Any],
-        context: dict[str, t.Any] | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
     ) -> t.Iterable[dict[str, t.Any] | None]:
         """Generate child contexts."""
         yield {
@@ -52,7 +55,7 @@ class Repositories(PolarStream):
 
     def get_url_params(
         self,
-        context: dict[str, t.Any] | None,
+        context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
         """Get URL query parameters."""
@@ -99,7 +102,7 @@ class Articles(PolarStream):
 
     def get_url_params(
         self,
-        context: dict[str, t.Any] | None,
+        context: Context | None,
         next_page_token: t.Any | None,  # noqa: ANN401
     ) -> dict[str, t.Any]:
         """Get URL query parameters."""
