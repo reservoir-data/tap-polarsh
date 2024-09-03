@@ -19,7 +19,6 @@ STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
     streams.Repositories,
     streams.Articles,
-    streams.OrganizationCustomers,
 ]
 
 

@@ -66,7 +66,10 @@ class Repositories(PolarStream):
 
 
 class OrganizationCustomers(PolarStream):
-    """Organization customers stream."""
+    """Organization customers stream.
+
+    DEPRECATED: This stream is no longer supported.
+    """
 
     name = "organization_customers"
     path = "/api/v1/organizations/{organization_id}/customers"
