@@ -12,8 +12,6 @@
             "program": "tap_polarsh",
             "justMyCode": false,
             "args": [
-                "--config",
-                ".secrets/config.json",
 		        "--config",
 		        "ENV",
             ],

@@ -18,7 +18,7 @@ class Organizations(PolarStream):
     primary_keys = ("id",)
     replication_key = None
 
-    swagger_ref: str = "Organization-Output"
+    swagger_ref: str = "Organization"
 
     def get_url_params(
         self,
