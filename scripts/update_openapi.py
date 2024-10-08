@@ -18,4 +18,4 @@ PATH = "tap_polarsh/openapi/openapi.json"
 
 
 with pathlib.Path(PATH).open("w") as file:
-    file.write(requests.get(OPENAPI_URL, timeout=5).text)
+    file.write(requests.get(OPENAPI_URL, timeout=5).text + "\n")
