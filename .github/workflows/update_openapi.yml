@@ -1,0 +1,17 @@
+name: Update OpenAPI Specification for polar.sh
+
+on:
+  workflow_dispatch:
+  schedule:
+  # Daily at noon
+  - cron: '0 12 * * *'
+
+jobs:
+  update_openapi_specification:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v3
+      with:
+        version: ">=0.4.18"
+    - run: uv run scripts/update_openapi.py
