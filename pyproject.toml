@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "tap-polarsh"
-description = "`tap-polarsh` is a Singer tap for Polar, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for Polar, built with the Meltano SDK for Singer Taps."
 readme = "README.md"
 keywords = [
   "ELT",
@@ -57,6 +57,17 @@ scripts."tap-polarsh" = "tap_polarsh.tap:TapPolar.cli"
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.envs.default]
+installer = "uv"
+
+[tool.hatch.envs.default.env-vars]
+UV_PRERELEASE = "allow"
+
+[tool.hatch.envs.default.overrides]
+env.GITHUB_ACTIONS.dev-mode = { value = false, if = [
+  "true",
+] }
+
 [tool.hatch.envs.sync.scripts]
 console = "tap-polarsh {args}"
 jsonl = "tap-polarsh {args} > tap-polarsh.jsonl"
@@ -73,11 +84,11 @@ dependencies = "deptry ."
 template = "test"
 [[tool.hatch.envs.all.matrix]]
 python = [
-  "3.8",
   "3.9",
   "3.10",
   "3.11",
   "3.12",
+  "3.13",
 ]
 
 [tool.hatch.envs.typing]
@@ -139,7 +150,7 @@ max_supported_python = "3.13"
 addopts = "-vvv --durations=10"
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 warn_redundant_casts = true
 warn_return_any = true
 warn_no_return = true

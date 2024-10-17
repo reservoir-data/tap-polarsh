@@ -1,4 +1,4 @@
-# `tap-polarsh`
+# tap-polarsh
 
 Singer tap for [Polar.sh](https://polar.sh).
 
