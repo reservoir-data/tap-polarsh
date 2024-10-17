@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: "1"
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       fail-fast: false
       matrix:
@@ -49,16 +48,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-        cache: pip
-
-    - name: Upgrade pip
-      run: |
-        pip install pip
-        pip --version
+    - uses: astral-sh/setup-uv@v3
+      with:
+        version: "0.4.22"
 
     - name: Install Hatch
       run: |
-        pipx install hatch
+        uv tool install hatch
         hatch --version
 
     - name: Run tests
