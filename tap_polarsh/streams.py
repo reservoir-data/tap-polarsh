@@ -49,7 +49,7 @@ class Repositories(PolarStream):
     primary_keys = ("id",)
     replication_key = None
 
-    swagger_ref: str = "Repository-Output"
+    swagger_ref: str = "Repository"
 
     parent_stream_type = Organizations
 
