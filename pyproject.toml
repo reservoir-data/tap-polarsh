@@ -46,7 +46,7 @@ optional-dependencies.testing = [
   "singer-sdk[testing]",
 ]
 optional-dependencies.typing = [
-  "mypy~=1.12.1",
+  "mypy~=1.13.0",
   "types-requests~=2.31",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
