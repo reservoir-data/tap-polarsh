@@ -24,7 +24,9 @@ def main() -> None:
         response = requests.get(OPENAPI_URL, timeout=5)
         response.raise_for_status()
         spec = response.json()
-        json.dump(spec, file, indent=2)
+
+        content = json.dumps(spec, indent=2) + "\n"
+        file.write(content)
 
 
 if __name__ == "__main__":
