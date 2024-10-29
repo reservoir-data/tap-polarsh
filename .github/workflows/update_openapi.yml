@@ -13,6 +13,11 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+    - uses: actions/create-github-app-token@v1
+      id: generate-token
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
     - uses: actions/checkout@v4
     - uses: astral-sh/setup-uv@v3
       with:
@@ -21,3 +26,4 @@ jobs:
     - uses: peter-evans/create-pull-request@v7
       with:
         title: 'chore: Update OpenAPI Specification for polar.sh'
+        token: ${{ steps.generate-token.outputs.token }}
