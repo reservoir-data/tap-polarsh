@@ -9208,7 +9208,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CheckoutLinkCreate"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckoutLinkProductCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutLinkPriceCreate"
+                  }
+                ],
+                "title": "Checkout Link Create"
               }
             }
           }
@@ -15052,14 +15060,49 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment."
           },
-          "product_price_id": {
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label",
+            "description": "Optional label to distinguish links internally"
+          },
+          "product_id": {
             "type": "string",
             "format": "uuid4",
+            "title": "Product Id",
+            "description": "ID of the product to checkout."
+          },
+          "product_price_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Product Price Id",
-            "description": "ID of the product price to checkout."
+            "description": "ID of the product price to checkout. First available price will be selected unless an explicit price ID is set."
+          },
+          "product": {
+            "$ref": "#/components/schemas/CheckoutLinkProduct"
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "url": {
             "type": "string",
@@ -15076,14 +15119,17 @@
           "payment_processor",
           "client_secret",
           "success_url",
+          "label",
+          "product_id",
           "product_price_id",
+          "product",
           "product_price",
           "url"
         ],
         "title": "CheckoutLink",
         "description": "Checkout link data."
       },
-      "CheckoutLinkCreate": {
+      "CheckoutLinkPriceCreate": {
         "properties": {
           "metadata": {
             "additionalProperties": {
@@ -15115,11 +15161,17 @@
             "title": "Payment Processor",
             "description": "Payment processor to use. Currently only Stripe is supported."
           },
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "ID of the product price to checkout."
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label",
+            "description": "Optional label to distinguish links internally"
           },
           "success_url": {
             "anyOf": [
@@ -15135,6 +15187,12 @@
             ],
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "product_price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Price Id",
+            "description": "ID of the product price to checkout."
           }
         },
         "type": "object",
@@ -15142,8 +15200,189 @@
           "payment_processor",
           "product_price_id"
         ],
-        "title": "CheckoutLinkCreate",
-        "description": "Schema to create a new checkout link."
+        "title": "CheckoutLinkPriceCreate"
+      },
+      "CheckoutLinkProduct": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the product."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the product."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the product."
+          },
+          "is_recurring": {
+            "type": "boolean",
+            "title": "Is Recurring",
+            "description": "Whether the product is a subscription tier."
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the product is archived and no longer available."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the product."
+          },
+          "prices": {
+            "items": {
+              "$ref": "#/components/schemas/ProductPrice"
+            },
+            "type": "array",
+            "title": "Prices",
+            "description": "List of prices for this product."
+          },
+          "benefits": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/BenefitBase"
+                },
+                {
+                  "$ref": "#/components/schemas/BenefitArticles"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "BenefitPublic",
+            "description": "List of benefits granted by the product."
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/ProductMediaFileRead"
+            },
+            "type": "array",
+            "title": "Medias",
+            "description": "List of medias associated to the product."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "name",
+          "description",
+          "is_recurring",
+          "is_archived",
+          "organization_id",
+          "prices",
+          "benefits",
+          "medias"
+        ],
+        "title": "CheckoutLinkProduct",
+        "description": "Product data for a checkout link."
+      },
+      "CheckoutLinkProductCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "payment_processor": {
+            "type": "string",
+            "enum": [
+              "stripe"
+            ],
+            "const": "stripe",
+            "title": "Payment Processor",
+            "description": "Payment processor to use. Currently only Stripe is supported."
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label",
+            "description": "Optional label to distinguish links internally"
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "ID of the product to checkout. First available price will be selected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "payment_processor",
+          "product_id"
+        ],
+        "title": "CheckoutLinkProductCreate"
       },
       "CheckoutLinkSortProperty": {
         "type": "string",
@@ -15182,6 +15421,29 @@
             ],
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "product_price_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Price Id"
           },
           "success_url": {
             "anyOf": [
