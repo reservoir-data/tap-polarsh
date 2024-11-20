@@ -3508,6 +3508,44 @@
             "description": "Filter by product ID."
           },
           {
+            "name": "discount_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The product ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/products",
+                    "resourceName": "Product",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The product ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/products",
+                      "resourceName": "Product",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "DiscountID Filter",
+              "description": "Filter by discount ID."
+            },
+            "description": "Filter by discount ID."
+          },
+          {
             "name": "active",
             "in": "query",
             "required": false,
@@ -6838,6 +6876,32 @@
             "description": "Filter by product price type. `recurring` will return orders corresponding to subscriptions creations or renewals. `one_time` will return orders corresponding to one-time purchases."
           },
           {
+            "name": "discount_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "DiscountID Filter",
+              "description": "Filter by discount ID."
+            },
+            "description": "Filter by discount ID."
+          },
+          {
             "name": "user_id",
             "in": "query",
             "required": false,
@@ -8590,7 +8654,7 @@
             "description": "Filter by organization ID."
           },
           {
-            "name": "benefit_ids",
+            "name": "benefit_id",
             "in": "query",
             "required": false,
             "schema": {
@@ -9628,7 +9692,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListResource__"
+                  "$ref": "#/components/schemas/ListResource_CustomField_"
                 }
               }
             }
@@ -9704,7 +9768,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomField"
+                  "$ref": "#/components/schemas/CustomField",
+                  "title": "CustomField"
                 }
               }
             }
@@ -9768,7 +9833,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomField"
+                  "$ref": "#/components/schemas/CustomField",
+                  "title": "CustomField"
                 }
               }
             }
@@ -9849,7 +9915,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomField"
+                  "$ref": "#/components/schemas/CustomField",
+                  "title": "CustomField"
                 }
               }
             }
@@ -9944,6 +10011,520 @@
           "User"
         ],
         "x-speakeasy-group": "custom-fields",
+        "x-speakeasy-name-override": "delete"
+      }
+    },
+    "/v1/discounts/": {
+      "get": {
+        "tags": [
+          "discounts",
+          "featured",
+          "documented"
+        ],
+        "summary": "List Discounts",
+        "description": "List discounts.",
+        "operationId": "discounts:list",
+        "security": [
+          {
+            "oidc": [
+              "discounts:read",
+              "discounts:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by name.",
+              "title": "Query"
+            },
+            "description": "Filter by name."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiscountSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-created_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Discount_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "discounts",
+        "x-speakeasy-name-override": "list"
+      },
+      "post": {
+        "tags": [
+          "discounts",
+          "featured",
+          "documented"
+        ],
+        "summary": "Create Discount",
+        "description": "Create a discount.",
+        "operationId": "discounts:create",
+        "security": [
+          {
+            "oidc": [
+              "discounts:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedOnceForeverDurationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedRepeatDurationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageOnceForeverDurationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageRepeatDurationCreate"
+                  }
+                ],
+                "title": "Discount Create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Discount created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedRepeatDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageRepeatDuration"
+                    }
+                  ],
+                  "title": "Response Discounts:Create"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "discounts",
+        "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/discounts/{id}": {
+      "get": {
+        "tags": [
+          "discounts",
+          "featured",
+          "documented"
+        ],
+        "summary": "Get Discount",
+        "description": "Get a discount by ID.",
+        "operationId": "discounts:get",
+        "security": [
+          {
+            "oidc": [
+              "discounts:read",
+              "discounts:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The discount ID.",
+              "title": "Id"
+            },
+            "description": "The discount ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedRepeatDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageRepeatDuration"
+                    }
+                  ],
+                  "title": "Response Discounts:Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Discount not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "discounts",
+        "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "tags": [
+          "discounts",
+          "featured",
+          "documented"
+        ],
+        "summary": "Update Discount",
+        "description": "Update a discount.",
+        "operationId": "discounts:update",
+        "security": [
+          {
+            "oidc": [
+              "discounts:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The discount ID.",
+              "title": "Id"
+            },
+            "description": "The discount ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscountUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Discount updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountFixedRepeatDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageOnceForeverDuration"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DiscountPercentageRepeatDuration"
+                    }
+                  ],
+                  "title": "Response Discounts:Update"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Discount not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "discounts",
+        "x-speakeasy-name-override": "update"
+      },
+      "delete": {
+        "tags": [
+          "discounts",
+          "featured",
+          "documented"
+        ],
+        "summary": "Delete Discount",
+        "description": "Delete a discount.",
+        "operationId": "discounts:delete",
+        "security": [
+          {
+            "oidc": [
+              "discounts:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The discount ID.",
+              "title": "Id"
+            },
+            "description": "The discount ID."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Discount deleted."
+          },
+          "404": {
+            "description": "Discount not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "discounts",
         "x-speakeasy-name-override": "delete"
       }
     }
@@ -11424,7 +12005,8 @@
             "description": "ID of the custom field."
           },
           "custom_field": {
-            "$ref": "#/components/schemas/CustomField"
+            "$ref": "#/components/schemas/CustomField",
+            "title": "CustomField"
           },
           "order": {
             "type": "integer",
@@ -14978,6 +15560,18 @@
             ],
             "title": "Customer Tax Id"
           },
+          "discount_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Code",
+            "description": "Discount code to apply to the checkout."
+          },
           "confirmation_token_id": {
             "anyOf": [
               {
@@ -14994,6 +15588,210 @@
         "type": "object",
         "title": "CheckoutConfirmStripe",
         "description": "Confirm a checkout session using a Stripe confirmation token."
+      },
+      "CheckoutDiscountFixedOnceForeverDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "amount",
+          "currency",
+          "id",
+          "name",
+          "code"
+        ],
+        "title": "CheckoutDiscountFixedOnceForeverDuration",
+        "description": "Schema for a fixed amount discount that is applied once or forever."
+      },
+      "CheckoutDiscountFixedRepeatDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "amount",
+          "currency",
+          "id",
+          "name",
+          "code"
+        ],
+        "title": "CheckoutDiscountFixedRepeatDuration",
+        "description": "Schema for a fixed amount discount that is applied on every invoice\nfor a certain number of months."
+      },
+      "CheckoutDiscountPercentageOnceForeverDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "basis_points",
+          "id",
+          "name",
+          "code"
+        ],
+        "title": "CheckoutDiscountPercentageOnceForeverDuration",
+        "description": "Schema for a percentage discount that is applied once or forever."
+      },
+      "CheckoutDiscountPercentageRepeatDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "basis_points",
+          "id",
+          "name",
+          "code"
+        ],
+        "title": "CheckoutDiscountPercentageRepeatDuration",
+        "description": "Schema for a percentage discount that is applied on every invoice\nfor a certain number of months."
       },
       "CheckoutLink": {
         "properties": {
@@ -15683,6 +16481,18 @@
             "title": "Currency",
             "description": "Currency code of the checkout session."
           },
+          "subtotal_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtotal Amount",
+            "description": "Subtotal amount in cents, including discounts and before tax."
+          },
           "total_amount": {
             "anyOf": [
               {
@@ -15693,7 +16503,7 @@
               }
             ],
             "title": "Total Amount",
-            "description": "Total amount to pay in cents."
+            "description": "Total amount to pay in cents, including discounts and after tax."
           },
           "product_id": {
             "type": "string",
@@ -15707,10 +16517,48 @@
             "title": "Product Price Id",
             "description": "ID of the product price to checkout."
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount applied to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
+          "is_discount_applicable": {
+            "type": "boolean",
+            "title": "Is Discount Applicable",
+            "description": "Whether the discount is applicable to the checkout. Typically, free and custom prices are not discountable."
+          },
+          "is_free_product_price": {
+            "type": "boolean",
+            "title": "Is Free Product Price",
+            "description": "Whether the product price is free, regardless of discounts."
+          },
           "is_payment_required": {
             "type": "boolean",
             "title": "Is Payment Required",
-            "description": "Whether the checkout requires payment. Useful to detect free products."
+            "description": "Whether the checkout requires payment, e.g. in case of free products or discounts that cover the total amount."
+          },
+          "is_payment_setup_required": {
+            "type": "boolean",
+            "title": "Is Payment Setup Required",
+            "description": "Whether the checkout requires setting up a payment method, regardless of the amount, e.g. subscriptions that have first free cycles."
+          },
+          "is_payment_form_required": {
+            "type": "boolean",
+            "title": "Is Payment Form Required",
+            "description": "Whether the checkout requires a payment form, whether because of a payment or payment method setup."
           },
           "customer_id": {
             "anyOf": [
@@ -15794,6 +16642,30 @@
           "product_price": {
             "$ref": "#/components/schemas/ProductPrice"
           },
+          "discount": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountFixedOnceForeverDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountFixedRepeatDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountPercentageOnceForeverDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountPercentageRepeatDuration"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15820,10 +16692,17 @@
           "amount",
           "tax_amount",
           "currency",
+          "subtotal_amount",
           "total_amount",
           "product_id",
           "product_price_id",
+          "discount_id",
+          "allow_discount_codes",
+          "is_discount_applicable",
+          "is_free_product_price",
           "is_payment_required",
+          "is_payment_setup_required",
+          "is_payment_form_required",
           "customer_id",
           "customer_name",
           "customer_email",
@@ -15833,6 +16712,7 @@
           "payment_processor_metadata",
           "product",
           "product_price",
+          "discount",
           "organization",
           "attached_custom_fields"
         ],
@@ -15974,6 +16854,31 @@
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout."
+          },
+          "allow_discount_codes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
           "customer_ip_address": {
             "anyOf": [
               {
@@ -16104,6 +17009,18 @@
               }
             ],
             "title": "Customer Tax Id"
+          },
+          "discount_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Code",
+            "description": "Discount code to apply to the checkout."
           }
         },
         "type": "object",
@@ -17666,6 +18583,2151 @@
         ],
         "title": "CustomFieldUpdateText",
         "description": "Schema to update a custom field of type text."
+      },
+      "DiscountDuration": {
+        "type": "string",
+        "enum": [
+          "once",
+          "forever",
+          "repeating"
+        ],
+        "title": "DiscountDuration"
+      },
+      "DiscountFixedOnceForeverDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/DiscountProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "amount",
+          "currency",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id",
+          "products"
+        ],
+        "title": "DiscountFixedOnceForeverDuration",
+        "description": "Schema for a fixed amount discount that is applied once or forever."
+      },
+      "DiscountFixedOnceForeverDurationBase": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "amount",
+          "currency",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id"
+        ],
+        "title": "DiscountFixedOnceForeverDurationBase"
+      },
+      "DiscountFixedOnceForeverDurationCreate": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType",
+            "description": "Type of the discount."
+          },
+          "amount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Amount",
+            "description": "Fixed amount to discount from the invoice total."
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "usd",
+            "title": "Currency",
+            "description": "The currency. Currently, only `usd` is supported.",
+            "default": "usd"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Optional timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Optional timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Optional maximum number of times the discount can be redeemed."
+          },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "description": "List of product IDs the discount can be applied to."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the discount. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "amount",
+          "name"
+        ],
+        "title": "DiscountFixedOnceForeverDurationCreate",
+        "description": "Schema to create a fixed amount discount that is applied once or forever."
+      },
+      "DiscountFixedRepeatDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/DiscountProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "amount",
+          "currency",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id",
+          "products"
+        ],
+        "title": "DiscountFixedRepeatDuration",
+        "description": "Schema for a fixed amount discount that is applied on every invoice\nfor a certain number of months."
+      },
+      "DiscountFixedRepeatDurationBase": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "amount",
+          "currency",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id"
+        ],
+        "title": "DiscountFixedRepeatDurationBase"
+      },
+      "DiscountFixedRepeatDurationCreate": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Duration In Months",
+            "description": "Number of months the discount should be applied.\n\nFor this to work on yearly pricing, you should multiply this by 12.\nFor example, to apply the discount for 2 years, set this to 24."
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType",
+            "description": "Type of the discount."
+          },
+          "amount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Amount",
+            "description": "Fixed amount to discount from the invoice total."
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "usd",
+            "title": "Currency",
+            "description": "The currency. Currently, only `usd` is supported.",
+            "default": "usd"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Optional timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Optional timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Optional maximum number of times the discount can be redeemed."
+          },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "description": "List of product IDs the discount can be applied to."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the discount. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "amount",
+          "name"
+        ],
+        "title": "DiscountFixedRepeatDurationCreate",
+        "description": "Schema to create a fixed amount discount that is applied on every invoice\nfor a certain number of months."
+      },
+      "DiscountPercentageOnceForeverDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/DiscountProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "basis_points",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id",
+          "products"
+        ],
+        "title": "DiscountPercentageOnceForeverDuration",
+        "description": "Schema for a percentage discount that is applied once or forever."
+      },
+      "DiscountPercentageOnceForeverDurationBase": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "basis_points",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id"
+        ],
+        "title": "DiscountPercentageOnceForeverDurationBase"
+      },
+      "DiscountPercentageOnceForeverDurationCreate": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType",
+            "description": "Type of the discount."
+          },
+          "basis_points": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points.\n\nA basis point is 1/100th of a percent.\nFor example, to create a 25.5% discount, set this to 2550."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Optional timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Optional timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Optional maximum number of times the discount can be redeemed."
+          },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "description": "List of product IDs the discount can be applied to."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the discount. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "type",
+          "basis_points",
+          "name"
+        ],
+        "title": "DiscountPercentageOnceForeverDurationCreate",
+        "description": "Schema to create a percentage discount that is applied once or forever."
+      },
+      "DiscountPercentageRepeatDuration": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/DiscountProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "basis_points",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id",
+          "products"
+        ],
+        "title": "DiscountPercentageRepeatDuration",
+        "description": "Schema for a percentage discount that is applied on every invoice\nfor a certain number of months."
+      },
+      "DiscountPercentageRepeatDurationBase": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "title": "Duration In Months"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType"
+          },
+          "basis_points": {
+            "type": "integer",
+            "title": "Basis Points"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Maximum number of times the discount can be redeemed."
+          },
+          "redemptions_count": {
+            "type": "integer",
+            "title": "Redemptions Count",
+            "description": "Number of times the discount has been redeemed."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "basis_points",
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "name",
+          "code",
+          "starts_at",
+          "ends_at",
+          "max_redemptions",
+          "redemptions_count",
+          "organization_id"
+        ],
+        "title": "DiscountPercentageRepeatDurationBase"
+      },
+      "DiscountPercentageRepeatDurationCreate": {
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DiscountDuration"
+          },
+          "duration_in_months": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Duration In Months",
+            "description": "Number of months the discount should be applied.\n\nFor this to work on yearly pricing, you should multiply this by 12.\nFor example, to apply the discount for 2 years, set this to 24."
+          },
+          "type": {
+            "$ref": "#/components/schemas/DiscountType",
+            "description": "Type of the discount."
+          },
+          "basis_points": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points.\n\nA basis point is 1/100th of a percent.\nFor example, to create a 25.5% discount, set this to 2550."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name",
+            "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At",
+            "description": "Optional timestamp after which the discount is redeemable."
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "Optional timestamp after which the discount is no longer redeemable."
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions",
+            "description": "Optional maximum number of times the discount can be redeemed."
+          },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "description": "List of product IDs the discount can be applied to."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the discount. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration",
+          "duration_in_months",
+          "type",
+          "basis_points",
+          "name"
+        ],
+        "title": "DiscountPercentageRepeatDurationCreate",
+        "description": "Schema to create a percentage discount that is applied on every invoice\nfor a certain number of months."
+      },
+      "DiscountProduct": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the product."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the product."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the product."
+          },
+          "is_recurring": {
+            "type": "boolean",
+            "title": "Is Recurring",
+            "description": "Whether the product is a subscription tier."
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the product is archived and no longer available."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the product."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "name",
+          "description",
+          "is_recurring",
+          "is_archived",
+          "organization_id"
+        ],
+        "title": "DiscountProduct",
+        "description": "A product that a discount can be applied to."
+      },
+      "DiscountSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "name",
+          "-name",
+          "code",
+          "-code",
+          "redemptions_count",
+          "-redemptions_count"
+        ],
+        "title": "DiscountSortProperty"
+      },
+      "DiscountType": {
+        "type": "string",
+        "enum": [
+          "fixed",
+          "percentage"
+        ],
+        "title": "DiscountType"
+      },
+      "DiscountUpdate": {
+        "properties": {
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 500,
+                      "minLength": 1
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": "object",
+                "maxProperties": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "description": "Name of the discount. Will be displayed to the customer when the discount is applied."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "code": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Optional timestamp after which the discount is redeemable."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Starts At"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Optional timestamp after which the discount is no longer redeemable."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
+          },
+          "max_redemptions": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1.0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Optional maximum number of times the discount can be redeemed."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Redemptions"
+          },
+          "duration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DiscountDuration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "duration_in_months": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0,
+                "description": "Number of months the discount should be applied.\n\nFor this to work on yearly pricing, you should multiply this by 12.\nFor example, to apply the discount for 2 years, set this to 24."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration In Months"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DiscountType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0,
+                "description": "Fixed amount to discount from the invoice total."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "usd",
+                "description": "The currency. Currently, only `usd` is supported.",
+                "default": "usd"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "basis_points": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000.0,
+                "minimum": 1.0,
+                "description": "Discount percentage in basis points.\n\nA basis point is 1/100th of a percent.\nFor example, to create a 25.5% discount, set this to 2550."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Basis Points"
+          },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "description": "List of product IDs the discount can be applied to."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "title": "DiscountUpdate",
+        "description": "Schema to update a discount."
       },
       "DownloadableFileCreate": {
         "properties": {
@@ -19425,6 +22487,61 @@
         ],
         "title": "ListResource[Checkout]"
       },
+      "ListResource_CustomField_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomField",
+              "title": "CustomField"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[CustomField]"
+      },
+      "ListResource_Discount_": {
+        "properties": {
+          "items": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DiscountFixedOnceForeverDuration"
+                },
+                {
+                  "$ref": "#/components/schemas/DiscountFixedRepeatDuration"
+                },
+                {
+                  "$ref": "#/components/schemas/DiscountPercentageOnceForeverDuration"
+                },
+                {
+                  "$ref": "#/components/schemas/DiscountPercentageRepeatDuration"
+                }
+              ],
+              "title": "Discount"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Discount]"
+      },
       "ListResource_DownloadableRead_": {
         "properties": {
           "items": {
@@ -19759,26 +22876,6 @@
         ],
         "title": "ListResource[UserSubscription]"
       },
-      "ListResource__": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/Pagination"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "pagination"
-        ],
-        "title": "ListResource[]"
-      },
       "Metric": {
         "properties": {
           "slug": {
@@ -20104,7 +23201,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
           },
           "client_name": {
             "type": "string",
@@ -20266,7 +23363,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
           },
           "client_name": {
             "type": "string",
@@ -20387,7 +23484,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write orders:read metrics:read articles:read articles:write webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write user:benefits:read user:orders:read user:subscriptions:read user:subscriptions:write user:downloadables:read user:license_keys:read user:advertisement_campaigns:read user:advertisement_campaigns:write"
           },
           "client_name": {
             "type": "string",
@@ -20632,6 +23729,18 @@
             "format": "uuid4",
             "title": "Product Price Id"
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
+          },
           "subscription_id": {
             "anyOf": [
               {
@@ -20665,6 +23774,31 @@
           "product_price": {
             "$ref": "#/components/schemas/ProductPrice"
           },
+          "discount": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedRepeatDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageRepeatDurationBase"
+                  }
+                ],
+                "title": "OrderDiscount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount"
+          },
           "subscription": {
             "anyOf": [
               {
@@ -20689,11 +23823,13 @@
           "user_id",
           "product_id",
           "product_price_id",
+          "discount_id",
           "subscription_id",
           "checkout_id",
           "user",
           "product",
           "product_price",
+          "discount",
           "subscription"
         ],
         "title": "Order"
@@ -20808,6 +23944,8 @@
           "-user",
           "product",
           "-product",
+          "discount",
+          "-discount",
           "subscription",
           "-subscription"
         ],
@@ -20945,6 +24083,18 @@
             "format": "uuid4",
             "title": "Price Id"
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
+          },
           "checkout_id": {
             "anyOf": [
               {
@@ -20976,6 +24126,7 @@
           "user_id",
           "product_id",
           "price_id",
+          "discount_id",
           "checkout_id"
         ],
         "title": "OrderSubscription"
@@ -24189,6 +27340,8 @@
           "organizations:write",
           "custom_fields:read",
           "custom_fields:write",
+          "discounts:read",
+          "discounts:write",
           "checkout_links:read",
           "checkout_links:write",
           "checkouts:read",
@@ -24389,6 +27542,18 @@
             "format": "uuid4",
             "title": "Price Id"
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
+          },
           "checkout_id": {
             "anyOf": [
               {
@@ -24431,6 +27596,31 @@
           },
           "price": {
             "$ref": "#/components/schemas/ProductPriceRecurring"
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedRepeatDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageRepeatDurationBase"
+                  }
+                ],
+                "title": "SubscriptionDiscount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount"
           }
         },
         "type": "object",
@@ -24450,11 +27640,13 @@
           "user_id",
           "product_id",
           "price_id",
+          "discount_id",
           "checkout_id",
           "metadata",
           "user",
           "product",
-          "price"
+          "price",
+          "discount"
         ],
         "title": "Subscription"
       },
@@ -24480,7 +27672,9 @@
           "amount",
           "-amount",
           "product",
-          "-product"
+          "-product",
+          "discount",
+          "-discount"
         ],
         "title": "SubscriptionSortProperty"
       },
@@ -25271,6 +28465,18 @@
             "format": "uuid4",
             "title": "Price Id"
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
+          },
           "checkout_id": {
             "anyOf": [
               {
@@ -25301,6 +28507,7 @@
           "user_id",
           "product_id",
           "price_id",
+          "discount_id",
           "checkout_id"
         ],
         "title": "UserOrderSubscription"
@@ -25420,6 +28627,18 @@
             "format": "uuid4",
             "title": "Price Id"
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
+          },
           "checkout_id": {
             "anyOf": [
               {
@@ -25456,6 +28675,7 @@
           "user_id",
           "product_id",
           "price_id",
+          "discount_id",
           "checkout_id",
           "product",
           "price"
@@ -26378,6 +29598,18 @@
             "title": "Currency",
             "description": "Currency code of the checkout session."
           },
+          "subtotal_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtotal Amount",
+            "description": "Subtotal amount in cents, including discounts and before tax."
+          },
           "total_amount": {
             "anyOf": [
               {
@@ -26388,7 +29620,7 @@
               }
             ],
             "title": "Total Amount",
-            "description": "Total amount to pay in cents."
+            "description": "Total amount to pay in cents, including discounts and after tax."
           },
           "product_id": {
             "type": "string",
@@ -26402,10 +29634,48 @@
             "title": "Product Price Id",
             "description": "ID of the product price to checkout."
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount applied to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
+          "is_discount_applicable": {
+            "type": "boolean",
+            "title": "Is Discount Applicable",
+            "description": "Whether the discount is applicable to the checkout. Typically, free and custom prices are not discountable."
+          },
+          "is_free_product_price": {
+            "type": "boolean",
+            "title": "Is Free Product Price",
+            "description": "Whether the product price is free, regardless of discounts."
+          },
           "is_payment_required": {
             "type": "boolean",
             "title": "Is Payment Required",
-            "description": "Whether the checkout requires payment. Useful to detect free products."
+            "description": "Whether the checkout requires payment, e.g. in case of free products or discounts that cover the total amount."
+          },
+          "is_payment_setup_required": {
+            "type": "boolean",
+            "title": "Is Payment Setup Required",
+            "description": "Whether the checkout requires setting up a payment method, regardless of the amount, e.g. subscriptions that have first free cycles."
+          },
+          "is_payment_form_required": {
+            "type": "boolean",
+            "title": "Is Payment Form Required",
+            "description": "Whether the checkout requires a payment form, whether because of a payment or payment method setup."
           },
           "customer_id": {
             "anyOf": [
@@ -26506,6 +29776,30 @@
           "product_price": {
             "$ref": "#/components/schemas/ProductPrice"
           },
+          "discount": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountFixedOnceForeverDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountFixedRepeatDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountPercentageOnceForeverDuration"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutDiscountPercentageRepeatDuration"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount"
+          },
           "subscription_id": {
             "anyOf": [
               {
@@ -26541,10 +29835,17 @@
           "amount",
           "tax_amount",
           "currency",
+          "subtotal_amount",
           "total_amount",
           "product_id",
           "product_price_id",
+          "discount_id",
+          "allow_discount_codes",
+          "is_discount_applicable",
+          "is_free_product_price",
           "is_payment_required",
+          "is_payment_setup_required",
+          "is_payment_form_required",
           "customer_id",
           "customer_name",
           "customer_email",
@@ -26555,6 +29856,7 @@
           "metadata",
           "product",
           "product_price",
+          "discount",
           "subscription_id",
           "attached_custom_fields"
         ],
@@ -26603,6 +29905,25 @@
             "format": "uuid4",
             "title": "Product Price Id",
             "description": "ID of the product price to checkout."
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
           },
           "amount": {
             "anyOf": [
