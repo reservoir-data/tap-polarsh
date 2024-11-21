@@ -7396,7 +7396,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/polar__checkout__schemas__CheckoutCreate"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckoutProductCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutPriceCreate"
+                  }
+                ],
+                "title": "Checkout Create"
               }
             }
           }
@@ -7801,7 +7809,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/polar__checkout__legacy__schemas__CheckoutCreate"
+                "$ref": "#/components/schemas/CheckoutCreate"
               }
             }
           },
@@ -15589,6 +15597,55 @@
         "title": "CheckoutConfirmStripe",
         "description": "Confirm a checkout session using a Stripe confirmation token."
       },
+      "CheckoutCreate": {
+        "properties": {
+          "product_price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Price Id",
+            "description": "ID of the product price to subscribe to."
+          },
+          "success_url": {
+            "type": "string",
+            "minLength": 1,
+            "format": "uri",
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful subscription. You can add the `session_id={CHECKOUT_SESSION_ID}` query parameter to retrieve the checkout session id."
+          },
+          "customer_email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Email",
+            "description": "If you already know the email of your customer, you can set it. It'll be pre-filled on the checkout page."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "ID of the subscription to update. If not provided, a new subscription will be created."
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_price_id",
+          "success_url"
+        ],
+        "title": "CheckoutCreate"
+      },
       "CheckoutDiscountFixedOnceForeverDuration": {
         "properties": {
           "duration": {
@@ -15870,6 +15927,11 @@
             "title": "Label",
             "description": "Optional label to distinguish links internally"
           },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
           "product_id": {
             "type": "string",
             "format": "uuid4",
@@ -15889,6 +15951,19 @@
             "title": "Product Price Id",
             "description": "ID of the product price to checkout. First available price will be selected unless an explicit price ID is set."
           },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
+          },
           "product": {
             "$ref": "#/components/schemas/CheckoutLinkProduct"
           },
@@ -15901,6 +15976,31 @@
                 "type": "null"
               }
             ]
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountFixedRepeatDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageOnceForeverDurationBase"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiscountPercentageRepeatDurationBase"
+                  }
+                ],
+                "title": "CheckoutLinkDiscount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount"
           },
           "url": {
             "type": "string",
@@ -15918,10 +16018,13 @@
           "client_secret",
           "success_url",
           "label",
+          "allow_discount_codes",
           "product_id",
           "product_price_id",
+          "discount_id",
           "product",
           "product_price",
+          "discount",
           "url"
         ],
         "title": "CheckoutLink",
@@ -15970,6 +16073,25 @@
             ],
             "title": "Label",
             "description": "Optional label to distinguish links internally"
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
           },
           "success_url": {
             "anyOf": [
@@ -16153,6 +16275,25 @@
             "title": "Label",
             "description": "Optional label to distinguish links internally"
           },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
+          },
           "success_url": {
             "anyOf": [
               {
@@ -16231,6 +16372,18 @@
             ],
             "title": "Label"
           },
+          "allow_discount_codes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
           "product_price_id": {
             "anyOf": [
               {
@@ -16242,6 +16395,19 @@
               }
             ],
             "title": "Product Price Id"
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
           },
           "success_url": {
             "anyOf": [
@@ -16262,6 +16428,189 @@
         "type": "object",
         "title": "CheckoutLinkUpdate",
         "description": "Schema to update an existing checkout link."
+      },
+      "CheckoutPriceCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "custom_field_data": {
+            "type": "object",
+            "title": "Custom Field Data",
+            "description": "Key-value object storing custom field values."
+          },
+          "payment_processor": {
+            "type": "string",
+            "enum": [
+              "stripe"
+            ],
+            "const": "stripe",
+            "title": "Payment Processor",
+            "description": "Payment processor to use. Currently only Stripe is supported."
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "description": "Amount to pay in cents. Only useful for custom prices, it'll be ignored for fixed and free prices."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "customer_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Name of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Name"
+          },
+          "customer_email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email",
+                "description": "Email address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Email"
+          },
+          "customer_ip_address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Ip Address"
+          },
+          "customer_billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address",
+                "description": "Billing address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_tax_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Tax Id"
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "ID of a subscription to upgrade. It must be on a free pricing. If checkout is successful, metadata set on this checkout will be copied to the subscription, and existing keys will be overwritten."
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "embed_origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embed Origin",
+            "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
+          },
+          "product_price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Price Id",
+            "description": "ID of the product price to checkout."
+          }
+        },
+        "type": "object",
+        "required": [
+          "payment_processor",
+          "product_price_id"
+        ],
+        "title": "CheckoutPriceCreate",
+        "description": "Create a new checkout session from a product price.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
       },
       "CheckoutProduct": {
         "properties": {
@@ -16371,6 +16720,189 @@
         ],
         "title": "CheckoutProduct",
         "description": "Product data for a checkout session."
+      },
+      "CheckoutProductCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "custom_field_data": {
+            "type": "object",
+            "title": "Custom Field Data",
+            "description": "Key-value object storing custom field values."
+          },
+          "payment_processor": {
+            "type": "string",
+            "enum": [
+              "stripe"
+            ],
+            "const": "stripe",
+            "title": "Payment Processor",
+            "description": "Payment processor to use. Currently only Stripe is supported."
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "description": "Amount to pay in cents. Only useful for custom prices, it'll be ignored for fixed and free prices."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "customer_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Name of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Name"
+          },
+          "customer_email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email",
+                "description": "Email address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Email"
+          },
+          "customer_ip_address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Ip Address"
+          },
+          "customer_billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address",
+                "description": "Billing address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_tax_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Tax Id"
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "ID of a subscription to upgrade. It must be on a free pricing. If checkout is successful, metadata set on this checkout will be copied to the subscription, and existing keys will be overwritten."
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "embed_origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embed Origin",
+            "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "ID of the product to checkout. First available price will be selected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "payment_processor",
+          "product_id"
+        ],
+        "title": "CheckoutProductCreate",
+        "description": "Create a new checkout session from a product.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
       },
       "CheckoutPublic": {
         "properties": {
@@ -29440,55 +29972,6 @@
         "title": "Checkout",
         "description": "A checkout session."
       },
-      "polar__checkout__legacy__schemas__CheckoutCreate": {
-        "properties": {
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "ID of the product price to subscribe to."
-          },
-          "success_url": {
-            "type": "string",
-            "minLength": 1,
-            "format": "uri",
-            "title": "Success Url",
-            "description": "URL where the customer will be redirected after a successful subscription. You can add the `session_id={CHECKOUT_SESSION_ID}` query parameter to retrieve the checkout session id."
-          },
-          "customer_email": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "email"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Email",
-            "description": "If you already know the email of your customer, you can set it. It'll be pre-filled on the checkout page."
-          },
-          "subscription_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subscription Id",
-            "description": "ID of the subscription to update. If not provided, a new subscription will be created."
-          }
-        },
-        "type": "object",
-        "required": [
-          "product_price_id",
-          "success_url"
-        ],
-        "title": "CheckoutCreate"
-      },
       "polar__checkout__schemas__Checkout": {
         "properties": {
           "created_at": {
@@ -29862,189 +30345,6 @@
         ],
         "title": "Checkout",
         "description": "Checkout session data retrieved using an access token."
-      },
-      "polar__checkout__schemas__CheckoutCreate": {
-        "properties": {
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 500,
-                  "minLength": 1
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "maxProperties": 50,
-            "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n    * A string with a maximum length of **500 characters**\n    * An integer\n    * A boolean\n\nYou can store up to **50 key-value pairs**."
-          },
-          "custom_field_data": {
-            "type": "object",
-            "title": "Custom Field Data",
-            "description": "Key-value object storing custom field values."
-          },
-          "payment_processor": {
-            "type": "string",
-            "enum": [
-              "stripe"
-            ],
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
-          },
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "ID of the product price to checkout."
-          },
-          "discount_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discount Id",
-            "description": "ID of the discount to apply to the checkout."
-          },
-          "allow_discount_codes": {
-            "type": "boolean",
-            "title": "Allow Discount Codes",
-            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
-            "default": true
-          },
-          "amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "description": "Amount to pay in cents. Only useful for custom prices, it'll be ignored for fixed and free prices."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
-          },
-          "customer_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "Name of the customer."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Name"
-          },
-          "customer_email": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "email",
-                "description": "Email address of the customer."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Email"
-          },
-          "customer_ip_address": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "ipvanyaddress",
-                "description": "IP address of the customer. Used to detect tax location."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Ip Address"
-          },
-          "customer_billing_address": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Address",
-                "description": "Billing address of the customer."
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "customer_tax_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Tax Id"
-          },
-          "subscription_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subscription Id",
-            "description": "ID of a subscription to upgrade. It must be on a free pricing. If checkout is successful, metadata set on this checkout will be copied to the subscription, and existing keys will be overwritten."
-          },
-          "success_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Success Url",
-            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
-          },
-          "embed_origin": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Embed Origin",
-            "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
-          }
-        },
-        "type": "object",
-        "required": [
-          "payment_processor",
-          "product_price_id"
-        ],
-        "title": "CheckoutCreate",
-        "description": "Create a new checkout session.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
       }
     },
     "securitySchemes": {
