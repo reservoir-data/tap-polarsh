@@ -24646,6 +24646,16 @@
           "billing_reason": {
             "$ref": "#/components/schemas/OrderBillingReason"
           },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "user_id": {
             "type": "string",
             "format": "uuid4",
@@ -24752,6 +24762,7 @@
           "tax_amount",
           "currency",
           "billing_reason",
+          "billing_address",
           "user_id",
           "product_id",
           "product_price_id",
