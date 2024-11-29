@@ -9137,7 +9137,7 @@
               ],
               "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
               "default": [
-                "-created_at"
+                "created_at"
               ],
               "title": "Sorting"
             },
@@ -13530,6 +13530,7 @@
               "format": "uuid4"
             },
             "type": "array",
+            "minItems": 1,
             "title": "Files"
           }
         },
@@ -28335,6 +28336,14 @@
           "articles:write": "Create or modify posts",
           "benefits:read": "Read benefits",
           "benefits:write": "Create or modify benefits",
+          "checkout_links:read": "Read checkout links",
+          "checkout_links:write": "Create or modify checkout links",
+          "checkouts:read": "Read checkout sessions",
+          "checkouts:write": "Create or modify checkout sessions",
+          "custom_fields:read": "Read custom fields",
+          "custom_fields:write": "Create or modify custom fields",
+          "discounts:read": "Read discounts",
+          "discounts:write": "Create or modify discounts",
           "email": "Read your email address",
           "files:read": "Read file uploads",
           "files:write": "Create or modify file uploads",
