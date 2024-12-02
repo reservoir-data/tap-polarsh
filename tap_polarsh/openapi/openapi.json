@@ -8027,8 +8027,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Successful Response",
+          "201": {
+            "description": "File created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8101,7 +8101,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "File upload completed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8125,6 +8125,26 @@
                     }
                   },
                   "title": "Response Files:Uploaded"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "You don't have the permission to update this file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotPermitted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
                 }
               }
             }
@@ -8193,7 +8213,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "File updated.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8217,6 +8237,26 @@
                     }
                   },
                   "title": "Response Files:Update"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "You don't have the permission to update this file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotPermitted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
                 }
               }
             }
@@ -8274,7 +8314,7 @@
             "description": "File deleted."
           },
           "403": {
-            "description": "You don't have the permission to update this file or it's not deletable.",
+            "description": "You don't have the permission to delete this file.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8288,7 +8328,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileNotFound"
+                  "$ref": "#/components/schemas/ResourceNotFound"
                 }
               }
             }
@@ -11276,13 +11316,13 @@
       },
       "AlreadyCanceledSubscription": {
         "properties": {
-          "type": {
+          "error": {
             "type": "string",
             "enum": [
               "AlreadyCanceledSubscription"
             ],
             "const": "AlreadyCanceledSubscription",
-            "title": "Type"
+            "title": "Error"
           },
           "detail": {
             "type": "string",
@@ -11291,7 +11331,7 @@
         },
         "type": "object",
         "required": [
-          "type",
+          "error",
           "detail"
         ],
         "title": "AlreadyCanceledSubscription"
@@ -22211,28 +22251,6 @@
         ],
         "title": "FileDownload"
       },
-      "FileNotFound": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "FileNotFound"
-            ],
-            "const": "FileNotFound",
-            "title": "Type"
-          },
-          "detail": {
-            "type": "string",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "required": [
-          "type",
-          "detail"
-        ],
-        "title": "FileNotFound"
-      },
       "FilePatch": {
         "properties": {
           "name": {
@@ -24060,13 +24078,13 @@
       },
       "NotPermitted": {
         "properties": {
-          "type": {
+          "error": {
             "type": "string",
             "enum": [
               "NotPermitted"
             ],
             "const": "NotPermitted",
-            "title": "Type"
+            "title": "Error"
           },
           "detail": {
             "type": "string",
@@ -24075,7 +24093,7 @@
         },
         "type": "object",
         "required": [
-          "type",
+          "error",
           "detail"
         ],
         "title": "NotPermitted"
@@ -28070,13 +28088,13 @@
       },
       "ResourceNotFound": {
         "properties": {
-          "type": {
+          "error": {
             "type": "string",
             "enum": [
               "ResourceNotFound"
             ],
             "const": "ResourceNotFound",
-            "title": "Type"
+            "title": "Error"
           },
           "detail": {
             "type": "string",
@@ -28085,7 +28103,7 @@
         },
         "type": "object",
         "required": [
-          "type",
+          "error",
           "detail"
         ],
         "title": "ResourceNotFound"
@@ -28746,13 +28764,13 @@
       },
       "Unauthorized": {
         "properties": {
-          "type": {
+          "error": {
             "type": "string",
             "enum": [
               "Unauthorized"
             ],
             "const": "Unauthorized",
-            "title": "Type"
+            "title": "Error"
           },
           "detail": {
             "type": "string",
@@ -28761,7 +28779,7 @@
         },
         "type": "object",
         "required": [
-          "type",
+          "error",
           "detail"
         ],
         "title": "Unauthorized"
