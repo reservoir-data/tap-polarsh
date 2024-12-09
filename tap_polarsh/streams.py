@@ -116,3 +116,51 @@ class Articles(PolarStream):
             **super().get_url_params(context, next_page_token),
             "organization_id": context["organization_id"] if context else None,
         }
+
+
+class Subscriptions(PolarStream):
+    """Subscriptions stream."""
+
+    name = "subscriptions"
+    path = "/api/v1/subscriptions"
+    primary_keys = ("id",)
+    replication_key = None
+
+    swagger_ref: str = "Subscription"
+
+    parent_stream_type = Organizations
+
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Get URL query parameters."""
+        return {
+            **super().get_url_params(context, next_page_token),
+            "organization_id": context["organization_id"] if context else None,
+        }
+
+
+class Orders(PolarStream):
+    """Orders stream."""
+
+    name = "orders"
+    path = "/api/v1/orders"
+    primary_keys = ("id",)
+    replication_key = None
+
+    swagger_ref: str = "Order"
+
+    parent_stream_type = Organizations
+
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: t.Any | None,  # noqa: ANN401
+    ) -> dict[str, t.Any]:
+        """Get URL query parameters."""
+        return {
+            **super().get_url_params(context, next_page_token),
+            "organization_id": context["organization_id"] if context else None,
+        }
