@@ -92,7 +92,10 @@ class OrganizationCustomers(PolarStream):
 
 
 class Articles(PolarStream):
-    """Issues stream."""
+    """Issues stream.
+
+    Removed from the Polar.sh API in https://github.com/polarsource/polar/pull/4395.
+    """
 
     name = "articles"
     path = "/api/v1/articles"
