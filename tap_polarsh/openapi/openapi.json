@@ -23818,6 +23818,17 @@
           "public_name": {
             "type": "string",
             "title": "Public Name"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
           }
         },
         "type": "object",
@@ -25877,6 +25888,17 @@
           "public_name": {
             "type": "string",
             "title": "Public Name"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
           }
         },
         "type": "object",
@@ -29546,6 +29568,17 @@
           "public_name": {
             "type": "string",
             "title": "Public Name"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
           }
         },
         "type": "object",
