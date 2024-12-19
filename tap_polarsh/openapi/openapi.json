@@ -2002,6 +2002,9 @@
             "properties": {
               "grant_type": {
                 "const": "authorization_code",
+                "enum": [
+                  "authorization_code"
+                ],
                 "title": "Grant Type",
                 "type": "string"
               },
@@ -2039,6 +2042,9 @@
             "properties": {
               "grant_type": {
                 "const": "refresh_token",
+                "enum": [
+                  "refresh_token"
+                ],
                 "title": "Grant Type",
                 "type": "string"
               },
@@ -10747,6 +10753,9 @@
         "properties": {
           "error": {
             "type": "string",
+            "enum": [
+              "AlreadyCanceledSubscription"
+            ],
             "const": "AlreadyCanceledSubscription",
             "title": "Error"
           },
@@ -10923,6 +10932,9 @@
           },
           "sub_type": {
             "type": "string",
+            "enum": [
+              "organization"
+            ],
             "const": "organization",
             "title": "Sub Type"
           },
@@ -10968,6 +10980,9 @@
           },
           "sub_type": {
             "type": "string",
+            "enum": [
+              "user"
+            ],
             "const": "user",
             "title": "Sub Type"
           },
@@ -11081,6 +11096,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "ads"
+            ],
             "const": "ads",
             "title": "Type"
           },
@@ -11128,6 +11146,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "ads"
+            ],
             "const": "ads",
             "title": "Type"
           },
@@ -11217,6 +11238,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "ads"
+            ],
             "const": "ads",
             "title": "Type"
           },
@@ -11281,6 +11305,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "ads"
+            ],
             "const": "ads",
             "title": "Type"
           },
@@ -11429,6 +11456,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Type"
           },
@@ -11482,6 +11512,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Type"
           },
@@ -11608,6 +11641,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Type"
           },
@@ -11701,6 +11737,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Type"
           },
@@ -11750,6 +11789,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "discord"
+            ],
             "const": "discord",
             "title": "Type"
           },
@@ -11797,6 +11839,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "discord"
+            ],
             "const": "discord",
             "title": "Type"
           },
@@ -11914,6 +11959,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "discord"
+            ],
             "const": "discord",
             "title": "Type"
           },
@@ -11993,6 +12041,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "discord"
+            ],
             "const": "discord",
             "title": "Type"
           },
@@ -12042,6 +12093,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "downloadables"
+            ],
             "const": "downloadables",
             "title": "Type"
           },
@@ -12088,6 +12142,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "downloadables"
+            ],
             "const": "downloadables",
             "title": "Type"
           },
@@ -12135,9 +12192,6 @@
             "additionalProperties": {
               "type": "boolean"
             },
-            "propertyNames": {
-              "format": "uuid4"
-            },
             "type": "object",
             "title": "Archived",
             "default": {}
@@ -12163,9 +12217,6 @@
           "archived": {
             "additionalProperties": {
               "type": "boolean"
-            },
-            "propertyNames": {
-              "format": "uuid4"
             },
             "type": "object",
             "title": "Archived"
@@ -12215,6 +12266,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "downloadables"
+            ],
             "const": "downloadables",
             "title": "Type"
           },
@@ -12296,6 +12350,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "downloadables"
+            ],
             "const": "downloadables",
             "title": "Type"
           },
@@ -12345,6 +12402,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "github_repository"
+            ],
             "const": "github_repository",
             "title": "Type"
           },
@@ -12392,6 +12452,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "github_repository"
+            ],
             "const": "github_repository",
             "title": "Type"
           },
@@ -12555,6 +12618,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "github_repository"
+            ],
             "const": "github_repository",
             "title": "Type"
           },
@@ -12646,6 +12712,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "github_repository"
+            ],
             "const": "github_repository",
             "title": "Type"
           },
@@ -13156,6 +13225,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "license_keys"
+            ],
             "const": "license_keys",
             "title": "Type"
           },
@@ -13202,6 +13274,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "license_keys"
+            ],
             "const": "license_keys",
             "title": "Type"
           },
@@ -13375,6 +13450,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "license_keys"
+            ],
             "const": "license_keys",
             "title": "Type"
           },
@@ -13493,6 +13571,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "license_keys"
+            ],
             "const": "license_keys",
             "title": "Type"
           },
@@ -13754,7 +13835,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -14561,10 +14643,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -14572,6 +14650,9 @@
           },
           "payment_processor": {
             "type": "string",
+            "enum": [
+              "stripe"
+            ],
             "const": "stripe",
             "title": "Payment Processor",
             "description": "Payment processor to use. Currently only Stripe is supported."
@@ -14756,10 +14837,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -14767,6 +14844,9 @@
           },
           "payment_processor": {
             "type": "string",
+            "enum": [
+              "stripe"
+            ],
             "const": "stripe",
             "title": "Payment Processor",
             "description": "Payment processor to use. Currently only Stripe is supported."
@@ -14858,10 +14938,6 @@
                       "type": "boolean"
                     }
                   ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
                 },
                 "type": "object",
                 "maxProperties": 50,
@@ -14959,10 +15035,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -14975,6 +15047,9 @@
           },
           "payment_processor": {
             "type": "string",
+            "enum": [
+              "stripe"
+            ],
             "const": "stripe",
             "title": "Payment Processor",
             "description": "Payment processor to use. Currently only Stripe is supported."
@@ -15052,7 +15127,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -15097,10 +15173,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
             },
             "type": "object",
             "maxProperties": 50,
@@ -15282,10 +15354,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -15298,6 +15366,9 @@
           },
           "payment_processor": {
             "type": "string",
+            "enum": [
+              "stripe"
+            ],
             "const": "stripe",
             "title": "Payment Processor",
             "description": "Payment processor to use. Currently only Stripe is supported."
@@ -15375,7 +15446,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -15420,10 +15492,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
             },
             "type": "object",
             "maxProperties": 50,
@@ -15714,7 +15782,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -15869,6 +15938,9 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "confirmed"
+            ],
             "const": "confirmed",
             "title": "Status"
           },
@@ -16061,7 +16133,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -16308,10 +16381,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -16351,7 +16420,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "ipvanyaddress"
+                "format": "ipvanyaddress",
+                "description": "IP address of the customer. Used to detect tax location."
               },
               {
                 "type": "null"
@@ -16376,10 +16446,6 @@
                       "type": "boolean"
                     }
                   ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
                 },
                 "type": "object",
                 "maxProperties": 50,
@@ -16622,6 +16688,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "checkbox"
+            ],
             "const": "checkbox",
             "title": "Type"
           },
@@ -16733,10 +16802,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -16744,6 +16809,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "checkbox"
+            ],
             "const": "checkbox",
             "title": "Type"
           },
@@ -16811,10 +16879,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -16822,6 +16886,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "date"
+            ],
             "const": "date",
             "title": "Type"
           },
@@ -16889,10 +16956,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -16900,6 +16963,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "number"
+            ],
             "const": "number",
             "title": "Type"
           },
@@ -16967,10 +17033,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -16978,6 +17040,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "select"
+            ],
             "const": "select",
             "title": "Type"
           },
@@ -17045,10 +17110,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -17056,6 +17117,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "text"
+            ],
             "const": "text",
             "title": "Type"
           },
@@ -17151,6 +17215,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "date"
+            ],
             "const": "date",
             "title": "Type"
           },
@@ -17269,6 +17336,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "number"
+            ],
             "const": "number",
             "title": "Type"
           },
@@ -17387,6 +17457,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "select"
+            ],
             "const": "select",
             "title": "Type"
           },
@@ -17541,6 +17614,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "text"
+            ],
             "const": "text",
             "title": "Type"
           },
@@ -17679,10 +17755,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -17722,6 +17794,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "checkbox"
+            ],
             "const": "checkbox",
             "title": "Type"
           },
@@ -17763,10 +17838,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -17806,6 +17877,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "date"
+            ],
             "const": "date",
             "title": "Type"
           },
@@ -17847,10 +17921,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -17890,6 +17960,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "number"
+            ],
             "const": "number",
             "title": "Type"
           },
@@ -17931,10 +18004,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -17974,6 +18043,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "select"
+            ],
             "const": "select",
             "title": "Type"
           },
@@ -18015,10 +18087,6 @@
                     }
                   ]
                 },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
-                },
                 "type": "object",
                 "maxProperties": 50,
                 "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
@@ -18058,6 +18126,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "text"
+            ],
             "const": "text",
             "title": "Type"
           },
@@ -18345,6 +18416,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "ads"
+            ],
             "const": "ads",
             "title": "Benefit Type"
           }
@@ -18477,6 +18551,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Benefit Type"
           }
@@ -18622,6 +18699,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "discord"
+            ],
             "const": "discord",
             "title": "Benefit Type"
           },
@@ -18758,6 +18838,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "downloadables"
+            ],
             "const": "downloadables",
             "title": "Benefit Type"
           }
@@ -18903,6 +18986,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "github_repository"
+            ],
             "const": "github_repository",
             "title": "Benefit Type"
           },
@@ -19039,6 +19125,9 @@
         "properties": {
           "benefit_type": {
             "type": "string",
+            "enum": [
+              "license_keys"
+            ],
             "const": "license_keys",
             "title": "Benefit Type"
           }
@@ -20470,10 +20559,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -20945,10 +21030,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -21388,10 +21469,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
             },
             "type": "object",
             "maxProperties": 50,
@@ -21848,10 +21925,6 @@
                 }
               ]
             },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
@@ -22077,10 +22150,6 @@
                       "type": "boolean"
                     }
                   ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
                 },
                 "type": "object",
                 "maxProperties": 50,
@@ -22327,6 +22396,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "downloadable"
+            ],
             "const": "downloadable",
             "title": "Service"
           },
@@ -22451,6 +22523,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "downloadable"
+            ],
             "const": "downloadable",
             "title": "Service"
           },
@@ -24749,6 +24824,9 @@
         "properties": {
           "error": {
             "type": "string",
+            "enum": [
+              "NotPermitted"
+            ],
             "const": "NotPermitted",
             "title": "Error"
           },
@@ -24804,6 +24882,9 @@
           "response_types": {
             "items": {
               "type": "string",
+              "enum": [
+                "code"
+              ],
               "const": "code"
             },
             "type": "array",
@@ -24963,6 +25044,9 @@
           "response_types": {
             "items": {
               "type": "string",
+              "enum": [
+                "code"
+              ],
               "const": "code"
             },
             "type": "array",
@@ -25081,6 +25165,9 @@
           "response_types": {
             "items": {
               "type": "string",
+              "enum": [
+                "code"
+              ],
               "const": "code"
             },
             "type": "array",
@@ -26169,6 +26256,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "organization_avatar"
+            ],
             "const": "organization_avatar",
             "title": "Service"
           },
@@ -26293,6 +26383,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "organization_avatar"
+            ],
             "const": "organization_avatar",
             "title": "Service"
           },
@@ -26680,6 +26773,7 @@
         "enum": [
           "stripe"
         ],
+        "const": "stripe",
         "title": "PaymentProcessor"
       },
       "Platforms": {
@@ -26687,6 +26781,7 @@
         "enum": [
           "github"
         ],
+        "const": "github",
         "title": "Platforms"
       },
       "Pledge": {
@@ -27099,6 +27194,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "product_media"
+            ],
             "const": "product_media",
             "title": "Service"
           },
@@ -27223,6 +27321,9 @@
           },
           "service": {
             "type": "string",
+            "enum": [
+              "product_media"
+            ],
             "const": "product_media",
             "title": "Service"
           },
@@ -27286,10 +27387,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
             },
             "type": "object",
             "maxProperties": 50,
@@ -27453,6 +27550,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Amount Type"
           },
@@ -27510,6 +27610,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type",
             "description": "The type of the price."
@@ -27536,11 +27639,17 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type"
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Amount Type"
           },
@@ -27634,6 +27743,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "fixed"
+            ],
             "const": "fixed",
             "title": "Amount Type"
           },
@@ -27660,6 +27772,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type",
             "description": "The type of the price."
@@ -27684,11 +27799,17 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type"
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "fixed"
+            ],
             "const": "fixed",
             "title": "Amount Type"
           },
@@ -27745,6 +27866,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "free"
+            ],
             "const": "free",
             "title": "Amount Type"
           },
@@ -27761,6 +27885,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type",
             "description": "The type of the price."
@@ -27783,11 +27910,17 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "one_time"
+            ],
             "const": "one_time",
             "title": "Type"
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "free"
+            ],
             "const": "free",
             "title": "Amount Type"
           }
@@ -27850,6 +27983,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "custom"
+            ],
             "const": "custom",
             "title": "Amount Type"
           },
@@ -27907,6 +28043,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "recurring"
+            ],
             "const": "recurring",
             "title": "Type",
             "description": "The type of the price."
@@ -27963,6 +28102,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "fixed"
+            ],
             "const": "fixed",
             "title": "Amount Type"
           },
@@ -27989,6 +28131,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "recurring"
+            ],
             "const": "recurring",
             "title": "Type",
             "description": "The type of the price."
@@ -28018,11 +28163,17 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "recurring"
+            ],
             "const": "recurring",
             "title": "Type"
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "fixed"
+            ],
             "const": "fixed",
             "title": "Amount Type"
           },
@@ -28084,6 +28235,9 @@
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "free"
+            ],
             "const": "free",
             "title": "Amount Type"
           },
@@ -28100,6 +28254,9 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "recurring"
+            ],
             "const": "recurring",
             "title": "Type",
             "description": "The type of the price."
@@ -28127,11 +28284,17 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "recurring"
+            ],
             "const": "recurring",
             "title": "Type"
           },
           "amount_type": {
             "type": "string",
+            "enum": [
+              "free"
+            ],
             "const": "free",
             "title": "Amount Type"
           },
@@ -28174,10 +28337,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
             },
             "type": "object",
             "maxProperties": 50,
@@ -28315,10 +28474,6 @@
                       "type": "boolean"
                     }
                   ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
-                  "minLength": 1
                 },
                 "type": "object",
                 "maxProperties": 50,
@@ -28811,6 +28966,9 @@
         "properties": {
           "error": {
             "type": "string",
+            "enum": [
+              "ResourceNotFound"
+            ],
             "const": "ResourceNotFound",
             "title": "Error"
           },
@@ -29645,6 +29803,9 @@
           },
           "token_type": {
             "type": "string",
+            "enum": [
+              "Bearer"
+            ],
             "const": "Bearer",
             "title": "Token Type"
           },
@@ -29687,6 +29848,9 @@
         "properties": {
           "error": {
             "type": "string",
+            "enum": [
+              "Unauthorized"
+            ],
             "const": "Unauthorized",
             "title": "Error"
           },
@@ -29947,6 +30111,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "benefit.created"
+            ],
             "const": "benefit.created",
             "title": "Type"
           },
@@ -29967,6 +30134,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "benefit_grant.created"
+            ],
             "const": "benefit_grant.created",
             "title": "Type"
           },
@@ -29986,6 +30156,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "benefit_grant.revoked"
+            ],
             "const": "benefit_grant.revoked",
             "title": "Type"
           },
@@ -30005,6 +30178,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "benefit_grant.updated"
+            ],
             "const": "benefit_grant.updated",
             "title": "Type"
           },
@@ -30024,6 +30200,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "benefit.updated"
+            ],
             "const": "benefit.updated",
             "title": "Type"
           },
@@ -30044,6 +30223,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "checkout.created"
+            ],
             "const": "checkout.created",
             "title": "Type"
           },
@@ -30063,6 +30245,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "checkout.updated"
+            ],
             "const": "checkout.updated",
             "title": "Type"
           },
@@ -30082,6 +30267,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "order.created"
+            ],
             "const": "order.created",
             "title": "Type"
           },
@@ -30101,6 +30289,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "organization.updated"
+            ],
             "const": "organization.updated",
             "title": "Type"
           },
@@ -30120,6 +30311,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "pledge.created"
+            ],
             "const": "pledge.created",
             "title": "Type"
           },
@@ -30139,6 +30333,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "pledge.updated"
+            ],
             "const": "pledge.updated",
             "title": "Type"
           },
@@ -30158,6 +30355,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "product.created"
+            ],
             "const": "product.created",
             "title": "Type"
           },
@@ -30177,6 +30377,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "product.updated"
+            ],
             "const": "product.updated",
             "title": "Type"
           },
@@ -30196,6 +30399,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "subscription.active"
+            ],
             "const": "subscription.active",
             "title": "Type"
           },
@@ -30215,6 +30421,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "subscription.canceled"
+            ],
             "const": "subscription.canceled",
             "title": "Type"
           },
@@ -30234,6 +30443,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "subscription.created"
+            ],
             "const": "subscription.created",
             "title": "Type"
           },
@@ -30253,6 +30465,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "subscription.revoked"
+            ],
             "const": "subscription.revoked",
             "title": "Type"
           },
@@ -30272,6 +30487,9 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": [
+              "subscription.updated"
+            ],
             "const": "subscription.updated",
             "title": "Type"
           },
