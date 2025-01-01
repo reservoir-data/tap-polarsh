@@ -19,7 +19,7 @@ jobs:
         app-id: ${{ secrets.APP_ID }}
         private-key: ${{ secrets.APP_PRIVATE_KEY }}
     - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v4
+    - uses: astral-sh/setup-uv@v5
       with:
         version: ">=0.4.18"
     - run: uv run scripts/update_openapi.py
