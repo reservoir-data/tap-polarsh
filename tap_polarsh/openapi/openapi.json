@@ -15045,12 +15045,6 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
-          "payment_processor": {
-            "type": "string",
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
-          },
           "discount_id": {
             "anyOf": [
               {
@@ -15230,7 +15224,6 @@
         },
         "type": "object",
         "required": [
-          "payment_processor",
           "product_price_id"
         ],
         "title": "CheckoutPriceCreate",
@@ -15369,12 +15362,6 @@
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
-          },
-          "payment_processor": {
-            "type": "string",
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
           },
           "discount_id": {
             "anyOf": [
@@ -15555,7 +15542,6 @@
         },
         "type": "object",
         "required": [
-          "payment_processor",
           "product_id"
         ],
         "title": "CheckoutProductCreate",
@@ -19842,6 +19828,10 @@
             "format": "date-time",
             "title": "Expires At"
           },
+          "customer_portal_url": {
+            "type": "string",
+            "title": "Customer Portal Url"
+          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
@@ -19858,6 +19848,7 @@
           "id",
           "token",
           "expires_at",
+          "customer_portal_url",
           "customer_id",
           "customer"
         ],
