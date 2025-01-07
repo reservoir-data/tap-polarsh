@@ -3104,6 +3104,44 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The product ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/products",
+                    "resourceName": "Product",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The product ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/products",
+                      "resourceName": "Product",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ProductID Filter",
+              "description": "Filter by product ID."
+            },
+            "description": "Filter by product ID."
+          },
+          {
             "name": "organization_id",
             "in": "query",
             "required": false,
