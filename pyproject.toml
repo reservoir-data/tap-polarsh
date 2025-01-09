@@ -37,67 +37,28 @@ dependencies = [
   "requests~=2.31",
   "singer-sdk~=0.43.1",
 ]
-optional-dependencies.dev = [
-  "tap-polarsh[testing,typing]",
-]
-optional-dependencies.testing = [
-  "deptry>=0.12",
-  "pytest>=8",
-  "singer-sdk[testing]",
-]
-optional-dependencies.typing = [
-  "mypy~=1.14.0",
-  "types-requests~=2.31",
-]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-polarsh"
 urls.Repository = "https://github.com/edgarrmondragon/tap-polarsh"
 scripts."tap-polarsh" = "tap_polarsh.tap:TapPolar.cli"
 
+[dependency-groups]
+dev = [
+  { include-group = "testing" },
+  { include-group = "typing" },
+]
+testing = [
+  "deptry>=0.12",
+  "pytest>=8",
+  "singer-sdk[testing]",
+]
+typing = [
+  "mypy~=1.14.0",
+  "types-requests~=2.31",
+]
+
 [tool.hatch.version]
 source = "vcs"
-
-[tool.hatch.envs.default]
-installer = "uv"
-
-[tool.hatch.envs.default.env-vars]
-UV_PRERELEASE = "allow"
-
-[tool.hatch.envs.default.overrides]
-env.GITHUB_ACTIONS.dev-mode = { value = false, if = [
-  "true",
-] }
-
-[tool.hatch.envs.sync.scripts]
-console = "tap-polarsh {args}"
-jsonl = "tap-polarsh {args} > tap-polarsh.jsonl"
-
-[tool.hatch.envs.test]
-features = [
-  "testing",
-]
-[tool.hatch.envs.test.scripts]
-integration = "pytest {args:tests}"
-dependencies = "deptry ."
-
-[tool.hatch.envs.all]
-template = "test"
-[[tool.hatch.envs.all.matrix]]
-python = [
-  "3.9",
-  "3.10",
-  "3.11",
-  "3.12",
-  "3.13",
-]
-
-[tool.hatch.envs.typing]
-features = [
-  "testing",
-  "typing",
-]
-[tool.hatch.envs.typing.scripts]
-check = "mypy --strict {args:tap_polarsh tests}"
 
 [tool.ruff]
 line-length = 88
@@ -106,7 +67,6 @@ lint.select = [
   "ALL",
 ]
 lint.ignore = [
-  "ANN101", # missing-type-self
   "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
   "FIX002", # line-contains-todo
@@ -147,7 +107,10 @@ DEP002 = [
 max_supported_python = "3.13"
 
 [tool.pytest.ini_options]
-addopts = "-vvv --durations=10"
+addopts = [
+  "-vvv",
+  "--durations=10",
+]
 
 [tool.mypy]
 python_version = "3.13"
