@@ -16,8 +16,10 @@ if t.TYPE_CHECKING:
     from tap_polarsh.client import PolarStream
 
 STREAMS: t.Sequence[type[PolarStream]] = [
+    streams.Orders,
     streams.Organizations,
     streams.Repositories,
+    streams.Subscriptions,
 ]
 
 
