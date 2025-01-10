@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["gh:edgarrmondragon/singer-tap-copier-template"],
-      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
+      "versioning": "regex:^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?<prerelease>[a-zA-Z]+\d+)?$"
     }
   ]
 }
