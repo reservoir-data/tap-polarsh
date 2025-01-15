@@ -39,3 +39,5 @@ repos:
     hooks:
     - id: check-dependabot
     - id: check-github-workflows
+    - id: check-renovate
+      additional_dependencies: [pyjson5]
