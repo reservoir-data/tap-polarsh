@@ -126,3 +126,6 @@ ignore_missing_imports = true
 module = [
   "backoff.*",
 ]
+
+[tool.uv]
+required-version = ">=0.5.0"
