@@ -47,6 +47,16 @@
     "enabled": false
   },
 
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["scripts/update_openapi.py"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)"
+      ]
+    }
+  ],
+
   // https://docs.renovatebot.com/configuration-options/#packagerules
   "packageRules": [
     {
