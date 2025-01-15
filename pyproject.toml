@@ -128,4 +128,4 @@ module = [
 ]
 
 [tool.uv]
-required-version = ">=0.5.0"
+required-version = ">=0.5.19"
