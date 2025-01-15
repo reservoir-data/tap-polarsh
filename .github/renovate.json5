@@ -52,7 +52,7 @@
       "customType": "regex",
       "fileMatch": ["scripts/update_openapi.py"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)"
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+#\\s+\"\\S+?==(?<currentValue>\\S+)\",?\\s+"
       ]
     }
   ],
