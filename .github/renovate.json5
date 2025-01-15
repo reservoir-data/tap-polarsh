@@ -42,7 +42,7 @@
     "schedule": ["before 5am on saturday"]
   },
 
-  // https://docs.renovatebot.com/configuration-options/#copier
+  // https://docs.renovatebot.com/modules/manager/copier
   "copier": {
     "enabled": false
   },
