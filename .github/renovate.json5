@@ -57,6 +57,7 @@
   "enabledManagers": [
     "github-actions",
     "pep621",
-    "pre-commit"
+    "pre-commit",
+    "regex"
   ]
 }
