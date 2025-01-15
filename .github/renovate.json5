@@ -42,6 +42,11 @@
     "schedule": ["before 5am on saturday"]
   },
 
+  // https://docs.renovatebot.com/configuration-options/#copier
+  "copier": {
+    "enabled": false
+  },
+
   // https://docs.renovatebot.com/configuration-options/#packagerules
   "packageRules": [
     {
@@ -52,12 +57,5 @@
       "matchPackageNames": ["tox", "tox-uv"],
       "groupName": "tox-version"
     }
-  ],
-
-  "enabledManagers": [
-    "github-actions",
-    "pep621",
-    "pre-commit",
-    "regex"
   ]
 }
