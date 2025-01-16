@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # /// script
 # dependencies = [
-#   "requests>=2.25.1",
+#   # renovate: datasource=pypi depName=requests
+#   "requests==2.32.3",
 # ]
 # ///
 

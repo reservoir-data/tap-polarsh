@@ -3,7 +3,7 @@
   "info": {
     "title": "Polar API",
     "summary": "Polar HTTP and Webhooks API",
-    "description": "Read the docs at https://docs.polar.sh/api",
+    "description": "Read the docs at https://docs.polar.sh/api-reference",
     "version": "0.1.0"
   },
   "servers": [
@@ -1391,6 +1391,180 @@
         ],
         "x-speakeasy-group": "subscriptions",
         "x-speakeasy-name-override": "export"
+      }
+    },
+    "/v1/subscriptions/{id}": {
+      "patch": {
+        "tags": [
+          "subscriptions",
+          "documented"
+        ],
+        "summary": "Update Subscription",
+        "description": "Update a subscription.",
+        "operationId": "subscriptions:update",
+        "security": [
+          {
+            "oidc": [
+              "subscriptions:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The subscription ID.",
+              "title": "Id"
+            },
+            "description": "The subscription ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Subscription is already canceled or will be at the end of the period.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlreadyCanceledSubscription"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subscription not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "subscriptions",
+        "x-speakeasy-name-override": "update"
+      },
+      "delete": {
+        "tags": [
+          "subscriptions",
+          "documented"
+        ],
+        "summary": "Revoke Subscription",
+        "description": "Revoke a subscription, i.e cancel immediately.",
+        "operationId": "subscriptions:revoke",
+        "security": [
+          {
+            "oidc": [
+              "subscriptions:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The subscription ID.",
+              "title": "Id"
+            },
+            "description": "The subscription ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription revoked.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "This subscription is already revoked.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlreadyCanceledSubscription"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subscription not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "subscriptions",
+        "x-speakeasy-name-override": "revoke"
       }
     },
     "/v1/advertisements/": {
@@ -2929,6 +3103,44 @@
           }
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The product ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/products",
+                    "resourceName": "Product",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The product ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/products",
+                      "resourceName": "Product",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ProductID Filter",
+              "description": "Filter by product ID."
+            },
+            "description": "Filter by product ID."
+          },
           {
             "name": "organization_id",
             "in": "query",
@@ -9661,10 +9873,10 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "The subscription ID.",
+              "description": "Customer subscription ID.",
               "title": "Id"
             },
-            "description": "The subscription ID."
+            "description": "Customer subscription ID."
           }
         ],
         "responses": {
@@ -9679,7 +9891,7 @@
             }
           },
           "404": {
-            "description": "Subscription not found.",
+            "description": "Customer subscription was not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9737,10 +9949,10 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "The subscription ID.",
+              "description": "Customer subscription ID.",
               "title": "Id"
             },
-            "description": "The subscription ID."
+            "description": "Customer subscription ID."
           }
         ],
         "requestBody": {
@@ -9755,7 +9967,7 @@
         },
         "responses": {
           "200": {
-            "description": "Subscription updated.",
+            "description": "Customer subscription updated.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9764,8 +9976,18 @@
               }
             }
           },
+          "403": {
+            "description": "Customer subscription is already canceled or will be at the end of the period.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlreadyCanceledSubscription"
+                }
+              }
+            }
+          },
           "404": {
-            "description": "Subscription not found.",
+            "description": "Customer subscription was not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9823,15 +10045,15 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "The subscription ID.",
+              "description": "Customer subscription ID.",
               "title": "Id"
             },
-            "description": "The subscription ID."
+            "description": "Customer subscription ID."
           }
         ],
         "responses": {
           "200": {
-            "description": "Subscription canceled.",
+            "description": "Customer subscription is canceled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9841,7 +10063,7 @@
             }
           },
           "403": {
-            "description": "This subscription is already canceled or will be at the end of the period.",
+            "description": "Customer subscription is already canceled or will be at the end of the period.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9851,7 +10073,7 @@
             }
           },
           "404": {
-            "description": "Subscription not found.",
+            "description": "Customer subscription was not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -10166,13 +10388,50 @@
     "subscription.canceled": {
       "post": {
         "summary": "subscription.canceled",
-        "description": "Sent when a subscription is canceled by the user.\nThey might still have access until the end of the current period.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a subscription is canceled.\nCustomers might still have access until the end of the current period.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointsubscription_canceled_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WebhookSubscriptionCanceledPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subscription.uncanceled": {
+      "post": {
+        "summary": "subscription.uncanceled",
+        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointsubscription_uncanceled_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookSubscriptionUncanceledPayload"
               }
             }
           },
@@ -15045,12 +15304,6 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
-          "payment_processor": {
-            "type": "string",
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
-          },
           "discount_id": {
             "anyOf": [
               {
@@ -15230,7 +15483,6 @@
         },
         "type": "object",
         "required": [
-          "payment_processor",
           "product_price_id"
         ],
         "title": "CheckoutPriceCreate",
@@ -15369,12 +15621,6 @@
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
-          },
-          "payment_processor": {
-            "type": "string",
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
           },
           "discount_id": {
             "anyOf": [
@@ -15555,7 +15801,6 @@
         },
         "type": "object",
         "required": [
-          "payment_processor",
           "product_id"
         ],
         "title": "CheckoutProductCreate",
@@ -19202,6 +19447,20 @@
           }
         }
       },
+      "CustomerCancellationReason": {
+        "type": "string",
+        "enum": [
+          "customer_service",
+          "low_quality",
+          "missing_features",
+          "switched_service",
+          "too_complex",
+          "too_expensive",
+          "unused",
+          "other"
+        ],
+        "title": "CustomerCancellationReason"
+      },
       "CustomerCreate": {
         "properties": {
           "email": {
@@ -19596,6 +19855,18 @@
             "type": "boolean",
             "title": "Cancel At Period End"
           },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At"
+          },
           "started_at": {
             "anyOf": [
               {
@@ -19607,6 +19878,18 @@
               }
             ],
             "title": "Started At"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
           },
           "ended_at": {
             "anyOf": [
@@ -19658,6 +19941,27 @@
               }
             ],
             "title": "Checkout Id"
+          },
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment"
           }
         },
         "type": "object",
@@ -19672,13 +19976,17 @@
           "current_period_start",
           "current_period_end",
           "cancel_at_period_end",
+          "canceled_at",
           "started_at",
+          "ends_at",
           "ended_at",
           "customer_id",
           "product_id",
           "price_id",
           "discount_id",
-          "checkout_id"
+          "checkout_id",
+          "customer_cancellation_reason",
+          "customer_cancellation_comment"
         ],
         "title": "CustomerOrderSubscription"
       },
@@ -19842,6 +20150,10 @@
             "format": "date-time",
             "title": "Expires At"
           },
+          "customer_portal_url": {
+            "type": "string",
+            "title": "Customer Portal Url"
+          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
@@ -19858,6 +20170,7 @@
           "id",
           "token",
           "expires_at",
+          "customer_portal_url",
           "customer_id",
           "customer"
         ],
@@ -19968,6 +20281,18 @@
             "type": "boolean",
             "title": "Cancel At Period End"
           },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At"
+          },
           "started_at": {
             "anyOf": [
               {
@@ -19979,6 +20304,18 @@
               }
             ],
             "title": "Started At"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
           },
           "ended_at": {
             "anyOf": [
@@ -20031,6 +20368,27 @@
             ],
             "title": "Checkout Id"
           },
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment"
+          },
           "user_id": {
             "type": "string",
             "format": "uuid4",
@@ -20056,18 +20414,63 @@
           "current_period_start",
           "current_period_end",
           "cancel_at_period_end",
+          "canceled_at",
           "started_at",
+          "ends_at",
           "ended_at",
           "customer_id",
           "product_id",
           "price_id",
           "discount_id",
           "checkout_id",
+          "customer_cancellation_reason",
+          "customer_cancellation_comment",
           "user_id",
           "product",
           "price"
         ],
         "title": "CustomerSubscription"
+      },
+      "CustomerSubscriptionCancel": {
+        "properties": {
+          "cancel_at_period_end": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancel At Period End",
+            "description": "Cancel an active subscription once the current period ends.\n\nOr uncancel a subscription currently set to be revoked at period end."
+          },
+          "cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Customers reason for cancellation.\n\n* `too_expensive`: Too expensive for the customer.\n* `missing_features`: Customer is missing certain features.\n* `switched_service`: Customer switched to another service.\n* `unused`: Customer is not using it enough.\n* `customer_service`: Customer is not satisfied with the customer service.\n* `low_quality`: Customer is unhappy with the quality.\n* `too_complex`: Customer considers the service too complicated.\n* `other`: Other reason(s)."
+          },
+          "cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancellation Comment",
+            "description": "Customer feedback and why they decided to cancel."
+          }
+        },
+        "type": "object",
+        "title": "CustomerSubscriptionCancel"
       },
       "CustomerSubscriptionProduct": {
         "properties": {
@@ -20191,18 +20594,29 @@
         "title": "CustomerSubscriptionSortProperty"
       },
       "CustomerSubscriptionUpdate": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/CustomerSubscriptionUpdatePrice"
+          },
+          {
+            "$ref": "#/components/schemas/CustomerSubscriptionCancel"
+          }
+        ]
+      },
+      "CustomerSubscriptionUpdatePrice": {
         "properties": {
           "product_price_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id"
+            "title": "Product Price Id",
+            "description": "Update subscription to another price."
           }
         },
         "type": "object",
         "required": [
           "product_price_id"
         ],
-        "title": "CustomerSubscriptionUpdate"
+        "title": "CustomerSubscriptionUpdatePrice"
       },
       "CustomerUpdate": {
         "properties": {
@@ -25978,6 +26392,18 @@
             "type": "boolean",
             "title": "Cancel At Period End"
           },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At"
+          },
           "started_at": {
             "anyOf": [
               {
@@ -25989,6 +26415,18 @@
               }
             ],
             "title": "Started At"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
           },
           "ended_at": {
             "anyOf": [
@@ -26041,6 +26479,27 @@
             ],
             "title": "Checkout Id"
           },
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment"
+          },
           "user_id": {
             "type": "string",
             "format": "uuid4",
@@ -26061,13 +26520,17 @@
           "current_period_start",
           "current_period_end",
           "cancel_at_period_end",
+          "canceled_at",
           "started_at",
+          "ends_at",
           "ended_at",
           "customer_id",
           "product_id",
           "price_id",
           "discount_id",
           "checkout_id",
+          "customer_cancellation_reason",
+          "customer_cancellation_comment",
           "user_id"
         ],
         "title": "OrderSubscription"
@@ -29372,6 +29835,18 @@
             "type": "boolean",
             "title": "Cancel At Period End"
           },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At"
+          },
           "started_at": {
             "anyOf": [
               {
@@ -29383,6 +29858,18 @@
               }
             ],
             "title": "Started At"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
           },
           "ended_at": {
             "anyOf": [
@@ -29434,6 +29921,27 @@
               }
             ],
             "title": "Checkout Id"
+          },
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment"
           },
           "metadata": {
             "additionalProperties": {
@@ -29514,13 +30022,17 @@
           "current_period_start",
           "current_period_end",
           "cancel_at_period_end",
+          "canceled_at",
           "started_at",
+          "ends_at",
           "ended_at",
           "customer_id",
           "product_id",
           "price_id",
           "discount_id",
           "checkout_id",
+          "customer_cancellation_reason",
+          "customer_cancellation_comment",
           "metadata",
           "customer",
           "user_id",
@@ -29530,6 +30042,60 @@
           "discount"
         ],
         "title": "Subscription"
+      },
+      "SubscriptionCancel": {
+        "properties": {
+          "cancel_at_period_end": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancel At Period End",
+            "description": "Cancel an active subscription once the current period ends.\n\nOr uncancel a subscription currently set to be revoked at period end."
+          },
+          "revoke": {
+            "anyOf": [
+              {
+                "type": "boolean",
+                "const": true
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoke",
+            "description": "Cancel and revoke an active subscription immediately"
+          },
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Customer reason for cancellation.\n\nHelpful to monitor reasons behind churn for future improvements.\n\nOnly set this in case your own service is requesting the reason from the\ncustomer. Or you know based on direct conversations, i.e support, with\nthe customer.\n\n* `too_expensive`: Too expensive for the customer.\n* `missing_features`: Customer is missing certain features.\n* `switched_service`: Customer switched to another service.\n* `unused`: Customer is not using it enough.\n* `customer_service`: Customer is not satisfied with the customer service.\n* `low_quality`: Customer is unhappy with the quality.\n* `too_complex`: Customer considers the service too complicated.\n* `other`: Other reason(s)."
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment",
+            "description": "Customer feedback and why they decided to cancel.\n\n**IMPORTANT:**\nDo not use this to store internal notes! It's intended to be input\nfrom the customer and is therefore also available in their Polar\npurchases library.\n\nOnly set this in case your own service is requesting the reason from the\ncustomer. Or you copy a message directly from a customer\nconversation, i.e support."
+          }
+        },
+        "type": "object",
+        "title": "SubscriptionCancel"
       },
       "SubscriptionCustomer": {
         "properties": {
@@ -29692,6 +30258,31 @@
           "unpaid"
         ],
         "title": "SubscriptionStatus"
+      },
+      "SubscriptionUpdate": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/SubscriptionUpdatePrice"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionCancel"
+          }
+        ]
+      },
+      "SubscriptionUpdatePrice": {
+        "properties": {
+          "product_price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Price Id",
+            "description": "Update subscription to another price."
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_price_id"
+        ],
+        "title": "SubscriptionUpdatePrice"
       },
       "SubscriptionUser": {
         "properties": {
@@ -30411,7 +31002,7 @@
           "data"
         ],
         "title": "WebhookSubscriptionCanceledPayload",
-        "description": "Sent when a subscription is canceled by the user.\nThey might still have access until the end of the current period.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a subscription is canceled.\nCustomers might still have access until the end of the current period.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionCreatedPayload": {
         "properties": {
@@ -30450,6 +31041,25 @@
         ],
         "title": "WebhookSubscriptionRevokedPayload",
         "description": "Sent when a subscription is revoked, the user looses access immediately.\nHappens when the subscription is canceled, or payment is past due.\n\n**Discord & Slack support:** Full"
+      },
+      "WebhookSubscriptionUncanceledPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "subscription.uncanceled",
+            "title": "Type"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Subscription"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookSubscriptionUncanceledPayload",
+        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionUpdatedPayload": {
         "properties": {
