@@ -37,7 +37,6 @@ repos:
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.31.0
     hooks:
-    - id: check-dependabot
     - id: check-github-workflows
     - id: check-renovate
       additional_dependencies: [pyjson5]
