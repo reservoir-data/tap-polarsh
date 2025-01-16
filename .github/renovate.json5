@@ -19,14 +19,6 @@
     "customManagers:githubActionsVersions"
   ],
 
-  // https://docs.renovatebot.com/configuration-options/#ignorepresets
-  "ignorePresets": [
-    // https://docs.renovatebot.com/presets-default/#ignoremodulesandtests
-    // By default, some directories, including "tests", are ignored. Since we do want Renovate to pick up dependencies
-    // in "tests" directory, we explicitly opt out from this preset.
-    ":ignoreModulesAndTests"
-  ],
-
   // https://docs.renovatebot.com/configuration-options/#labels
   "labels": ["dependencies"],
 
