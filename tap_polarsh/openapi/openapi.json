@@ -7509,6 +7509,24 @@
             "description": "Filter by organization ID."
           },
           {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by exact email.",
+              "title": "Email"
+            },
+            "description": "Filter by exact email."
+          },
+          {
             "name": "query",
             "in": "query",
             "required": false,
@@ -7575,6 +7593,16 @@
               "title": "Sorting"
             },
             "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -31079,6 +31107,48 @@
         ],
         "title": "WebhookSubscriptionUpdatedPayload",
         "description": "Sent when a subscription is updated. This event fires for all changes to the subscription, including renewals.\n\nIf you want more specific events, you can listen to `subscription.active`, `subscription.canceled`, and `subscription.revoked`.\n\nTo listen specifically for renewals, you can listen to `order.created` events and check the `billing_reason` field.\n\n**Discord & Slack support:** On cancellation and revocation. Renewals are skipped."
+      },
+      "MetadataQuery": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "boolean"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "MetadataQuery"
       }
     },
     "securitySchemes": {
