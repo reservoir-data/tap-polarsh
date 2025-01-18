@@ -14142,6 +14142,9 @@
             "title": "Customer Tax Id"
           },
           "payment_processor_metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
             "type": "object",
             "title": "Payment Processor Metadata"
           },
@@ -16096,6 +16099,9 @@
             "title": "Customer Tax Id"
           },
           "payment_processor_metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
             "type": "object",
             "title": "Payment Processor Metadata"
           },
@@ -16445,6 +16451,9 @@
             "title": "Customer Tax Id"
           },
           "payment_processor_metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
             "type": "object",
             "title": "Payment Processor Metadata"
           },
