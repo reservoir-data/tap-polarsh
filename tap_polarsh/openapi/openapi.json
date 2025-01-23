@@ -1131,13 +1131,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The customer ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The customer ID."
                   }
                 },
                 {
@@ -2977,13 +2979,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The customer ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The customer ID."
                   }
                 },
                 {
@@ -3857,13 +3861,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The customer ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The customer ID."
                   }
                 },
                 {
@@ -4119,6 +4125,375 @@
         ],
         "x-speakeasy-group": "orders",
         "x-speakeasy-name-override": "invoice"
+      }
+    },
+    "/v1/refunds/": {
+      "get": {
+        "tags": [
+          "refunds",
+          "documented"
+        ],
+        "summary": "List Refunds",
+        "description": "List products.",
+        "operationId": "refunds:list",
+        "security": [
+          {
+            "oidc": [
+              "refunds:read",
+              "refunds:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The refund ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The refund ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "RefundID Filter",
+              "description": "Filter by refund ID."
+            },
+            "description": "Filter by refund ID."
+          },
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The order ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The order ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrderID Filter",
+              "description": "Filter by order ID."
+            },
+            "description": "Filter by order ID."
+          },
+          {
+            "name": "subscription_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The subscription ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The subscription ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "SubscriptionID Filter",
+              "description": "Filter by subscription ID."
+            },
+            "description": "Filter by subscription ID."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "succeeded",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "RefundStatus Filter",
+              "description": "Filter by `succeeded`."
+            },
+            "description": "Filter by `succeeded`."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RefundSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-created_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Refund_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "refunds",
+        "x-speakeasy-name-override": "list"
+      },
+      "post": {
+        "tags": [
+          "refunds",
+          "documented"
+        ],
+        "summary": "Create Refund",
+        "description": "Create a refund.",
+        "operationId": "refunds:create",
+        "security": [
+          {
+            "oidc": [
+              "refunds:write"
+            ]
+          },
+          {
+            "pat": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refund"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Refund created."
+          },
+          "400": {
+            "description": "Refund amount exceeds remaining order balance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefundAmountTooHigh"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Order is already fully refunded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefundedAlready"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "refunds",
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1/checkouts/custom/": {
@@ -5503,6 +5878,34 @@
               "description": "Filter by product price type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
             },
             "description": "Filter by product price type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
           }
         ],
         "responses": {
@@ -8081,13 +8484,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The order ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The order ID."
                   }
                 },
                 {
@@ -8107,13 +8512,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The subscription ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The subscription ID."
                   }
                 },
                 {
@@ -9279,13 +9686,15 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "format": "uuid4"
+                  "format": "uuid4",
+                  "description": "The subscription ID."
                 },
                 {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "format": "uuid4"
+                    "format": "uuid4",
+                    "description": "The subscription ID."
                   }
                 },
                 {
@@ -9901,10 +10310,10 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "Customer subscription ID.",
+              "description": "The subscription ID.",
               "title": "Id"
             },
-            "description": "Customer subscription ID."
+            "description": "The subscription ID."
           }
         ],
         "responses": {
@@ -9977,10 +10386,10 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "Customer subscription ID.",
+              "description": "The subscription ID.",
               "title": "Id"
             },
-            "description": "Customer subscription ID."
+            "description": "The subscription ID."
           }
         ],
         "requestBody": {
@@ -10073,10 +10482,10 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
-              "description": "Customer subscription ID.",
+              "description": "The subscription ID.",
               "title": "Id"
             },
-            "description": "Customer subscription ID."
+            "description": "The subscription ID."
           }
         ],
         "responses": {
@@ -10302,6 +10711,43 @@
         }
       }
     },
+    "order.refunded": {
+      "post": {
+        "summary": "order.refunded",
+        "description": "Sent when an order is fully or partially refunded.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointorder_refunded_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookOrderRefundedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "subscription.created": {
       "post": {
         "summary": "subscription.created",
@@ -10497,6 +10943,80 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WebhookSubscriptionRevokedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refund.created": {
+      "post": {
+        "summary": "refund.created",
+        "description": "Sent when a refund is created regardless of status.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointrefund_created_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookRefundCreatedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refund.updated": {
+      "post": {
+        "summary": "refund.updated",
+        "description": "Sent when a refund is updated.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointrefund_updated_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookRefundUpdatedPayload"
               }
             }
           },
@@ -19500,6 +20020,31 @@
       },
       "CustomerCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "email": {
             "type": "string",
             "format": "email",
@@ -20657,6 +21202,38 @@
       },
       "CustomerUpdate": {
         "properties": {
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 500,
+                      "minLength": 1
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "propertyNames": {
+                  "maxLength": 40,
+                  "minLength": 1
+                },
+                "type": "object",
+                "maxProperties": 50,
+                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          },
           "email": {
             "anyOf": [
               {
@@ -25089,6 +25666,26 @@
         ],
         "title": "ListResource[Product]"
       },
+      "ListResource_Refund_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Refund"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Refund]"
+      },
       "ListResource_Repository_": {
         "properties": {
           "items": {
@@ -25171,6 +25768,10 @@
             "type": "integer",
             "title": "Revenue"
           },
+          "cumulative_revenue": {
+            "type": "integer",
+            "title": "Cumulative Revenue"
+          },
           "average_order_value": {
             "type": "integer",
             "title": "Average Order Value"
@@ -25213,6 +25814,7 @@
           "timestamp",
           "orders",
           "revenue",
+          "cumulative_revenue",
           "average_order_value",
           "one_time_products",
           "one_time_products_revenue",
@@ -25239,6 +25841,9 @@
             "$ref": "#/components/schemas/Metric"
           },
           "revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "cumulative_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
           "average_order_value": {
@@ -25273,6 +25878,7 @@
         "required": [
           "orders",
           "revenue",
+          "cumulative_revenue",
           "average_order_value",
           "one_time_products",
           "one_time_products_revenue",
@@ -25448,7 +26054,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -25607,7 +26213,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -25725,7 +26331,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -25940,6 +26546,10 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
           "amount": {
             "type": "integer",
             "title": "Amount"
@@ -25947,6 +26557,16 @@
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount"
+          },
+          "refunded_amount": {
+            "type": "integer",
+            "title": "Refunded Amount",
+            "description": "Amount refunded"
+          },
+          "refunded_tax_amount": {
+            "type": "integer",
+            "title": "Refunded Tax Amount",
+            "description": "Sales tax refunded"
           },
           "currency": {
             "type": "string",
@@ -26077,8 +26697,11 @@
           "modified_at",
           "id",
           "metadata",
+          "status",
           "amount",
           "tax_amount",
+          "refunded_amount",
+          "refunded_tax_amount",
           "currency",
           "billing_reason",
           "billing_address",
@@ -29172,6 +29795,255 @@
         ],
         "title": "Reactions"
       },
+      "Refund": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RefundStatus"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/RefundReason"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id"
+          },
+          "order_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Order Id"
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id"
+          },
+          "revoke_benefits": {
+            "type": "boolean",
+            "title": "Revoke Benefits"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "metadata",
+          "status",
+          "reason",
+          "amount",
+          "tax_amount",
+          "currency",
+          "organization_id",
+          "order_id",
+          "subscription_id",
+          "customer_id",
+          "revoke_benefits"
+        ],
+        "title": "Refund"
+      },
+      "RefundAmountTooHigh": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "RefundAmountTooHigh",
+            "title": "Error"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "RefundAmountTooHigh"
+      },
+      "RefundCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "order_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Order Id"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/RefundReason"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comment",
+            "description": "An internal comment about the refund."
+          },
+          "revoke_benefits": {
+            "type": "boolean",
+            "title": "Revoke Benefits",
+            "description": "Should this refund trigger the associated customer benefits to be revoked?\n\n**Note:**\nOnly allowed in case the `order` is a one-time purchase.\nSubscriptions automatically revoke customer benefits once the\nsubscription itself is revoked, i.e fully canceled.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "order_id",
+          "reason",
+          "amount"
+        ],
+        "title": "RefundCreate"
+      },
+      "RefundReason": {
+        "type": "string",
+        "enum": [
+          "duplicate",
+          "fraudulent",
+          "customer_request",
+          "service_disruption",
+          "satisfaction_guarantee",
+          "other"
+        ],
+        "title": "RefundReason"
+      },
+      "RefundSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "amount",
+          "-amount"
+        ],
+        "title": "RefundSortProperty"
+      },
+      "RefundStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "succeeded",
+          "failed",
+          "canceled"
+        ],
+        "title": "RefundStatus"
+      },
+      "RefundedAlready": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "RefundedAlready",
+            "title": "Error"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "RefundedAlready"
+      },
       "Repository": {
         "properties": {
           "id": {
@@ -29730,6 +30602,8 @@
           "customers:write",
           "customer_sessions:write",
           "orders:read",
+          "refunds:read",
+          "refunds:write",
           "metrics:read",
           "webhooks:read",
           "webhooks:write",
@@ -29772,6 +30646,8 @@
           "products:read": "Read products",
           "products:write": "Create or modify products",
           "profile": "Read your profile",
+          "refunds:read": "Read refunds made on your organizations",
+          "refunds:write": "Create or modify refunds",
           "subscriptions:read": "Read subscriptions made on your organizations",
           "subscriptions:write": "Create or modify subscriptions made on your organizations",
           "user:read": "User Read",
@@ -30908,6 +31784,25 @@
         "title": "WebhookOrderCreatedPayload",
         "description": "Sent when a new order is created.\n\n**Discord & Slack support:** Full"
       },
+      "WebhookOrderRefundedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "order.refunded",
+            "title": "Type"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookOrderRefundedPayload",
+        "description": "Sent when an order is fully or partially refunded.\n\n**Discord & Slack support:** Full"
+      },
       "WebhookOrganizationUpdatedPayload": {
         "properties": {
           "type": {
@@ -31002,6 +31897,44 @@
         ],
         "title": "WebhookProductUpdatedPayload",
         "description": "Sent when a product is updated.\n\n**Discord & Slack support:** Basic"
+      },
+      "WebhookRefundCreatedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "refund.created",
+            "title": "Type"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Refund"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookRefundCreatedPayload",
+        "description": "Sent when a refund is created regardless of status.\n\n**Discord & Slack support:** Full"
+      },
+      "WebhookRefundUpdatedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "refund.updated",
+            "title": "Type"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Refund"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookRefundUpdatedPayload",
+        "description": "Sent when a refund is updated.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionActivePayload": {
         "properties": {
