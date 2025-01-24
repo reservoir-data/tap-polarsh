@@ -14428,6 +14428,23 @@
             "description": "The ID of the object."
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -14605,27 +14622,26 @@
           "customer_name": {
             "anyOf": [
               {
-                "type": "string",
-                "description": "Name of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Name"
+            "title": "Customer Name",
+            "description": "Name of the customer."
           },
           "customer_email": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "email",
-                "description": "Email address of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Email"
+            "title": "Customer Email",
+            "description": "Email address of the customer."
           },
           "customer_ip_address": {
             "anyOf": [
@@ -14801,6 +14817,23 @@
           "custom_field_data": {
             "anyOf": [
               {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
                 "type": "object"
               },
               {
@@ -15851,6 +15884,23 @@
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -16169,6 +16219,23 @@
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -16385,6 +16452,23 @@
             "description": "The ID of the object."
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -16562,27 +16646,26 @@
           "customer_name": {
             "anyOf": [
               {
-                "type": "string",
-                "description": "Name of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Name"
+            "title": "Customer Name",
+            "description": "Name of the customer."
           },
           "customer_email": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "email",
-                "description": "Email address of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Email"
+            "title": "Customer Email",
+            "description": "Email address of the customer."
           },
           "customer_ip_address": {
             "anyOf": [
@@ -16736,6 +16819,23 @@
             "description": "The ID of the object."
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -16914,27 +17014,26 @@
           "customer_name": {
             "anyOf": [
               {
-                "type": "string",
-                "description": "Name of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Name"
+            "title": "Customer Name",
+            "description": "Name of the customer."
           },
           "customer_email": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "email",
-                "description": "Email address of the customer."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Customer Email"
+            "title": "Customer Email",
+            "description": "Email address of the customer."
           },
           "customer_ip_address": {
             "anyOf": [
@@ -17091,6 +17190,23 @@
           "custom_field_data": {
             "anyOf": [
               {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
                 "type": "object"
               },
               {
@@ -17313,6 +17429,23 @@
           "custom_field_data": {
             "anyOf": [
               {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
                 "type": "object"
               },
               {
@@ -26542,6 +26675,23 @@
             "title": "Metadata"
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
@@ -30874,6 +31024,23 @@
             "title": "Metadata"
           },
           "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
             "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
