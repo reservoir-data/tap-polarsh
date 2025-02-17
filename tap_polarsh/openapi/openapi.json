@@ -37,6 +37,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -246,6 +249,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -497,6 +503,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -574,6 +583,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -673,6 +685,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -810,6 +825,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -870,6 +888,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -946,6 +967,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1044,6 +1068,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1325,6 +1352,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1412,6 +1442,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1483,6 +1516,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1574,6 +1610,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1837,6 +1876,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -1961,6 +2003,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "x-polar-allowed-subjects": [
@@ -1986,6 +2031,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2041,6 +2089,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2106,6 +2157,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2188,6 +2242,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "x-polar-allowed-subjects": [
@@ -2214,19 +2271,12 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/paths/~1v1~1oauth2~1token/post/x-components/AuthorizationCodeTokenRequest"
+                    "$ref": "#/components/schemas/AuthorizationCodeTokenRequest"
                   },
                   {
-                    "$ref": "#/paths/~1v1~1oauth2~1token/post/x-components/RefreshTokenRequest"
+                    "$ref": "#/components/schemas/RefreshTokenRequest"
                   }
-                ],
-                "discriminator": {
-                  "propertyName": "grant_type",
-                  "mapping": {
-                    "authorization_code": "#/paths/~1v1~1oauth2~1token/post/x-components/AuthorizationCodeTokenRequest",
-                    "refresh_token": "#/paths/~1v1~1oauth2~1token/post/x-components/RefreshTokenRequest"
-                  }
-                }
+                ]
               }
             }
           },
@@ -2242,74 +2292,6 @@
                 }
               }
             }
-          }
-        },
-        "x-components": {
-          "AuthorizationCodeTokenRequest": {
-            "properties": {
-              "grant_type": {
-                "const": "authorization_code",
-                "title": "Grant Type",
-                "type": "string"
-              },
-              "client_id": {
-                "title": "Client Id",
-                "type": "string"
-              },
-              "client_secret": {
-                "title": "Client Secret",
-                "type": "string"
-              },
-              "code": {
-                "title": "Code",
-                "type": "string"
-              },
-              "redirect_uri": {
-                "format": "uri",
-                "maxLength": 2083,
-                "minLength": 1,
-                "title": "Redirect Uri",
-                "type": "string"
-              }
-            },
-            "required": [
-              "grant_type",
-              "client_id",
-              "client_secret",
-              "code",
-              "redirect_uri"
-            ],
-            "title": "AuthorizationCodeTokenRequest",
-            "type": "object"
-          },
-          "RefreshTokenRequest": {
-            "properties": {
-              "grant_type": {
-                "const": "refresh_token",
-                "title": "Grant Type",
-                "type": "string"
-              },
-              "client_id": {
-                "title": "Client Id",
-                "type": "string"
-              },
-              "client_secret": {
-                "title": "Client Secret",
-                "type": "string"
-              },
-              "refresh_token": {
-                "title": "Refresh Token",
-                "type": "string"
-              }
-            },
-            "required": [
-              "grant_type",
-              "client_id",
-              "client_secret",
-              "refresh_token"
-            ],
-            "title": "RefreshTokenRequest",
-            "type": "object"
           }
         },
         "x-speakeasy-group": "oauth2",
@@ -2330,42 +2312,7 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "properties": {
-                  "token": {
-                    "type": "string",
-                    "title": "Token"
-                  },
-                  "token_type_hint": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "access_token",
-                          "refresh_token"
-                        ]
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "title": "Token Type Hint"
-                  },
-                  "client_id": {
-                    "type": "string",
-                    "title": "Client Id"
-                  },
-                  "client_secret": {
-                    "type": "string",
-                    "title": "Client Secret"
-                  }
-                },
-                "type": "object",
-                "required": [
-                  "token",
-                  "client_id",
-                  "client_secret"
-                ],
-                "title": "RevokeTokenRequest"
+                "$ref": "#/components/schemas/RevokeTokenRequest"
               }
             }
           },
@@ -2401,42 +2348,7 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "properties": {
-                  "token": {
-                    "type": "string",
-                    "title": "Token"
-                  },
-                  "token_type_hint": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "access_token",
-                          "refresh_token"
-                        ]
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "title": "Token Type Hint"
-                  },
-                  "client_id": {
-                    "type": "string",
-                    "title": "Client Id"
-                  },
-                  "client_secret": {
-                    "type": "string",
-                    "title": "Client Secret"
-                  }
-                },
-                "type": "object",
-                "required": [
-                  "token",
-                  "client_id",
-                  "client_secret"
-                ],
-                "title": "IntrospectTokenRequest"
+                "$ref": "#/components/schemas/IntrospectTokenRequest"
               }
             }
           },
@@ -2515,6 +2427,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2671,6 +2586,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -2732,6 +2650,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2808,6 +2729,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -2924,6 +2848,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3005,6 +2932,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3175,6 +3105,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3462,6 +3395,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -3524,6 +3460,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3600,6 +3539,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3698,6 +3640,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3795,6 +3740,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -3953,6 +3901,32 @@
             "description": "Filter by customer ID."
           },
           {
+            "name": "checkout_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CheckoutID Filter",
+              "description": "Filter by checkout ID."
+            },
+            "description": "Filter by checkout ID."
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -4069,6 +4043,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4142,6 +4119,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4216,6 +4196,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4502,6 +4485,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -4567,17 +4553,16 @@
         "x-speakeasy-name-override": "create"
       }
     },
-    "/v1/checkouts/custom/": {
+    "/v1/checkouts/": {
       "get": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "List Checkout Sessions",
         "description": "List checkout sessions.",
-        "operationId": "checkouts:custom:list",
+        "operationId": "checkouts:list",
         "security": [
           {
             "oidc": [
@@ -4587,6 +4572,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4762,19 +4750,18 @@
             "numPages": "$.pagination.max_page"
           }
         },
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "list"
       },
       "post": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Create Checkout Session",
         "description": "Create a checkout session.",
-        "operationId": "checkouts:custom:create",
+        "operationId": "checkouts:create",
         "security": [
           {
             "oidc": [
@@ -4783,6 +4770,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -4821,21 +4811,20 @@
           "Organization",
           "User"
         ],
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "create"
       }
     },
-    "/v1/checkouts/custom/{id}": {
+    "/v1/checkouts/{id}": {
       "get": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Get Checkout Session",
         "description": "Get a checkout session by ID.",
-        "operationId": "checkouts:custom:get",
+        "operationId": "checkouts:get",
         "security": [
           {
             "oidc": [
@@ -4845,6 +4834,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4897,19 +4889,18 @@
           "Organization",
           "User"
         ],
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "get"
       },
       "patch": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Update Checkout Session",
         "description": "Update a checkout session.",
-        "operationId": "checkouts:custom:update",
+        "operationId": "checkouts:update",
         "security": [
           {
             "oidc": [
@@ -4918,6 +4909,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -4966,11 +4960,11 @@
             }
           },
           "403": {
-            "description": "The customer already has an active subscription.",
+            "description": "The checkout is expired or the customer already has an active subscription.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AlreadyActiveSubscriptionError"
+                  "$ref": "#/components/schemas/CheckoutForbiddenError"
                 }
               }
             }
@@ -4990,21 +4984,20 @@
           "Organization",
           "User"
         ],
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "update"
       }
     },
-    "/v1/checkouts/custom/client/{client_secret}": {
+    "/v1/checkouts/client/{client_secret}": {
       "get": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Get Checkout Session from Client",
         "description": "Get a checkout session by client secret.",
-        "operationId": "checkouts:custom:client_get",
+        "operationId": "checkouts:client_get",
         "parameters": [
           {
             "name": "client_secret",
@@ -5050,19 +5043,18 @@
             }
           }
         },
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "client_get"
       },
       "patch": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Update Checkout Session from Client",
         "description": "Update a checkout session by client secret.",
-        "operationId": "checkouts:custom:client_update",
+        "operationId": "checkouts:client_update",
         "parameters": [
           {
             "name": "client_secret",
@@ -5108,11 +5100,11 @@
             }
           },
           "403": {
-            "description": "The customer already has an active subscription.",
+            "description": "The checkout is expired or the customer already has an active subscription.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AlreadyActiveSubscriptionError"
+                  "$ref": "#/components/schemas/CheckoutForbiddenError"
                 }
               }
             }
@@ -5128,27 +5120,29 @@
             }
           }
         },
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "client_update"
       }
     },
-    "/v1/checkouts/custom/client/{client_secret}/confirm": {
+    "/v1/checkouts/client/{client_secret}/confirm": {
       "post": {
         "tags": [
           "checkouts",
-          "custom",
           "documented",
           "featured"
         ],
         "summary": "Confirm Checkout Session from Client",
         "description": "Confirm a checkout session by client secret.\n\nOrders and subscriptions will be processed.",
-        "operationId": "checkouts:custom:client_confirm",
+        "operationId": "checkouts:client_confirm",
         "security": [
           {
             "oidc": []
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5185,6 +5179,16 @@
               }
             }
           },
+          "400": {
+            "description": "The payment failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentError"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Checkout session not found.",
             "content": {
@@ -5196,11 +5200,11 @@
             }
           },
           "403": {
-            "description": "The customer already has an active subscription.",
+            "description": "The checkout is expired or the customer already has an active subscription.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AlreadyActiveSubscriptionError"
+                  "$ref": "#/components/schemas/CheckoutForbiddenError"
                 }
               }
             }
@@ -5220,116 +5224,8 @@
           "Anonymous",
           "User"
         ],
-        "x-speakeasy-group": "checkouts.custom",
+        "x-speakeasy-group": "checkouts",
         "x-speakeasy-name-override": "client_confirm"
-      }
-    },
-    "/v1/checkouts/": {
-      "post": {
-        "tags": [
-          "checkouts",
-          "documented"
-        ],
-        "summary": "Create Checkout",
-        "description": "Create a checkout session.",
-        "operationId": "checkouts:create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CheckoutLegacyCreate"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CheckoutLegacy"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true,
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "x-polar-allowed-subjects": [
-          "Anonymous",
-          "User"
-        ],
-        "x-speakeasy-deprecation-replacement": "checkouts:custom:create",
-        "x-speakeasy-deprecation-message": "This API is deprecated. We recommend you to use the new custom checkout API, which is more flexible and powerful. Please refer to the documentation for more information.",
-        "x-speakeasy-group": "checkouts",
-        "x-speakeasy-name-override": "create"
-      }
-    },
-    "/v1/checkouts/{id}": {
-      "get": {
-        "tags": [
-          "checkouts",
-          "documented"
-        ],
-        "summary": "Get Checkout",
-        "description": "Get an active checkout session by ID.",
-        "operationId": "checkouts:get",
-        "deprecated": true,
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CheckoutLegacy"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-speakeasy-deprecation-message": "This API is deprecated. We recommend you to use the new custom checkout API, which is more flexible and powerful. Please refer to the documentation for more information.",
-        "x-speakeasy-group": "checkouts",
-        "x-speakeasy-name-override": "get"
       }
     },
     "/v1/files/": {
@@ -5349,6 +5245,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5488,6 +5387,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -5547,6 +5449,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5659,6 +5564,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5769,6 +5677,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5843,6 +5754,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -5875,7 +5789,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Interval",
+              "$ref": "#/components/schemas/TimeInterval",
               "description": "Interval between two timestamps."
             },
             "description": "Interval between two timestamps."
@@ -6068,6 +5982,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "x-polar-allowed-subjects": [
@@ -6097,6 +6014,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6291,6 +6211,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6371,6 +6294,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6464,6 +6390,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6556,6 +6485,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6750,6 +6682,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -6810,6 +6745,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6881,6 +6819,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -6962,6 +6903,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7029,6 +6973,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7227,6 +7174,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -7288,6 +7238,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7360,6 +7313,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7442,6 +7398,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7510,6 +7469,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7685,6 +7647,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -7747,6 +7712,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7820,6 +7788,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7903,6 +7874,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -7971,6 +7945,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -8174,6 +8151,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "requestBody": {
@@ -8235,6 +8215,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -8307,6 +8290,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -8389,6 +8375,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "parameters": [
@@ -8457,6 +8446,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -8754,6 +8746,9 @@
             "pat": []
           },
           {
+            "oat": []
+          },
+          {
             "customer_session": []
           }
         ],
@@ -8828,6 +8823,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -8930,6 +8928,9 @@
             "pat": []
           },
           {
+            "oat": []
+          },
+          {
             "customer_session": []
           }
         ],
@@ -9005,6 +9006,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -9240,6 +9244,9 @@
             "pat": []
           },
           {
+            "oat": []
+          },
+          {
             "customer_session": []
           }
         ],
@@ -9423,6 +9430,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -9673,6 +9683,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -9946,6 +9959,9 @@
             "pat": []
           },
           {
+            "oat": []
+          },
+          {
             "customer_session": []
           }
         ],
@@ -10022,6 +10038,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -10110,7 +10129,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Organization"
+                  "$ref": "#/components/schemas/CustomerOrganization"
                 }
               }
             }
@@ -10160,6 +10179,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -10400,6 +10422,9 @@
             "pat": []
           },
           {
+            "oat": []
+          },
+          {
             "customer_session": []
           }
         ],
@@ -10474,6 +10499,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -10570,6 +10598,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           },
           {
             "customer_session": []
@@ -10689,6 +10720,9 @@
           },
           {
             "pat": []
+          },
+          {
+            "oat": []
           }
         ],
         "x-polar-allowed-subjects": [
@@ -10697,6 +10731,1136 @@
         ],
         "x-speakeasy-group": "customer-sessions",
         "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/events/": {
+      "get": {
+        "tags": [
+          "events",
+          "documented",
+          "featured"
+        ],
+        "summary": "List Events",
+        "description": "List events.",
+        "operationId": "events:list",
+        "security": [
+          {
+            "oidc": [
+              "events:read",
+              "events:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter events after this timestamp.",
+              "title": "Start Timestamp"
+            },
+            "description": "Filter events after this timestamp."
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter events before this timestamp.",
+              "title": "End Timestamp"
+            },
+            "description": "Filter events before this timestamp."
+          },
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "external_customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ExternalCustomerID Filter",
+              "description": "Filter by external customer ID."
+            },
+            "description": "Filter by external customer ID."
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventSource"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventSource"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Filter",
+              "description": "Filter by event source."
+            },
+            "description": "Filter by event source."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-timestamp"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Event_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "events",
+        "x-speakeasy-name-override": "list"
+      }
+    },
+    "/v1/events/{id}": {
+      "get": {
+        "tags": [
+          "events",
+          "documented",
+          "featured"
+        ],
+        "summary": "Get Event",
+        "description": "Get an event by ID.",
+        "operationId": "events:get",
+        "security": [
+          {
+            "oidc": [
+              "events:read",
+              "events:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The event ID.",
+              "title": "Id"
+            },
+            "description": "The event ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "events",
+        "x-speakeasy-name-override": "get"
+      }
+    },
+    "/v1/events/ingest": {
+      "post": {
+        "tags": [
+          "events",
+          "documented",
+          "featured"
+        ],
+        "summary": "Ingest Events",
+        "description": "Ingest batch of events.",
+        "operationId": "events:ingest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventsIngest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventsIngestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": [
+              "events:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "events",
+        "x-speakeasy-name-override": "ingest"
+      }
+    },
+    "/v1/meters/": {
+      "get": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "List Meters",
+        "description": "List meters.",
+        "operationId": "meters:list",
+        "security": [
+          {
+            "oidc": [
+              "meters:read",
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by name.",
+              "title": "Query"
+            },
+            "description": "Filter by name."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MeterSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "name"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Meter_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "list"
+      },
+      "post": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "Create Meter",
+        "description": "Create a meter.",
+        "operationId": "meters:create",
+        "security": [
+          {
+            "oidc": [
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeterCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Meter created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meter"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/meters/{id}": {
+      "get": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "Get Meter",
+        "description": "Get a meter by ID.",
+        "operationId": "meters:get",
+        "security": [
+          {
+            "oidc": [
+              "meters:read",
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The meter ID.",
+              "title": "Id"
+            },
+            "description": "The meter ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Meter not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "Update Meter",
+        "description": "Update a meter.",
+        "operationId": "meters:update",
+        "security": [
+          {
+            "oidc": [
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The meter ID.",
+              "title": "Id"
+            },
+            "description": "The meter ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeterUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Meter updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Meter not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "update"
+      }
+    },
+    "/v1/meters/{id}/events": {
+      "get": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "Get Meter Events",
+        "description": "Get events matching the filter of a meter.",
+        "operationId": "meters:events",
+        "security": [
+          {
+            "oidc": [
+              "meters:read",
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The meter ID.",
+              "title": "Id"
+            },
+            "description": "The meter ID."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Event_"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Meter not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "events"
+      }
+    },
+    "/v1/meters/{id}/quantities": {
+      "get": {
+        "tags": [
+          "meters",
+          "documented",
+          "featured"
+        ],
+        "summary": "Get Meter Quantities",
+        "description": "Get quantities of a meter over a time period.",
+        "operationId": "meters:quantities",
+        "security": [
+          {
+            "oidc": [
+              "meters:read",
+              "meters:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The meter ID.",
+              "title": "Id"
+            },
+            "description": "The meter ID."
+          },
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Start timestamp.",
+              "title": "Start Timestamp"
+            },
+            "description": "Start timestamp."
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "End timestamp.",
+              "title": "End Timestamp"
+            },
+            "description": "End timestamp."
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TimeInterval",
+              "description": "Interval between two timestamps."
+            },
+            "description": "Interval between two timestamps."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "exernal_customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ExternalCustomerID Filter",
+              "description": "Filter by external customer ID."
+            },
+            "description": "Filter by external customer ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeterQuantities"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Meter not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-group": "meters",
+        "x-speakeasy-name-override": "quantities"
       }
     }
   },
@@ -14938,34 +16102,27 @@
       "CheckoutConfirmStripe": {
         "properties": {
           "custom_field_data": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
                 },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
@@ -15286,113 +16443,15 @@
         "title": "CheckoutDiscountPercentageRepeatDuration",
         "description": "Schema for a percentage discount that is applied on every invoice\nfor a certain number of months."
       },
-      "CheckoutLegacy": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "The ID of the checkout."
+      "CheckoutForbiddenError": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AlreadyActiveSubscriptionError"
           },
-          "url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Url",
-            "description": "URL the customer should be redirected to complete the purchase."
-          },
-          "customer_email": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Email"
-          },
-          "customer_name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Name"
-          },
-          "product": {
-            "$ref": "#/components/schemas/CheckoutProduct"
-          },
-          "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+          {
+            "$ref": "#/components/schemas/NotOpenCheckout"
           }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "customer_email",
-          "customer_name",
-          "product",
-          "product_price"
-        ],
-        "title": "CheckoutLegacy",
-        "description": "A checkout session."
-      },
-      "CheckoutLegacyCreate": {
-        "properties": {
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "ID of the product price to subscribe to."
-          },
-          "success_url": {
-            "type": "string",
-            "minLength": 1,
-            "format": "uri",
-            "title": "Success Url",
-            "description": "URL where the customer will be redirected after a successful subscription. You can add the `session_id={CHECKOUT_SESSION_ID}` query parameter to retrieve the checkout session id."
-          },
-          "customer_email": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "email"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Email",
-            "description": "If you already know the email of your customer, you can set it. It'll be pre-filled on the checkout page."
-          },
-          "subscription_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subscription Id",
-            "description": "ID of the subscription to update. If not provided, a new subscription will be created."
-          }
-        },
-        "type": "object",
-        "required": [
-          "product_price_id",
-          "success_url"
-        ],
-        "title": "CheckoutLegacyCreate"
+        ]
       },
       "CheckoutLink": {
         "properties": {
@@ -17689,6 +18748,18 @@
         "type": "object",
         "title": "CheckoutUpdatePublic",
         "description": "Update an existing checkout session using the client secret."
+      },
+      "CountAggregation": {
+        "properties": {
+          "func": {
+            "type": "string",
+            "const": "count",
+            "title": "Func",
+            "default": "count"
+          }
+        },
+        "type": "object",
+        "title": "CountAggregation"
       },
       "CurrencyAmount": {
         "properties": {
@@ -20849,6 +21920,27 @@
         ],
         "title": "CustomerOrderSubscription"
       },
+      "CustomerOrganization": {
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerProduct"
+            },
+            "type": "array",
+            "title": "Products"
+          }
+        },
+        "type": "object",
+        "required": [
+          "organization",
+          "products"
+        ],
+        "title": "CustomerOrganization",
+        "description": "Schema of an organization and related data for customer portal."
+      },
       "CustomerPortalCustomer": {
         "properties": {
           "created_at": {
@@ -20972,6 +22064,108 @@
           "account_username"
         ],
         "title": "CustomerPortalOAuthAccount"
+      },
+      "CustomerProduct": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the product."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the product."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the product."
+          },
+          "is_recurring": {
+            "type": "boolean",
+            "title": "Is Recurring",
+            "description": "Whether the product is a subscription tier."
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the product is archived and no longer available."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the product."
+          },
+          "prices": {
+            "items": {
+              "$ref": "#/components/schemas/ProductPrice"
+            },
+            "type": "array",
+            "title": "Prices",
+            "description": "List of available prices for this product."
+          },
+          "benefits": {
+            "items": {
+              "$ref": "#/components/schemas/BenefitBase"
+            },
+            "type": "array",
+            "title": "BenefitPublic",
+            "description": "The benefits granted by the product."
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/ProductMediaFileRead"
+            },
+            "type": "array",
+            "title": "Medias",
+            "description": "The medias associated to the product."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "name",
+          "description",
+          "is_recurring",
+          "is_archived",
+          "organization_id",
+          "prices",
+          "benefits",
+          "medias"
+        ],
+        "title": "CustomerProduct",
+        "description": "Schema of a product for customer portal."
       },
       "CustomerSession": {
         "properties": {
@@ -24002,6 +25196,303 @@
         ],
         "title": "DownloadableRead"
       },
+      "Event": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "source": {
+            "$ref": "#/components/schemas/EventSource",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "id",
+          "timestamp",
+          "name",
+          "source",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id"
+        ],
+        "title": "Event"
+      },
+      "EventCreateCustomer": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event. **Required unless you use an organization token.**"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "customer_id"
+        ],
+        "title": "EventCreateCustomer"
+      },
+      "EventCreateExternalCustomer": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event. **Required unless you use an organization token.**"
+          },
+          "external_customer_id": {
+            "type": "string",
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "external_customer_id"
+        ],
+        "title": "EventCreateExternalCustomer"
+      },
+      "EventSortProperty": {
+        "type": "string",
+        "enum": [
+          "timestamp",
+          "-timestamp"
+        ],
+        "title": "EventSortProperty"
+      },
+      "EventSource": {
+        "type": "string",
+        "enum": [
+          "system",
+          "user"
+        ],
+        "title": "EventSource"
+      },
+      "EventsIngest": {
+        "properties": {
+          "events": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventCreateCustomer"
+                },
+                {
+                  "$ref": "#/components/schemas/EventCreateExternalCustomer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "List of events to ingest."
+          }
+        },
+        "type": "object",
+        "required": [
+          "events"
+        ],
+        "title": "EventsIngest"
+      },
+      "EventsIngestResponse": {
+        "properties": {
+          "inserted": {
+            "type": "integer",
+            "title": "Inserted",
+            "description": "Number of events inserted."
+          }
+        },
+        "type": "object",
+        "required": [
+          "inserted"
+        ],
+        "title": "EventsIngestResponse"
+      },
       "ExistingProductPrice": {
         "properties": {
           "id": {
@@ -24513,6 +26004,87 @@
         ],
         "title": "FileUploadCompleted"
       },
+      "Filter": {
+        "properties": {
+          "conjunction": {
+            "$ref": "#/components/schemas/FilterConjunction"
+          },
+          "clauses": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FilterClause"
+                },
+                {
+                  "$ref": "#/components/schemas/Filter"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Clauses"
+          }
+        },
+        "type": "object",
+        "required": [
+          "conjunction",
+          "clauses"
+        ],
+        "title": "Filter"
+      },
+      "FilterClause": {
+        "properties": {
+          "property": {
+            "type": "string",
+            "title": "Property"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/FilterOperator"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "property",
+          "operator",
+          "value"
+        ],
+        "title": "FilterClause"
+      },
+      "FilterConjunction": {
+        "type": "string",
+        "enum": [
+          "and",
+          "or"
+        ],
+        "title": "FilterConjunction"
+      },
+      "FilterOperator": {
+        "type": "string",
+        "enum": [
+          "eq",
+          "ne",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "like",
+          "not_like"
+        ],
+        "title": "FilterOperator"
+      },
       "Funding": {
         "properties": {
           "funding_goal": {
@@ -24552,17 +26124,6 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
-      },
-      "Interval": {
-        "type": "string",
-        "enum": [
-          "year",
-          "month",
-          "week",
-          "day",
-          "hour"
-        ],
-        "title": "Interval"
       },
       "IntrospectTokenResponse": {
         "properties": {
@@ -25784,6 +27345,26 @@
         ],
         "title": "ListResource[DownloadableRead]"
       },
+      "ListResource_Event_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Event]"
+      },
       "ListResource_ExternalOrganization_": {
         "properties": {
           "items": {
@@ -25862,6 +27443,26 @@
           "pagination"
         ],
         "title": "ListResource[LicenseKeyRead]"
+      },
+      "ListResource_Meter_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Meter"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Meter]"
       },
       "ListResource_OAuth2Client_": {
         "properties": {
@@ -26002,6 +27603,326 @@
           "pagination"
         ],
         "title": "ListResource[Subscription]"
+      },
+      "Meter": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the meter. Will be shown on customer's invoices and usage."
+          },
+          "filter": {
+            "$ref": "#/components/schemas/Filter",
+            "description": "The filter to apply on events that'll be used to calculate the meter."
+          },
+          "aggregation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CountAggregation"
+              },
+              {
+                "$ref": "#/components/schemas/PropertyAggregation"
+              }
+            ],
+            "title": "Aggregation",
+            "description": "The aggregation to apply on the filtered events to calculate the meter.",
+            "discriminator": {
+              "propertyName": "func",
+              "mapping": {
+                "avg": "#/components/schemas/PropertyAggregation",
+                "count": "#/components/schemas/CountAggregation",
+                "max": "#/components/schemas/PropertyAggregation",
+                "min": "#/components/schemas/PropertyAggregation",
+                "sum": "#/components/schemas/PropertyAggregation"
+              }
+            }
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the meter."
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "created_at",
+          "modified_at",
+          "id",
+          "name",
+          "filter",
+          "aggregation",
+          "organization_id"
+        ],
+        "title": "Meter"
+      },
+      "MeterCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Name",
+            "description": "The name of the meter. Will be shown on customer's invoices and usage."
+          },
+          "filter": {
+            "$ref": "#/components/schemas/Filter",
+            "description": "The filter to apply on events that'll be used to calculate the meter."
+          },
+          "aggregation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CountAggregation"
+              },
+              {
+                "$ref": "#/components/schemas/PropertyAggregation"
+              }
+            ],
+            "title": "Aggregation",
+            "description": "The aggregation to apply on the filtered events to calculate the meter.",
+            "discriminator": {
+              "propertyName": "func",
+              "mapping": {
+                "avg": "#/components/schemas/PropertyAggregation",
+                "count": "#/components/schemas/CountAggregation",
+                "max": "#/components/schemas/PropertyAggregation",
+                "min": "#/components/schemas/PropertyAggregation",
+                "sum": "#/components/schemas/PropertyAggregation"
+              }
+            }
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the meter. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "filter",
+          "aggregation"
+        ],
+        "title": "MeterCreate"
+      },
+      "MeterQuantities": {
+        "properties": {
+          "quantities": {
+            "items": {
+              "$ref": "#/components/schemas/MeterQuantity"
+            },
+            "type": "array",
+            "title": "Quantities"
+          }
+        },
+        "type": "object",
+        "required": [
+          "quantities"
+        ],
+        "title": "MeterQuantities"
+      },
+      "MeterQuantity": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp for the current period."
+          },
+          "quantity": {
+            "type": "number",
+            "title": "Quantity",
+            "description": "The quantity for the current period."
+          }
+        },
+        "type": "object",
+        "required": [
+          "timestamp",
+          "quantity"
+        ],
+        "title": "MeterQuantity"
+      },
+      "MeterSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "name",
+          "-name"
+        ],
+        "title": "MeterSortProperty"
+      },
+      "MeterUpdate": {
+        "properties": {
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 500,
+                      "minLength": 1
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "propertyNames": {
+                  "maxLength": 40,
+                  "minLength": 1
+                },
+                "type": "object",
+                "maxProperties": 50,
+                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "The name of the meter. Will be shown on customer's invoices and usage."
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Filter"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The filter to apply on events that'll be used to calculate the meter."
+          },
+          "aggregation": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CountAggregation"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PropertyAggregation"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "func",
+                  "mapping": {
+                    "avg": "#/components/schemas/PropertyAggregation",
+                    "count": "#/components/schemas/CountAggregation",
+                    "max": "#/components/schemas/PropertyAggregation",
+                    "min": "#/components/schemas/PropertyAggregation",
+                    "sum": "#/components/schemas/PropertyAggregation"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aggregation",
+            "description": "The aggregation to apply on the filtered events to calculate the meter."
+          }
+        },
+        "type": "object",
+        "title": "MeterUpdate"
       },
       "Metric": {
         "properties": {
@@ -26261,6 +28182,25 @@
         "title": "MetricsResponse",
         "description": "Metrics response schema."
       },
+      "NotOpenCheckout": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "NotOpenCheckout",
+            "title": "Error"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "NotOpenCheckout"
+      },
       "NotPermitted": {
         "properties": {
           "error": {
@@ -26331,7 +28271,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -26490,7 +28430,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -26608,7 +28548,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write"
           },
           "client_name": {
             "type": "string",
@@ -28323,6 +30263,25 @@
           "max_page"
         ],
         "title": "Pagination"
+      },
+      "PaymentError": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "PaymentError",
+            "title": "Error"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "PaymentError"
       },
       "PaymentProcessor": {
         "type": "string",
@@ -30086,6 +32045,30 @@
         "title": "ProductUpdate",
         "description": "Schema to update a product."
       },
+      "PropertyAggregation": {
+        "properties": {
+          "func": {
+            "type": "string",
+            "enum": [
+              "sum",
+              "max",
+              "min",
+              "avg"
+            ],
+            "title": "Func"
+          },
+          "property": {
+            "type": "string",
+            "title": "Property"
+          }
+        },
+        "type": "object",
+        "required": [
+          "func",
+          "property"
+        ],
+        "title": "PropertyAggregation"
+      },
       "Reactions": {
         "properties": {
           "total_count": {
@@ -30938,6 +32921,10 @@
           "products:write",
           "benefits:read",
           "benefits:write",
+          "events:read",
+          "events:write",
+          "meters:read",
+          "meters:write",
           "files:read",
           "files:write",
           "subscriptions:read",
@@ -30978,10 +32965,14 @@
           "discounts:read": "Read discounts",
           "discounts:write": "Create or modify discounts",
           "email": "Read your email address",
+          "events:read": "Read events",
+          "events:write": "Create events",
           "files:read": "Read file uploads",
           "files:write": "Create or modify file uploads",
           "license_keys:read": "Read license keys",
           "license_keys:write": "Modify license keys",
+          "meters:read": "Read meters",
+          "meters:write": "Create or modify meters",
           "metrics:read": "Read metrics",
           "openid": "OpenID",
           "orders:read": "Read orders made on your organizations",
@@ -31706,6 +33697,17 @@
         ],
         "title": "TaxIDFormat",
         "description": "List of supported tax ID formats.\n\nRef: https://docs.stripe.com/billing/customer/tax-ids#supported-tax-id"
+      },
+      "TimeInterval": {
+        "type": "string",
+        "enum": [
+          "year",
+          "month",
+          "week",
+          "day",
+          "hour"
+        ],
+        "title": "TimeInterval"
       },
       "TokenResponse": {
         "properties": {
@@ -32474,6 +34476,150 @@
           }
         ],
         "title": "MetadataQuery"
+      },
+      "AuthorizationCodeTokenRequest": {
+        "properties": {
+          "grant_type": {
+            "const": "authorization_code",
+            "title": "Grant Type",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "redirect_uri": {
+            "format": "uri",
+            "maxLength": 2083,
+            "minLength": 1,
+            "title": "Redirect Uri",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grant_type",
+          "client_id",
+          "client_secret",
+          "code",
+          "redirect_uri"
+        ],
+        "title": "AuthorizationCodeTokenRequest",
+        "type": "object"
+      },
+      "RefreshTokenRequest": {
+        "properties": {
+          "grant_type": {
+            "const": "refresh_token",
+            "title": "Grant Type",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          },
+          "refresh_token": {
+            "title": "Refresh Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grant_type",
+          "client_id",
+          "client_secret",
+          "refresh_token"
+        ],
+        "title": "RefreshTokenRequest",
+        "type": "object"
+      },
+      "RevokeTokenRequest": {
+        "properties": {
+          "token": {
+            "title": "Token",
+            "type": "string"
+          },
+          "token_type_hint": {
+            "anyOf": [
+              {
+                "enum": [
+                  "access_token",
+                  "refresh_token"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Token Type Hint"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "client_id",
+          "client_secret"
+        ],
+        "title": "RevokeTokenRequest",
+        "type": "object"
+      },
+      "IntrospectTokenRequest": {
+        "properties": {
+          "token": {
+            "title": "Token",
+            "type": "string"
+          },
+          "token_type_hint": {
+            "anyOf": [
+              {
+                "enum": [
+                  "access_token",
+                  "refresh_token"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Token Type Hint"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "client_id",
+          "client_secret"
+        ],
+        "title": "IntrospectTokenRequest",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -32484,6 +34630,11 @@
       "pat": {
         "type": "http",
         "description": "You can generate a **Personal Access Token** from your [settings](https://polar.sh/settings).",
+        "scheme": "bearer"
+      },
+      "oat": {
+        "type": "http",
+        "description": "You can generate an **Organization Access Token** from your organization's dashboard.",
         "scheme": "bearer"
       },
       "customer_session": {
