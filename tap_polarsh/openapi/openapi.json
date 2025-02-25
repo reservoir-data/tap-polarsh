@@ -3405,8 +3405,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductCreate",
-                "title": "ProductCreate"
+                "$ref": "#/components/schemas/ProductCreate"
               }
             }
           }
@@ -5871,28 +5870,28 @@
             "description": "Filter by product ID."
           },
           {
-            "name": "product_price_type",
+            "name": "billing_type",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/ProductPriceType"
+                  "$ref": "#/components/schemas/ProductBillingType"
                 },
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductPriceType"
+                    "$ref": "#/components/schemas/ProductBillingType"
                   }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "ProductPriceType Filter",
-              "description": "Filter by product price type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
+              "title": "ProductBillingType Filter",
+              "description": "Filter by billing type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
             },
-            "description": "Filter by product price type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
+            "description": "Filter by billing type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
           },
           {
             "name": "customer_id",
@@ -6692,7 +6691,18 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CheckoutLinkCreate"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckoutLinkCreateProductPrice"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutLinkCreateProduct"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckoutLinkCreateProducts"
+                  }
+                ],
+                "title": "Checkout Link Create"
               }
             }
           }
@@ -8435,7 +8445,7 @@
           "documented"
         ],
         "summary": "List Benefit Grants",
-        "description": "List benefits grants of the authenticated customer or user.",
+        "description": "List benefits grants of the authenticated customer.",
         "operationId": "customer_portal:benefit-grants:list",
         "security": [
           {
@@ -8699,8 +8709,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -8733,7 +8742,7 @@
           "documented"
         ],
         "summary": "Get Benefit Grant",
-        "description": "Get a benefit grant by ID for the authenticated customer or user.",
+        "description": "Get a benefit grant by ID for the authenticated customer.",
         "operationId": "customer_portal:benefit-grants:get",
         "security": [
           {
@@ -8800,8 +8809,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.benefit-grants",
         "x-speakeasy-name-override": "get"
@@ -8813,7 +8821,7 @@
           "documented"
         ],
         "summary": "Update Benefit Grant",
-        "description": "Update a benefit grant for the authenticated customer or user.",
+        "description": "Update a benefit grant for the authenticated customer.",
         "operationId": "customer_portal:benefit-grants:update",
         "security": [
           {
@@ -8900,14 +8908,13 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.benefit-grants",
         "x-speakeasy-name-override": "update"
       }
     },
-    "/v1/customer-portal/customers/{id}": {
+    "/v1/customer-portal/customers/me": {
       "get": {
         "tags": [
           "customer_portal",
@@ -8915,8 +8922,254 @@
           "documented"
         ],
         "summary": "Get Customer",
-        "description": "Get a customer by ID for the authenticated customer or user.",
+        "description": "Get authenticated customer.",
         "operationId": "customer_portal:customers:get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerPortalCustomer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": [
+              "customer_portal:read",
+              "customer_portal:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          },
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-group": "customer_portal.customers",
+        "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "tags": [
+          "customer_portal",
+          "customers",
+          "documented"
+        ],
+        "summary": "Update Customer",
+        "description": "Update authenticated customer.",
+        "operationId": "customer_portal:customers:update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerPortalCustomerUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Customer updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerPortalCustomer"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": [
+              "customer_portal:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          },
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-group": "customer_portal.customers",
+        "x-speakeasy-name-override": "update"
+      }
+    },
+    "/v1/customer-portal/customers/me/payment-methods": {
+      "get": {
+        "tags": [
+          "customer_portal",
+          "customers",
+          "documented"
+        ],
+        "summary": "Get Customer Payment Methods",
+        "description": "Get saved payment methods of the authenticated customer.",
+        "operationId": "customer_portal:customers:get_payment_methods",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Union_PaymentMethodCard__PaymentMethodGeneric__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": [
+              "customer_portal:read",
+              "customer_portal:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          },
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-group": "customer_portal.customers",
+        "x-speakeasy-name-override": "get_payment_methods"
+      },
+      "post": {
+        "tags": [
+          "customer_portal",
+          "customers",
+          "documented"
+        ],
+        "summary": "Add Customer Payment Method",
+        "description": "Add a payment method to the authenticated customer.",
+        "operationId": "customer_portal:customers:add_payment_method",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerPaymentMethodCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Payment method created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/PaymentMethodCard"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PaymentMethodGeneric"
+                    }
+                  ],
+                  "title": "Response Customer Portal:Customers:Add Payment Method"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": [
+              "customer_portal:read",
+              "customer_portal:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          },
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-group": "customer_portal.customers",
+        "x-speakeasy-name-override": "add_payment_method"
+      }
+    },
+    "/v1/customer-portal/customers/me/payment-methods/{id}": {
+      "delete": {
+        "tags": [
+          "customer_portal",
+          "customers",
+          "documented"
+        ],
+        "summary": "Delete Customer Payment Method",
+        "description": "Delete a payment method from the authenticated customer.",
+        "operationId": "customer_portal:customers:delete_payment_method",
         "security": [
           {
             "oidc": [
@@ -8941,26 +9194,16 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuid4",
-              "description": "The customer ID.",
               "title": "Id"
-            },
-            "description": "The customer ID."
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomerPortalCustomer"
-                }
-              }
-            }
+          "204": {
+            "description": "Payment method deleted."
           },
           "404": {
-            "description": "Customer not found.",
+            "description": "Payment method not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8981,11 +9224,10 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.customers",
-        "x-speakeasy-name-override": "get"
+        "x-speakeasy-name-override": "delete_payment_method"
       }
     },
     "/v1/customer-portal/downloadables/": {
@@ -9141,8 +9383,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -9384,8 +9625,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -9483,8 +9723,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.license_keys",
         "x-speakeasy-name-override": "get"
@@ -9672,7 +9911,7 @@
           "documented"
         ],
         "summary": "List Orders",
-        "description": "List orders of the authenticated customer or user.",
+        "description": "List orders of the authenticated customer.",
         "operationId": "customer_portal:orders:list",
         "security": [
           {
@@ -9912,8 +10151,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -9946,7 +10184,7 @@
           "documented"
         ],
         "summary": "Get Order",
-        "description": "Get an order by ID for the authenticated customer or user.",
+        "description": "Get an order by ID for the authenticated customer.",
         "operationId": "customer_portal:orders:get",
         "security": [
           {
@@ -10012,8 +10250,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.orders",
         "x-speakeasy-name-override": "get"
@@ -10093,8 +10330,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.orders",
         "x-speakeasy-name-override": "invoice"
@@ -10168,7 +10404,7 @@
           "featured"
         ],
         "summary": "List Subscriptions",
-        "description": "List subscriptions of the authenticated customer or user.",
+        "description": "List subscriptions of the authenticated customer.",
         "operationId": "customer_portal:subscriptions:list",
         "security": [
           {
@@ -10374,8 +10610,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -10409,7 +10644,7 @@
           "featured"
         ],
         "summary": "Get Subscription",
-        "description": "Get a subscription for the authenticated customer or user.",
+        "description": "Get a subscription for the authenticated customer.",
         "operationId": "customer_portal:subscriptions:get",
         "security": [
           {
@@ -10475,8 +10710,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.subscriptions",
         "x-speakeasy-name-override": "get"
@@ -10489,7 +10723,7 @@
           "featured"
         ],
         "summary": "Update Subscription",
-        "description": "Update a subscription of the authenticated customer or user.",
+        "description": "Update a subscription of the authenticated customer.",
         "operationId": "customer_portal:subscriptions:update",
         "security": [
           {
@@ -10574,8 +10808,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.subscriptions",
         "x-speakeasy-name-override": "update"
@@ -10588,7 +10821,7 @@
           "featured"
         ],
         "summary": "Cancel Subscription",
-        "description": "Cancel a subscription of the authenticated customer or user.",
+        "description": "Cancel a subscription of the authenticated customer.",
         "operationId": "customer_portal:subscriptions:cancel",
         "security": [
           {
@@ -10663,8 +10896,7 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer",
-          "User"
+          "Customer"
         ],
         "x-speakeasy-group": "customer_portal.subscriptions",
         "x-speakeasy-name-override": "cancel"
@@ -15988,11 +16220,29 @@
             "type": "object",
             "title": "Metadata"
           },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CheckoutProduct"
+            },
+            "type": "array",
+            "title": "Products",
+            "description": "List of products available to select."
+          },
           "product": {
-            "$ref": "#/components/schemas/CheckoutProduct"
+            "$ref": "#/components/schemas/CheckoutProduct",
+            "description": "Product selected to checkout."
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price",
+            "description": "Price of the selected product."
           },
           "discount": {
             "anyOf": [
@@ -16089,6 +16339,7 @@
           "customer_tax_id",
           "payment_processor_metadata",
           "metadata",
+          "products",
           "product",
           "product_price",
           "discount",
@@ -16126,6 +16377,19 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id",
+            "description": "ID of the product to checkout. Must be present in the checkout's product list."
+          },
           "product_price_id": {
             "anyOf": [
               {
@@ -16137,7 +16401,8 @@
               }
             ],
             "title": "Product Price Id",
-            "description": "ID of the product price to checkout. Must correspond to a price linked to the same product."
+            "description": "ID of the product price to checkout. Must correspond to a price present in the checkout's product list.",
+            "deprecated": true
           },
           "amount": {
             "anyOf": [
@@ -16231,6 +16496,9 @@
       },
       "CheckoutCreate": {
         "anyOf": [
+          {
+            "$ref": "#/components/schemas/CheckoutProductsCreate"
+          },
           {
             "$ref": "#/components/schemas/CheckoutProductCreate"
           },
@@ -16535,25 +16803,6 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "description": "ID of the product to checkout."
-          },
-          "product_price_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Product Price Id",
-            "description": "ID of the product price to checkout. First available price will be selected unless an explicit price ID is set."
-          },
           "discount_id": {
             "anyOf": [
               {
@@ -16567,18 +16816,23 @@
             "title": "Discount Id",
             "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
           },
-          "product": {
-            "$ref": "#/components/schemas/CheckoutLinkProduct"
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID.",
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
           },
-          "product_price": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              },
-              {
-                "type": "null"
-              }
-            ]
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CheckoutLinkProduct"
+            },
+            "type": "array",
+            "title": "Products"
           },
           "discount": {
             "anyOf": [
@@ -16605,6 +16859,34 @@
             ],
             "title": "Discount"
           },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "deprecated": true
+          },
+          "product_price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Price Id",
+            "deprecated": true
+          },
+          "product": {
+            "$ref": "#/components/schemas/CheckoutLinkProduct",
+            "deprecated": true
+          },
+          "product_price": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price",
+            "deprecated": true
+          },
           "url": {
             "type": "string",
             "title": "Url",
@@ -16622,28 +16904,113 @@
           "success_url",
           "label",
           "allow_discount_codes",
+          "discount_id",
+          "organization_id",
+          "products",
+          "discount",
           "product_id",
           "product_price_id",
-          "discount_id",
           "product",
           "product_price",
-          "discount",
           "url"
         ],
         "title": "CheckoutLink",
         "description": "Checkout link data."
       },
-      "CheckoutLinkCreate": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/CheckoutLinkProductCreate"
+      "CheckoutLinkCreateProduct": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
-          {
-            "$ref": "#/components/schemas/CheckoutLinkPriceCreate"
+          "payment_processor": {
+            "type": "string",
+            "const": "stripe",
+            "title": "Payment Processor",
+            "description": "Payment processor to use. Currently only Stripe is supported."
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label",
+            "description": "Optional label to distinguish links internally"
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id"
           }
-        ]
+        },
+        "type": "object",
+        "required": [
+          "payment_processor",
+          "product_id"
+        ],
+        "title": "CheckoutLinkCreateProduct",
+        "description": "Schema to create a new checkout link from a a single product.\n\n**Deprecated**: Use `CheckoutLinkCreateProducts` instead."
       },
-      "CheckoutLinkPriceCreate": {
+      "CheckoutLinkCreateProductPrice": {
         "properties": {
           "metadata": {
             "additionalProperties": {
@@ -16725,8 +17092,7 @@
           "product_price_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "ID of the product price to checkout."
+            "title": "Product Price Id"
           }
         },
         "type": "object",
@@ -16734,7 +17100,106 @@
           "payment_processor",
           "product_price_id"
         ],
-        "title": "CheckoutLinkPriceCreate"
+        "title": "CheckoutLinkCreateProductPrice",
+        "description": "Schema to create a new checkout link from a a single product price.\n\n**Deprecated**: Use `CheckoutLinkCreateProducts` instead."
+      },
+      "CheckoutLinkCreateProducts": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "payment_processor": {
+            "type": "string",
+            "const": "stripe",
+            "title": "Payment Processor",
+            "description": "Payment processor to use. Currently only Stripe is supported."
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label",
+            "description": "Optional label to distinguish links internally"
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "products": {
+            "items": {
+              "type": "string",
+              "format": "uuid4"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Products",
+            "description": "List of products that will be available to select at checkout."
+          }
+        },
+        "type": "object",
+        "required": [
+          "payment_processor",
+          "products"
+        ],
+        "title": "CheckoutLinkCreateProducts",
+        "description": "Schema to create a new checkout link."
       },
       "CheckoutLinkProduct": {
         "properties": {
@@ -16780,10 +17245,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -16798,7 +17274,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -16828,6 +17311,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -16838,104 +17322,17 @@
         "title": "CheckoutLinkProduct",
         "description": "Product data for a checkout link."
       },
-      "CheckoutLinkProductCreate": {
-        "properties": {
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 500,
-                  "minLength": 1
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
-            "type": "object",
-            "maxProperties": 50,
-            "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-          },
-          "payment_processor": {
-            "type": "string",
-            "const": "stripe",
-            "title": "Payment Processor",
-            "description": "Payment processor to use. Currently only Stripe is supported."
-          },
-          "label": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Label",
-            "description": "Optional label to distinguish links internally"
-          },
-          "allow_discount_codes": {
-            "type": "boolean",
-            "title": "Allow Discount Codes",
-            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
-            "default": true
-          },
-          "discount_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discount Id",
-            "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored."
-          },
-          "success_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Success Url",
-            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
-          },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "description": "ID of the product to checkout. First available price will be selected."
-          }
-        },
-        "type": "object",
-        "required": [
-          "payment_processor",
-          "product_id"
-        ],
-        "title": "CheckoutLinkProductCreate"
-      },
       "CheckoutLinkSortProperty": {
         "type": "string",
         "enum": [
           "created_at",
-          "-created_at"
+          "-created_at",
+          "label",
+          "-label",
+          "success_url",
+          "-success_url",
+          "allow_discount_codes",
+          "-allow_discount_codes"
         ],
         "title": "CheckoutLinkSortProperty"
       },
@@ -16973,6 +17370,23 @@
             ],
             "title": "Metadata"
           },
+          "products": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array",
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Products",
+            "description": "List of products that will be available to select at checkout."
+          },
           "label": {
             "anyOf": [
               {
@@ -16995,18 +17409,6 @@
             ],
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
-          },
-          "product_price_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Product Price Id"
           },
           "discount_id": {
             "anyOf": [
@@ -17275,7 +17677,7 @@
           "product_price_id"
         ],
         "title": "CheckoutPriceCreate",
-        "description": "Create a new checkout session from a product price.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
+        "description": "Create a new checkout session from a product price.\n\n**Deprecated**: Use `CheckoutProductsCreate` instead.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
       },
       "CheckoutProduct": {
         "properties": {
@@ -17321,10 +17723,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -17339,7 +17752,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -17369,6 +17789,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -17613,7 +18034,247 @@
           "product_id"
         ],
         "title": "CheckoutProductCreate",
-        "description": "Create a new checkout session from a product.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
+        "description": "Create a new checkout session from a product.\n\n**Deprecated**: Use `CheckoutProductsCreate` instead.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
+      },
+      "CheckoutProductsCreate": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Custom Field Data",
+            "description": "Key-value object storing custom field values."
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "ID of the discount to apply to the checkout."
+          },
+          "allow_discount_codes": {
+            "type": "boolean",
+            "title": "Allow Discount Codes",
+            "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+            "default": true
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 50.0,
+                "description": "Amount to pay in cents. Only useful for custom prices, it'll be ignored for fixed and free prices."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of an existing customer in the organization. The customer data will be pre-filled in the checkout form. The resulting order will be linked to this customer."
+          },
+          "customer_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Name of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Name"
+          },
+          "customer_email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email",
+                "description": "Email address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Email"
+          },
+          "customer_ip_address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "ipvanyaddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Ip Address"
+          },
+          "customer_billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address",
+                "description": "Billing address of the customer."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_tax_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Tax Id"
+          },
+          "customer_metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Customer Metadata",
+            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "ID of a subscription to upgrade. It must be on a free pricing. If checkout is successful, metadata set on this checkout will be copied to the subscription, and existing keys will be overwritten."
+          },
+          "success_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Success Url",
+            "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "embed_origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embed Origin",
+            "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
+          },
+          "products": {
+            "items": {
+              "type": "string",
+              "format": "uuid4"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Products",
+            "description": "List of product IDs available to select at that checkout. The first one will be selected by default."
+          }
+        },
+        "type": "object",
+        "required": [
+          "products"
+        ],
+        "title": "CheckoutProductsCreate",
+        "description": "Create a new checkout session from a list of products.\nCustomers will be able to switch between those products.\n\nMetadata set on the checkout will be copied\nto the resulting order and/or subscription."
       },
       "CheckoutPublic": {
         "properties": {
@@ -17902,11 +18563,29 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CheckoutProduct"
+            },
+            "type": "array",
+            "title": "Products",
+            "description": "List of products available to select."
+          },
           "product": {
-            "$ref": "#/components/schemas/CheckoutProduct"
+            "$ref": "#/components/schemas/CheckoutProduct",
+            "description": "Product selected to checkout."
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price",
+            "description": "Price of the selected product."
           },
           "discount": {
             "anyOf": [
@@ -17976,6 +18655,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
+          "products",
           "product",
           "product_price",
           "discount",
@@ -18273,11 +18953,29 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/CheckoutProduct"
+            },
+            "type": "array",
+            "title": "Products",
+            "description": "List of products available to select."
+          },
           "product": {
-            "$ref": "#/components/schemas/CheckoutProduct"
+            "$ref": "#/components/schemas/CheckoutProduct",
+            "description": "Product selected to checkout."
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price",
+            "description": "Price of the selected product."
           },
           "discount": {
             "anyOf": [
@@ -18351,6 +19049,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
+          "products",
           "product",
           "product_price",
           "discount",
@@ -18416,6 +19115,19 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id",
+            "description": "ID of the product to checkout. Must be present in the checkout's product list."
+          },
           "product_price_id": {
             "anyOf": [
               {
@@ -18427,7 +19139,8 @@
               }
             ],
             "title": "Product Price Id",
-            "description": "ID of the product price to checkout. Must correspond to a price linked to the same product."
+            "description": "ID of the product price to checkout. Must correspond to a price present in the checkout's product list.",
+            "deprecated": true
           },
           "amount": {
             "anyOf": [
@@ -18658,6 +19371,19 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id",
+            "description": "ID of the product to checkout. Must be present in the checkout's product list."
+          },
           "product_price_id": {
             "anyOf": [
               {
@@ -18669,7 +19395,8 @@
               }
             ],
             "title": "Product Price Id",
-            "description": "ID of the product price to checkout. Must correspond to a price linked to the same product."
+            "description": "ID of the product price to checkout. Must correspond to a price present in the checkout's product list.",
+            "deprecated": true
           },
           "amount": {
             "anyOf": [
@@ -21541,7 +22268,15 @@
             "$ref": "#/components/schemas/CustomerOrderProduct"
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price"
           },
           "subscription": {
             "anyOf": [
@@ -21632,10 +22367,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -21650,7 +22396,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -21683,6 +22436,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -21941,6 +22695,29 @@
         "title": "CustomerOrganization",
         "description": "Schema of an organization and related data for customer portal."
       },
+      "CustomerPaymentMethodCreate": {
+        "properties": {
+          "confirmation_token_id": {
+            "type": "string",
+            "title": "Confirmation Token Id"
+          },
+          "set_default": {
+            "type": "boolean",
+            "title": "Set Default"
+          },
+          "return_url": {
+            "type": "string",
+            "title": "Return Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "confirmation_token_id",
+          "set_default",
+          "return_url"
+        ],
+        "title": "CustomerPaymentMethodCreate"
+      },
       "CustomerPortalCustomer": {
         "properties": {
           "created_at": {
@@ -22040,6 +22817,56 @@
         ],
         "title": "CustomerPortalCustomer"
       },
+      "CustomerPortalCustomerUpdate": {
+        "properties": {
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Id"
+          }
+        },
+        "type": "object",
+        "title": "CustomerPortalCustomerUpdate"
+      },
       "CustomerPortalOAuthAccount": {
         "properties": {
           "account_id": {
@@ -22109,10 +22936,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -22127,7 +22965,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -22157,6 +23002,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -22452,7 +23298,15 @@
             "$ref": "#/components/schemas/CustomerSubscriptionProduct"
           },
           "price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Price"
           }
         },
         "type": "object",
@@ -22569,10 +23423,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -22587,7 +23452,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -22620,6 +23492,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -22649,27 +23522,27 @@
       "CustomerSubscriptionUpdate": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/CustomerSubscriptionUpdatePrice"
+            "$ref": "#/components/schemas/CustomerSubscriptionUpdateProduct"
           },
           {
             "$ref": "#/components/schemas/CustomerSubscriptionCancel"
           }
         ]
       },
-      "CustomerSubscriptionUpdatePrice": {
+      "CustomerSubscriptionUpdateProduct": {
         "properties": {
-          "product_price_id": {
+          "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "Update subscription to another price."
+            "title": "Product Id",
+            "description": "Update subscription to another product."
           }
         },
         "type": "object",
         "required": [
-          "product_price_id"
+          "product_id"
         ],
-        "title": "CustomerSubscriptionUpdatePrice"
+        "title": "CustomerSubscriptionUpdateProduct"
       },
       "CustomerUpdate": {
         "properties": {
@@ -24686,10 +25559,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -24710,6 +25594,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id"
@@ -26396,6 +27281,309 @@
         ],
         "title": "Label"
       },
+      "LegacyRecurringProductPrice": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/LegacyRecurringProductPriceFixed"
+          },
+          {
+            "$ref": "#/components/schemas/LegacyRecurringProductPriceCustom"
+          },
+          {
+            "$ref": "#/components/schemas/LegacyRecurringProductPriceFree"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "amount_type",
+          "mapping": {
+            "custom": "#/components/schemas/LegacyRecurringProductPriceCustom",
+            "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed",
+            "free": "#/components/schemas/LegacyRecurringProductPriceFree"
+          }
+        }
+      },
+      "LegacyRecurringProductPriceCustom": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the price."
+          },
+          "amount_type": {
+            "type": "string",
+            "const": "custom",
+            "title": "Amount Type"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the price is archived and no longer available."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "The ID of the product owning the price."
+          },
+          "type": {
+            "type": "string",
+            "const": "recurring",
+            "title": "Type",
+            "description": "The type of the price."
+          },
+          "recurring_interval": {
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The recurring interval of the price."
+          },
+          "price_currency": {
+            "type": "string",
+            "title": "Price Currency",
+            "description": "The currency."
+          },
+          "minimum_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minimum Amount",
+            "description": "The minimum amount the customer can pay."
+          },
+          "maximum_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum Amount",
+            "description": "The maximum amount the customer can pay."
+          },
+          "preset_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preset Amount",
+            "description": "The initial amount shown to the customer."
+          },
+          "legacy": {
+            "type": "boolean",
+            "const": true,
+            "title": "Legacy",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "amount_type",
+          "is_archived",
+          "product_id",
+          "type",
+          "recurring_interval",
+          "price_currency",
+          "minimum_amount",
+          "maximum_amount",
+          "preset_amount",
+          "legacy"
+        ],
+        "title": "LegacyRecurringProductPriceCustom",
+        "description": "A pay-what-you-want recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself."
+      },
+      "LegacyRecurringProductPriceFixed": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the price."
+          },
+          "amount_type": {
+            "type": "string",
+            "const": "fixed",
+            "title": "Amount Type"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the price is archived and no longer available."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "The ID of the product owning the price."
+          },
+          "type": {
+            "type": "string",
+            "const": "recurring",
+            "title": "Type",
+            "description": "The type of the price."
+          },
+          "recurring_interval": {
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The recurring interval of the price."
+          },
+          "price_currency": {
+            "type": "string",
+            "title": "Price Currency",
+            "description": "The currency."
+          },
+          "price_amount": {
+            "type": "integer",
+            "title": "Price Amount",
+            "description": "The price in cents."
+          },
+          "legacy": {
+            "type": "boolean",
+            "const": true,
+            "title": "Legacy",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "amount_type",
+          "is_archived",
+          "product_id",
+          "type",
+          "recurring_interval",
+          "price_currency",
+          "price_amount",
+          "legacy"
+        ],
+        "title": "LegacyRecurringProductPriceFixed",
+        "description": "A recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself."
+      },
+      "LegacyRecurringProductPriceFree": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the price."
+          },
+          "amount_type": {
+            "type": "string",
+            "const": "free",
+            "title": "Amount Type"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the price is archived and no longer available."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "The ID of the product owning the price."
+          },
+          "type": {
+            "type": "string",
+            "const": "recurring",
+            "title": "Type",
+            "description": "The type of the price."
+          },
+          "recurring_interval": {
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The recurring interval of the price."
+          },
+          "legacy": {
+            "type": "boolean",
+            "const": true,
+            "title": "Legacy",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "amount_type",
+          "is_archived",
+          "product_id",
+          "type",
+          "recurring_interval",
+          "legacy"
+        ],
+        "title": "LegacyRecurringProductPriceFree",
+        "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself."
+      },
       "LicenseKeyActivate": {
         "properties": {
           "key": {
@@ -27603,6 +28791,33 @@
           "pagination"
         ],
         "title": "ListResource[Subscription]"
+      },
+      "ListResource_Union_PaymentMethodCard__PaymentMethodGeneric__": {
+        "properties": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PaymentMethodCard"
+                },
+                {
+                  "$ref": "#/components/schemas/PaymentMethodGeneric"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Union[PaymentMethodCard, PaymentMethodGeneric]]"
       },
       "Meter": {
         "properties": {
@@ -28890,7 +30105,15 @@
             "$ref": "#/components/schemas/OrderProduct"
           },
           "product_price": {
-            "$ref": "#/components/schemas/ProductPrice"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Product Price"
           },
           "discount": {
             "anyOf": [
@@ -29148,10 +30371,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -29172,6 +30406,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id"
@@ -30283,6 +31518,86 @@
         ],
         "title": "PaymentError"
       },
+      "PaymentMethodCard": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "card",
+            "title": "Type"
+          },
+          "card": {
+            "$ref": "#/components/schemas/PaymentMethodCardData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "card"
+        ],
+        "title": "PaymentMethodCard"
+      },
+      "PaymentMethodCardData": {
+        "properties": {
+          "brand": {
+            "type": "string",
+            "title": "Brand"
+          },
+          "last4": {
+            "type": "string",
+            "title": "Last4"
+          },
+          "exp_month": {
+            "type": "integer",
+            "title": "Exp Month"
+          },
+          "exp_year": {
+            "type": "integer",
+            "title": "Exp Year"
+          },
+          "wallet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wallet"
+          }
+        },
+        "type": "object",
+        "required": [
+          "brand",
+          "last4",
+          "exp_month",
+          "exp_year"
+        ],
+        "title": "PaymentMethodCardData"
+      },
+      "PaymentMethodGeneric": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "PaymentMethodGeneric"
+      },
       "PaymentProcessor": {
         "type": "string",
         "enum": [
@@ -30534,10 +31849,21 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
           "is_recurring": {
             "type": "boolean",
             "title": "Is Recurring",
-            "description": "Whether the product is a subscription tier."
+            "description": "Whether the product is a subscription."
           },
           "is_archived": {
             "type": "boolean",
@@ -30569,7 +31895,14 @@
           },
           "prices": {
             "items": {
-              "$ref": "#/components/schemas/ProductPrice"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
             },
             "type": "array",
             "title": "Prices",
@@ -30608,6 +31941,7 @@
           "id",
           "name",
           "description",
+          "recurring_interval",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -30645,15 +31979,142 @@
         "title": "ProductBenefitsUpdate",
         "description": "Schema to update the benefits granted by a product."
       },
+      "ProductBillingType": {
+        "type": "string",
+        "enum": [
+          "one_time",
+          "recurring"
+        ],
+        "title": "ProductBillingType"
+      },
       "ProductCreate": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/ProductRecurringCreate"
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
-          {
-            "$ref": "#/components/schemas/ProductOneTimeCreate"
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Name",
+            "description": "The name of the product."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the product."
+          },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
+          "prices": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductPriceFixedCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceCustomCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                }
+              ]
+            },
+            "type": "array",
+            "maxItems": 1,
+            "minItems": 1,
+            "title": "ProductPriceCreateList",
+            "description": "List of available prices for this product. Currently, only a single price is supported."
+          },
+          "medias": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Medias",
+            "description": "List of file IDs. Each one must be on the same organization as the product, of type `product_media` and correctly uploaded."
+          },
+          "attached_custom_fields": {
+            "items": {
+              "$ref": "#/components/schemas/AttachedCustomFieldCreate"
+            },
+            "type": "array",
+            "title": "Attached Custom Fields",
+            "description": "List of custom fields to attach."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the product. **Required unless you use an organization token.**"
           }
-        ]
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "recurring_interval",
+          "prices"
+        ],
+        "title": "ProductCreate",
+        "description": "Schema to create a product."
       },
       "ProductMediaFileCreate": {
         "properties": {
@@ -30877,162 +32338,28 @@
         "title": "ProductMediaFileRead",
         "description": "File to be used as a product media file."
       },
-      "ProductOneTimeCreate": {
-        "properties": {
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 500,
-                  "minLength": 1
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
-            "type": "object",
-            "maxProperties": 50,
-            "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-          },
-          "name": {
-            "type": "string",
-            "minLength": 3,
-            "title": "Name",
-            "description": "The name of the product."
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description",
-            "description": "The description of the product."
-          },
-          "prices": {
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/ProductPriceOneTimeFixedCreate"
-                },
-                {
-                  "$ref": "#/components/schemas/ProductPriceOneTimeCustomCreate"
-                },
-                {
-                  "$ref": "#/components/schemas/ProductPriceOneTimeFreeCreate"
-                }
-              ]
-            },
-            "type": "array",
-            "maxItems": 1,
-            "minItems": 1,
-            "title": "ProductPriceOneTimeCreate",
-            "description": "List of available prices for this product."
-          },
-          "medias": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Medias",
-            "description": "List of file IDs. Each one must be on the same organization as the product, of type `product_media` and correctly uploaded."
-          },
-          "attached_custom_fields": {
-            "items": {
-              "$ref": "#/components/schemas/AttachedCustomFieldCreate"
-            },
-            "type": "array",
-            "title": "Attached Custom Fields",
-            "description": "List of custom fields to attach."
-          },
-          "organization_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4",
-                "description": "The organization ID.",
-                "x-polar-selector-widget": {
-                  "displayProperty": "name",
-                  "resourceName": "Organization",
-                  "resourceRoot": "/v1/organizations"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Organization Id",
-            "description": "The ID of the organization owning the product. **Required unless you use an organization token.**"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "prices"
-        ],
-        "title": "ProductOneTimeCreate",
-        "description": "Schema to create a one-time product."
-      },
       "ProductPrice": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ProductPriceRecurring"
+            "$ref": "#/components/schemas/ProductPriceFixed"
           },
           {
-            "$ref": "#/components/schemas/ProductPriceOneTime"
-          }
-        ],
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "one_time": "#/components/schemas/ProductPriceOneTime",
-            "recurring": "#/components/schemas/ProductPriceRecurring"
-          }
-        }
-      },
-      "ProductPriceOneTime": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ProductPriceOneTimeFixed"
+            "$ref": "#/components/schemas/ProductPriceCustom"
           },
           {
-            "$ref": "#/components/schemas/ProductPriceOneTimeCustom"
-          },
-          {
-            "$ref": "#/components/schemas/ProductPriceOneTimeFree"
+            "$ref": "#/components/schemas/ProductPriceFree"
           }
         ],
         "discriminator": {
           "propertyName": "amount_type",
           "mapping": {
-            "custom": "#/components/schemas/ProductPriceOneTimeCustom",
-            "fixed": "#/components/schemas/ProductPriceOneTimeFixed",
-            "free": "#/components/schemas/ProductPriceOneTimeFree"
+            "custom": "#/components/schemas/ProductPriceCustom",
+            "fixed": "#/components/schemas/ProductPriceFixed",
+            "free": "#/components/schemas/ProductPriceFree"
           }
         }
       },
-      "ProductPriceOneTimeCustom": {
+      "ProductPriceCustom": {
         "properties": {
           "created_at": {
             "type": "string",
@@ -31075,6 +32402,21 @@
             "title": "Product Id",
             "description": "The ID of the product owning the price."
           },
+          "type": {
+            "$ref": "#/components/schemas/ProductPriceType",
+            "deprecated": true
+          },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
+          },
           "price_currency": {
             "type": "string",
             "title": "Price Currency",
@@ -31115,12 +32457,6 @@
             ],
             "title": "Preset Amount",
             "description": "The initial amount shown to the customer."
-          },
-          "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type",
-            "description": "The type of the price."
           }
         },
         "type": "object",
@@ -31131,22 +32467,18 @@
           "amount_type",
           "is_archived",
           "product_id",
+          "type",
+          "recurring_interval",
           "price_currency",
           "minimum_amount",
           "maximum_amount",
-          "preset_amount",
-          "type"
+          "preset_amount"
         ],
-        "title": "ProductPriceOneTimeCustom",
-        "description": "A pay-what-you-want price for a one-time product."
+        "title": "ProductPriceCustom",
+        "description": "A pay-what-you-want price for a product."
       },
-      "ProductPriceOneTimeCustomCreate": {
+      "ProductPriceCustomCreate": {
         "properties": {
-          "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type"
-          },
           "amount_type": {
             "type": "string",
             "const": "custom",
@@ -31207,13 +32539,12 @@
         },
         "type": "object",
         "required": [
-          "type",
           "amount_type"
         ],
-        "title": "ProductPriceOneTimeCustomCreate",
-        "description": "Schema to create a pay-what-you-want price for a one-time product."
+        "title": "ProductPriceCustomCreate",
+        "description": "Schema to create a pay-what-you-want price."
       },
-      "ProductPriceOneTimeFixed": {
+      "ProductPriceFixed": {
         "properties": {
           "created_at": {
             "type": "string",
@@ -31256,6 +32587,21 @@
             "title": "Product Id",
             "description": "The ID of the product owning the price."
           },
+          "type": {
+            "$ref": "#/components/schemas/ProductPriceType",
+            "deprecated": true
+          },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
+          },
           "price_currency": {
             "type": "string",
             "title": "Price Currency",
@@ -31265,12 +32611,6 @@
             "type": "integer",
             "title": "Price Amount",
             "description": "The price in cents."
-          },
-          "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type",
-            "description": "The type of the price."
           }
         },
         "type": "object",
@@ -31281,20 +32621,16 @@
           "amount_type",
           "is_archived",
           "product_id",
+          "type",
+          "recurring_interval",
           "price_currency",
-          "price_amount",
-          "type"
+          "price_amount"
         ],
-        "title": "ProductPriceOneTimeFixed",
-        "description": "A one-time price for a product."
+        "title": "ProductPriceFixed",
+        "description": "A fixed price for a product."
       },
-      "ProductPriceOneTimeFixedCreate": {
+      "ProductPriceFixedCreate": {
         "properties": {
-          "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type"
-          },
           "amount_type": {
             "type": "string",
             "const": "fixed",
@@ -31317,14 +32653,13 @@
         },
         "type": "object",
         "required": [
-          "type",
           "amount_type",
           "price_amount"
         ],
-        "title": "ProductPriceOneTimeFixedCreate",
-        "description": "Schema to create a one-time product price."
+        "title": "ProductPriceFixedCreate",
+        "description": "Schema to create a fixed price."
       },
-      "ProductPriceOneTimeFree": {
+      "ProductPriceFree": {
         "properties": {
           "created_at": {
             "type": "string",
@@ -31368,10 +32703,19 @@
             "description": "The ID of the product owning the price."
           },
           "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type",
-            "description": "The type of the price."
+            "$ref": "#/components/schemas/ProductPriceType",
+            "deprecated": true
+          },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
           }
         },
         "type": "object",
@@ -31382,18 +32726,14 @@
           "amount_type",
           "is_archived",
           "product_id",
-          "type"
+          "type",
+          "recurring_interval"
         ],
-        "title": "ProductPriceOneTimeFree",
-        "description": "A free one-time price for a product."
+        "title": "ProductPriceFree",
+        "description": "A free price for a product."
       },
-      "ProductPriceOneTimeFreeCreate": {
+      "ProductPriceFreeCreate": {
         "properties": {
-          "type": {
-            "type": "string",
-            "const": "one_time",
-            "title": "Type"
-          },
           "amount_type": {
             "type": "string",
             "const": "free",
@@ -31402,360 +32742,10 @@
         },
         "type": "object",
         "required": [
-          "type",
           "amount_type"
         ],
-        "title": "ProductPriceOneTimeFreeCreate",
-        "description": "Schema to create a free one-time product price."
-      },
-      "ProductPriceRecurring": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ProductPriceRecurringFixed"
-          },
-          {
-            "$ref": "#/components/schemas/ProductPriceRecurringCustom"
-          },
-          {
-            "$ref": "#/components/schemas/ProductPriceRecurringFree"
-          }
-        ],
-        "discriminator": {
-          "propertyName": "amount_type",
-          "mapping": {
-            "custom": "#/components/schemas/ProductPriceRecurringCustom",
-            "fixed": "#/components/schemas/ProductPriceRecurringFixed",
-            "free": "#/components/schemas/ProductPriceRecurringFree"
-          }
-        }
-      },
-      "ProductPriceRecurringCustom": {
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the price."
-          },
-          "amount_type": {
-            "type": "string",
-            "const": "custom",
-            "title": "Amount Type"
-          },
-          "is_archived": {
-            "type": "boolean",
-            "title": "Is Archived",
-            "description": "Whether the price is archived and no longer available."
-          },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "description": "The ID of the product owning the price."
-          },
-          "price_currency": {
-            "type": "string",
-            "title": "Price Currency",
-            "description": "The currency."
-          },
-          "minimum_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Minimum Amount",
-            "description": "The minimum amount the customer can pay."
-          },
-          "maximum_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Maximum Amount",
-            "description": "The maximum amount the customer can pay."
-          },
-          "preset_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Preset Amount",
-            "description": "The initial amount shown to the customer."
-          },
-          "type": {
-            "type": "string",
-            "const": "recurring",
-            "title": "Type",
-            "description": "The type of the price."
-          },
-          "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The recurring interval of the price."
-          }
-        },
-        "type": "object",
-        "required": [
-          "created_at",
-          "modified_at",
-          "id",
-          "amount_type",
-          "is_archived",
-          "product_id",
-          "price_currency",
-          "minimum_amount",
-          "maximum_amount",
-          "preset_amount",
-          "type",
-          "recurring_interval"
-        ],
-        "title": "ProductPriceRecurringCustom",
-        "description": "A pay-what-you-want recurring price for a product, i.e. a subscription."
-      },
-      "ProductPriceRecurringFixed": {
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the price."
-          },
-          "amount_type": {
-            "type": "string",
-            "const": "fixed",
-            "title": "Amount Type"
-          },
-          "is_archived": {
-            "type": "boolean",
-            "title": "Is Archived",
-            "description": "Whether the price is archived and no longer available."
-          },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "description": "The ID of the product owning the price."
-          },
-          "price_currency": {
-            "type": "string",
-            "title": "Price Currency",
-            "description": "The currency."
-          },
-          "price_amount": {
-            "type": "integer",
-            "title": "Price Amount",
-            "description": "The price in cents."
-          },
-          "type": {
-            "type": "string",
-            "const": "recurring",
-            "title": "Type",
-            "description": "The type of the price."
-          },
-          "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The recurring interval of the price."
-          }
-        },
-        "type": "object",
-        "required": [
-          "created_at",
-          "modified_at",
-          "id",
-          "amount_type",
-          "is_archived",
-          "product_id",
-          "price_currency",
-          "price_amount",
-          "type",
-          "recurring_interval"
-        ],
-        "title": "ProductPriceRecurringFixed",
-        "description": "A recurring price for a product, i.e. a subscription."
-      },
-      "ProductPriceRecurringFixedCreate": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "recurring",
-            "title": "Type"
-          },
-          "amount_type": {
-            "type": "string",
-            "const": "fixed",
-            "title": "Amount Type"
-          },
-          "price_amount": {
-            "type": "integer",
-            "maximum": 99999999.0,
-            "minimum": 50.0,
-            "title": "Price Amount",
-            "description": "The price in cents."
-          },
-          "price_currency": {
-            "type": "string",
-            "pattern": "usd",
-            "title": "Price Currency",
-            "description": "The currency. Currently, only `usd` is supported.",
-            "default": "usd"
-          },
-          "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The recurring interval of the price."
-          }
-        },
-        "type": "object",
-        "required": [
-          "type",
-          "amount_type",
-          "price_amount",
-          "recurring_interval"
-        ],
-        "title": "ProductPriceRecurringFixedCreate",
-        "description": "Schema to create a recurring product price, i.e. a subscription."
-      },
-      "ProductPriceRecurringFree": {
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the price."
-          },
-          "amount_type": {
-            "type": "string",
-            "const": "free",
-            "title": "Amount Type"
-          },
-          "is_archived": {
-            "type": "boolean",
-            "title": "Is Archived",
-            "description": "Whether the price is archived and no longer available."
-          },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "description": "The ID of the product owning the price."
-          },
-          "type": {
-            "type": "string",
-            "const": "recurring",
-            "title": "Type",
-            "description": "The type of the price."
-          },
-          "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The recurring interval of the price."
-          }
-        },
-        "type": "object",
-        "required": [
-          "created_at",
-          "modified_at",
-          "id",
-          "amount_type",
-          "is_archived",
-          "product_id",
-          "type",
-          "recurring_interval"
-        ],
-        "title": "ProductPriceRecurringFree",
-        "description": "A free recurring price for a product, i.e. a subscription."
-      },
-      "ProductPriceRecurringFreeCreate": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "recurring",
-            "title": "Type"
-          },
-          "amount_type": {
-            "type": "string",
-            "const": "free",
-            "title": "Amount Type"
-          },
-          "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The recurring interval of the price."
-          }
-        },
-        "type": "object",
-        "required": [
-          "type",
-          "amount_type",
-          "recurring_interval"
-        ],
-        "title": "ProductPriceRecurringFreeCreate",
-        "description": "Schema to create a free recurring product price, i.e. a subscription."
+        "title": "ProductPriceFreeCreate",
+        "description": "Schema to create a free price."
       },
       "ProductPriceType": {
         "type": "string",
@@ -31765,129 +32755,6 @@
         ],
         "title": "ProductPriceType"
       },
-      "ProductRecurringCreate": {
-        "properties": {
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 500,
-                  "minLength": 1
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "propertyNames": {
-              "maxLength": 40,
-              "minLength": 1
-            },
-            "type": "object",
-            "maxProperties": 50,
-            "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-          },
-          "name": {
-            "type": "string",
-            "minLength": 3,
-            "title": "Name",
-            "description": "The name of the product."
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description",
-            "description": "The description of the product."
-          },
-          "prices": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/ProductPriceRecurringFixedCreate"
-                },
-                "type": "array",
-                "maxItems": 2,
-                "minItems": 1,
-                "title": "ProductPriceRecurringFixedCreate",
-                "description": "List of recurring prices. Only one price per interval (one monthly and one yearly) is allowed."
-              },
-              {
-                "items": {
-                  "$ref": "#/components/schemas/ProductPriceRecurringFreeCreate"
-                },
-                "type": "array",
-                "maxItems": 1,
-                "minItems": 1,
-                "title": "ProductPriceRecurringFreeCreate",
-                "description": "List with a single free recurring price."
-              }
-            ],
-            "title": "Prices",
-            "description": "List of available prices for this product."
-          },
-          "medias": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Medias",
-            "description": "List of file IDs. Each one must be on the same organization as the product, of type `product_media` and correctly uploaded."
-          },
-          "attached_custom_fields": {
-            "items": {
-              "$ref": "#/components/schemas/AttachedCustomFieldCreate"
-            },
-            "type": "array",
-            "title": "Attached Custom Fields",
-            "description": "List of custom fields to attach."
-          },
-          "organization_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4",
-                "description": "The organization ID.",
-                "x-polar-selector-widget": {
-                  "displayProperty": "name",
-                  "resourceName": "Organization",
-                  "resourceRoot": "/v1/organizations"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Organization Id",
-            "description": "The ID of the organization owning the product. **Required unless you use an organization token.**"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "prices"
-        ],
-        "title": "ProductRecurringCreate",
-        "description": "Schema to create a recurring product, i.e. a subscription."
-      },
       "ProductSortProperty": {
         "type": "string",
         "enum": [
@@ -31895,8 +32762,6 @@
           "-created_at",
           "name",
           "-name",
-          "price_type",
-          "-price_type",
           "price_amount_type",
           "-price_amount_type",
           "price_amount",
@@ -31963,6 +32828,17 @@
             "title": "Description",
             "description": "The description of the product."
           },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase. **Can only be set on legacy recurring products. Once set, it can't be changed.**"
+          },
           "is_archived": {
             "anyOf": [
               {
@@ -31984,19 +32860,13 @@
                       "$ref": "#/components/schemas/ExistingProductPrice"
                     },
                     {
-                      "$ref": "#/components/schemas/ProductPriceRecurringFixedCreate"
+                      "$ref": "#/components/schemas/ProductPriceFixedCreate"
                     },
                     {
-                      "$ref": "#/components/schemas/ProductPriceRecurringFreeCreate"
+                      "$ref": "#/components/schemas/ProductPriceCustomCreate"
                     },
                     {
-                      "$ref": "#/components/schemas/ProductPriceOneTimeFixedCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceOneTimeCustomCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceOneTimeFreeCreate"
+                      "$ref": "#/components/schemas/ProductPriceFreeCreate"
                     }
                   ]
                 },
@@ -33250,7 +34120,15 @@
             "$ref": "#/components/schemas/Product"
           },
           "price": {
-            "$ref": "#/components/schemas/ProductPriceRecurring"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Price"
           },
           "discount": {
             "anyOf": [
@@ -33538,20 +34416,20 @@
       "SubscriptionUpdate": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/SubscriptionUpdatePrice"
+            "$ref": "#/components/schemas/SubscriptionUpdateProduct"
           },
           {
             "$ref": "#/components/schemas/SubscriptionCancel"
           }
         ]
       },
-      "SubscriptionUpdatePrice": {
+      "SubscriptionUpdateProduct": {
         "properties": {
-          "product_price_id": {
+          "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id",
-            "description": "Update subscription to another price."
+            "title": "Product Id",
+            "description": "Update subscription to another product."
           },
           "proration_behavior": {
             "anyOf": [
@@ -33567,9 +34445,9 @@
         },
         "type": "object",
         "required": [
-          "product_price_id"
+          "product_id"
         ],
-        "title": "SubscriptionUpdatePrice"
+        "title": "SubscriptionUpdateProduct"
       },
       "SubscriptionUser": {
         "properties": {
