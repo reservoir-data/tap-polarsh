@@ -31236,6 +31236,8 @@
         "enum": [
           "created_at",
           "-created_at",
+          "slug",
+          "-slug",
           "name",
           "-name"
         ],
