@@ -7,16 +7,18 @@ on:
     - tap_polarsh/**
     - tests/**
     - pyproject.toml
+    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
     - tap_polarsh/**
     - tests/**
     - pyproject.toml
+    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
   workflow_dispatch:
   schedule:
   # Run weekly on Monday at 12:00 PM UTC
@@ -25,11 +27,11 @@ on:
 env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=uv
-  UV_VERSION: 0.5.20
+  UV_VERSION: 0.6.5
   # renovate: datasource=pypi depName=tox
-  TOX_VERSION: 4.23.2
+  TOX_VERSION: 4.24.2
   # renovate: datasource=pypi depName=tox-uv
-  TOX_UV_VERSION: 1.17.0
+  TOX_UV_VERSION: 1.25.0
 
 jobs:
   test:
@@ -50,12 +52,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-    - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+    - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
       id: setup-python
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-    - uses: astral-sh/setup-uv@887a942a15af3a7626099df99e897a18d9e5ab3a # v5.1.0
+    - uses: astral-sh/setup-uv@f94ec6bedd8674c4426838e6b50417d36b6ab231 # v5.3.1
       with:
         version: ${{ env.UV_VERSION }}
     - name: Run tests
@@ -65,16 +67,3 @@ jobs:
         TAP_POLARSH_START_DATE: ${{ secrets.TAP_POLARSH_START_DATE }}
       run: |
         uvx --with tox-uv==${{ env.TOX_UV_VERSION }} --with tox==${{ env.TOX_VERSION }} tox -e ${{ matrix.environment || matrix.python-version }}
-
-  pre-commit:
-    runs-on: ubuntu-24.04
-    env:
-      FORCE_COLOR: "1"
-    steps:
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-    - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
-      with:
-        python-version: "3.x"
-    - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
-    - uses: pre-commit-ci/lite-action@5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
-      if: always()

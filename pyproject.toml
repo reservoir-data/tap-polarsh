@@ -35,7 +35,7 @@ dynamic = [
 ]
 dependencies = [
   "requests~=2.31",
-  "singer-sdk~=0.43.1",
+  "singer-sdk~=0.44.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-polarsh"
@@ -53,7 +53,7 @@ testing = [
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy~=1.14.0",
+  "mypy~=1.15.0",
   "types-requests~=2.31",
 ]
 
@@ -128,4 +128,6 @@ module = [
 ]
 
 [tool.uv]
+prerelease = "allow"
+preview = true
 required-version = ">=0.5.19"
