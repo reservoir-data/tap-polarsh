@@ -100,6 +100,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -112,6 +115,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -357,6 +363,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -369,6 +378,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -916,6 +928,9 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
+              "examples": [
+                "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+              ],
               "description": "The organization ID.",
               "x-polar-selector-widget": {
                 "resourceRoot": "/v1/organizations",
@@ -998,6 +1013,9 @@
             "schema": {
               "type": "string",
               "format": "uuid4",
+              "examples": [
+                "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+              ],
               "description": "The organization ID.",
               "x-polar-selector-widget": {
                 "resourceRoot": "/v1/organizations",
@@ -1105,6 +1123,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -1117,6 +1138,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -1397,6 +1421,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -1409,6 +1436,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -2334,6 +2364,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -2346,6 +2379,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -2386,6 +2422,24 @@
               "description": "Filter by benefit type."
             },
             "description": "Filter by benefit type."
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query",
+              "description": "Filter by description."
+            },
+            "description": "Filter by description."
           },
           {
             "name": "page",
@@ -3066,6 +3120,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -3078,6 +3135,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -3702,6 +3762,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -3714,6 +3777,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -4233,6 +4299,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -4245,6 +4314,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -4587,6 +4659,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -4599,6 +4674,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -5279,6 +5357,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -5838,6 +5919,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -5850,6 +5934,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -6079,6 +6166,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -6091,6 +6181,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -6562,6 +6655,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -6574,6 +6670,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -7076,6 +7175,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -7088,6 +7190,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -7587,6 +7692,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -7599,6 +7707,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -8079,6 +8190,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -8091,6 +8205,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -8516,7 +8633,7 @@
           "mcp"
         ],
         "summary": "Delete Customer",
-        "description": "Delete a customer.\n\nImmediately cancels any active subscriptions and revokes any active benefits.\n\n**Scopes**: `customers:write`",
+        "description": "Delete a customer.\n\nThis action cannot be undone and will immediately:\n- Cancel any active subscriptions for the customer\n- Revoke all their benefits\n- Clear any `external_id`\n\nUse it only in the context of deleting a user within your\nown service. Otherwise, use more granular API endpoints to cancel\na specific subscription or revoke certain benefits.\n\nNote: The customers information will nonetheless be retained for historic\norders and subscriptions.\n\n**Scopes**: `customers:write`",
         "operationId": "customers:delete",
         "security": [
           {
@@ -8837,6 +8954,177 @@
         "x-speakeasy-name-override": "delete_external"
       }
     },
+    "/v1/customers/{id}/state": {
+      "get": {
+        "tags": [
+          "customers",
+          "documented",
+          "featured",
+          "mcp"
+        ],
+        "summary": "Get Customer State",
+        "description": "Get a customer state by ID.\n\nThe customer state includes information about\nthe customer's active subscriptions and benefits.\n\nIt's the ideal endpoint to use when you need to get a full overview\nof a customer's status.\n\n**Scopes**: `customers:read` `customers:write`",
+        "operationId": "customers:get_state",
+        "security": [
+          {
+            "oidc": [
+              "customers:read",
+              "customers:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The customer ID.",
+              "title": "Id"
+            },
+            "description": "The customer ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerState"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customers"
+          ]
+        },
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-name-override": "get_state"
+      }
+    },
+    "/v1/customers/external/{external_id}/state": {
+      "get": {
+        "tags": [
+          "customers",
+          "documented",
+          "featured",
+          "mcp"
+        ],
+        "summary": "Get Customer State by External ID",
+        "description": "Get a customer state by external ID.\n\nThe customer state includes information about\nthe customer's active subscriptions and benefits.\n\nIt's the ideal endpoint to use when you need to get a full overview\nof a customer's status.\n\n**Scopes**: `customers:read` `customers:write`",
+        "operationId": "customers:get_state_external",
+        "security": [
+          {
+            "oidc": [
+              "customers:read",
+              "customers:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "external_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The customer external ID.",
+              "title": "External Id"
+            },
+            "description": "The customer external ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerState"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customers"
+          ]
+        },
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-name-override": "get_state_external"
+      }
+    },
     "/v1/customer-portal/benefit-grants/": {
       "get": {
         "tags": [
@@ -8912,6 +9200,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -8924,6 +9215,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -9623,6 +9917,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -9635,6 +9932,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -9853,6 +10153,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -9865,6 +10168,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -10283,6 +10589,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -10295,6 +10604,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -10776,6 +11088,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -10788,6 +11103,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -11369,6 +11687,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -11381,6 +11702,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -11768,6 +12092,9 @@
                 {
                   "type": "string",
                   "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
                   "description": "The organization ID.",
                   "x-polar-selector-widget": {
                     "resourceRoot": "/v1/organizations",
@@ -11780,6 +12107,9 @@
                   "items": {
                     "type": "string",
                     "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
                     "description": "The organization ID.",
                     "x-polar-selector-widget": {
                       "resourceRoot": "/v1/organizations",
@@ -12530,16 +12860,238 @@
         }
       }
     },
+    "customer.created": {
+      "post": {
+        "summary": "customer.created",
+        "description": "Sent when a new customer is created.\n\nA customer can be created:\n\n* After a successful checkout.\n* Programmatically via the API.\n\n**Discord & Slack support:** Basic",
+        "operationId": "_endpointcustomer_created_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCustomerCreatedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "customer.updated": {
+      "post": {
+        "summary": "customer.updated",
+        "description": "Sent when a customer is updated.\n\nThis event is fired when the customer details are updated.\n\nIf you want to be notified when a customer subscription or benefit state changes, you should listen to the `customer_state_changed` event.\n\n**Discord & Slack support:** Basic",
+        "operationId": "_endpointcustomer_updated_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCustomerUpdatedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "customer.deleted": {
+      "post": {
+        "summary": "customer.deleted",
+        "description": "Sent when a customer is deleted.\n\n**Discord & Slack support:** Basic",
+        "operationId": "_endpointcustomer_deleted_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCustomerDeletedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "customer.state_changed": {
+      "post": {
+        "summary": "customer.state_changed",
+        "description": "Sent when a customer state has changed.\n\nIt's triggered when:\n\n* Customer is created, updated or deleted.\n* A subscription is created or updated.\n* A benefit is granted or revoked.\n\n**Discord & Slack support:** Basic",
+        "operationId": "_endpointcustomer_state_changed_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCustomerStateChangedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "order.created": {
       "post": {
         "summary": "order.created",
-        "description": "Sent when a new order is created.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n<Warning>The order might not be paid yet, so the `status` field might be `pending`.</Warning>\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointorder_created_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WebhookOrderCreatedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "order.updated": {
+      "post": {
+        "summary": "order.updated",
+        "description": "Sent when an order is updated.\n\nAn order is updated when:\n\n* Its status changes, e.g. from `pending` to `paid`.\n* It's refunded, partially or fully.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointorder_updated_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookOrderUpdatedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "order.paid": {
+      "post": {
+        "summary": "order.paid",
+        "description": "Sent when an order is paid.\n\nWhen you receive this event, the order is fully processed and payment has been received.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointorder_paid_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookOrderPaidPayload"
               }
             }
           },
@@ -12607,7 +13159,7 @@
     "subscription.created": {
       "post": {
         "summary": "subscription.created",
-        "description": "Sent when a new subscription is created.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a new subscription is created.\n\nWhen this event occurs, the subscription `status` might not be `active` yet, as we can still have to wait for the first payment to be processed.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointsubscription_created_post",
         "requestBody": {
           "content": {
@@ -13333,7 +13885,12 @@
           "country": {
             "type": "string",
             "pattern": "^\\w{2}$",
-            "title": "Country"
+            "title": "Country",
+            "examples": [
+              "US",
+              "SE",
+              "FR"
+            ]
           }
         },
         "type": "object",
@@ -13347,7 +13904,10 @@
           "error": {
             "type": "string",
             "const": "AlreadyActiveSubscriptionError",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "AlreadyActiveSubscriptionError"
+            ]
           },
           "detail": {
             "type": "string",
@@ -13366,7 +13926,10 @@
           "error": {
             "type": "string",
             "const": "AlreadyCanceledSubscription",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "AlreadyCanceledSubscription"
+            ]
           },
           "detail": {
             "type": "string",
@@ -13860,6 +14423,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -14175,6 +14741,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -14466,6 +15035,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -14770,6 +15342,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -15435,7 +16010,7 @@
         "properties": {
           "limit": {
             "type": "integer",
-            "maximum": 50.0,
+            "maximum": 1000.0,
             "exclusiveMinimum": 0.0,
             "title": "Limit"
           },
@@ -15566,6 +16141,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -16176,6 +16754,18 @@
             "type": "object",
             "title": "Metadata"
           },
+          "customer_external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer External Id",
+            "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
+          },
           "products": {
             "items": {
               "$ref": "#/components/schemas/CheckoutProduct"
@@ -16295,6 +16885,7 @@
           "customer_tax_id",
           "payment_processor_metadata",
           "metadata",
+          "customer_external_id",
           "products",
           "product",
           "product_price",
@@ -16777,6 +17368,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -19593,6 +20187,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the custom field.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -19719,6 +20316,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -19797,6 +20397,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -19875,6 +20478,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -19953,6 +20559,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -20031,6 +20640,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -20122,6 +20734,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the custom field.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -20240,6 +20855,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the custom field.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -20358,6 +20976,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the custom field.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -20512,6 +21133,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the custom field.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -21034,6 +21658,15 @@
       },
       "Customer": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the customer.",
+            "examples": [
+              "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+            ]
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -21052,12 +21685,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "metadata": {
             "additionalProperties": {
@@ -21086,17 +21713,26 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "type": "string",
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "email_verified": {
             "type": "boolean",
             "title": "Email Verified",
-            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address."
+            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+            "examples": [
+              true
+            ]
           },
           "name": {
             "anyOf": [
@@ -21107,7 +21743,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -21132,7 +21772,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -21143,19 +21793,39 @@
           "organization_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Organization Id"
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the customer.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ]
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Timestamp for when the customer was soft deleted."
           },
           "avatar_url": {
             "type": "string",
             "title": "Avatar Url",
-            "readOnly": true
+            "readOnly": true,
+            "examples": [
+              "https://www.gravatar.com/avatar/xxx?d=blank"
+            ]
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "metadata",
           "external_id",
           "email",
@@ -21164,6 +21834,7 @@
           "billing_address",
           "tax_id",
           "organization_id",
+          "deleted_at",
           "avatar_url"
         ],
         "title": "Customer",
@@ -21994,13 +22665,19 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "type": "string",
             "format": "email",
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "name": {
             "anyOf": [
@@ -22011,7 +22688,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -22036,7 +22717,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -22050,6 +22741,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -22096,13 +22790,60 @@
             "format": "uuid4",
             "title": "Id"
           },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatus",
+            "examples": [
+              "paid"
+            ]
+          },
+          "paid": {
+            "type": "boolean",
+            "title": "Paid",
+            "description": "Whether the order has been paid for.",
+            "examples": [
+              true
+            ]
+          },
+          "subtotal_amount": {
+            "type": "integer",
+            "title": "Subtotal Amount",
+            "description": "Amount in cents, before discounts and taxes."
+          },
+          "discount_amount": {
+            "type": "integer",
+            "title": "Discount Amount",
+            "description": "Discount amount in cents."
+          },
+          "net_amount": {
+            "type": "integer",
+            "title": "Net Amount",
+            "description": "Amount in cents, after discounts but before taxes."
+          },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "description": "Amount in cents, after discounts but before taxes.",
+            "deprecated": true
           },
           "tax_amount": {
             "type": "integer",
-            "title": "Tax Amount"
+            "title": "Tax Amount",
+            "description": "Sales tax amount in cents."
+          },
+          "total_amount": {
+            "type": "integer",
+            "title": "Total Amount",
+            "description": "Amount in cents, after discounts and taxes."
+          },
+          "refunded_amount": {
+            "type": "integer",
+            "title": "Refunded Amount",
+            "description": "Amount refunded in cents."
+          },
+          "refunded_tax_amount": {
+            "type": "integer",
+            "title": "Refunded Tax Amount",
+            "description": "Sales tax refunded in cents."
           },
           "currency": {
             "type": "string",
@@ -22121,7 +22862,8 @@
           "product_price_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id"
+            "title": "Product Price Id",
+            "deprecated": true
           },
           "subscription_id": {
             "anyOf": [
@@ -22153,7 +22895,8 @@
                 "$ref": "#/components/schemas/ProductPrice"
               }
             ],
-            "title": "Product Price"
+            "title": "Product Price",
+            "deprecated": true
           },
           "subscription": {
             "anyOf": [
@@ -22164,6 +22907,14 @@
                 "type": "null"
               }
             ]
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OrderItemSchema"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "Line items composing the order."
           }
         },
         "type": "object",
@@ -22171,8 +22922,16 @@
           "created_at",
           "modified_at",
           "id",
+          "status",
+          "paid",
+          "subtotal_amount",
+          "discount_amount",
+          "net_amount",
           "amount",
           "tax_amount",
+          "total_amount",
+          "refunded_amount",
+          "refunded_tax_amount",
           "currency",
           "customer_id",
           "product_id",
@@ -22181,7 +22940,8 @@
           "user_id",
           "product",
           "product_price",
-          "subscription"
+          "subscription",
+          "items"
         ],
         "title": "CustomerOrder"
       },
@@ -22331,8 +23091,8 @@
           "-created_at",
           "amount",
           "-amount",
-          "organization",
-          "-organization",
+          "net_amount",
+          "-net_amount",
           "product",
           "-product",
           "subscription",
@@ -22368,37 +23128,28 @@
             "description": "The ID of the object."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the subscription."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency"
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the subscription."
           },
           "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The interval at which the subscription recurs."
           },
           "status": {
-            "$ref": "#/components/schemas/SubscriptionStatus"
+            "$ref": "#/components/schemas/SubscriptionStatus",
+            "description": "The status of the subscription."
           },
           "current_period_start": {
             "type": "string",
             "format": "date-time",
-            "title": "Current Period Start"
+            "title": "Current Period Start",
+            "description": "The start timestamp of the current billing period."
           },
           "current_period_end": {
             "anyOf": [
@@ -22410,11 +23161,13 @@
                 "type": "null"
               }
             ],
-            "title": "Current Period End"
+            "title": "Current Period End",
+            "description": "The end timestamp of the current billing period."
           },
           "cancel_at_period_end": {
             "type": "boolean",
-            "title": "Cancel At Period End"
+            "title": "Cancel At Period End",
+            "description": "Whether the subscription will be canceled at the end of the current period."
           },
           "canceled_at": {
             "anyOf": [
@@ -22426,7 +23179,8 @@
                 "type": "null"
               }
             ],
-            "title": "Canceled At"
+            "title": "Canceled At",
+            "description": "The timestamp when the subscription was canceled. The subscription might still be active if `cancel_at_period_end` is `true`."
           },
           "started_at": {
             "anyOf": [
@@ -22438,7 +23192,8 @@
                 "type": "null"
               }
             ],
-            "title": "Started At"
+            "title": "Started At",
+            "description": "The timestamp when the subscription started."
           },
           "ends_at": {
             "anyOf": [
@@ -22450,7 +23205,8 @@
                 "type": "null"
               }
             ],
-            "title": "Ends At"
+            "title": "Ends At",
+            "description": "The timestamp when the subscription will end."
           },
           "ended_at": {
             "anyOf": [
@@ -22462,22 +23218,20 @@
                 "type": "null"
               }
             ],
-            "title": "Ended At"
+            "title": "Ended At",
+            "description": "The timestamp when the subscription ended."
           },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Customer Id"
+            "title": "Customer Id",
+            "description": "The ID of the subscribed customer."
           },
           "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Id"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id"
+            "title": "Product Id",
+            "description": "The ID of the subscribed product."
           },
           "discount_id": {
             "anyOf": [
@@ -22489,7 +23243,8 @@
                 "type": "null"
               }
             ],
-            "title": "Discount Id"
+            "title": "Discount Id",
+            "description": "The ID of the applied discount, if any."
           },
           "checkout_id": {
             "anyOf": [
@@ -22523,6 +23278,12 @@
               }
             ],
             "title": "Customer Cancellation Comment"
+          },
+          "price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Price Id",
+            "deprecated": true
           }
         },
         "type": "object",
@@ -22543,11 +23304,11 @@
           "ended_at",
           "customer_id",
           "product_id",
-          "price_id",
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
-          "customer_cancellation_comment"
+          "customer_cancellation_comment",
+          "price_id"
         ],
         "title": "CustomerOrderSubscription"
       },
@@ -22664,7 +23425,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -22996,6 +23767,536 @@
         ],
         "title": "CustomerSortProperty"
       },
+      "CustomerState": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the customer.",
+            "examples": [
+              "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Id",
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
+          },
+          "email_verified": {
+            "type": "boolean",
+            "title": "Email Verified",
+            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+            "examples": [
+              true
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_id": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TaxIDFormat"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Id"
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the customer.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ]
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Timestamp for when the customer was soft deleted."
+          },
+          "active_subscriptions": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerStateSubscription"
+            },
+            "type": "array",
+            "title": "Active Subscriptions",
+            "description": "The customer's active subscriptions."
+          },
+          "granted_benefits": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerStateBenefitGrant"
+            },
+            "type": "array",
+            "title": "Granted Benefits",
+            "description": "The customer's active benefit grants."
+          },
+          "avatar_url": {
+            "type": "string",
+            "title": "Avatar Url",
+            "readOnly": true,
+            "examples": [
+              "https://www.gravatar.com/avatar/xxx?d=blank"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "metadata",
+          "external_id",
+          "email",
+          "email_verified",
+          "name",
+          "billing_address",
+          "tax_id",
+          "organization_id",
+          "deleted_at",
+          "active_subscriptions",
+          "granted_benefits",
+          "avatar_url"
+        ],
+        "title": "CustomerState",
+        "description": "A customer along with additional state information:\n\n* Active subscriptions\n* Active benefits"
+      },
+      "CustomerStateBenefitGrant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant.",
+            "examples": [
+              "d322132c-a9d0-4e0d-b8d3-d81ad021a3a9"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "granted_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted.",
+            "examples": [
+              "2025-01-03T13:37:00Z"
+            ]
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant.",
+            "examples": [
+              "397a17aa-15cf-4cb4-9333-18040203cf98"
+            ]
+          },
+          "benefit_type": {
+            "$ref": "#/components/schemas/BenefitType",
+            "description": "The type of the benefit concerned by this grant.",
+            "examples": [
+              "custom"
+            ]
+          },
+          "properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantDiscordProperties"
+              },
+              {
+                "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryProperties"
+              },
+              {
+                "$ref": "#/components/schemas/BenefitGrantDownloadablesProperties"
+              },
+              {
+                "$ref": "#/components/schemas/BenefitGrantLicenseKeysProperties"
+              },
+              {
+                "$ref": "#/components/schemas/BenefitGrantCustomProperties"
+              }
+            ],
+            "title": "Properties"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "granted_at",
+          "benefit_id",
+          "benefit_type",
+          "properties"
+        ],
+        "title": "CustomerStateBenefitGrant",
+        "description": "An active benefit grant for a customer."
+      },
+      "CustomerStateSubscription": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the subscription.",
+            "examples": [
+              "e5149aae-e521-42b9-b24c-abb3d71eea2e"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Custom Field Data",
+            "description": "Key-value object storing custom field values."
+          },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "status": {
+            "type": "string",
+            "const": "active",
+            "title": "Status",
+            "examples": [
+              "active"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the subscription.",
+            "examples": [
+              1000
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the subscription.",
+            "examples": [
+              "usd"
+            ]
+          },
+          "recurring_interval": {
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The interval at which the subscription recurs."
+          },
+          "current_period_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Current Period Start",
+            "description": "The start timestamp of the current billing period.",
+            "examples": [
+              "2025-02-03T13:37:00Z"
+            ]
+          },
+          "current_period_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Period End",
+            "description": "The end timestamp of the current billing period.",
+            "examples": [
+              "2025-03-03T13:37:00Z"
+            ]
+          },
+          "cancel_at_period_end": {
+            "type": "boolean",
+            "title": "Cancel At Period End",
+            "description": "Whether the subscription will be canceled at the end of the current period.",
+            "examples": [
+              false
+            ]
+          },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At",
+            "description": "The timestamp when the subscription was canceled. The subscription might still be active if `cancel_at_period_end` is `true`.",
+            "examples": [
+              null
+            ]
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At",
+            "description": "The timestamp when the subscription started.",
+            "examples": [
+              "2025-01-03T13:37:00Z"
+            ]
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At",
+            "description": "The timestamp when the subscription will end.",
+            "examples": [
+              null
+            ]
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "The ID of the subscribed product.",
+            "examples": [
+              "d8dd2de1-21b7-4a41-8bc3-ce909c0cfe23"
+            ]
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "The ID of the applied discount, if any.",
+            "examples": [
+              null
+            ]
+          },
+          "price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Price Id",
+            "deprecated": true,
+            "examples": [
+              "196ca717-4d84-4d28-a1b8-777255797dbc"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "metadata",
+          "status",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "current_period_start",
+          "current_period_end",
+          "cancel_at_period_end",
+          "canceled_at",
+          "started_at",
+          "ends_at",
+          "product_id",
+          "discount_id",
+          "price_id"
+        ],
+        "title": "CustomerStateSubscription",
+        "description": "An active customer subscription."
+      },
       "CustomerSubscription": {
         "properties": {
           "created_at": {
@@ -23024,37 +24325,28 @@
             "description": "The ID of the object."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the subscription."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency"
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the subscription."
           },
           "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The interval at which the subscription recurs."
           },
           "status": {
-            "$ref": "#/components/schemas/SubscriptionStatus"
+            "$ref": "#/components/schemas/SubscriptionStatus",
+            "description": "The status of the subscription."
           },
           "current_period_start": {
             "type": "string",
             "format": "date-time",
-            "title": "Current Period Start"
+            "title": "Current Period Start",
+            "description": "The start timestamp of the current billing period."
           },
           "current_period_end": {
             "anyOf": [
@@ -23066,11 +24358,13 @@
                 "type": "null"
               }
             ],
-            "title": "Current Period End"
+            "title": "Current Period End",
+            "description": "The end timestamp of the current billing period."
           },
           "cancel_at_period_end": {
             "type": "boolean",
-            "title": "Cancel At Period End"
+            "title": "Cancel At Period End",
+            "description": "Whether the subscription will be canceled at the end of the current period."
           },
           "canceled_at": {
             "anyOf": [
@@ -23082,7 +24376,8 @@
                 "type": "null"
               }
             ],
-            "title": "Canceled At"
+            "title": "Canceled At",
+            "description": "The timestamp when the subscription was canceled. The subscription might still be active if `cancel_at_period_end` is `true`."
           },
           "started_at": {
             "anyOf": [
@@ -23094,7 +24389,8 @@
                 "type": "null"
               }
             ],
-            "title": "Started At"
+            "title": "Started At",
+            "description": "The timestamp when the subscription started."
           },
           "ends_at": {
             "anyOf": [
@@ -23106,7 +24402,8 @@
                 "type": "null"
               }
             ],
-            "title": "Ends At"
+            "title": "Ends At",
+            "description": "The timestamp when the subscription will end."
           },
           "ended_at": {
             "anyOf": [
@@ -23118,22 +24415,20 @@
                 "type": "null"
               }
             ],
-            "title": "Ended At"
+            "title": "Ended At",
+            "description": "The timestamp when the subscription ended."
           },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Customer Id"
+            "title": "Customer Id",
+            "description": "The ID of the subscribed customer."
           },
           "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Id"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id"
+            "title": "Product Id",
+            "description": "The ID of the subscribed product."
           },
           "discount_id": {
             "anyOf": [
@@ -23145,7 +24440,8 @@
                 "type": "null"
               }
             ],
-            "title": "Discount Id"
+            "title": "Discount Id",
+            "description": "The ID of the applied discount, if any."
           },
           "checkout_id": {
             "anyOf": [
@@ -23180,6 +24476,12 @@
             ],
             "title": "Customer Cancellation Comment"
           },
+          "price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Price Id",
+            "deprecated": true
+          },
           "user_id": {
             "type": "string",
             "format": "uuid4",
@@ -23198,7 +24500,23 @@
                 "$ref": "#/components/schemas/ProductPrice"
               }
             ],
-            "title": "Price"
+            "title": "Price",
+            "deprecated": true
+          },
+          "prices": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Prices",
+            "description": "List of enabled prices for the subscription."
           }
         },
         "type": "object",
@@ -23219,14 +24537,15 @@
           "ended_at",
           "customer_id",
           "product_id",
-          "price_id",
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
           "customer_cancellation_comment",
+          "price_id",
           "user_id",
           "product",
-          "price"
+          "price",
+          "prices"
         ],
         "title": "CustomerSubscription"
       },
@@ -23480,7 +24799,10 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "anyOf": [
@@ -23493,7 +24815,10 @@
               }
             ],
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "name": {
             "anyOf": [
@@ -23504,7 +24829,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -23529,7 +24858,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -23705,6 +25044,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -23864,6 +25206,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -24017,6 +25362,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -24168,6 +25516,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -24332,6 +25683,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -24492,6 +25846,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -24636,6 +25993,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -24790,6 +26150,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -24936,6 +26299,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -25083,6 +26449,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -25242,6 +26611,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -25395,6 +26767,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -25758,6 +27133,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -26031,6 +27409,9 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -26132,6 +27513,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -26203,6 +27587,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -26403,6 +27790,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -27627,6 +29017,15 @@
       },
       "LicenseKeyCustomer": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the customer.",
+            "examples": [
+              "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+            ]
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -27645,12 +29044,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "metadata": {
             "additionalProperties": {
@@ -27679,17 +29072,26 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "type": "string",
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "email_verified": {
             "type": "boolean",
             "title": "Email Verified",
-            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address."
+            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+            "examples": [
+              true
+            ]
           },
           "name": {
             "anyOf": [
@@ -27700,7 +29102,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -27725,7 +29131,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -27736,19 +29152,39 @@
           "organization_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Organization Id"
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the customer.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ]
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Timestamp for when the customer was soft deleted."
           },
           "avatar_url": {
             "type": "string",
             "title": "Avatar Url",
-            "readOnly": true
+            "readOnly": true,
+            "examples": [
+              "https://www.gravatar.com/avatar/xxx?d=blank"
+            ]
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "metadata",
           "external_id",
           "email",
@@ -27757,6 +29193,7 @@
           "billing_address",
           "tax_id",
           "organization_id",
+          "deleted_at",
           "avatar_url"
         ],
         "title": "LicenseKeyCustomer"
@@ -27944,7 +29381,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 50.0,
+                "maximum": 1000.0,
                 "exclusiveMinimum": 0.0
               },
               {
@@ -28899,6 +30336,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -29322,7 +30762,10 @@
           "error": {
             "type": "string",
             "const": "NotOpenCheckout",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "NotOpenCheckout"
+            ]
           },
           "detail": {
             "type": "string",
@@ -29341,7 +30784,10 @@
           "error": {
             "type": "string",
             "const": "NotPermitted",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "NotPermitted"
+            ]
           },
           "detail": {
             "type": "string",
@@ -29919,26 +31365,59 @@
             "description": "Key-value object storing custom field values."
           },
           "status": {
-            "type": "string",
-            "title": "Status"
+            "$ref": "#/components/schemas/OrderStatus",
+            "examples": [
+              "paid"
+            ]
+          },
+          "paid": {
+            "type": "boolean",
+            "title": "Paid",
+            "description": "Whether the order has been paid for.",
+            "examples": [
+              true
+            ]
+          },
+          "subtotal_amount": {
+            "type": "integer",
+            "title": "Subtotal Amount",
+            "description": "Amount in cents, before discounts and taxes."
+          },
+          "discount_amount": {
+            "type": "integer",
+            "title": "Discount Amount",
+            "description": "Discount amount in cents."
+          },
+          "net_amount": {
+            "type": "integer",
+            "title": "Net Amount",
+            "description": "Amount in cents, after discounts but before taxes."
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "description": "Amount in cents, after discounts but before taxes.",
+            "deprecated": true
           },
           "tax_amount": {
             "type": "integer",
-            "title": "Tax Amount"
+            "title": "Tax Amount",
+            "description": "Sales tax amount in cents."
+          },
+          "total_amount": {
+            "type": "integer",
+            "title": "Total Amount",
+            "description": "Amount in cents, after discounts and taxes."
           },
           "refunded_amount": {
             "type": "integer",
             "title": "Refunded Amount",
-            "description": "Amount refunded"
+            "description": "Amount refunded in cents."
           },
           "refunded_tax_amount": {
             "type": "integer",
             "title": "Refunded Tax Amount",
-            "description": "Sales tax refunded"
+            "description": "Sales tax refunded in cents."
           },
           "currency": {
             "type": "string",
@@ -29970,7 +31449,8 @@
           "product_price_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Price Id"
+            "title": "Product Price Id",
+            "deprecated": true
           },
           "discount_id": {
             "anyOf": [
@@ -30033,7 +31513,8 @@
                 "$ref": "#/components/schemas/ProductPrice"
               }
             ],
-            "title": "Product Price"
+            "title": "Product Price",
+            "deprecated": true
           },
           "discount": {
             "anyOf": [
@@ -30069,6 +31550,14 @@
                 "type": "null"
               }
             ]
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OrderItemSchema"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "Line items composing the order."
           }
         },
         "type": "object",
@@ -30078,8 +31567,13 @@
           "id",
           "metadata",
           "status",
+          "paid",
+          "subtotal_amount",
+          "discount_amount",
+          "net_amount",
           "amount",
           "tax_amount",
+          "total_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
@@ -30097,7 +31591,8 @@
           "product",
           "product_price",
           "discount",
-          "subscription"
+          "subscription",
+          "items"
         ],
         "title": "Order"
       },
@@ -30113,6 +31608,15 @@
       },
       "OrderCustomer": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the customer.",
+            "examples": [
+              "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+            ]
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -30131,12 +31635,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "metadata": {
             "additionalProperties": {
@@ -30165,17 +31663,26 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "type": "string",
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "email_verified": {
             "type": "boolean",
             "title": "Email Verified",
-            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address."
+            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+            "examples": [
+              true
+            ]
           },
           "name": {
             "anyOf": [
@@ -30186,7 +31693,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -30211,7 +31722,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -30222,19 +31743,39 @@
           "organization_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Organization Id"
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the customer.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ]
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Timestamp for when the customer was soft deleted."
           },
           "avatar_url": {
             "type": "string",
             "title": "Avatar Url",
-            "readOnly": true
+            "readOnly": true,
+            "examples": [
+              "https://www.gravatar.com/avatar/xxx?d=blank"
+            ]
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "metadata",
           "external_id",
           "email",
@@ -30243,6 +31784,7 @@
           "billing_address",
           "tax_id",
           "organization_id",
+          "deleted_at",
           "avatar_url"
         ],
         "title": "OrderCustomer"
@@ -30261,6 +31803,81 @@
         ],
         "title": "OrderInvoice",
         "description": "Order's invoice data."
+      },
+      "OrderItemSchema": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Description of the line item charge."
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents, before discounts and taxes."
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount",
+            "description": "Sales tax amount in cents."
+          },
+          "proration": {
+            "type": "boolean",
+            "title": "Proration",
+            "description": "Whether this charge is due to a proration."
+          },
+          "product_price_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Price Id",
+            "description": "Associated price ID, if any."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "label",
+          "amount",
+          "tax_amount",
+          "proration",
+          "product_price_id"
+        ],
+        "title": "OrderItemSchema",
+        "description": "An order line item."
       },
       "OrderProduct": {
         "properties": {
@@ -30355,6 +31972,8 @@
           "-created_at",
           "amount",
           "-amount",
+          "net_amount",
+          "-net_amount",
           "customer",
           "-customer",
           "product",
@@ -30365,6 +31984,16 @@
           "-subscription"
         ],
         "title": "OrderSortProperty"
+      },
+      "OrderStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "paid",
+          "refunded",
+          "partially_refunded"
+        ],
+        "title": "OrderStatus"
       },
       "OrderSubscription": {
         "properties": {
@@ -30411,37 +32040,28 @@
             "description": "The ID of the object."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the subscription."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency"
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the subscription."
           },
           "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The interval at which the subscription recurs."
           },
           "status": {
-            "$ref": "#/components/schemas/SubscriptionStatus"
+            "$ref": "#/components/schemas/SubscriptionStatus",
+            "description": "The status of the subscription."
           },
           "current_period_start": {
             "type": "string",
             "format": "date-time",
-            "title": "Current Period Start"
+            "title": "Current Period Start",
+            "description": "The start timestamp of the current billing period."
           },
           "current_period_end": {
             "anyOf": [
@@ -30453,11 +32073,13 @@
                 "type": "null"
               }
             ],
-            "title": "Current Period End"
+            "title": "Current Period End",
+            "description": "The end timestamp of the current billing period."
           },
           "cancel_at_period_end": {
             "type": "boolean",
-            "title": "Cancel At Period End"
+            "title": "Cancel At Period End",
+            "description": "Whether the subscription will be canceled at the end of the current period."
           },
           "canceled_at": {
             "anyOf": [
@@ -30469,7 +32091,8 @@
                 "type": "null"
               }
             ],
-            "title": "Canceled At"
+            "title": "Canceled At",
+            "description": "The timestamp when the subscription was canceled. The subscription might still be active if `cancel_at_period_end` is `true`."
           },
           "started_at": {
             "anyOf": [
@@ -30481,7 +32104,8 @@
                 "type": "null"
               }
             ],
-            "title": "Started At"
+            "title": "Started At",
+            "description": "The timestamp when the subscription started."
           },
           "ends_at": {
             "anyOf": [
@@ -30493,7 +32117,8 @@
                 "type": "null"
               }
             ],
-            "title": "Ends At"
+            "title": "Ends At",
+            "description": "The timestamp when the subscription will end."
           },
           "ended_at": {
             "anyOf": [
@@ -30505,22 +32130,20 @@
                 "type": "null"
               }
             ],
-            "title": "Ended At"
+            "title": "Ended At",
+            "description": "The timestamp when the subscription ended."
           },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Customer Id"
+            "title": "Customer Id",
+            "description": "The ID of the subscribed customer."
           },
           "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Id"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id"
+            "title": "Product Id",
+            "description": "The ID of the subscribed product."
           },
           "discount_id": {
             "anyOf": [
@@ -30532,7 +32155,8 @@
                 "type": "null"
               }
             ],
-            "title": "Discount Id"
+            "title": "Discount Id",
+            "description": "The ID of the applied discount, if any."
           },
           "checkout_id": {
             "anyOf": [
@@ -30567,6 +32191,12 @@
             ],
             "title": "Customer Cancellation Comment"
           },
+          "price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Price Id",
+            "deprecated": true
+          },
           "user_id": {
             "type": "string",
             "format": "uuid4",
@@ -30593,11 +32223,11 @@
           "ended_at",
           "customer_id",
           "product_id",
-          "price_id",
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
           "customer_cancellation_comment",
+          "price_id",
           "user_id"
         ],
         "title": "OrderSubscription"
@@ -30674,6 +32304,9 @@
             "format": "uuid4",
             "title": "Id",
             "description": "The organization ID.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
             "x-polar-selector-widget": {
               "displayProperty": "name",
               "resourceName": "Organization",
@@ -30682,11 +32315,13 @@
           },
           "name": {
             "type": "string",
-            "title": "Name"
+            "title": "Name",
+            "description": "Organization name shown in checkout, customer portal, emails etc."
           },
           "slug": {
             "type": "string",
-            "title": "Slug"
+            "title": "Slug",
+            "description": "Unique organization slug in checkout, customer portal and credit card statements."
           },
           "avatar_url": {
             "anyOf": [
@@ -30697,51 +32332,8 @@
                 "type": "null"
               }
             ],
-            "title": "Avatar Url"
-          },
-          "bio": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Bio"
-          },
-          "company": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Company"
-          },
-          "blog": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Blog"
-          },
-          "location": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Location"
+            "title": "Avatar Url",
+            "description": "Avatar URL shown in checkout, customer portal, emails etc."
           },
           "email": {
             "anyOf": [
@@ -30752,9 +32344,10 @@
                 "type": "null"
               }
             ],
-            "title": "Email"
+            "title": "Email",
+            "description": "Public support email."
           },
-          "twitter_username": {
+          "website": {
             "anyOf": [
               {
                 "type": "string"
@@ -30763,37 +32356,29 @@
                 "type": "null"
               }
             ],
-            "title": "Twitter Username"
+            "title": "Website",
+            "description": "Official website of the organization."
           },
-          "pledge_minimum_amount": {
-            "type": "integer",
-            "title": "Pledge Minimum Amount"
+          "socials": {
+            "items": {
+              "$ref": "#/components/schemas/OrganizationSocialLink"
+            },
+            "type": "array",
+            "title": "Socials",
+            "description": "Links to social profiles."
           },
-          "pledge_badge_show_amount": {
-            "type": "boolean",
-            "title": "Pledge Badge Show Amount"
-          },
-          "default_upfront_split_to_contributors": {
+          "details_submitted_at": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "string",
+                "format": "date-time"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Default Upfront Split To Contributors"
-          },
-          "profile_settings": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OrganizationProfileSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Settings for the organization profile"
+            "title": "Details Submitted At",
+            "description": "When the business details were submitted."
           },
           "feature_settings": {
             "anyOf": [
@@ -30804,11 +32389,105 @@
                 "type": "null"
               }
             ],
-            "description": "Settings for the organization features"
+            "description": "Organization feature settings"
           },
           "subscription_settings": {
             "$ref": "#/components/schemas/OrganizationSubscriptionSettings",
             "description": "Settings related to subscriptions management"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio",
+            "deprecated": true
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company",
+            "deprecated": true
+          },
+          "blog": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blog",
+            "deprecated": true
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location",
+            "deprecated": true
+          },
+          "twitter_username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Twitter Username",
+            "deprecated": true
+          },
+          "pledge_minimum_amount": {
+            "type": "integer",
+            "title": "Pledge Minimum Amount",
+            "deprecated": true
+          },
+          "pledge_badge_show_amount": {
+            "type": "boolean",
+            "title": "Pledge Badge Show Amount",
+            "deprecated": true
+          },
+          "default_upfront_split_to_contributors": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Upfront Split To Contributors",
+            "deprecated": true
+          },
+          "profile_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationProfileSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Settings for the organization profile",
+            "deprecated": true
           }
         },
         "type": "object",
@@ -30819,18 +32498,21 @@
           "name",
           "slug",
           "avatar_url",
+          "email",
+          "website",
+          "socials",
+          "details_submitted_at",
+          "feature_settings",
+          "subscription_settings",
           "bio",
           "company",
           "blog",
           "location",
-          "email",
           "twitter_username",
           "pledge_minimum_amount",
           "pledge_badge_show_amount",
           "default_upfront_split_to_contributors",
-          "profile_settings",
-          "feature_settings",
-          "subscription_settings"
+          "profile_settings"
         ],
         "title": "Organization"
       },
@@ -30842,6 +32524,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -31082,6 +32767,60 @@
             ],
             "title": "Avatar Url"
           },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "Public support email."
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Website",
+            "description": "Official website of the organization."
+          },
+          "socials": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationSocialLink"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Socials",
+            "description": "Link to social profiles."
+          },
+          "details": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationDetails"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Additional, private, business details Polar needs about active organizations for compliance (KYC)."
+          },
           "feature_settings": {
             "anyOf": [
               {
@@ -31109,6 +32848,78 @@
           "slug"
         ],
         "title": "OrganizationCreate"
+      },
+      "OrganizationDetails": {
+        "properties": {
+          "about": {
+            "type": "string",
+            "title": "About",
+            "description": "Brief information about you and your business."
+          },
+          "product_description": {
+            "type": "string",
+            "title": "Product Description",
+            "description": "Description of digital products being sold."
+          },
+          "intended_use": {
+            "type": "string",
+            "title": "Intended Use",
+            "description": "How the organization will integrate and use Polar."
+          },
+          "customer_acquisition": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Customer Acquisition",
+            "description": "Main customer acquisition channels."
+          },
+          "future_annual_revenue": {
+            "type": "integer",
+            "title": "Future Annual Revenue",
+            "description": "Estimated revenue in the next 12 months"
+          },
+          "switching": {
+            "type": "boolean",
+            "title": "Switching",
+            "description": "Switching from another platform?",
+            "default": true
+          },
+          "switching_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "paddle",
+                  "lemon_squeezy",
+                  "gumroad",
+                  "stripe",
+                  "other"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Switching From",
+            "description": "Which platform the organization is migrating from."
+          },
+          "previous_annual_revenue": {
+            "type": "integer",
+            "title": "Previous Annual Revenue",
+            "description": "Revenue from last year if applicable.",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "about",
+          "product_description",
+          "intended_use",
+          "customer_acquisition",
+          "future_annual_revenue"
+        ],
+        "title": "OrganizationDetails"
       },
       "OrganizationFeatureSettings": {
         "properties": {
@@ -31231,11 +33042,49 @@
         "type": "object",
         "title": "OrganizationProfileSettings"
       },
+      "OrganizationSocialLink": {
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/OrganizationSocialPlatforms",
+            "description": "The social platform of the URL"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url",
+            "description": "The URL to the organization profile"
+          }
+        },
+        "type": "object",
+        "required": [
+          "platform",
+          "url"
+        ],
+        "title": "OrganizationSocialLink"
+      },
+      "OrganizationSocialPlatforms": {
+        "type": "string",
+        "enum": [
+          "x",
+          "github",
+          "facebook",
+          "instagram",
+          "youtube",
+          "tiktok",
+          "linkedin",
+          "other"
+        ],
+        "title": "OrganizationSocialPlatforms"
+      },
       "OrganizationSortProperty": {
         "type": "string",
         "enum": [
           "created_at",
           "-created_at",
+          "slug",
+          "-slug",
           "name",
           "-name"
         ],
@@ -31315,25 +33164,7 @@
             ],
             "title": "Avatar Url"
           },
-          "default_upfront_split_to_contributors": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Default Upfront Split To Contributors"
-          },
-          "pledge_badge_show_amount": {
-            "type": "boolean",
-            "title": "Pledge Badge Show Amount",
-            "default": false
-          },
-          "billing_email": {
+          "email": {
             "anyOf": [
               {
                 "type": "string"
@@ -31342,9 +33173,10 @@
                 "type": "null"
               }
             ],
-            "title": "Billing Email"
+            "title": "Email",
+            "description": "Public support email."
           },
-          "default_badge_custom_content": {
+          "website": {
             "anyOf": [
               {
                 "type": "string"
@@ -31353,44 +33185,34 @@
                 "type": "null"
               }
             ],
-            "title": "Default Badge Custom Content"
+            "title": "Website",
+            "description": "Official website of the organization."
           },
-          "pledge_minimum_amount": {
-            "type": "integer",
-            "title": "Pledge Minimum Amount",
-            "default": 2000
-          },
-          "total_monthly_spending_limit": {
+          "socials": {
             "anyOf": [
               {
-                "type": "integer"
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationSocialLink"
+                },
+                "type": "array"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Total Monthly Spending Limit"
+            "title": "Socials",
+            "description": "Links to social profiles."
           },
-          "per_user_monthly_spending_limit": {
+          "details": {
             "anyOf": [
               {
-                "type": "integer"
+                "$ref": "#/components/schemas/OrganizationDetails"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Per User Monthly Spending Limit"
-          },
-          "profile_settings": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OrganizationProfileSettings"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "description": "Additional, private, business details Polar needs about active organizations for compliance (KYC)."
           },
           "feature_settings": {
             "anyOf": [
@@ -31411,6 +33233,91 @@
                 "type": "null"
               }
             ]
+          },
+          "default_upfront_split_to_contributors": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Upfront Split To Contributors",
+            "deprecated": true
+          },
+          "pledge_badge_show_amount": {
+            "type": "boolean",
+            "title": "Pledge Badge Show Amount",
+            "default": false,
+            "deprecated": true
+          },
+          "billing_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Email",
+            "deprecated": true
+          },
+          "default_badge_custom_content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Badge Custom Content",
+            "deprecated": true
+          },
+          "pledge_minimum_amount": {
+            "type": "integer",
+            "title": "Pledge Minimum Amount",
+            "default": 2000,
+            "deprecated": true
+          },
+          "total_monthly_spending_limit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Monthly Spending Limit",
+            "deprecated": true
+          },
+          "per_user_monthly_spending_limit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Per User Monthly Spending Limit",
+            "deprecated": true
+          },
+          "profile_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationProfileSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
           }
         },
         "type": "object",
@@ -31439,7 +33346,10 @@
           "error": {
             "type": "string",
             "const": "PaymentError",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "PaymentError"
+            ]
           },
           "detail": {
             "type": "string",
@@ -32050,6 +33960,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -32081,6 +33994,9 @@
                 "type": "string",
                 "format": "uuid4",
                 "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
                 "x-polar-selector-widget": {
                   "displayProperty": "name",
                   "resourceName": "Organization",
@@ -32467,7 +34383,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 99999999.0,
+                "maximum": 1000000.0,
                 "minimum": 50.0,
                 "description": "The price in cents."
               },
@@ -32482,7 +34398,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 99999999.0,
+                "maximum": 1000000.0,
                 "minimum": 50.0,
                 "description": "The price in cents."
               },
@@ -33067,7 +34983,10 @@
           "error": {
             "type": "string",
             "const": "RefundAmountTooHigh",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "RefundAmountTooHigh"
+            ]
           },
           "detail": {
             "type": "string",
@@ -33118,7 +35037,9 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "exclusiveMinimum": 0.0,
+            "title": "Amount",
+            "description": "Amount to refund in cents. Minimum is 1."
           },
           "comment": {
             "anyOf": [
@@ -33184,7 +35105,10 @@
           "error": {
             "type": "string",
             "const": "RefundedAlready",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "RefundedAlready"
+            ]
           },
           "detail": {
             "type": "string",
@@ -33520,7 +35444,10 @@
           "error": {
             "type": "string",
             "const": "ResourceNotFound",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "ResourceNotFound"
+            ]
           },
           "detail": {
             "type": "string",
@@ -33862,37 +35789,28 @@
             "description": "The ID of the object."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount of the subscription."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency"
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency of the subscription."
           },
           "recurring_interval": {
-            "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The interval at which the subscription recurs."
           },
           "status": {
-            "$ref": "#/components/schemas/SubscriptionStatus"
+            "$ref": "#/components/schemas/SubscriptionStatus",
+            "description": "The status of the subscription."
           },
           "current_period_start": {
             "type": "string",
             "format": "date-time",
-            "title": "Current Period Start"
+            "title": "Current Period Start",
+            "description": "The start timestamp of the current billing period."
           },
           "current_period_end": {
             "anyOf": [
@@ -33904,11 +35822,13 @@
                 "type": "null"
               }
             ],
-            "title": "Current Period End"
+            "title": "Current Period End",
+            "description": "The end timestamp of the current billing period."
           },
           "cancel_at_period_end": {
             "type": "boolean",
-            "title": "Cancel At Period End"
+            "title": "Cancel At Period End",
+            "description": "Whether the subscription will be canceled at the end of the current period."
           },
           "canceled_at": {
             "anyOf": [
@@ -33920,7 +35840,8 @@
                 "type": "null"
               }
             ],
-            "title": "Canceled At"
+            "title": "Canceled At",
+            "description": "The timestamp when the subscription was canceled. The subscription might still be active if `cancel_at_period_end` is `true`."
           },
           "started_at": {
             "anyOf": [
@@ -33932,7 +35853,8 @@
                 "type": "null"
               }
             ],
-            "title": "Started At"
+            "title": "Started At",
+            "description": "The timestamp when the subscription started."
           },
           "ends_at": {
             "anyOf": [
@@ -33944,7 +35866,8 @@
                 "type": "null"
               }
             ],
-            "title": "Ends At"
+            "title": "Ends At",
+            "description": "The timestamp when the subscription will end."
           },
           "ended_at": {
             "anyOf": [
@@ -33956,22 +35879,20 @@
                 "type": "null"
               }
             ],
-            "title": "Ended At"
+            "title": "Ended At",
+            "description": "The timestamp when the subscription ended."
           },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Customer Id"
+            "title": "Customer Id",
+            "description": "The ID of the subscribed customer."
           },
           "product_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Product Id"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id"
+            "title": "Product Id",
+            "description": "The ID of the subscribed product."
           },
           "discount_id": {
             "anyOf": [
@@ -33983,7 +35904,8 @@
                 "type": "null"
               }
             ],
-            "title": "Discount Id"
+            "title": "Discount Id",
+            "description": "The ID of the applied discount, if any."
           },
           "checkout_id": {
             "anyOf": [
@@ -34017,6 +35939,12 @@
               }
             ],
             "title": "Customer Cancellation Comment"
+          },
+          "price_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Price Id",
+            "deprecated": true
           },
           "metadata": {
             "additionalProperties": {
@@ -34076,17 +36004,6 @@
           "product": {
             "$ref": "#/components/schemas/Product"
           },
-          "price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Price"
-          },
           "discount": {
             "anyOf": [
               {
@@ -34111,6 +36028,33 @@
               }
             ],
             "title": "Discount"
+          },
+          "price": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+              },
+              {
+                "$ref": "#/components/schemas/ProductPrice"
+              }
+            ],
+            "title": "Price",
+            "deprecated": true
+          },
+          "prices": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/LegacyRecurringProductPrice"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Prices",
+            "description": "List of enabled prices for the subscription."
           }
         },
         "type": "object",
@@ -34131,18 +36075,19 @@
           "ended_at",
           "customer_id",
           "product_id",
-          "price_id",
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
           "customer_cancellation_comment",
+          "price_id",
           "metadata",
           "customer",
           "user_id",
           "user",
           "product",
+          "discount",
           "price",
-          "discount"
+          "prices"
         ],
         "title": "Subscription"
       },
@@ -34202,6 +36147,15 @@
       },
       "SubscriptionCustomer": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the customer.",
+            "examples": [
+              "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+            ]
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -34220,12 +36174,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "metadata": {
             "additionalProperties": {
@@ -34254,17 +36202,26 @@
               }
             ],
             "title": "External Id",
-            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated."
+            "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+            "examples": [
+              "usr_1337"
+            ]
           },
           "email": {
             "type": "string",
             "title": "Email",
-            "description": "The email address of the customer. This must be unique within the organization."
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
           },
           "email_verified": {
             "type": "boolean",
             "title": "Email Verified",
-            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address."
+            "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+            "examples": [
+              true
+            ]
           },
           "name": {
             "anyOf": [
@@ -34275,7 +36232,11 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -34300,7 +36261,17 @@
                 ],
                 "type": "array",
                 "maxItems": 2,
-                "minItems": 2
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
               },
               {
                 "type": "null"
@@ -34311,19 +36282,39 @@
           "organization_id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Organization Id"
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the customer.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ]
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Timestamp for when the customer was soft deleted."
           },
           "avatar_url": {
             "type": "string",
             "title": "Avatar Url",
-            "readOnly": true
+            "readOnly": true,
+            "examples": [
+              "https://www.gravatar.com/avatar/xxx?d=blank"
+            ]
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "metadata",
           "external_id",
           "email",
@@ -34332,6 +36323,7 @@
           "billing_address",
           "tax_id",
           "organization_id",
+          "deleted_at",
           "avatar_url"
         ],
         "title": "SubscriptionCustomer"
@@ -34610,7 +36602,10 @@
           "error": {
             "type": "string",
             "const": "Unauthorized",
-            "title": "Error"
+            "title": "Error",
+            "examples": [
+              "Unauthorized"
+            ]
           },
           "detail": {
             "type": "string",
@@ -34870,7 +36865,10 @@
           "type": {
             "type": "string",
             "const": "benefit.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "benefit.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Benefit",
@@ -34890,7 +36888,10 @@
           "type": {
             "type": "string",
             "const": "benefit_grant.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "benefit_grant.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
@@ -34909,7 +36910,10 @@
           "type": {
             "type": "string",
             "const": "benefit_grant.revoked",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "benefit_grant.revoked"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
@@ -34928,7 +36932,10 @@
           "type": {
             "type": "string",
             "const": "benefit_grant.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "benefit_grant.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
@@ -34947,7 +36954,10 @@
           "type": {
             "type": "string",
             "const": "benefit.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "benefit.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Benefit",
@@ -34967,7 +36977,10 @@
           "type": {
             "type": "string",
             "const": "checkout.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "checkout.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Checkout"
@@ -34986,7 +36999,10 @@
           "type": {
             "type": "string",
             "const": "checkout.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "checkout.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Checkout"
@@ -35000,12 +37016,103 @@
         "title": "WebhookCheckoutUpdatedPayload",
         "description": "Sent when a checkout is updated.\n\n**Discord & Slack support:** Basic"
       },
+      "WebhookCustomerCreatedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "customer.created",
+            "title": "Type",
+            "examples": [
+              "customer.created"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookCustomerCreatedPayload",
+        "description": "Sent when a new customer is created.\n\nA customer can be created:\n\n* After a successful checkout.\n* Programmatically via the API.\n\n**Discord & Slack support:** Basic"
+      },
+      "WebhookCustomerDeletedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "customer.deleted",
+            "title": "Type",
+            "examples": [
+              "customer.deleted"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookCustomerDeletedPayload",
+        "description": "Sent when a customer is deleted.\n\n**Discord & Slack support:** Basic"
+      },
+      "WebhookCustomerStateChangedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "customer.state_changed",
+            "title": "Type",
+            "examples": [
+              "customer.state_changed"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomerState"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookCustomerStateChangedPayload",
+        "description": "Sent when a customer state has changed.\n\nIt's triggered when:\n\n* Customer is created, updated or deleted.\n* A subscription is created or updated.\n* A benefit is granted or revoked.\n\n**Discord & Slack support:** Basic"
+      },
+      "WebhookCustomerUpdatedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "customer.updated",
+            "title": "Type",
+            "examples": [
+              "customer.updated"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookCustomerUpdatedPayload",
+        "description": "Sent when a customer is updated.\n\nThis event is fired when the customer details are updated.\n\nIf you want to be notified when a customer subscription or benefit state changes, you should listen to the `customer_state_changed` event.\n\n**Discord & Slack support:** Basic"
+      },
       "WebhookOrderCreatedPayload": {
         "properties": {
           "type": {
             "type": "string",
             "const": "order.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "order.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Order"
@@ -35017,14 +37124,39 @@
           "data"
         ],
         "title": "WebhookOrderCreatedPayload",
-        "description": "Sent when a new order is created.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n<Warning>The order might not be paid yet, so the `status` field might be `pending`.</Warning>\n\n**Discord & Slack support:** Full"
+      },
+      "WebhookOrderPaidPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "order.paid",
+            "title": "Type",
+            "examples": [
+              "order.paid"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookOrderPaidPayload",
+        "description": "Sent when an order is paid.\n\nWhen you receive this event, the order is fully processed and payment has been received.\n\n**Discord & Slack support:** Full"
       },
       "WebhookOrderRefundedPayload": {
         "properties": {
           "type": {
             "type": "string",
             "const": "order.refunded",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "order.refunded"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Order"
@@ -35038,12 +37170,37 @@
         "title": "WebhookOrderRefundedPayload",
         "description": "Sent when an order is fully or partially refunded.\n\n**Discord & Slack support:** Full"
       },
+      "WebhookOrderUpdatedPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "order.updated",
+            "title": "Type",
+            "examples": [
+              "order.updated"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookOrderUpdatedPayload",
+        "description": "Sent when an order is updated.\n\nAn order is updated when:\n\n* Its status changes, e.g. from `pending` to `paid`.\n* It's refunded, partially or fully.\n\n**Discord & Slack support:** Full"
+      },
       "WebhookOrganizationUpdatedPayload": {
         "properties": {
           "type": {
             "type": "string",
             "const": "organization.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "organization.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Organization"
@@ -35062,7 +37219,10 @@
           "type": {
             "type": "string",
             "const": "pledge.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "pledge.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Pledge"
@@ -35081,7 +37241,10 @@
           "type": {
             "type": "string",
             "const": "pledge.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "pledge.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Pledge"
@@ -35100,7 +37263,10 @@
           "type": {
             "type": "string",
             "const": "product.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "product.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Product"
@@ -35119,7 +37285,10 @@
           "type": {
             "type": "string",
             "const": "product.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "product.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Product"
@@ -35138,7 +37307,10 @@
           "type": {
             "type": "string",
             "const": "refund.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "refund.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Refund"
@@ -35157,7 +37329,10 @@
           "type": {
             "type": "string",
             "const": "refund.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "refund.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Refund"
@@ -35176,7 +37351,10 @@
           "type": {
             "type": "string",
             "const": "subscription.active",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.active"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
@@ -35195,7 +37373,10 @@
           "type": {
             "type": "string",
             "const": "subscription.canceled",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.canceled"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
@@ -35214,7 +37395,10 @@
           "type": {
             "type": "string",
             "const": "subscription.created",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.created"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
@@ -35226,14 +37410,17 @@
           "data"
         ],
         "title": "WebhookSubscriptionCreatedPayload",
-        "description": "Sent when a new subscription is created.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a new subscription is created.\n\nWhen this event occurs, the subscription `status` might not be `active` yet, as we can still have to wait for the first payment to be processed.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionRevokedPayload": {
         "properties": {
           "type": {
             "type": "string",
             "const": "subscription.revoked",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.revoked"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
@@ -35252,7 +37439,10 @@
           "type": {
             "type": "string",
             "const": "subscription.uncanceled",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.uncanceled"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
@@ -35271,7 +37461,10 @@
           "type": {
             "type": "string",
             "const": "subscription.updated",
-            "title": "Type"
+            "title": "Type",
+            "examples": [
+              "subscription.updated"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/Subscription"
