@@ -17915,36 +17915,29 @@
       "CheckoutLinkUpdate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "products": {
             "anyOf": [
@@ -19748,34 +19741,27 @@
       "CheckoutUpdate": {
         "properties": {
           "custom_field_data": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
                 },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
@@ -19868,36 +19854,29 @@
             "title": "Customer Tax Id"
           },
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "discount_id": {
             "anyOf": [
@@ -20004,34 +19983,27 @@
       "CheckoutUpdatePublic": {
         "properties": {
           "custom_field_data": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
                 },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
@@ -21317,36 +21289,29 @@
       "CustomFieldUpdateCheckbox": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21401,36 +21366,29 @@
       "CustomFieldUpdateDate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21485,36 +21443,29 @@
       "CustomFieldUpdateNumber": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21569,36 +21520,29 @@
       "CustomFieldUpdateSelect": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21653,36 +21597,29 @@
       "CustomFieldUpdateText": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -24836,36 +24773,29 @@
       "CustomerUpdate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "external_id": {
             "anyOf": [
@@ -26985,36 +26915,29 @@
       "DiscountUpdate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -30489,36 +30412,29 @@
       "MeterUpdate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -34865,36 +34781,29 @@
       "ProductUpdate": {
         "properties": {
           "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "maxLength": 500,
-                      "minLength": 1
-                    },
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "boolean"
-                    }
-                  ]
-                },
-                "propertyNames": {
-                  "maxLength": 40,
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
                   "minLength": 1
                 },
-                "type": "object",
-                "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
