@@ -2466,6 +2466,30 @@
               "title": "Limit"
             },
             "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BenefitSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-created_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
           }
         ],
         "responses": {
@@ -16439,6 +16463,16 @@
         ],
         "title": "BenefitLicenseKeysUpdate"
       },
+      "BenefitSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "description",
+          "-description"
+        ],
+        "title": "BenefitSortProperty"
+      },
       "BenefitType": {
         "type": "string",
         "enum": [
@@ -16544,40 +16578,17 @@
             "description": "When checkout is embedded, represents the Origin of the page embedding the checkout. Used as a security measure to send messages only to the embedding page."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 50.0,
-                "description": "Amount in cents, before discounts and taxes. Only useful for custom prices, it'll be ignored for fixed and free prices."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents, before discounts and taxes."
           },
           "discount_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Discount Amount",
             "description": "Discount amount in cents."
           },
           "net_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
@@ -16591,17 +16602,10 @@
               }
             ],
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents. If `null`, it means there is no enough information yet to calculate it."
           },
           "total_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
@@ -18975,40 +18979,17 @@
             "description": "When checkout is embedded, represents the Origin of the page embedding the checkout. Used as a security measure to send messages only to the embedding page."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 50.0,
-                "description": "Amount in cents, before discounts and taxes. Only useful for custom prices, it'll be ignored for fixed and free prices."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents, before discounts and taxes."
           },
           "discount_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Discount Amount",
             "description": "Discount amount in cents."
           },
           "net_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
@@ -19022,17 +19003,10 @@
               }
             ],
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents. If `null`, it means there is no enough information yet to calculate it."
           },
           "total_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
@@ -19391,40 +19365,17 @@
             "description": "When checkout is embedded, represents the Origin of the page embedding the checkout. Used as a security measure to send messages only to the embedding page."
           },
           "amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 50.0,
-                "description": "Amount in cents, before discounts and taxes. Only useful for custom prices, it'll be ignored for fixed and free prices."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount"
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents, before discounts and taxes."
           },
           "discount_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Discount Amount",
             "description": "Discount amount in cents."
           },
           "net_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
@@ -19438,17 +19389,10 @@
               }
             ],
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents. If `null`, it means there is no enough information yet to calculate it."
           },
           "total_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
@@ -33915,11 +33859,13 @@
                 },
                 {
                   "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
                 }
               ]
             },
             "type": "array",
-            "maxItems": 1,
             "minItems": 1,
             "title": "ProductPriceCreateList",
             "description": "List of available prices for this product. Currently, only a single price is supported."
@@ -34756,6 +34702,62 @@
         "title": "ProductPriceMeteredUnit",
         "description": "A metered, usage-based, price for a product, with a fixed unit price."
       },
+      "ProductPriceMeteredUnitCreate": {
+        "properties": {
+          "amount_type": {
+            "type": "string",
+            "const": "metered_unit",
+            "title": "Amount Type"
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter associated to the price."
+          },
+          "price_currency": {
+            "type": "string",
+            "pattern": "usd",
+            "title": "Price Currency",
+            "description": "The currency. Currently, only `usd` is supported.",
+            "default": "usd"
+          },
+          "unit_amount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unit Amount",
+            "description": "The price per unit in cents."
+          },
+          "included_units": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Included Units",
+            "description": "The number of units included in the price. They will be deducted from the total."
+          },
+          "cap_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cap Amount",
+            "description": "Optional maximum amount in cents that can be charged, regardless of the number of units consumed."
+          }
+        },
+        "type": "object",
+        "required": [
+          "amount_type",
+          "meter_id",
+          "unit_amount",
+          "included_units"
+        ],
+        "title": "ProductPriceMeteredUnitCreate",
+        "description": "Schema to create a metered price with a fixed unit price."
+      },
       "ProductPriceType": {
         "type": "string",
         "enum": [
@@ -34869,6 +34871,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
                     }
                   ]
                 },
