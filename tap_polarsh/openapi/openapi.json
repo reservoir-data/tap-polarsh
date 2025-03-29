@@ -34732,7 +34732,8 @@
             "type": "integer",
             "minimum": 0.0,
             "title": "Included Units",
-            "description": "The number of units included in the price. They will be deducted from the total."
+            "description": "The number of units included in the price. They will be deducted from the total.",
+            "default": 0
           },
           "cap_amount": {
             "anyOf": [
@@ -34752,8 +34753,7 @@
         "required": [
           "amount_type",
           "meter_id",
-          "unit_amount",
-          "included_units"
+          "unit_amount"
         ],
         "title": "ProductPriceMeteredUnitCreate",
         "description": "Schema to create a metered price with a fixed unit price."
