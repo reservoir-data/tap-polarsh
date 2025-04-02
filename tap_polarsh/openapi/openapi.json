@@ -2751,6 +2751,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/BenefitLicenseKeysUpdate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BenefitMeterCreditUpdate"
                   }
                 ],
                 "title": "Benefit Update"
@@ -2766,16 +2769,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Benefit",
                   "title": "Benefit"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "You don't have the permission to update this benefit.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotPermitted"
                 }
               }
             }
@@ -2855,7 +2848,7 @@
             "description": "Benefit deleted."
           },
           "403": {
-            "description": "You don't have the permission to update this benefit or it's not deletable.",
+            "description": "This benefit is not deletable.",
             "content": {
               "application/json": {
                 "schema": {
@@ -13775,7 +13768,7 @@
     "benefit_grant.updated": {
       "post": {
         "summary": "benefit_grant.updated",
-        "description": "Sent when a new benefit grant is updated.\n\n**Discord & Slack support:** Basic",
+        "description": "Sent when a benefit grant is updated.\n\n**Discord & Slack support:** Basic",
         "operationId": "_endpointbenefit_grant_updated_post",
         "requestBody": {
           "content": {
@@ -13809,10 +13802,47 @@
         }
       }
     },
+    "benefit_grant.cycled": {
+      "post": {
+        "summary": "benefit_grant.cycled",
+        "description": "Sent when a benefit grant is cycled,\nmeaning the related subscription has been renewed for another period.\n\n**Discord & Slack support:** Basic",
+        "operationId": "_endpointbenefit_grant_cycled_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookBenefitGrantCycledPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "benefit_grant.revoked": {
       "post": {
         "summary": "benefit_grant.revoked",
-        "description": "Sent when a new benefit grant is revoked.\n\n**Discord & Slack support:** Basic",
+        "description": "Sent when a benefit grant is revoked.\n\n**Discord & Slack support:** Basic",
         "operationId": "_endpointbenefit_grant_revoked_post",
         "requestBody": {
           "content": {
@@ -14251,6 +14281,9 @@
           },
           {
             "$ref": "#/components/schemas/BenefitLicenseKeys"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitMeterCredit"
           }
         ]
       },
@@ -14336,6 +14369,9 @@
           },
           {
             "$ref": "#/components/schemas/BenefitLicenseKeysCreate"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitMeterCreditCreate"
           }
         ],
         "discriminator": {
@@ -14345,7 +14381,8 @@
             "discord": "#/components/schemas/BenefitDiscordCreate",
             "downloadables": "#/components/schemas/BenefitDownloadablesCreate",
             "github_repository": "#/components/schemas/BenefitGitHubRepositoryCreate",
-            "license_keys": "#/components/schemas/BenefitLicenseKeysCreate"
+            "license_keys": "#/components/schemas/BenefitLicenseKeysCreate",
+            "meter_credit": "#/components/schemas/BenefitMeterCreditCreate"
           }
         }
       },
@@ -16030,12 +16067,30 @@
         ],
         "title": "BenefitGrantWebhook"
       },
+      "BenefitLicenseKeyActivationCreateProperties": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 50.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Limit"
+          },
+          "enable_customer_admin": {
+            "type": "boolean",
+            "title": "Enable Customer Admin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "limit",
+          "enable_customer_admin"
+        ],
+        "title": "BenefitLicenseKeyActivationCreateProperties"
+      },
       "BenefitLicenseKeyActivationProperties": {
         "properties": {
           "limit": {
             "type": "integer",
-            "maximum": 1000.0,
-            "exclusiveMinimum": 0.0,
             "title": "Limit"
           },
           "enable_customer_admin": {
@@ -16219,7 +16274,7 @@
           "activations": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BenefitLicenseKeyActivationProperties"
+                "$ref": "#/components/schemas/BenefitLicenseKeyActivationCreateProperties"
               },
               {
                 "type": "null"
@@ -16463,6 +16518,206 @@
         ],
         "title": "BenefitLicenseKeysUpdate"
       },
+      "BenefitMeterCredit": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
+          "type": {
+            "type": "string",
+            "const": "meter_credit",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "The description of the benefit."
+          },
+          "selectable": {
+            "type": "boolean",
+            "title": "Selectable",
+            "description": "Whether the benefit is selectable when creating a product."
+          },
+          "deletable": {
+            "type": "boolean",
+            "title": "Deletable",
+            "description": "Whether the benefit is deletable."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the benefit."
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitMeterCreditProperties"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "type",
+          "description",
+          "selectable",
+          "deletable",
+          "organization_id",
+          "properties"
+        ],
+        "title": "BenefitMeterCredit",
+        "description": "A benefit of type `meter_unit`.\n\nUse it to grant a number of units on a specific meter."
+      },
+      "BenefitMeterCreditCreate": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "meter_credit",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 42,
+            "minLength": 3,
+            "title": "Description",
+            "description": "The description of the benefit. Will be displayed on products having this benefit."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the benefit. **Required unless you use an organization token.**"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitMeterCreditCreateProperties"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "description",
+          "properties"
+        ],
+        "title": "BenefitMeterCreditCreate",
+        "description": "Schema to create a benefit of type `meter_unit`."
+      },
+      "BenefitMeterCreditCreateProperties": {
+        "properties": {
+          "unit": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Unit"
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unit",
+          "meter_id"
+        ],
+        "title": "BenefitMeterCreditCreateProperties",
+        "description": "Properties for creating a benefit of type `meter_unit`."
+      },
+      "BenefitMeterCreditProperties": {
+        "properties": {
+          "unit": {
+            "type": "integer",
+            "title": "Unit"
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unit",
+          "meter_id"
+        ],
+        "title": "BenefitMeterCreditProperties",
+        "description": "Properties for a benefit of type `meter_unit`."
+      },
+      "BenefitMeterCreditUpdate": {
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 42,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the benefit. Will be displayed on products having this benefit."
+          },
+          "type": {
+            "type": "string",
+            "const": "meter_credit",
+            "title": "Type"
+          },
+          "properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitMeterCreditCreateProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "title": "BenefitMeterCreditUpdate"
+      },
       "BenefitSortProperty": {
         "type": "string",
         "enum": [
@@ -16480,7 +16735,8 @@
           "discord",
           "github_repository",
           "downloadables",
-          "license_keys"
+          "license_keys",
+          "meter_credit"
         ],
         "title": "BenefitType"
       },
@@ -30744,7 +31000,6 @@
           "redirect_uris": {
             "items": {
               "type": "string",
-              "maxLength": 2083,
               "minLength": 1,
               "format": "uri"
             },
@@ -30903,7 +31158,6 @@
           "redirect_uris": {
             "items": {
               "type": "string",
-              "maxLength": 2083,
               "minLength": 1,
               "format": "uri"
             },
@@ -31021,7 +31275,6 @@
           "redirect_uris": {
             "items": {
               "type": "string",
-              "maxLength": 2083,
               "minLength": 1,
               "format": "uri"
             },
@@ -34654,11 +34907,6 @@
             "title": "Unit Amount",
             "description": "The price per unit in cents."
           },
-          "included_units": {
-            "type": "integer",
-            "title": "Included Units",
-            "description": "The number of units included in the price. They will be deducted from the total."
-          },
           "cap_amount": {
             "anyOf": [
               {
@@ -34694,7 +34942,6 @@
           "recurring_interval",
           "price_currency",
           "unit_amount",
-          "included_units",
           "cap_amount",
           "meter_id",
           "meter"
@@ -34727,13 +34974,6 @@
             "minimum": 0.0,
             "title": "Unit Amount",
             "description": "The price per unit in cents."
-          },
-          "included_units": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Included Units",
-            "description": "The number of units included in the price. They will be deducted from the total.",
-            "default": 0
           },
           "cap_amount": {
             "anyOf": [
@@ -37039,6 +37279,28 @@
         "title": "WebhookBenefitGrantCreatedPayload",
         "description": "Sent when a new benefit grant is created.\n\n**Discord & Slack support:** Basic"
       },
+      "WebhookBenefitGrantCycledPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "benefit_grant.cycled",
+            "title": "Type",
+            "examples": [
+              "benefit_grant.cycled"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/BenefitGrantWebhook"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "data"
+        ],
+        "title": "WebhookBenefitGrantCycledPayload",
+        "description": "Sent when a benefit grant is cycled,\nmeaning the related subscription has been renewed for another period.\n\n**Discord & Slack support:** Basic"
+      },
       "WebhookBenefitGrantRevokedPayload": {
         "properties": {
           "type": {
@@ -37059,7 +37321,7 @@
           "data"
         ],
         "title": "WebhookBenefitGrantRevokedPayload",
-        "description": "Sent when a new benefit grant is revoked.\n\n**Discord & Slack support:** Basic"
+        "description": "Sent when a benefit grant is revoked.\n\n**Discord & Slack support:** Basic"
       },
       "WebhookBenefitGrantUpdatedPayload": {
         "properties": {
@@ -37081,7 +37343,7 @@
           "data"
         ],
         "title": "WebhookBenefitGrantUpdatedPayload",
-        "description": "Sent when a new benefit grant is updated.\n\n**Discord & Slack support:** Basic"
+        "description": "Sent when a benefit grant is updated.\n\n**Discord & Slack support:** Basic"
       },
       "WebhookBenefitUpdatedPayload": {
         "properties": {
