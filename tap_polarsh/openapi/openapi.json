@@ -15891,6 +15891,29 @@
         "type": "object",
         "title": "BenefitGrantLicenseKeysProperties"
       },
+      "BenefitGrantMeterCreditProperties": {
+        "properties": {
+          "last_credited_meter_id": {
+            "type": "string",
+            "title": "Last Credited Meter Id"
+          },
+          "last_credited_units": {
+            "type": "integer",
+            "title": "Last Credited Units"
+          },
+          "last_credited_at": {
+            "type": "string",
+            "title": "Last Credited At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "last_credited_meter_id",
+          "last_credited_units",
+          "last_credited_at"
+        ],
+        "title": "BenefitGrantMeterCreditProperties"
+      },
       "BenefitGrantWebhook": {
         "properties": {
           "created_at": {
@@ -16641,10 +16664,10 @@
       },
       "BenefitMeterCreditCreateProperties": {
         "properties": {
-          "unit": {
+          "units": {
             "type": "integer",
             "exclusiveMinimum": 0.0,
-            "title": "Unit"
+            "title": "Units"
           },
           "meter_id": {
             "type": "string",
@@ -16654,7 +16677,7 @@
         },
         "type": "object",
         "required": [
-          "unit",
+          "units",
           "meter_id"
         ],
         "title": "BenefitMeterCreditCreateProperties",
@@ -16662,9 +16685,9 @@
       },
       "BenefitMeterCreditProperties": {
         "properties": {
-          "unit": {
+          "units": {
             "type": "integer",
-            "title": "Unit"
+            "title": "Units"
           },
           "meter_id": {
             "type": "string",
@@ -16674,11 +16697,106 @@
         },
         "type": "object",
         "required": [
-          "unit",
+          "units",
           "meter_id"
         ],
         "title": "BenefitMeterCreditProperties",
         "description": "Properties for a benefit of type `meter_unit`."
+      },
+      "BenefitMeterCreditSubscriber": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
+          "type": {
+            "type": "string",
+            "const": "meter_credit",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "The description of the benefit."
+          },
+          "selectable": {
+            "type": "boolean",
+            "title": "Selectable",
+            "description": "Whether the benefit is selectable when creating a product."
+          },
+          "deletable": {
+            "type": "boolean",
+            "title": "Deletable",
+            "description": "Whether the benefit is deletable."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the benefit."
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitMeterCreditSubscriberProperties"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "type",
+          "description",
+          "selectable",
+          "deletable",
+          "organization_id",
+          "organization",
+          "properties"
+        ],
+        "title": "BenefitMeterCreditSubscriber"
+      },
+      "BenefitMeterCreditSubscriberProperties": {
+        "properties": {
+          "units": {
+            "type": "integer",
+            "title": "Units"
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "units",
+          "meter_id"
+        ],
+        "title": "BenefitMeterCreditSubscriberProperties",
+        "description": "Properties available to subscribers for a benefit of type `meter_unit`."
       },
       "BenefitMeterCreditUpdate": {
         "properties": {
@@ -16866,14 +16984,7 @@
             "description": "Amount in cents, after discounts and taxes."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
           },
@@ -19267,14 +19378,7 @@
             "description": "Amount in cents, after discounts and taxes."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
           },
@@ -19653,14 +19757,7 @@
             "description": "Amount in cents, after discounts and taxes."
           },
           "currency": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
           },
@@ -22071,6 +22168,9 @@
           },
           {
             "$ref": "#/components/schemas/CustomerBenefitGrantCustom"
+          },
+          {
+            "$ref": "#/components/schemas/CustomerBenefitGrantMeterCredit"
           }
         ]
       },
@@ -22788,6 +22888,142 @@
         ],
         "title": "CustomerBenefitGrantLicenseKeysUpdate"
       },
+      "CustomerBenefitGrantMeterCredit": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At"
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id"
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id"
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id"
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id"
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted"
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/CustomerPortalCustomer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitMeterCreditSubscriber"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantMeterCreditProperties"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "granted_at",
+          "revoked_at",
+          "customer_id",
+          "benefit_id",
+          "subscription_id",
+          "order_id",
+          "is_granted",
+          "is_revoked",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "CustomerBenefitGrantMeterCredit"
+      },
+      "CustomerBenefitGrantMeterCreditUpdate": {
+        "properties": {
+          "benefit_type": {
+            "type": "string",
+            "const": "meter_credit",
+            "title": "Benefit Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "benefit_type"
+        ],
+        "title": "CustomerBenefitGrantMeterCreditUpdate"
+      },
       "CustomerBenefitGrantSortProperty": {
         "type": "string",
         "enum": [
@@ -22816,6 +23052,9 @@
           },
           {
             "$ref": "#/components/schemas/CustomerBenefitGrantCustomUpdate"
+          },
+          {
+            "$ref": "#/components/schemas/CustomerBenefitGrantMeterCreditUpdate"
           }
         ],
         "discriminator": {
@@ -22825,7 +23064,8 @@
             "discord": "#/components/schemas/CustomerBenefitGrantDiscordUpdate",
             "downloadables": "#/components/schemas/CustomerBenefitGrantDownloadablesUpdate",
             "github_repository": "#/components/schemas/CustomerBenefitGrantGitHubRepositoryUpdate",
-            "license_keys": "#/components/schemas/CustomerBenefitGrantLicenseKeysUpdate"
+            "license_keys": "#/components/schemas/CustomerBenefitGrantLicenseKeysUpdate",
+            "meter_credit": "#/components/schemas/CustomerBenefitGrantMeterCreditUpdate"
           }
         }
       },
