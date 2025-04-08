@@ -24394,6 +24394,14 @@
             "title": "Granted Benefits",
             "description": "The customer's active benefit grants."
           },
+          "active_meters": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerStateMeter"
+            },
+            "type": "array",
+            "title": "Active Meters",
+            "description": "The customer's active meters."
+          },
           "avatar_url": {
             "type": "string",
             "title": "Avatar Url",
@@ -24419,10 +24427,11 @@
           "deleted_at",
           "active_subscriptions",
           "granted_benefits",
+          "active_meters",
           "avatar_url"
         ],
         "title": "CustomerState",
-        "description": "A customer along with additional state information:\n\n* Active subscriptions\n* Active benefits"
+        "description": "A customer along with additional state information:\n\n* Active subscriptions\n* Granted benefits\n* Active meters"
       },
       "CustomerStateBenefitGrant": {
         "properties": {
@@ -24512,6 +24521,73 @@
         ],
         "title": "CustomerStateBenefitGrant",
         "description": "An active benefit grant for a customer."
+      },
+      "CustomerStateMeter": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter.",
+            "examples": [
+              "d498a884-e2cd-4d3e-8002-f536468a8b22"
+            ]
+          },
+          "consumed_units": {
+            "type": "number",
+            "title": "Consumed Units",
+            "description": "The number of consumed units.",
+            "examples": [
+              25.0
+            ]
+          },
+          "credited_units": {
+            "type": "integer",
+            "title": "Credited Units",
+            "description": "The number of credited units.",
+            "examples": [
+              100
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "title": "Balance",
+            "description": "The balance of the meter, i.e. the difference between credited and consumed units. Never goes negative.",
+            "examples": [
+              75.0
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "meter_id",
+          "consumed_units",
+          "credited_units",
+          "balance"
+        ],
+        "title": "CustomerStateMeter",
+        "description": "An active meter for a customer, with latest consumed and credited units."
       },
       "CustomerStateSubscription": {
         "properties": {
