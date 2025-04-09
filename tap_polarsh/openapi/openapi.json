@@ -35219,7 +35219,7 @@
             "description": "The currency."
           },
           "unit_amount": {
-            "type": "integer",
+            "type": "string",
             "title": "Unit Amount",
             "description": "The price per unit in cents."
           },
@@ -35286,10 +35286,17 @@
             "default": "usd"
           },
           "unit_amount": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
             "title": "Unit Amount",
-            "description": "The price per unit in cents."
+            "description": "The price per unit in cents. Supports up to 12 decimal places."
           },
           "cap_amount": {
             "anyOf": [
