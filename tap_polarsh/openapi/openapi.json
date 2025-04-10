@@ -11792,6 +11792,30 @@
             "description": "Filter by external customer ID."
           },
           {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Name Filter",
+              "description": "Filter by event name."
+            },
+            "description": "Filter by event name."
+          },
+          {
             "name": "source",
             "in": "query",
             "required": false,
@@ -11926,6 +11950,233 @@
         },
         "x-speakeasy-group": "events",
         "x-speakeasy-name-override": "list"
+      }
+    },
+    "/v1/events/names": {
+      "get": {
+        "tags": [
+          "events",
+          "documented",
+          "featured"
+        ],
+        "summary": "List Event Names",
+        "description": "List event names.\n\n**Scopes**: `events:read` `events:write`",
+        "operationId": "events:list_names",
+        "security": [
+          {
+            "oidc": [
+              "events:read",
+              "events:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "external_customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ExternalCustomerID Filter",
+              "description": "Filter by external customer ID."
+            },
+            "description": "Filter by external customer ID."
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query",
+              "description": "Query to filter event names."
+            },
+            "description": "Query to filter event names."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventNamesSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-last_seen"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventName"
+                  },
+                  "title": "Response Events:List Names"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "events",
+        "x-speakeasy-name-override": "list_names"
       }
     },
     "/v1/events/{id}": {
@@ -12799,6 +13050,347 @@
         },
         "x-speakeasy-group": "meters",
         "x-speakeasy-name-override": "quantities"
+      }
+    },
+    "/v1/customer-meters/": {
+      "get": {
+        "tags": [
+          "customer_meters",
+          "documented",
+          "featured",
+          "mcp"
+        ],
+        "summary": "List Customer Meters",
+        "description": "List customer meters.\n\n**Scopes**: `customer_meters:read`",
+        "operationId": "customer_meters:list",
+        "security": [
+          {
+            "oidc": [
+              "customer_meters:read"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "external_customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ExternalCustomerID Filter",
+              "description": "Filter by external customer ID."
+            },
+            "description": "Filter by external customer ID."
+          },
+          {
+            "name": "meter_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The meter ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The meter ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "MeterID Filter",
+              "description": "Filter by meter ID."
+            },
+            "description": "Filter by meter ID."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerMeterSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-modified_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_CustomerMeter_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customer_meters"
+          ]
+        },
+        "x-speakeasy-group": "customer_meters",
+        "x-speakeasy-name-override": "list"
+      }
+    },
+    "/v1/customer-meters/{id}": {
+      "get": {
+        "tags": [
+          "customer_meters",
+          "documented",
+          "featured",
+          "mcp"
+        ],
+        "summary": "Get Customer Meter",
+        "description": "Get a customer meter by ID.\n\n**Scopes**: `customer_meters:read`",
+        "operationId": "customer_meters:get",
+        "security": [
+          {
+            "oidc": [
+              "customer_meters:read"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The customer meter ID.",
+              "title": "Id"
+            },
+            "description": "The customer meter ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerMeter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer meter not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customer_meters"
+          ]
+        },
+        "x-speakeasy-group": "customer_meters",
+        "x-speakeasy-name-override": "get"
       }
     }
   },
@@ -23219,6 +23811,114 @@
         ],
         "title": "CustomerCreate"
       },
+      "CustomerMeter": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter.",
+            "examples": [
+              "d498a884-e2cd-4d3e-8002-f536468a8b22"
+            ]
+          },
+          "consumed_units": {
+            "type": "number",
+            "title": "Consumed Units",
+            "description": "The number of consumed units.",
+            "examples": [
+              25.0
+            ]
+          },
+          "credited_units": {
+            "type": "integer",
+            "title": "Credited Units",
+            "description": "The number of credited units.",
+            "examples": [
+              100
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "title": "Balance",
+            "description": "The balance of the meter, i.e. the difference between credited and consumed units. Never goes negative.",
+            "examples": [
+              75.0
+            ]
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer",
+            "description": "The customer associated with this meter."
+          },
+          "meter": {
+            "$ref": "#/components/schemas/Meter",
+            "description": "The meter associated with this customer."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "meter_id",
+          "consumed_units",
+          "credited_units",
+          "balance",
+          "customer",
+          "meter"
+        ],
+        "title": "CustomerMeter",
+        "description": "An active customer meter, with current consumed and credited units."
+      },
+      "CustomerMeterSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "modified_at",
+          "-modified_at",
+          "customer_id",
+          "-customer_id",
+          "customer_name",
+          "-customer_name",
+          "meter_id",
+          "-meter_id",
+          "meter_name",
+          "-meter_name",
+          "consumed_units",
+          "-consumed_units",
+          "credited_units",
+          "-credited_units",
+          "balance",
+          "-balance"
+        ],
+        "title": "CustomerMeterSortProperty"
+      },
       "CustomerOrder": {
         "properties": {
           "created_at": {
@@ -28133,6 +28833,52 @@
         ],
         "title": "EventCreateExternalCustomer"
       },
+      "EventName": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "events_count": {
+            "type": "integer",
+            "title": "Events Count",
+            "description": "Number of times the event has occurred."
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Seen",
+            "description": "The first time the event occurred."
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Seen",
+            "description": "The last time the event occurred."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "events_count",
+          "first_seen",
+          "last_seen"
+        ],
+        "title": "EventName"
+      },
+      "EventNamesSortProperty": {
+        "type": "string",
+        "enum": [
+          "events_count",
+          "-events_count",
+          "first_seen",
+          "-first_seen",
+          "last_seen",
+          "-last_seen"
+        ],
+        "title": "EventNamesSortProperty"
+      },
       "EventSortProperty": {
         "type": "string",
         "enum": [
@@ -30306,6 +31052,26 @@
         ],
         "title": "ListResource[CustomerBenefitGrant]"
       },
+      "ListResource_CustomerMeter_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerMeter"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[CustomerMeter]"
+      },
       "ListResource_CustomerOrder_": {
         "properties": {
           "items": {
@@ -31361,7 +32127,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -31519,7 +32285,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -31636,7 +32402,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -34437,7 +35203,7 @@
             "type": "array",
             "minItems": 1,
             "title": "ProductPriceCreateList",
-            "description": "List of available prices for this product. Currently, only a single price is supported."
+            "description": "List of available prices for this product. It should contain at most one static price (fixed, custom or free), and any number of metered prices. Metered prices are not supported on one-time purchase products."
           },
           "medias": {
             "anyOf": [
@@ -36382,6 +37148,7 @@
           "subscriptions:write",
           "customers:read",
           "customers:write",
+          "customer_meters:read",
           "customer_sessions:write",
           "orders:read",
           "refunds:read",
