@@ -17,6 +17,7 @@ if t.TYPE_CHECKING:
 
 STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
+    streams.CheckoutLinks,
 ]
 
 

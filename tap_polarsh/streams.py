@@ -116,3 +116,26 @@ class Articles(PolarStream):
             **super().get_url_params(context, next_page_token),
             "organization_id": context["organization_id"] if context else None,
         }
+
+
+class CheckoutLinks(PolarStream):
+    """Checkout links stream."""
+
+    name = "checkout_links"
+    path = "/api/v1/checkout-links"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "CheckoutLink"
+
+    parent_stream_type = Organizations
+
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: int | None,
+    ) -> dict[str, t.Any]:
+        """Get URL query parameters."""
+        return {
+            **super().get_url_params(context, next_page_token),
+            "organization_id": context["organization_id"] if context else None,
+        }
