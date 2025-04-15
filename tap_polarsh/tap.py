@@ -1,4 +1,7 @@
-"""Polar tap class."""
+"""Polar tap class.
+
+Copyright (c) 2024 Edgar Ramírez-Mondragón
+"""
 
 from __future__ import annotations
 
@@ -49,7 +52,7 @@ class TapPolar(Tap):
         ),
     ).to_dict()
 
-    def get_openapi_schema(self) -> dict[t.Any, t.Any]:
+    def get_openapi_schema(self) -> dict[t.Any, t.Any]:  # noqa: PLR6301
         """Retrieve Swagger/OpenAPI schema for this API.
 
         Returns:
