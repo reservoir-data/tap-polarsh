@@ -62,6 +62,7 @@ source = "vcs"
 
 [tool.ruff]
 line-length = 88
+preview = true
 
 lint.select = [
   "ALL",

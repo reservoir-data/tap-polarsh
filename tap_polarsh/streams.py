@@ -1,4 +1,7 @@
-"""Stream type classes for tap-polarsh."""
+"""Stream type classes for tap-polarsh.
+
+Copyright (c) 2024 Edgar Ramírez-Mondragón
+"""
 
 from __future__ import annotations
 
@@ -25,31 +28,46 @@ class Organizations(PolarStream):
         context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
-        """Get URL query parameters."""
+        """Get URL query parameters.
+
+        Args:
+            context: The context of the stream.
+            next_page_token: The next page token.
+
+        Returns:
+            The URL query parameters.
+        """
         params = super().get_url_params(context, next_page_token)
         params["is_member"] = self.config.get("is_member", False)
         return params
 
-    def generate_child_contexts(
+    def generate_child_contexts(  # noqa: PLR6301
         self,
         record: dict[str, t.Any],
         context: Context | None,  # noqa: ARG002
     ) -> t.Iterable[dict[str, t.Any] | None]:
-        """Generate child contexts."""
+        """Generate child contexts.
+
+        Args:
+            record: The record.
+            context: The context of the stream.
+
+        Yields:
+            The child contexts.
+        """
         yield {
             "organization_id": record["id"],
         }
 
 
-class Repositories(PolarStream):
-    """Repositories stream."""
+class CheckoutLinks(PolarStream):
+    """Checkout links stream."""
 
-    name = "repositories"
-    path = "/api/v1/repositories"
+    name = "checkout_links"
+    path = "/api/v1/checkout-links"
     primary_keys = ("id",)
-    replication_key = None
 
-    swagger_ref: str = "Repository"
+    swagger_ref: str = "CheckoutLink"
 
     parent_stream_type = Organizations
 
@@ -58,60 +76,15 @@ class Repositories(PolarStream):
         context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
-        """Get URL query parameters."""
-        return {
-            **super().get_url_params(context, next_page_token),
-            "organization_id": context["organization_id"] if context else None,
-        }
+        """Get URL query parameters.
 
+        Args:
+            context: The context of the stream.
+            next_page_token: The next page token.
 
-class OrganizationCustomers(PolarStream):
-    """Organization customers stream.
-
-    DEPRECATED: This stream is no longer supported.
-    """
-
-    name = "organization_customers"
-    path = "/api/v1/organizations/{organization_id}/customers"
-    primary_keys = (
-        "organization_id",
-        "public_name",
-    )
-    replication_key = None
-
-    swagger_ref: str = "OrganizationCustomer"
-
-    parent_stream_type = Organizations
-
-    @property
-    def schema(self) -> dict[str, t.Any]:
-        """Generate schema."""
-        schema = super().schema
-        schema["properties"]["organization_id"] = {"type": ["string", "null"]}
-        return schema
-
-
-class Articles(PolarStream):
-    """Issues stream.
-
-    Removed from the Polar.sh API in https://github.com/polarsource/polar/pull/4395.
-    """
-
-    name = "articles"
-    path = "/api/v1/articles"
-    primary_keys = ("id",)
-    replication_key = None
-
-    swagger_ref: str = "Article"
-
-    parent_stream_type = Organizations
-
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: t.Any | None,  # noqa: ANN401
-    ) -> dict[str, t.Any]:
-        """Get URL query parameters."""
+        Returns:
+            The URL query parameters.
+        """
         return {
             **super().get_url_params(context, next_page_token),
             "organization_id": context["organization_id"] if context else None,
