@@ -8,7 +8,7 @@ from importlib import resources
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk._singerlib import resolve_schema_references
+from singer_sdk.singerlib import resolve_schema_references
 
 from tap_polarsh import openapi, streams
 
