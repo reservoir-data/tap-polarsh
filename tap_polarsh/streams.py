@@ -60,14 +60,8 @@ class Organizations(PolarStream):
         }
 
 
-class CheckoutLinks(PolarStream):
-    """Checkout links stream."""
-
-    name = "checkout_links"
-    path = "/api/v1/checkout-links"
-    primary_keys = ("id",)
-
-    swagger_ref: str = "CheckoutLink"
+class _OrganizationStream(PolarStream):
+    """Base class for organization streams."""
 
     parent_stream_type = Organizations
 
@@ -91,7 +85,7 @@ class CheckoutLinks(PolarStream):
         }
 
 
-class _BaseBenefits(PolarStream):
+class _BaseBenefits(_OrganizationStream):
     """Base benefits stream."""
 
     path = "/api/v1/benefits"
@@ -106,18 +100,8 @@ class _BaseBenefits(PolarStream):
         context: Context | None,
         next_page_token: int | None,
     ) -> dict[str, t.Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: The context of the stream.
-            next_page_token: The next page token.
-
-        Returns:
-            The URL query parameters.
-        """
         return {
             **super().get_url_params(context, next_page_token),
-            "organization_id": context["organization_id"] if context else None,
             "type": self.benefit_type,
         }
 
@@ -126,15 +110,6 @@ class _BaseBenefits(PolarStream):
         record: dict[str, t.Any],
         context: Context | None,  # noqa: ARG002
     ) -> dict[str, t.Any]:
-        """Get child context.
-
-        Args:
-            record: The record.
-            context: The context of the stream.
-
-        Returns:
-            The child context.
-        """
         return {
             "benefit_id": record["id"],
         }
@@ -196,3 +171,27 @@ class BenefitGrants(PolarStream):
     primary_keys = ("id",)
 
     swagger_ref: str = "BenefitGrant"
+
+
+class CheckoutLinks(_OrganizationStream):
+    """Checkout links stream."""
+
+    name = "checkout_links"
+    path = "/api/v1/checkout-links"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "CheckoutLink"
+
+    parent_stream_type = Organizations
+
+
+class Products(_OrganizationStream):
+    """Products stream."""
+
+    name = "products"
+    path = "/api/v1/products"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "Product"
+
+    parent_stream_type = Organizations
