@@ -60,14 +60,8 @@ class Organizations(PolarStream):
         }
 
 
-class CheckoutLinks(PolarStream):
-    """Checkout links stream."""
-
-    name = "checkout_links"
-    path = "/api/v1/checkout-links"
-    primary_keys = ("id",)
-
-    swagger_ref: str = "CheckoutLink"
+class _OrganizationStream(PolarStream):
+    """Base class for organization streams."""
 
     parent_stream_type = Organizations
 
@@ -89,3 +83,27 @@ class CheckoutLinks(PolarStream):
             **super().get_url_params(context, next_page_token),
             "organization_id": context["organization_id"] if context else None,
         }
+
+
+class CheckoutLinks(_OrganizationStream):
+    """Checkout links stream."""
+
+    name = "checkout_links"
+    path = "/api/v1/checkout-links"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "CheckoutLink"
+
+    parent_stream_type = Organizations
+
+
+class Products(_OrganizationStream):
+    """Products stream."""
+
+    name = "products"
+    path = "/api/v1/products"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "Product"
+
+    parent_stream_type = Organizations
