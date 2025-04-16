@@ -1,0 +1,387 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "selectable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "deletable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_deleted"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "metadata"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "prefix"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "expires"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "activations"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "limit_usage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "properties": {
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "deletable": {
+        "description": "Whether the benefit is deletable.",
+        "title": "Deletable",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "description": {
+        "description": "The description of the benefit.",
+        "title": "Description",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "The ID of the benefit.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "is_deleted": {
+        "description": "Whether the benefit is deleted.",
+        "title": "Is Deleted",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "metadata": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "organization_id": {
+        "description": "The ID of the organization owning the benefit.",
+        "format": "uuid4",
+        "title": "Organization Id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "properties": {
+        "properties": {
+          "activations": {
+            "anyOf": [
+              {
+                "properties": {
+                  "enable_customer_admin": {
+                    "title": "Enable Customer Admin",
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "limit": {
+                    "title": "Limit",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "limit",
+                  "enable_customer_admin"
+                ],
+                "title": "BenefitLicenseKeyActivationProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "properties": {
+                  "timeframe": {
+                    "title": "Timeframe",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "ttl": {
+                    "exclusiveMinimum": 0.0,
+                    "title": "Ttl",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "ttl",
+                  "timeframe"
+                ],
+                "title": "BenefitLicenseKeyExpirationProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit_usage": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limit Usage"
+          },
+          "prefix": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prefix"
+          }
+        },
+        "required": [
+          "prefix",
+          "expires",
+          "activations",
+          "limit_usage"
+        ],
+        "title": "BenefitLicenseKeysProperties",
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "selectable": {
+        "description": "Whether the benefit is selectable when creating a product.",
+        "title": "Selectable",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "type": {
+        "title": "Type",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "modified_at",
+      "type",
+      "description",
+      "selectable",
+      "deletable",
+      "is_deleted",
+      "organization_id",
+      "metadata",
+      "properties"
+    ],
+    "title": "BenefitLicenseKeys",
+    "type": "object"
+  },
+  "stream": "benefits_license_keys",
+  "tap_stream_id": "benefits_license_keys"
+}

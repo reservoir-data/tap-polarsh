@@ -1,0 +1,3119 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "granted_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_granted"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "revoked_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_revoked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "order_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "member_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "benefit_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "error"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "member"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "benefit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "properties": {
+      "benefit": {
+        "oneOf": [
+          {
+            "description": "A benefit of type `custom`.\n\nUse it to grant any kind of benefit that doesn't fit in the other types.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "description": "Properties for a benefit of type `custom`.",
+                "properties": {
+                  "note": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "description": "Private note to be shared with customers who have this benefit granted."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Note"
+                  }
+                },
+                "required": [
+                  "note"
+                ],
+                "title": "BenefitCustomProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "custom",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitCustom",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "description": "A benefit of type `discord`.\n\nUse it to automatically invite your backers to a Discord server.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "description": "Properties for a benefit of type `discord`.",
+                "properties": {
+                  "guild_id": {
+                    "description": "The ID of the Discord server.",
+                    "title": "Guild Id",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "guild_token": {
+                    "readOnly": true,
+                    "title": "Guild Token",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "kick_member": {
+                    "description": "Whether to kick the member from the Discord server on revocation.",
+                    "title": "Kick Member",
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "role_id": {
+                    "description": "The ID of the Discord role to grant.",
+                    "title": "Role Id",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "guild_id",
+                  "role_id",
+                  "kick_member",
+                  "guild_token"
+                ],
+                "title": "BenefitDiscordProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "discord",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitDiscord",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "description": "A benefit of type `github_repository`.\n\nUse it to automatically invite your backers to a private GitHub repository.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "description": "Properties for a benefit of type `github_repository`.",
+                "properties": {
+                  "permission": {
+                    "description": "The permission level to grant. Read more about roles and their permissions on [GitHub documentation](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role).",
+                    "title": "Permission",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "repository_name": {
+                    "description": "The name of the repository.",
+                    "examples": [
+                      "private_repo"
+                    ],
+                    "title": "Repository Name",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "repository_owner": {
+                    "description": "The owner of the repository.",
+                    "examples": [
+                      "polarsource"
+                    ],
+                    "title": "Repository Owner",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "repository_owner",
+                  "repository_name",
+                  "permission"
+                ],
+                "title": "BenefitGitHubRepositoryProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "github_repository",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitGitHubRepository",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "properties": {
+                  "archived": {
+                    "additionalProperties": {
+                      "type": "boolean"
+                    },
+                    "propertyNames": {
+                      "format": "uuid4"
+                    },
+                    "title": "Archived",
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "files": {
+                    "items": {
+                      "format": "uuid4",
+                      "type": "string"
+                    },
+                    "title": "Files",
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "archived",
+                  "files"
+                ],
+                "title": "BenefitDownloadablesProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "downloadables",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitDownloadables",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "properties": {
+                  "activations": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "enable_customer_admin": {
+                            "title": "Enable Customer Admin",
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "limit": {
+                            "title": "Limit",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "enable_customer_admin"
+                        ],
+                        "title": "BenefitLicenseKeyActivationProperties",
+                        "type": [
+                          "object",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "expires": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "timeframe": {
+                            "title": "Timeframe",
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "ttl": {
+                            "exclusiveMinimum": 0.0,
+                            "title": "Ttl",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "ttl",
+                          "timeframe"
+                        ],
+                        "title": "BenefitLicenseKeyExpirationProperties",
+                        "type": [
+                          "object",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "limit_usage": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Limit Usage"
+                  },
+                  "prefix": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Prefix"
+                  }
+                },
+                "required": [
+                  "prefix",
+                  "expires",
+                  "activations",
+                  "limit_usage"
+                ],
+                "title": "BenefitLicenseKeysProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "license_keys",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitLicenseKeys",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "description": "A benefit of type `meter_unit`.\n\nUse it to grant a number of units on a specific meter.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "description": "Properties for a benefit of type `meter_unit`.",
+                "properties": {
+                  "meter_id": {
+                    "format": "uuid4",
+                    "title": "Meter Id",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "rollover": {
+                    "title": "Rollover",
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "units": {
+                    "title": "Units",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "units",
+                  "rollover",
+                  "meter_id"
+                ],
+                "title": "BenefitMeterCreditProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "meter_credit",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitMeterCredit",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "description": "A benefit of type `feature_flag`.\n\nUse it to grant feature flags with key-value metadata\nthat can be queried via the API and webhooks.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deletable": {
+                "description": "Whether the benefit is deletable.",
+                "title": "Deletable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "description": {
+                "description": "The description of the benefit.",
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the benefit.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "is_deleted": {
+                "description": "Whether the benefit is deleted.",
+                "title": "Is Deleted",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the benefit.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "properties": {
+                "description": "Properties for a benefit of type `feature_flag`.",
+                "properties": {},
+                "title": "BenefitFeatureFlagProperties",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "selectable": {
+                "description": "Whether the benefit is selectable when creating a product.",
+                "title": "Selectable",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "type": {
+                "const": "feature_flag",
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "type",
+              "description",
+              "selectable",
+              "deletable",
+              "is_deleted",
+              "organization_id",
+              "metadata",
+              "properties"
+            ],
+            "title": "BenefitFeatureFlag",
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        ],
+        "title": "Benefit"
+      },
+      "benefit_id": {
+        "description": "The ID of the benefit concerned by this grant.",
+        "format": "uuid4",
+        "title": "Benefit Id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "customer": {
+        "oneOf": [
+          {
+            "description": "A customer in an organization.",
+            "properties": {
+              "avatar_url": {
+                "examples": [
+                  "https://www.gravatar.com/avatar/xxx?d=404"
+                ],
+                "readOnly": true,
+                "title": "Avatar Url",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "billing_address": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "city": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "City"
+                      },
+                      "country": {
+                        "examples": [
+                          "US",
+                          "SE",
+                          "FR"
+                        ],
+                        "title": "CountryAlpha2",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "x-speakeasy-enums": [
+                          "AD",
+                          "AE",
+                          "AF",
+                          "AG",
+                          "AI",
+                          "AL",
+                          "AM",
+                          "AO",
+                          "AQ",
+                          "AR",
+                          "AS",
+                          "AT",
+                          "AU",
+                          "AW",
+                          "AX",
+                          "AZ",
+                          "BA",
+                          "BB",
+                          "BD",
+                          "BE",
+                          "BF",
+                          "BG",
+                          "BH",
+                          "BI",
+                          "BJ",
+                          "BL",
+                          "BM",
+                          "BN",
+                          "BO",
+                          "BQ",
+                          "BR",
+                          "BS",
+                          "BT",
+                          "BV",
+                          "BW",
+                          "BY",
+                          "BZ",
+                          "CA",
+                          "CC",
+                          "CD",
+                          "CF",
+                          "CG",
+                          "CH",
+                          "CI",
+                          "CK",
+                          "CL",
+                          "CM",
+                          "CN",
+                          "CO",
+                          "CR",
+                          "CU",
+                          "CV",
+                          "CW",
+                          "CX",
+                          "CY",
+                          "CZ",
+                          "DE",
+                          "DJ",
+                          "DK",
+                          "DM",
+                          "DO",
+                          "DZ",
+                          "EC",
+                          "EE",
+                          "EG",
+                          "EH",
+                          "ER",
+                          "ES",
+                          "ET",
+                          "FI",
+                          "FJ",
+                          "FK",
+                          "FM",
+                          "FO",
+                          "FR",
+                          "GA",
+                          "GB",
+                          "GD",
+                          "GE",
+                          "GF",
+                          "GG",
+                          "GH",
+                          "GI",
+                          "GL",
+                          "GM",
+                          "GN",
+                          "GP",
+                          "GQ",
+                          "GR",
+                          "GS",
+                          "GT",
+                          "GU",
+                          "GW",
+                          "GY",
+                          "HK",
+                          "HM",
+                          "HN",
+                          "HR",
+                          "HT",
+                          "HU",
+                          "ID",
+                          "IE",
+                          "IL",
+                          "IM",
+                          "IN",
+                          "IO",
+                          "IQ",
+                          "IR",
+                          "IS",
+                          "IT",
+                          "JE",
+                          "JM",
+                          "JO",
+                          "JP",
+                          "KE",
+                          "KG",
+                          "KH",
+                          "KI",
+                          "KM",
+                          "KN",
+                          "KP",
+                          "KR",
+                          "KW",
+                          "KY",
+                          "KZ",
+                          "LA",
+                          "LB",
+                          "LC",
+                          "LI",
+                          "LK",
+                          "LR",
+                          "LS",
+                          "LT",
+                          "LU",
+                          "LV",
+                          "LY",
+                          "MA",
+                          "MC",
+                          "MD",
+                          "ME",
+                          "MF",
+                          "MG",
+                          "MH",
+                          "MK",
+                          "ML",
+                          "MM",
+                          "MN",
+                          "MO",
+                          "MP",
+                          "MQ",
+                          "MR",
+                          "MS",
+                          "MT",
+                          "MU",
+                          "MV",
+                          "MW",
+                          "MX",
+                          "MY",
+                          "MZ",
+                          "NA",
+                          "NC",
+                          "NE",
+                          "NF",
+                          "NG",
+                          "NI",
+                          "NL",
+                          "NO",
+                          "NP",
+                          "NR",
+                          "NU",
+                          "NZ",
+                          "OM",
+                          "PA",
+                          "PE",
+                          "PF",
+                          "PG",
+                          "PH",
+                          "PK",
+                          "PL",
+                          "PM",
+                          "PN",
+                          "PR",
+                          "PS",
+                          "PT",
+                          "PW",
+                          "PY",
+                          "QA",
+                          "RE",
+                          "RO",
+                          "RS",
+                          "RU",
+                          "RW",
+                          "SA",
+                          "SB",
+                          "SC",
+                          "SD",
+                          "SE",
+                          "SG",
+                          "SH",
+                          "SI",
+                          "SJ",
+                          "SK",
+                          "SL",
+                          "SM",
+                          "SN",
+                          "SO",
+                          "SR",
+                          "SS",
+                          "ST",
+                          "SV",
+                          "SX",
+                          "SY",
+                          "SZ",
+                          "TC",
+                          "TD",
+                          "TF",
+                          "TG",
+                          "TH",
+                          "TJ",
+                          "TK",
+                          "TL",
+                          "TM",
+                          "TN",
+                          "TO",
+                          "TR",
+                          "TT",
+                          "TV",
+                          "TW",
+                          "TZ",
+                          "UA",
+                          "UG",
+                          "UM",
+                          "US",
+                          "UY",
+                          "UZ",
+                          "VA",
+                          "VC",
+                          "VE",
+                          "VG",
+                          "VI",
+                          "VN",
+                          "VU",
+                          "WF",
+                          "WS",
+                          "YE",
+                          "YT",
+                          "ZA",
+                          "ZM",
+                          "ZW"
+                        ]
+                      },
+                      "line1": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Line1"
+                      },
+                      "line2": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Line2"
+                      },
+                      "postal_code": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Postal Code"
+                      },
+                      "state": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "State"
+                      }
+                    },
+                    "required": [
+                      "country"
+                    ],
+                    "title": "Address",
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deleted_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Timestamp for when the customer was soft deleted.",
+                "title": "Deleted At"
+              },
+              "email": {
+                "description": "The email address of the customer. This must be unique within the organization.",
+                "examples": [
+                  "customer@example.com"
+                ],
+                "title": "Email",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "email_verified": {
+                "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+                "examples": [
+                  true
+                ],
+                "title": "Email Verified",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "external_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+                "examples": [
+                  "usr_1337"
+                ],
+                "title": "External Id"
+              },
+              "id": {
+                "description": "The ID of the customer.",
+                "examples": [
+                  "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+                ],
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "locale": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Locale"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The name of the customer.",
+                "examples": [
+                  "John Doe"
+                ],
+                "title": "Name"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the customer.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "tax_id": {
+                "anyOf": [
+                  {
+                    "examples": [
+                      [
+                        "911144442",
+                        "us_ein"
+                      ],
+                      [
+                        "FR61954506077",
+                        "eu_vat"
+                      ]
+                    ],
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "description": "List of supported tax ID formats.\n\nRef: https://docs.stripe.com/billing/customer/tax-ids#supported-tax-id",
+                        "enum": [
+                          "ad_nrt",
+                          "ae_trn",
+                          "ar_cuit",
+                          "au_abn",
+                          "au_arn",
+                          "bg_uic",
+                          "bh_vat",
+                          "bo_tin",
+                          "br_cnpj",
+                          "br_cpf",
+                          "ca_bn",
+                          "ca_gst_hst",
+                          "ca_pst_bc",
+                          "ca_pst_mb",
+                          "ca_pst_sk",
+                          "ca_qst",
+                          "ch_uid",
+                          "ch_vat",
+                          "cl_tin",
+                          "cn_tin",
+                          "co_nit",
+                          "cr_tin",
+                          "de_stn",
+                          "do_rcn",
+                          "ec_ruc",
+                          "eg_tin",
+                          "es_cif",
+                          "eu_oss_vat",
+                          "eu_vat",
+                          "gb_vat",
+                          "ge_vat",
+                          "hk_br",
+                          "hr_oib",
+                          "hu_tin",
+                          "id_npwp",
+                          "il_vat",
+                          "in_gst",
+                          "is_vat",
+                          "jp_cn",
+                          "jp_rn",
+                          "jp_trn",
+                          "ke_pin",
+                          "kr_brn",
+                          "kz_bin",
+                          "li_uid",
+                          "mk_vat",
+                          "mx_rfc",
+                          "my_frp",
+                          "my_itn",
+                          "my_sst",
+                          "ng_tin",
+                          "no_vat",
+                          "no_voec",
+                          "nz_gst",
+                          "om_vat",
+                          "pe_ruc",
+                          "ph_tin",
+                          "ro_tin",
+                          "rs_pib",
+                          "ru_inn",
+                          "ru_kpp",
+                          "sa_vat",
+                          "sg_gst",
+                          "sg_uen",
+                          "si_tin",
+                          "sv_nit",
+                          "th_vat",
+                          "tr_tin",
+                          "tw_vat",
+                          "ua_vat",
+                          "us_ein",
+                          "uy_ruc",
+                          "ve_rif",
+                          "vn_tin",
+                          "za_vat"
+                        ],
+                        "title": "TaxIDFormat",
+                        "type": "string"
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Tax Id"
+              },
+              "type": {
+                "const": "individual",
+                "description": "The type of customer.",
+                "examples": [
+                  "individual"
+                ],
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "metadata",
+              "email",
+              "email_verified",
+              "type",
+              "name",
+              "billing_address",
+              "tax_id",
+              "organization_id",
+              "deleted_at",
+              "avatar_url"
+            ],
+            "title": "CustomerIndividual",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "description": "A team customer in an organization.",
+            "properties": {
+              "avatar_url": {
+                "examples": [
+                  "https://www.gravatar.com/avatar/xxx?d=404"
+                ],
+                "readOnly": true,
+                "title": "Avatar Url",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "billing_address": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "city": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "City"
+                      },
+                      "country": {
+                        "examples": [
+                          "US",
+                          "SE",
+                          "FR"
+                        ],
+                        "title": "CountryAlpha2",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "x-speakeasy-enums": [
+                          "AD",
+                          "AE",
+                          "AF",
+                          "AG",
+                          "AI",
+                          "AL",
+                          "AM",
+                          "AO",
+                          "AQ",
+                          "AR",
+                          "AS",
+                          "AT",
+                          "AU",
+                          "AW",
+                          "AX",
+                          "AZ",
+                          "BA",
+                          "BB",
+                          "BD",
+                          "BE",
+                          "BF",
+                          "BG",
+                          "BH",
+                          "BI",
+                          "BJ",
+                          "BL",
+                          "BM",
+                          "BN",
+                          "BO",
+                          "BQ",
+                          "BR",
+                          "BS",
+                          "BT",
+                          "BV",
+                          "BW",
+                          "BY",
+                          "BZ",
+                          "CA",
+                          "CC",
+                          "CD",
+                          "CF",
+                          "CG",
+                          "CH",
+                          "CI",
+                          "CK",
+                          "CL",
+                          "CM",
+                          "CN",
+                          "CO",
+                          "CR",
+                          "CU",
+                          "CV",
+                          "CW",
+                          "CX",
+                          "CY",
+                          "CZ",
+                          "DE",
+                          "DJ",
+                          "DK",
+                          "DM",
+                          "DO",
+                          "DZ",
+                          "EC",
+                          "EE",
+                          "EG",
+                          "EH",
+                          "ER",
+                          "ES",
+                          "ET",
+                          "FI",
+                          "FJ",
+                          "FK",
+                          "FM",
+                          "FO",
+                          "FR",
+                          "GA",
+                          "GB",
+                          "GD",
+                          "GE",
+                          "GF",
+                          "GG",
+                          "GH",
+                          "GI",
+                          "GL",
+                          "GM",
+                          "GN",
+                          "GP",
+                          "GQ",
+                          "GR",
+                          "GS",
+                          "GT",
+                          "GU",
+                          "GW",
+                          "GY",
+                          "HK",
+                          "HM",
+                          "HN",
+                          "HR",
+                          "HT",
+                          "HU",
+                          "ID",
+                          "IE",
+                          "IL",
+                          "IM",
+                          "IN",
+                          "IO",
+                          "IQ",
+                          "IR",
+                          "IS",
+                          "IT",
+                          "JE",
+                          "JM",
+                          "JO",
+                          "JP",
+                          "KE",
+                          "KG",
+                          "KH",
+                          "KI",
+                          "KM",
+                          "KN",
+                          "KP",
+                          "KR",
+                          "KW",
+                          "KY",
+                          "KZ",
+                          "LA",
+                          "LB",
+                          "LC",
+                          "LI",
+                          "LK",
+                          "LR",
+                          "LS",
+                          "LT",
+                          "LU",
+                          "LV",
+                          "LY",
+                          "MA",
+                          "MC",
+                          "MD",
+                          "ME",
+                          "MF",
+                          "MG",
+                          "MH",
+                          "MK",
+                          "ML",
+                          "MM",
+                          "MN",
+                          "MO",
+                          "MP",
+                          "MQ",
+                          "MR",
+                          "MS",
+                          "MT",
+                          "MU",
+                          "MV",
+                          "MW",
+                          "MX",
+                          "MY",
+                          "MZ",
+                          "NA",
+                          "NC",
+                          "NE",
+                          "NF",
+                          "NG",
+                          "NI",
+                          "NL",
+                          "NO",
+                          "NP",
+                          "NR",
+                          "NU",
+                          "NZ",
+                          "OM",
+                          "PA",
+                          "PE",
+                          "PF",
+                          "PG",
+                          "PH",
+                          "PK",
+                          "PL",
+                          "PM",
+                          "PN",
+                          "PR",
+                          "PS",
+                          "PT",
+                          "PW",
+                          "PY",
+                          "QA",
+                          "RE",
+                          "RO",
+                          "RS",
+                          "RU",
+                          "RW",
+                          "SA",
+                          "SB",
+                          "SC",
+                          "SD",
+                          "SE",
+                          "SG",
+                          "SH",
+                          "SI",
+                          "SJ",
+                          "SK",
+                          "SL",
+                          "SM",
+                          "SN",
+                          "SO",
+                          "SR",
+                          "SS",
+                          "ST",
+                          "SV",
+                          "SX",
+                          "SY",
+                          "SZ",
+                          "TC",
+                          "TD",
+                          "TF",
+                          "TG",
+                          "TH",
+                          "TJ",
+                          "TK",
+                          "TL",
+                          "TM",
+                          "TN",
+                          "TO",
+                          "TR",
+                          "TT",
+                          "TV",
+                          "TW",
+                          "TZ",
+                          "UA",
+                          "UG",
+                          "UM",
+                          "US",
+                          "UY",
+                          "UZ",
+                          "VA",
+                          "VC",
+                          "VE",
+                          "VG",
+                          "VI",
+                          "VN",
+                          "VU",
+                          "WF",
+                          "WS",
+                          "YE",
+                          "YT",
+                          "ZA",
+                          "ZM",
+                          "ZW"
+                        ]
+                      },
+                      "line1": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Line1"
+                      },
+                      "line2": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Line2"
+                      },
+                      "postal_code": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "Postal Code"
+                      },
+                      "state": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "title": "State"
+                      }
+                    },
+                    "required": [
+                      "country"
+                    ],
+                    "title": "Address",
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "deleted_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Timestamp for when the customer was soft deleted.",
+                "title": "Deleted At"
+              },
+              "email": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The email address of the customer. This must be unique within the organization.",
+                "examples": [
+                  "customer@example.com"
+                ],
+                "title": "Email"
+              },
+              "email_verified": {
+                "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
+                "examples": [
+                  true
+                ],
+                "title": "Email Verified",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "external_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The ID of the customer in your system. This must be unique within the organization. Once set, it can't be updated.",
+                "examples": [
+                  "usr_1337"
+                ],
+                "title": "External Id"
+              },
+              "id": {
+                "description": "The ID of the customer.",
+                "examples": [
+                  "992fae2a-2a17-4b7a-8d9e-e287cf90131b"
+                ],
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "locale": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Locale"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The name of the customer.",
+                "examples": [
+                  "John Doe"
+                ],
+                "title": "Name"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the customer.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "tax_id": {
+                "anyOf": [
+                  {
+                    "examples": [
+                      [
+                        "911144442",
+                        "us_ein"
+                      ],
+                      [
+                        "FR61954506077",
+                        "eu_vat"
+                      ]
+                    ],
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "description": "List of supported tax ID formats.\n\nRef: https://docs.stripe.com/billing/customer/tax-ids#supported-tax-id",
+                        "enum": [
+                          "ad_nrt",
+                          "ae_trn",
+                          "ar_cuit",
+                          "au_abn",
+                          "au_arn",
+                          "bg_uic",
+                          "bh_vat",
+                          "bo_tin",
+                          "br_cnpj",
+                          "br_cpf",
+                          "ca_bn",
+                          "ca_gst_hst",
+                          "ca_pst_bc",
+                          "ca_pst_mb",
+                          "ca_pst_sk",
+                          "ca_qst",
+                          "ch_uid",
+                          "ch_vat",
+                          "cl_tin",
+                          "cn_tin",
+                          "co_nit",
+                          "cr_tin",
+                          "de_stn",
+                          "do_rcn",
+                          "ec_ruc",
+                          "eg_tin",
+                          "es_cif",
+                          "eu_oss_vat",
+                          "eu_vat",
+                          "gb_vat",
+                          "ge_vat",
+                          "hk_br",
+                          "hr_oib",
+                          "hu_tin",
+                          "id_npwp",
+                          "il_vat",
+                          "in_gst",
+                          "is_vat",
+                          "jp_cn",
+                          "jp_rn",
+                          "jp_trn",
+                          "ke_pin",
+                          "kr_brn",
+                          "kz_bin",
+                          "li_uid",
+                          "mk_vat",
+                          "mx_rfc",
+                          "my_frp",
+                          "my_itn",
+                          "my_sst",
+                          "ng_tin",
+                          "no_vat",
+                          "no_voec",
+                          "nz_gst",
+                          "om_vat",
+                          "pe_ruc",
+                          "ph_tin",
+                          "ro_tin",
+                          "rs_pib",
+                          "ru_inn",
+                          "ru_kpp",
+                          "sa_vat",
+                          "sg_gst",
+                          "sg_uen",
+                          "si_tin",
+                          "sv_nit",
+                          "th_vat",
+                          "tr_tin",
+                          "tw_vat",
+                          "ua_vat",
+                          "us_ein",
+                          "uy_ruc",
+                          "ve_rif",
+                          "vn_tin",
+                          "za_vat"
+                        ],
+                        "title": "TaxIDFormat",
+                        "type": "string"
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Tax Id"
+              },
+              "type": {
+                "const": "team",
+                "description": "The type of customer. Team customers can have multiple members.",
+                "examples": [
+                  "team"
+                ],
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "metadata",
+              "email_verified",
+              "type",
+              "name",
+              "billing_address",
+              "tax_id",
+              "organization_id",
+              "deleted_at",
+              "avatar_url"
+            ],
+            "title": "CustomerTeam",
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        ]
+      },
+      "customer_id": {
+        "description": "The ID of the customer concerned by this grant.",
+        "format": "uuid4",
+        "title": "Customer Id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "error": {
+        "anyOf": [
+          {
+            "properties": {
+              "message": {
+                "title": "Message",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "timestamp": {
+                "title": "Timestamp",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "type": {
+                "title": "Type",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "message",
+              "type",
+              "timestamp"
+            ],
+            "title": "BenefitGrantError",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The error information if the benefit grant failed with an unrecoverable error."
+      },
+      "granted_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted.",
+        "title": "Granted At"
+      },
+      "id": {
+        "description": "The ID of the grant.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "is_granted": {
+        "description": "Whether the benefit is granted.",
+        "title": "Is Granted",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "is_revoked": {
+        "description": "Whether the benefit is revoked.",
+        "title": "Is Revoked",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "member": {
+        "anyOf": [
+          {
+            "description": "A member of a customer.",
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "customer_id": {
+                "description": "The ID of the customer this member belongs to.",
+                "format": "uuid4",
+                "title": "Customer Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "email": {
+                "description": "The email address of the member.",
+                "examples": [
+                  "member@example.com"
+                ],
+                "title": "Email",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "external_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The ID of the member in your system. This must be unique within the customer. ",
+                "examples": [
+                  "usr_1337"
+                ],
+                "title": "External Id"
+              },
+              "id": {
+                "description": "The ID of the member.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The name of the member.",
+                "examples": [
+                  "Jane Doe"
+                ],
+                "title": "Name"
+              },
+              "role": {
+                "description": "The role of the member within the customer.",
+                "examples": [
+                  "owner"
+                ],
+                "title": "MemberRole",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "created_at",
+              "modified_at",
+              "customer_id",
+              "email",
+              "name",
+              "external_id",
+              "role"
+            ],
+            "title": "Member",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "member_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The ID of the member concerned by this grant.",
+        "title": "Member Id"
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "order_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The ID of the order that granted this benefit.",
+        "title": "Order Id"
+      },
+      "properties": {
+        "anyOf": [
+          {
+            "properties": {
+              "account_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Account Id"
+              },
+              "granted_account_id": {
+                "title": "Granted Account Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "guild_id": {
+                "title": "Guild Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "role_id": {
+                "title": "Role Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "BenefitGrantDiscordProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {
+              "account_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Account Id"
+              },
+              "granted_account_id": {
+                "title": "Granted Account Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "permission": {
+                "title": "Permission",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "repository_name": {
+                "title": "Repository Name",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "repository_owner": {
+                "title": "Repository Owner",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "BenefitGrantGitHubRepositoryProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {
+              "files": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Files",
+                "type": [
+                  "array",
+                  "null"
+                ]
+              }
+            },
+            "title": "BenefitGrantDownloadablesProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {
+              "display_key": {
+                "title": "Display Key",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "license_key_id": {
+                "title": "License Key Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "user_provided_key": {
+                "title": "User Provided Key",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "BenefitGrantLicenseKeysProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {},
+            "title": "BenefitGrantCustomProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "properties": {},
+            "title": "BenefitGrantFeatureFlagProperties",
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        ],
+        "title": "Properties"
+      },
+      "revoked_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked.",
+        "title": "Revoked At"
+      },
+      "subscription_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The ID of the subscription that granted this benefit.",
+        "title": "Subscription Id"
+      }
+    },
+    "required": [
+      "created_at",
+      "modified_at",
+      "id",
+      "is_granted",
+      "is_revoked",
+      "subscription_id",
+      "order_id",
+      "customer_id",
+      "benefit_id",
+      "customer",
+      "benefit",
+      "properties"
+    ],
+    "title": "BenefitGrant",
+    "type": "object"
+  },
+  "stream": "benefit_grants_github_repo",
+  "tap_stream_id": "benefit_grants_github_repo"
+}

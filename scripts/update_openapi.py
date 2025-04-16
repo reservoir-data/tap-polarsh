@@ -29,7 +29,7 @@ logger = logging.getLogger()
 def main() -> None:
     """Update the OpenAPI schema from the Polar API."""
     logger.info("Updating OpenAPI schema from %s", OPENAPI_URL)
-    request = urllib.request.Request(OPENAPI_URL, headers={"User-Agent": "tap-polarsh"})  # noqa: S310
+    request = urllib.request.Request(OPENAPI_URL, headers={"User-Agent": "tap-polarsh"})
     with (
         tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8") as f_out,
         urllib.request.urlopen(request) as f_req,  # noqa: S310
