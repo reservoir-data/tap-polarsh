@@ -20,6 +20,19 @@ TestTapPolar = get_tap_test_class(
         max_records_limit=10,
         ignore_no_records_for_streams=[
             "checkout_links",
+            # Benefits
+            "benefits_custom",
+            "benefits_discord",
+            "benefits_downloadables",
+            "benefits_license_keys",
+            "benefits_meter_credit",
+            # Benefit grants
+            "benefit_grants_custom",
+            "benefit_grants_discord",
+            "benefit_grants_github_repo",
+            "benefit_grants_downloadables",
+            "benefit_grants_license_keys",
+            "benefit_grants_meter_credit",
         ],
     ),
 )
