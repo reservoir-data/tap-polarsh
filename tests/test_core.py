@@ -23,7 +23,6 @@ TestTapPolar = get_tap_test_class(
             "subscriptions",
             # Benefits
             "benefits_custom",
-            "benefits_discord",
             "benefits_downloadables",
             "benefits_license_keys",
             "benefits_meter_credit",
