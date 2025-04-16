@@ -3114,6 +3114,6 @@
     "title": "BenefitGrant",
     "type": "object"
   },
-  "stream": "benefit_grants_license_keys",
-  "tap_stream_id": "benefit_grants_license_keys"
+  "stream": "benefit_grants",
+  "tap_stream_id": "benefit_grants"
 }

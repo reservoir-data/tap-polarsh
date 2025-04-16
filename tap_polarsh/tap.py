@@ -48,22 +48,27 @@ class TapPolar(Tap):
         Returns:
             A list of Neon Serverless Postgres streams.
         """
-        return [
-            streams.Organizations(tap=self),
-            streams.CheckoutLinks(tap=self),
-            streams.Products(tap=self),
-            streams.Subscriptions(tap=self),
-            streams.Orders(tap=self),
-            streams.BenefitsCustom(tap=self),
-            streams.BenefitGrantsCustom(tap=self),
-            streams.BenefitsDiscord(tap=self),
-            streams.BenefitGrantsDiscord(tap=self),
-            streams.BenefitsGitHubRepo(tap=self),
-            streams.BenefitGrantsGitHubRepo(tap=self),
-            streams.BenefitsDownloadables(tap=self),
-            streams.BenefitGrantsDownloadables(tap=self),
-            streams.BenefitsLicenseKeys(tap=self),
-            streams.BenefitGrantsLicenseKeys(tap=self),
-            streams.BenefitsMeterCredit(tap=self),
-            streams.BenefitGrantsMeterCredit(tap=self),
+        stream_classes = [
+            streams.Organizations,
+            streams.CheckoutLinks,
+            streams.Products,
+            streams.Subscriptions,
+            streams.Orders,
+            streams.BenefitsCustom,
+            streams.BenefitsDiscord,
+            streams.BenefitsGitHubRepo,
+            streams.BenefitsDownloadables,
+            streams.BenefitsLicenseKeys,
+            streams.BenefitsMeterCredit,
+            streams.BenefitGrants,
         ]
+        streams_dict: dict[str, Stream] = {}
+        for stream_type in stream_classes:
+            _stream = stream_type(tap=self)
+            streams_dict[_stream.name] = _stream
+
+        for stream_name, stream in streams_dict.items():
+            if stream_name.startswith("benefits_"):
+                stream.child_streams.append(streams_dict["benefit_grants"])
+
+        return sorted(streams_dict.values(), key=lambda x: x.name)

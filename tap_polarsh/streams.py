@@ -129,15 +129,6 @@ class _BaseBenefits(PolarStream):
         }
 
 
-class _BaseBenefitsGrants(PolarStream):
-    """Base benefits grants stream."""
-
-    path = "/api/v1/benefits/{benefit_id}/grants"
-    primary_keys = ("id",)
-
-    schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitGrant")
-
-
 class BenefitsCustom(_BaseBenefits):
     """Custom benefits stream."""
 
@@ -145,13 +136,6 @@ class BenefitsCustom(_BaseBenefits):
     benefit_type = "custom"
 
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitCustom")
-
-
-class BenefitGrantsCustom(_BaseBenefitsGrants):
-    """Custom benefits grants stream."""
-
-    name = "benefit_grants_custom"
-    parent_stream_type = BenefitsCustom
 
 
 class BenefitsDiscord(_BaseBenefits):
@@ -163,13 +147,6 @@ class BenefitsDiscord(_BaseBenefits):
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitDiscord")
 
 
-class BenefitGrantsDiscord(_BaseBenefitsGrants):
-    """Discord benefits grants stream."""
-
-    name = "benefit_grants_discord"
-    parent_stream_type = BenefitsDiscord
-
-
 class BenefitsGitHubRepo(_BaseBenefits):
     """Benefits stream."""
 
@@ -177,13 +154,6 @@ class BenefitsGitHubRepo(_BaseBenefits):
     benefit_type = "github_repository"
 
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitGitHubRepository")
-
-
-class BenefitGrantsGitHubRepo(_BaseBenefitsGrants):
-    """Benefits grants stream."""
-
-    name = "benefit_grants_github_repo"
-    parent_stream_type = BenefitsGitHubRepo
 
 
 class BenefitsDownloadables(_BaseBenefits):
@@ -195,13 +165,6 @@ class BenefitsDownloadables(_BaseBenefits):
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitDownloadables")
 
 
-class BenefitGrantsDownloadables(_BaseBenefitsGrants):
-    """Downloadable benefits grants stream."""
-
-    name = "benefit_grants_downloadables"
-    parent_stream_type = BenefitsDownloadables
-
-
 class BenefitsLicenseKeys(_BaseBenefits):
     """License keys benefits stream."""
 
@@ -209,13 +172,6 @@ class BenefitsLicenseKeys(_BaseBenefits):
     benefit_type = "license_keys"
 
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitLicenseKeys")
-
-
-class BenefitGrantsLicenseKeys(_BaseBenefitsGrants):
-    """License keys benefits grants stream."""
-
-    name = "benefit_grants_license_keys"
-    parent_stream_type = BenefitsLicenseKeys
 
 
 class BenefitsMeterCredit(_BaseBenefits):
@@ -227,8 +183,11 @@ class BenefitsMeterCredit(_BaseBenefits):
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitMeterCredit")
 
 
-class BenefitGrantsMeterCredit(_BaseBenefitsGrants):
-    """Meter credit benefits grants stream."""
+class BenefitGrants(PolarStream):
+    """Base benefits grants stream."""
 
-    name = "benefit_grants_meter_credit"
-    parent_stream_type = BenefitsMeterCredit
+    name = "benefit_grants"
+    path = "/api/v1/benefits/{benefit_id}/grants"
+    primary_keys = ("id",)
+
+    schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitGrant")
