@@ -22,17 +22,12 @@ STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
     streams.CheckoutLinks,
     streams.BenefitsCustom,
-    streams.BenefitGrantsCustom,
     streams.BenefitsDiscord,
-    streams.BenefitGrantsDiscord,
     streams.BenefitsGitHubRepo,
-    streams.BenefitGrantsGitHubRepo,
     streams.BenefitsDownloadables,
-    streams.BenefitGrantsDownloadables,
     streams.BenefitsLicenseKeys,
-    streams.BenefitGrantsLicenseKeys,
     streams.BenefitsMeterCredit,
-    streams.BenefitGrantsMeterCredit,
+    streams.BenefitGrants,
 ]
 
 
@@ -79,7 +74,7 @@ class TapPolar(Tap):
         Returns:
             A list of Neon Serverless Postgres streams.
         """
-        streams: list[PolarStream] = []
+        streams_dict: dict[str, PolarStream] = {}
         openapi_schema = self.get_openapi_schema()
 
         for stream_type in STREAMS:
@@ -88,6 +83,13 @@ class TapPolar(Tap):
                 "components": openapi_schema["components"],
             }
             resolved_schema = resolve_schema_references(schema)
-            streams.append(stream_type(tap=self, schema=resolved_schema))
+            streams_dict[stream_type.name] = stream_type(
+                tap=self,
+                schema=resolved_schema,
+            )
 
-        return sorted(streams, key=lambda x: x.name)
+        for stream_name, stream_type in streams_dict.items():
+            if stream_name.startswith("benefits_"):
+                stream_type.child_streams.append(streams_dict["benefit_grants"])
+
+        return sorted(streams_dict.values(), key=lambda x: x.name)

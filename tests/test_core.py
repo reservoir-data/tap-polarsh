@@ -27,12 +27,7 @@ TestTapPolar = get_tap_test_class(
             "benefits_license_keys",
             "benefits_meter_credit",
             # Benefit grants
-            "benefit_grants_custom",
-            "benefit_grants_discord",
-            "benefit_grants_github_repo",
-            "benefit_grants_downloadables",
-            "benefit_grants_license_keys",
-            "benefit_grants_meter_credit",
+            "benefit_grants",
         ],
     ),
 )
