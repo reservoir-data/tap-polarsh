@@ -14284,93 +14284,6 @@
           }
         ]
       },
-      "BenefitBase": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
-          "type": {
-            "$ref": "#/components/schemas/BenefitType",
-            "description": "The type of the benefit."
-          },
-          "description": {
-            "type": "string",
-            "title": "Description",
-            "description": "The description of the benefit."
-          },
-          "selectable": {
-            "type": "boolean",
-            "title": "Selectable",
-            "description": "Whether the benefit is selectable when creating a product."
-          },
-          "deletable": {
-            "type": "boolean",
-            "title": "Deletable",
-            "description": "Whether the benefit is deletable."
-          },
-          "organization_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Organization Id",
-            "description": "The ID of the organization owning the benefit."
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "created_at",
-          "modified_at",
-          "metadata",
-          "type",
-          "description",
-          "selectable",
-          "deletable",
-          "organization_id"
-        ],
-        "title": "BenefitBase"
-      },
       "BenefitCreate": {
         "oneOf": [
           {
@@ -14431,26 +14344,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "custom",
@@ -14477,6 +14370,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitCustomProperties"
           },
@@ -14491,12 +14404,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties",
           "is_tax_applicable"
         ],
@@ -14662,26 +14575,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "custom",
@@ -14708,6 +14601,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -14720,12 +14633,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -14853,26 +14766,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "discord",
@@ -14899,6 +14792,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitDiscordProperties"
           }
@@ -14908,12 +14821,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitDiscord",
@@ -15069,26 +14982,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "discord",
@@ -15115,6 +15008,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15127,12 +15040,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -15246,26 +15159,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "downloadables",
@@ -15292,6 +15185,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitDownloadablesProperties"
           }
@@ -15301,12 +15214,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitDownloadables"
@@ -15471,26 +15384,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "downloadables",
@@ -15517,6 +15410,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15529,12 +15442,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -15650,26 +15563,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "github_repository",
@@ -15696,6 +15589,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitGitHubRepositoryProperties"
           }
@@ -15705,12 +15618,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitGitHubRepository",
@@ -15912,26 +15825,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "github_repository",
@@ -15958,6 +15851,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15970,12 +15883,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -16589,26 +16502,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "license_keys",
@@ -16635,6 +16528,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitLicenseKeysProperties"
           }
@@ -16644,12 +16557,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitLicenseKeys"
@@ -16860,26 +16773,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "license_keys",
@@ -16906,6 +16799,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -16918,12 +16831,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -17076,26 +16989,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "meter_credit",
@@ -17122,6 +17015,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitMeterCreditProperties"
           }
@@ -17131,12 +17044,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitMeterCredit",
@@ -17287,26 +17200,6 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
           "type": {
             "type": "string",
             "const": "meter_credit",
@@ -17333,6 +17226,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -17345,12 +17258,12 @@
           "id",
           "created_at",
           "modified_at",
-          "metadata",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -17441,6 +17354,72 @@
           "type"
         ],
         "title": "BenefitMeterCreditUpdate"
+      },
+      "BenefitPublic": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "type": {
+            "$ref": "#/components/schemas/BenefitType",
+            "description": "The type of the benefit."
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "The description of the benefit."
+          },
+          "selectable": {
+            "type": "boolean",
+            "title": "Selectable",
+            "description": "Whether the benefit is selectable when creating a product."
+          },
+          "deletable": {
+            "type": "boolean",
+            "title": "Deletable",
+            "description": "Whether the benefit is deletable."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the benefit."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "type",
+          "description",
+          "selectable",
+          "deletable",
+          "organization_id"
+        ],
+        "title": "BenefitPublic"
       },
       "BenefitSortProperty": {
         "type": "string",
@@ -18771,6 +18750,26 @@
       },
       "CheckoutLinkProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -18857,7 +18856,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -18874,6 +18873,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
@@ -19349,7 +19349,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -24449,7 +24449,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -25029,7 +25029,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -26372,7 +26372,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -28523,6 +28523,26 @@
       },
       "DiscountProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -28595,6 +28615,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
@@ -33341,6 +33362,26 @@
       },
       "OrderProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -33413,6 +33454,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
