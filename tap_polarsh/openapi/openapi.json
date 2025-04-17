@@ -11708,6 +11708,30 @@
             "description": "Filter by external customer ID."
           },
           {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventSource"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventSource"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Filter",
+              "description": "Filter by event source."
+            },
+            "description": "Filter by event source."
+          },
+          {
             "name": "query",
             "in": "query",
             "required": false,
@@ -14260,72 +14284,6 @@
           }
         ]
       },
-      "BenefitBase": {
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
-          },
-          "type": {
-            "$ref": "#/components/schemas/BenefitType",
-            "description": "The type of the benefit."
-          },
-          "description": {
-            "type": "string",
-            "title": "Description",
-            "description": "The description of the benefit."
-          },
-          "selectable": {
-            "type": "boolean",
-            "title": "Selectable",
-            "description": "Whether the benefit is selectable when creating a product."
-          },
-          "deletable": {
-            "type": "boolean",
-            "title": "Deletable",
-            "description": "Whether the benefit is deletable."
-          },
-          "organization_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Organization Id",
-            "description": "The ID of the organization owning the benefit."
-          }
-        },
-        "type": "object",
-        "required": [
-          "created_at",
-          "modified_at",
-          "id",
-          "type",
-          "description",
-          "selectable",
-          "deletable",
-          "organization_id"
-        ],
-        "title": "BenefitBase"
-      },
       "BenefitCreate": {
         "oneOf": [
           {
@@ -14361,6 +14319,12 @@
       },
       "BenefitCustom": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -14379,12 +14343,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -14412,6 +14370,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitCustomProperties"
           },
@@ -14423,14 +14401,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties",
           "is_tax_applicable"
         ],
@@ -14439,6 +14418,34 @@
       },
       "BenefitCustomCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "custom",
@@ -14543,6 +14550,12 @@
       },
       "BenefitCustomSubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -14561,12 +14574,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -14594,6 +14601,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -14603,14 +14630,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -14647,6 +14675,34 @@
       },
       "BenefitCustomUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -14685,6 +14741,12 @@
       },
       "BenefitDiscord": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -14703,12 +14765,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -14736,20 +14792,41 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitDiscordProperties"
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitDiscord",
@@ -14757,6 +14834,34 @@
       },
       "BenefitDiscordCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "discord",
@@ -14852,6 +14957,12 @@
       },
       "BenefitDiscordSubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -14870,12 +14981,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -14903,6 +15008,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -14912,14 +15037,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -14942,6 +15068,34 @@
       },
       "BenefitDiscordUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -14980,6 +15134,12 @@
       },
       "BenefitDownloadables": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -14998,12 +15158,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -15031,26 +15185,75 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitDownloadablesProperties"
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitDownloadables"
       },
       "BenefitDownloadablesCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "downloadables",
@@ -15156,6 +15359,12 @@
       },
       "BenefitDownloadablesSubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -15174,12 +15383,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -15207,6 +15410,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15216,14 +15439,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -15248,6 +15472,34 @@
       },
       "BenefitDownloadablesUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -15286,6 +15538,12 @@
       },
       "BenefitGitHubRepository": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -15304,12 +15562,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -15337,20 +15589,41 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitGitHubRepositoryProperties"
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitGitHubRepository",
@@ -15358,6 +15631,34 @@
       },
       "BenefitGitHubRepositoryCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "github_repository",
@@ -15499,6 +15800,12 @@
       },
       "BenefitGitHubRepositorySubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -15517,12 +15824,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -15550,6 +15851,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -15559,14 +15880,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -15601,6 +15923,34 @@
       },
       "BenefitGitHubRepositoryUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -16127,6 +16477,12 @@
       },
       "BenefitLicenseKeys": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -16145,12 +16501,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -16178,26 +16528,75 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitLicenseKeysProperties"
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitLicenseKeys"
       },
       "BenefitLicenseKeysCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "license_keys",
@@ -16349,6 +16748,12 @@
       },
       "BenefitLicenseKeysSubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -16367,12 +16772,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -16400,6 +16799,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -16409,14 +16828,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -16478,6 +16898,34 @@
       },
       "BenefitLicenseKeysUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -16516,6 +16964,12 @@
       },
       "BenefitMeterCredit": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -16534,12 +16988,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -16567,20 +17015,41 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "properties": {
             "$ref": "#/components/schemas/BenefitMeterCreditProperties"
           }
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "properties"
         ],
         "title": "BenefitMeterCredit",
@@ -16588,6 +17057,34 @@
       },
       "BenefitMeterCreditCreate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "type": {
             "type": "string",
             "const": "meter_credit",
@@ -16678,6 +17175,12 @@
       },
       "BenefitMeterCreditSubscriber": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -16696,12 +17199,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the benefit."
           },
           "type": {
             "type": "string",
@@ -16729,6 +17226,26 @@
             "title": "Organization Id",
             "description": "The ID of the organization owning the benefit."
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "organization": {
             "$ref": "#/components/schemas/Organization"
           },
@@ -16738,14 +17255,15 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "type",
           "description",
           "selectable",
           "deletable",
           "organization_id",
+          "metadata",
           "organization",
           "properties"
         ],
@@ -16773,6 +17291,34 @@
       },
       "BenefitMeterCreditUpdate": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
           "description": {
             "anyOf": [
               {
@@ -16808,6 +17354,72 @@
           "type"
         ],
         "title": "BenefitMeterCreditUpdate"
+      },
+      "BenefitPublic": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the benefit."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "type": {
+            "$ref": "#/components/schemas/BenefitType",
+            "description": "The type of the benefit."
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "The description of the benefit."
+          },
+          "selectable": {
+            "type": "boolean",
+            "title": "Selectable",
+            "description": "Whether the benefit is selectable when creating a product."
+          },
+          "deletable": {
+            "type": "boolean",
+            "title": "Deletable",
+            "description": "Whether the benefit is deletable."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the benefit."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "modified_at",
+          "type",
+          "description",
+          "selectable",
+          "deletable",
+          "organization_id"
+        ],
+        "title": "BenefitPublic"
       },
       "BenefitSortProperty": {
         "type": "string",
@@ -17113,6 +17725,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -17675,6 +18290,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -17851,6 +18469,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -17862,7 +18483,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "payment_processor": {
             "type": "string",
@@ -17944,6 +18565,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -17955,7 +18579,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "payment_processor": {
             "type": "string",
@@ -18037,6 +18661,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18048,7 +18675,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "payment_processor": {
             "type": "string",
@@ -18123,6 +18750,26 @@
       },
       "CheckoutLinkProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -18209,7 +18856,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -18226,6 +18873,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
@@ -18270,6 +18918,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18281,7 +18932,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "products": {
             "anyOf": [
@@ -18370,6 +19021,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18381,7 +19035,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -18537,6 +19191,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18548,7 +19205,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Customer Metadata",
-            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "subscription_id": {
             "anyOf": [
@@ -18692,7 +19349,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -18739,6 +19396,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18750,7 +19410,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -18906,6 +19566,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18917,7 +19580,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Customer Metadata",
-            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "subscription_id": {
             "anyOf": [
@@ -18987,6 +19650,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -18998,7 +19664,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -19154,6 +19820,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -19165,7 +19834,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Customer Metadata",
-            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "subscription_id": {
             "anyOf": [
@@ -20135,6 +20804,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20146,7 +20818,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "discount_id": {
             "anyOf": [
@@ -20199,6 +20871,9 @@
                       "type": "integer"
                     },
                     {
+                      "type": "number"
+                    },
+                    {
                       "type": "boolean"
                     }
                   ]
@@ -20209,14 +20884,14 @@
                 },
                 "type": "object",
                 "maxProperties": 50,
-                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+                "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
               },
               {
                 "type": "null"
               }
             ],
             "title": "Customer Metadata",
-            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information that'll be copied to the created customer.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "success_url": {
             "anyOf": [
@@ -20460,6 +21135,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20579,6 +21257,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20590,7 +21271,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "type": {
             "type": "string",
@@ -20660,6 +21341,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20671,7 +21355,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "type": {
             "type": "string",
@@ -20741,6 +21425,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20752,7 +21439,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "type": {
             "type": "string",
@@ -20822,6 +21509,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20833,7 +21523,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "type": {
             "type": "string",
@@ -20903,6 +21593,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -20914,7 +21607,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "type": {
             "type": "string",
@@ -21005,6 +21698,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -21128,6 +21824,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21247,6 +21946,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -21406,6 +22108,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21550,6 +22255,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21561,7 +22269,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21627,6 +22335,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21638,7 +22349,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21704,6 +22415,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21715,7 +22429,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21781,6 +22495,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21792,7 +22509,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21858,6 +22575,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -21869,7 +22589,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -21959,6 +22679,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -23050,6 +23773,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -23061,7 +23787,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "external_id": {
             "anyOf": [
@@ -23723,7 +24449,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -24303,7 +25029,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -24480,6 +25206,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -24874,6 +25603,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -25023,6 +25755,14 @@
             "examples": [
               "196ca717-4d84-4d28-a1b8-777255797dbc"
             ]
+          },
+          "meters": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerStateSubscriptionMeter"
+            },
+            "type": "array",
+            "title": "Meters",
+            "description": "List of meters associated with the subscription."
           }
         },
         "type": "object",
@@ -25043,10 +25783,85 @@
           "ends_at",
           "product_id",
           "discount_id",
-          "price_id"
+          "price_id",
+          "meters"
         ],
         "title": "CustomerStateSubscription",
         "description": "An active customer subscription."
+      },
+      "CustomerStateSubscriptionMeter": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "consumed_units": {
+            "type": "number",
+            "title": "Consumed Units",
+            "description": "The number of consumed units so far in this billing period.",
+            "examples": [
+              25.0
+            ]
+          },
+          "credited_units": {
+            "type": "integer",
+            "title": "Credited Units",
+            "description": "The number of credited units so far in this billing period.",
+            "examples": [
+              100
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount due in cents so far in this billing period.",
+            "examples": [
+              0
+            ]
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter.",
+            "examples": [
+              "d498a884-e2cd-4d3e-8002-f536468a8b22"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "consumed_units",
+          "credited_units",
+          "amount",
+          "meter_id"
+        ],
+        "title": "CustomerStateSubscriptionMeter",
+        "description": "Current consumption and spending for a subscription meter."
       },
       "CustomerSubscription": {
         "properties": {
@@ -25268,6 +26083,14 @@
             "type": "array",
             "title": "Prices",
             "description": "List of enabled prices for the subscription."
+          },
+          "meters": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerSubscriptionMeter"
+            },
+            "type": "array",
+            "title": "Meters",
+            "description": "List of meters associated with the subscription."
           }
         },
         "type": "object",
@@ -25296,7 +26119,8 @@
           "user_id",
           "product",
           "price",
-          "prices"
+          "prices",
+          "meters"
         ],
         "title": "CustomerSubscription"
       },
@@ -25340,6 +26164,125 @@
         },
         "type": "object",
         "title": "CustomerSubscriptionCancel"
+      },
+      "CustomerSubscriptionMeter": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "consumed_units": {
+            "type": "number",
+            "title": "Consumed Units",
+            "description": "The number of consumed units so far in this billing period.",
+            "examples": [
+              25.0
+            ]
+          },
+          "credited_units": {
+            "type": "integer",
+            "title": "Credited Units",
+            "description": "The number of credited units so far in this billing period.",
+            "examples": [
+              100
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount due in cents so far in this billing period.",
+            "examples": [
+              0
+            ]
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter.",
+            "examples": [
+              "d498a884-e2cd-4d3e-8002-f536468a8b22"
+            ]
+          },
+          "meter": {
+            "$ref": "#/components/schemas/CustomerSubscriptionMeterMeter"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "consumed_units",
+          "credited_units",
+          "amount",
+          "meter_id",
+          "meter"
+        ],
+        "title": "CustomerSubscriptionMeter"
+      },
+      "CustomerSubscriptionMeterMeter": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the meter. Will be shown on customer's invoices and usage."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "name"
+        ],
+        "title": "CustomerSubscriptionMeterMeter"
       },
       "CustomerSubscriptionProduct": {
         "properties": {
@@ -25429,7 +26372,7 @@
           },
           "benefits": {
             "items": {
-              "$ref": "#/components/schemas/BenefitBase"
+              "$ref": "#/components/schemas/BenefitPublic"
             },
             "type": "array",
             "title": "BenefitPublic",
@@ -25520,6 +26463,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -25531,7 +26477,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "external_id": {
             "anyOf": [
@@ -25716,6 +26662,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -25878,6 +26827,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26014,6 +26966,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26025,7 +26980,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -26186,6 +27141,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -26355,6 +27313,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26498,6 +27459,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26509,7 +27473,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -26663,6 +27627,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -26822,6 +27789,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26951,6 +27921,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -26962,7 +27935,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -27119,6 +28092,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -27283,6 +28259,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -27419,6 +28398,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -27430,7 +28412,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -27541,6 +28523,26 @@
       },
       "DiscountProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -27613,6 +28615,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
@@ -27662,6 +28665,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -27673,7 +28679,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -28113,6 +29119,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -28220,6 +29229,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -28231,7 +29243,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "timestamp": {
             "type": "string",
@@ -28294,6 +29306,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -28305,7 +29320,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "timestamp": {
             "type": "string",
@@ -29481,6 +30496,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -30634,6 +31652,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -30731,6 +31752,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -30742,7 +31766,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -30880,6 +31904,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -30891,7 +31918,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -31780,6 +32807,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -32094,6 +33124,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -32329,6 +33362,26 @@
       },
       "OrderProduct": {
         "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -32401,6 +33454,7 @@
         },
         "type": "object",
         "required": [
+          "metadata",
           "created_at",
           "modified_at",
           "id",
@@ -32453,6 +33507,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -33338,6 +34395,12 @@
             "title": "Issue Funding Enabled",
             "description": "If this organization has issue funding enabled",
             "default": false
+          },
+          "usage_based_billing_enabled": {
+            "type": "boolean",
+            "title": "Usage Based Billing Enabled",
+            "description": "If this organization has usage-based billing enabled",
+            "default": false
           }
         },
         "type": "object",
@@ -33878,6 +34941,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -33993,6 +35059,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -34004,7 +35073,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "type": "string",
@@ -34975,6 +36044,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -34986,7 +36058,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "name": {
             "anyOf": [
@@ -35164,6 +36236,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -35276,6 +36351,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -35287,7 +36365,7 @@
             "type": "object",
             "maxProperties": 50,
             "title": "Metadata",
-            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "order_id": {
             "type": "string",
@@ -35898,6 +36976,9 @@
                   "type": "integer"
                 },
                 {
+                  "type": "number"
+                },
+                {
                   "type": "boolean"
                 }
               ]
@@ -35997,6 +37078,14 @@
             "type": "array",
             "title": "Prices",
             "description": "List of enabled prices for the subscription."
+          },
+          "meters": {
+            "items": {
+              "$ref": "#/components/schemas/SubscriptionMeter"
+            },
+            "type": "array",
+            "title": "Meters",
+            "description": "List of meters associated with the subscription."
           }
         },
         "type": "object",
@@ -36029,7 +37118,8 @@
           "product",
           "discount",
           "price",
-          "prices"
+          "prices",
+          "meters"
         ],
         "title": "Subscription"
       },
@@ -36125,6 +37215,9 @@
                 },
                 {
                   "type": "integer"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "type": "boolean"
@@ -36269,6 +37362,85 @@
           "avatar_url"
         ],
         "title": "SubscriptionCustomer"
+      },
+      "SubscriptionMeter": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "consumed_units": {
+            "type": "number",
+            "title": "Consumed Units",
+            "description": "The number of consumed units so far in this billing period.",
+            "examples": [
+              25.0
+            ]
+          },
+          "credited_units": {
+            "type": "integer",
+            "title": "Credited Units",
+            "description": "The number of credited units so far in this billing period.",
+            "examples": [
+              100
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The amount due in cents so far in this billing period.",
+            "examples": [
+              0
+            ]
+          },
+          "meter_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Meter Id",
+            "description": "The ID of the meter.",
+            "examples": [
+              "d498a884-e2cd-4d3e-8002-f536468a8b22"
+            ]
+          },
+          "meter": {
+            "$ref": "#/components/schemas/Meter",
+            "description": "The meter associated with this subscription."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "consumed_units",
+          "credited_units",
+          "amount",
+          "meter_id",
+          "meter"
+        ],
+        "title": "SubscriptionMeter",
+        "description": "Current consumption and spending for a subscription meter."
       },
       "SubscriptionProrationBehavior": {
         "type": "string",
