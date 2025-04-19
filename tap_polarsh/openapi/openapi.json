@@ -17522,6 +17522,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -17739,6 +17744,11 @@
             },
             "type": "object",
             "title": "Customer Metadata"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -17763,6 +17773,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -17783,7 +17794,8 @@
           "discount",
           "subscription_id",
           "attached_custom_fields",
-          "customer_metadata"
+          "customer_metadata",
+          "customer_billing_address_fields"
         ],
         "title": "Checkout",
         "description": "Checkout session data retrieved using an access token."
@@ -17934,6 +17946,44 @@
       },
       "CheckoutCreate": {
         "$ref": "#/components/schemas/CheckoutProductsCreate"
+      },
+      "CheckoutCustomerBillingAddressFields": {
+        "properties": {
+          "country": {
+            "type": "boolean",
+            "title": "Country"
+          },
+          "state": {
+            "type": "boolean",
+            "title": "State"
+          },
+          "city": {
+            "type": "boolean",
+            "title": "City"
+          },
+          "postal_code": {
+            "type": "boolean",
+            "title": "Postal Code"
+          },
+          "line1": {
+            "type": "boolean",
+            "title": "Line1"
+          },
+          "line2": {
+            "type": "boolean",
+            "title": "Line2"
+          }
+        },
+        "type": "object",
+        "required": [
+          "country",
+          "state",
+          "city",
+          "postal_code",
+          "line1",
+          "line2"
+        ],
+        "title": "CheckoutCustomerBillingAddressFields"
       },
       "CheckoutDiscountFixedOnceForeverDuration": {
         "properties": {
@@ -18234,6 +18284,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting."
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -18310,6 +18365,7 @@
           "success_url",
           "label",
           "allow_discount_codes",
+          "require_billing_address",
           "discount_id",
           "organization_id",
           "products",
@@ -18372,6 +18428,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
           },
           "discount_id": {
             "anyOf": [
@@ -18469,6 +18531,12 @@
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -18564,6 +18632,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
           },
           "discount_id": {
             "anyOf": [
@@ -18838,6 +18912,18 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting."
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -18944,6 +19030,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
           },
           "amount": {
             "anyOf": [
@@ -19320,6 +19412,12 @@
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
+          },
           "amount": {
             "anyOf": [
               {
@@ -19573,6 +19671,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
           },
           "amount": {
             "anyOf": [
@@ -19918,6 +20022,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -20077,6 +20186,11 @@
             },
             "type": "array",
             "title": "Attached Custom Fields"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -20101,6 +20215,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -20118,7 +20233,8 @@
           "product_price",
           "discount",
           "organization",
-          "attached_custom_fields"
+          "attached_custom_fields",
+          "customer_billing_address_fields"
         ],
         "title": "CheckoutPublic",
         "description": "Checkout session data retrieved using the client secret."
@@ -20284,6 +20400,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -20447,6 +20568,11 @@
           "customer_session_token": {
             "type": "string",
             "title": "Customer Session Token"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -20471,6 +20597,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -20489,7 +20616,8 @@
           "discount",
           "organization",
           "attached_custom_fields",
-          "customer_session_token"
+          "customer_session_token",
+          "customer_billing_address_fields"
         ],
         "title": "CheckoutPublicConfirmed",
         "description": "Checkout session data retrieved using the client secret after confirmation.\n\nIt contains a customer session token to retrieve order information\nright after the checkout."
@@ -20682,6 +20810,18 @@
             ],
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
+          "require_billing_address": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
           },
           "customer_ip_address": {
             "anyOf": [
