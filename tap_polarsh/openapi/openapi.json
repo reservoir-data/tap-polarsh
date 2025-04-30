@@ -30243,14 +30243,60 @@
             "title": "Label"
           },
           "conditions": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Conditions",
-            "default": {}
+            "description": "Key-value object allowing you to set conditions that must match when validating the license key.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Meta",
-            "default": {}
+            "description": "Key-value object allowing you to store additional information about the activation\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           }
         },
         "type": "object",
@@ -30278,6 +30324,22 @@
             "title": "Label"
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
             "type": "object",
             "title": "Meta"
           },
@@ -30327,6 +30389,22 @@
             "title": "Label"
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
             "type": "object",
             "title": "Meta"
           },
@@ -30857,9 +30935,32 @@
             "title": "Increment Usage"
           },
           "conditions": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Conditions",
-            "default": {}
+            "description": "Key-value object allowing you to set conditions that must match when validating the license key.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           }
         },
         "type": "object",
