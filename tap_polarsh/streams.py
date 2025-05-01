@@ -115,7 +115,6 @@ class Subscriptions(_OrganizationStream):
     name = "subscriptions"
     path = "/api/v1/subscriptions"
     primary_keys = ("id",)
-    replication_key = None
 
     swagger_ref: str = "Subscription"
 
@@ -128,7 +127,6 @@ class Orders(_OrganizationStream):
     name = "orders"
     path = "/api/v1/orders"
     primary_keys = ("id",)
-    replication_key = None
 
     swagger_ref: str = "Order"
 
