@@ -27,9 +27,9 @@ on:
 env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=uv
-  UV_VERSION: 0.6.5
+  UV_VERSION: 0.6.11
   # renovate: datasource=pypi depName=tox
-  TOX_VERSION: 4.24.2
+  TOX_VERSION: 4.25.0
   # renovate: datasource=pypi depName=tox-uv
   TOX_UV_VERSION: 1.25.0
 
@@ -46,18 +46,15 @@ jobs:
         - "3.11"
         - "3.10"
         - "3.9"
-        include:
-        - { environment: "dependencies", python-version: "3.x" }
-        - { environment: "typing",       python-version: "3.x" }
 
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-    - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+    - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
       id: setup-python
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-    - uses: astral-sh/setup-uv@f94ec6bedd8674c4426838e6b50417d36b6ab231 # v5.3.1
+    - uses: astral-sh/setup-uv@0c5e2b8115b80b4c7c5ddf6ffdd634974642d182 # v5.4.1
       with:
         version: ${{ env.UV_VERSION }}
     - name: Run tests
@@ -65,5 +62,34 @@ jobs:
         UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
         TAP_POLARSH_TOKEN: ${{ secrets.TAP_POLARSH_TOKEN }}
         TAP_POLARSH_START_DATE: ${{ secrets.TAP_POLARSH_START_DATE }}
-      run: |
-        uvx --with tox-uv==${{ env.TOX_UV_VERSION }} --with tox==${{ env.TOX_VERSION }} tox -e ${{ matrix.environment || matrix.python-version }}
+      run: >
+        uvx
+        --with tox-uv==${{ env.TOX_UV_VERSION }}
+        --with tox==${{ env.TOX_VERSION }}
+        tox -e ${{ matrix.python-version }} -- --junit-xml=junit.xml
+    - uses: mikepenz/action-junit-report@cf701569b05ccdd861a76b8607a66d76f6fd4857 # v5.5.1
+      if: ${{ matrix.python-version == '3.13' && success() || failure() }} #  always run even if the previous step fails
+      with:
+        comment: true
+        detailed_summary: true
+        include_passed: true
+        report_paths: junit.xml
+
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
+      id: setup-python
+      with:
+        python-version: 3.x
+    - uses: astral-sh/setup-uv@0c5e2b8115b80b4c7c5ddf6ffdd634974642d182 # v5.4.1
+      with:
+        version: ${{ env.UV_VERSION }}
+    - env:
+        UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
+      run: uv tool install --with tox-uv==${{ env.TOX_UV_VERSION }} --from tox==${{ env.TOX_VERSION }} tox
+    - name: Static type checking
+      run: tox -e typing
+    - name: Unused, missing and transitive dependencies
+      run: tox -e dependencies

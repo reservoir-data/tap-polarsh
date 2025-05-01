@@ -1,4 +1,7 @@
-"""REST client handling, including PolarStream base class."""
+"""REST client handling, including PolarStream base class.
+
+Copyright (c) 2024 Edgar Ramírez-Mondragón
+"""
 
 from __future__ import annotations
 
@@ -46,8 +49,12 @@ class PolarStream(RESTStream[t.Any]):
         """
         return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
 
-    def get_new_paginator(self) -> BasePageNumberPaginator:
-        """Get a new paginator object."""
+    def get_new_paginator(self) -> BasePageNumberPaginator:  # noqa: PLR6301
+        """Get a new paginator object.
+
+        Returns:
+            A new paginator object.
+        """
         return BasePageNumberPaginator(start_value=1)
 
     def get_url_params(

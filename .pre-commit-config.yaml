@@ -21,7 +21,7 @@ repos:
       - id: pyproject-fmt
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.10
+    rev: v0.11.5
     hooks:
       - id: ruff
         name: Ruff lint
@@ -30,14 +30,15 @@ repos:
         name: Ruff format
 
   - repo: https://github.com/pre-commit/pre-commit
-    rev: v4.1.0
+    rev: v4.2.0
     hooks:
       - id: validate_manifest
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.3
+    rev: 0.33.0
     hooks:
     - id: check-github-workflows
+    - id: check-meltano
     - id: check-renovate
       language: python
       additional_dependencies:

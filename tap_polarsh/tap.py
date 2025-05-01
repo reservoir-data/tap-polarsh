@@ -1,4 +1,7 @@
-"""Polar tap class."""
+"""Polar tap class.
+
+Copyright (c) 2024 Edgar Ramírez-Mondragón
+"""
 
 from __future__ import annotations
 
@@ -8,7 +11,7 @@ from importlib import resources
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk._singerlib import resolve_schema_references
+from singer_sdk.singerlib import resolve_schema_references
 
 from tap_polarsh import openapi, streams
 
@@ -16,10 +19,11 @@ if t.TYPE_CHECKING:
     from tap_polarsh.client import PolarStream
 
 STREAMS: t.Sequence[type[PolarStream]] = [
-    streams.Orders,
     streams.Organizations,
-    streams.Repositories,
+    streams.CheckoutLinks,
+    streams.Products,
     streams.Subscriptions,
+    streams.Orders,
 ]
 
 
@@ -51,7 +55,7 @@ class TapPolar(Tap):
         ),
     ).to_dict()
 
-    def get_openapi_schema(self) -> dict[t.Any, t.Any]:
+    def get_openapi_schema(self) -> dict[t.Any, t.Any]:  # noqa: PLR6301
         """Retrieve Swagger/OpenAPI schema for this API.
 
         Returns:

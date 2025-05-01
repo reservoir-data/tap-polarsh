@@ -6,7 +6,10 @@
 # ]
 # ///
 
-"""Update the OpenAPI schema from the Polar API."""
+"""Update the OpenAPI schema from the Polar API.
+
+Copyright (c) 2024 Edgar Ramírez-Mondragón
+"""
 
 from __future__ import annotations
 
@@ -21,7 +24,7 @@ PATH = "tap_polarsh/openapi/openapi.json"
 
 def main() -> None:
     """Update the OpenAPI schema from the Polar API."""
-    with pathlib.Path(PATH).open("w") as file:
+    with pathlib.Path(PATH).open("w", encoding="utf-8") as file:
         response = requests.get(OPENAPI_URL, timeout=5)
         response.raise_for_status()
         spec = response.json()
