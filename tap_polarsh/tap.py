@@ -22,7 +22,7 @@ STREAMS: t.Sequence[type[PolarStream]] = [
     streams.Organizations,
     streams.CheckoutLinks,
     streams.Products,
-    # streams.Subscriptions,
+    streams.Subscriptions,
     streams.Orders,
 ]
 
