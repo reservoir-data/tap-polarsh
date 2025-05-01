@@ -3206,30 +3206,6 @@
             "description": "Filter by product billing type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
           },
           {
-            "name": "product_price_type",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/ProductPriceType"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductPriceType"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "ProductPriceType Filter",
-              "deprecated": true
-            },
-            "deprecated": true
-          },
-          {
             "name": "discount_id",
             "in": "query",
             "required": false,
@@ -10300,30 +10276,6 @@
             "description": "Filter by product billing type. `recurring` will filter data corresponding to subscriptions creations or renewals. `one_time` will filter data corresponding to one-time purchases."
           },
           {
-            "name": "product_price_type",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/ProductPriceType"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductPriceType"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "ProductPriceType Filter",
-              "deprecated": true
-            },
-            "deprecated": true
-          },
-          {
             "name": "subscription_id",
             "in": "query",
             "required": false,
@@ -14392,11 +14344,6 @@
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitCustomProperties"
-          },
-          "is_tax_applicable": {
-            "type": "boolean",
-            "title": "Is Tax Applicable",
-            "deprecated": true
           }
         },
         "type": "object",
@@ -14410,8 +14357,7 @@
           "deletable",
           "organization_id",
           "metadata",
-          "properties",
-          "is_tax_applicable"
+          "properties"
         ],
         "title": "BenefitCustom",
         "description": "A benefit of type `custom`.\n\nUse it to grant any kind of benefit that doesn't fit in the other types."
@@ -15774,19 +15720,6 @@
             ],
             "title": "Permission",
             "description": "The permission level to grant. Read more about roles and their permissions on [GitHub documentation](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role)."
-          },
-          "repository_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Repository Id",
-            "deprecated": true
           }
         },
         "type": "object",
@@ -16082,12 +16015,6 @@
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -16128,7 +16055,6 @@
           "subscription_id",
           "order_id",
           "customer_id",
-          "user_id",
           "benefit_id",
           "customer",
           "properties"
@@ -16332,12 +16258,6 @@
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -16405,7 +16325,6 @@
           "subscription_id",
           "order_id",
           "customer_id",
-          "user_id",
           "benefit_id",
           "customer",
           "properties",
@@ -17603,6 +17522,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -17704,18 +17628,6 @@
             },
             "type": "object",
             "title": "Payment Processor Metadata"
-          },
-          "subtotal_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subtotal Amount",
-            "deprecated": true
           },
           "metadata": {
             "additionalProperties": {
@@ -17832,6 +17744,11 @@
             },
             "type": "object",
             "title": "Customer Metadata"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -17856,6 +17773,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -17868,7 +17786,6 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "subtotal_amount",
           "metadata",
           "customer_external_id",
           "products",
@@ -17877,7 +17794,8 @@
           "discount",
           "subscription_id",
           "attached_custom_fields",
-          "customer_metadata"
+          "customer_metadata",
+          "customer_billing_address_fields"
         ],
         "title": "Checkout",
         "description": "Checkout session data retrieved using an access token."
@@ -18027,17 +17945,45 @@
         "description": "Confirm a checkout session using a Stripe confirmation token."
       },
       "CheckoutCreate": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/CheckoutProductsCreate"
+        "$ref": "#/components/schemas/CheckoutProductsCreate"
+      },
+      "CheckoutCustomerBillingAddressFields": {
+        "properties": {
+          "country": {
+            "type": "boolean",
+            "title": "Country"
           },
-          {
-            "$ref": "#/components/schemas/CheckoutProductCreate"
+          "state": {
+            "type": "boolean",
+            "title": "State"
           },
-          {
-            "$ref": "#/components/schemas/CheckoutPriceCreate"
+          "city": {
+            "type": "boolean",
+            "title": "City"
+          },
+          "postal_code": {
+            "type": "boolean",
+            "title": "Postal Code"
+          },
+          "line1": {
+            "type": "boolean",
+            "title": "Line1"
+          },
+          "line2": {
+            "type": "boolean",
+            "title": "Line2"
           }
-        ]
+        },
+        "type": "object",
+        "required": [
+          "country",
+          "state",
+          "city",
+          "postal_code",
+          "line1",
+          "line2"
+        ],
+        "title": "CheckoutCustomerBillingAddressFields"
       },
       "CheckoutDiscountFixedOnceForeverDuration": {
         "properties": {
@@ -18338,6 +18284,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting."
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -18397,34 +18348,6 @@
             ],
             "title": "Discount"
           },
-          "product_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Id",
-            "deprecated": true
-          },
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "deprecated": true
-          },
-          "product": {
-            "$ref": "#/components/schemas/CheckoutLinkProduct",
-            "deprecated": true
-          },
-          "product_price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Product Price",
-            "deprecated": true
-          },
           "url": {
             "type": "string",
             "title": "Url",
@@ -18442,14 +18365,11 @@
           "success_url",
           "label",
           "allow_discount_codes",
+          "require_billing_address",
           "discount_id",
           "organization_id",
           "products",
           "discount",
-          "product_id",
-          "product_price_id",
-          "product",
-          "product_price",
           "url"
         ],
         "title": "CheckoutLink",
@@ -18508,6 +18428,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
           },
           "discount_id": {
             "anyOf": [
@@ -18605,6 +18531,12 @@
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -18700,6 +18632,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+            "default": false
           },
           "discount_id": {
             "anyOf": [
@@ -18974,6 +18912,18 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting."
+          },
           "discount_id": {
             "anyOf": [
               {
@@ -19080,6 +19030,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
           },
           "amount": {
             "anyOf": [
@@ -19456,6 +19412,12 @@
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
+          },
           "amount": {
             "anyOf": [
               {
@@ -19709,6 +19671,12 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
             "default": true
+          },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`.",
+            "default": false
           },
           "amount": {
             "anyOf": [
@@ -20054,6 +20022,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -20156,18 +20129,6 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
-          "subtotal_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subtotal Amount",
-            "deprecated": true
-          },
           "products": {
             "items": {
               "$ref": "#/components/schemas/CheckoutProduct"
@@ -20225,6 +20186,11 @@
             },
             "type": "array",
             "title": "Attached Custom Fields"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -20249,6 +20215,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -20261,13 +20228,13 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "subtotal_amount",
           "products",
           "product",
           "product_price",
           "discount",
           "organization",
-          "attached_custom_fields"
+          "attached_custom_fields",
+          "customer_billing_address_fields"
         ],
         "title": "CheckoutPublic",
         "description": "Checkout session data retrieved using the client secret."
@@ -20433,6 +20400,11 @@
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
           },
+          "require_billing_address": {
+            "type": "boolean",
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
+          },
           "is_discount_applicable": {
             "type": "boolean",
             "title": "Is Discount Applicable",
@@ -20535,18 +20507,6 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
-          "subtotal_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Subtotal Amount",
-            "deprecated": true
-          },
           "products": {
             "items": {
               "$ref": "#/components/schemas/CheckoutProduct"
@@ -20608,6 +20568,11 @@
           "customer_session_token": {
             "type": "string",
             "title": "Customer Session Token"
+          },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -20632,6 +20597,7 @@
           "product_price_id",
           "discount_id",
           "allow_discount_codes",
+          "require_billing_address",
           "is_discount_applicable",
           "is_free_product_price",
           "is_payment_required",
@@ -20644,14 +20610,14 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "subtotal_amount",
           "products",
           "product",
           "product_price",
           "discount",
           "organization",
           "attached_custom_fields",
-          "customer_session_token"
+          "customer_session_token",
+          "customer_billing_address_fields"
         ],
         "title": "CheckoutPublicConfirmed",
         "description": "Checkout session data retrieved using the client secret after confirmation.\n\nIt contains a customer session token to retrieve order information\nright after the checkout."
@@ -20844,6 +20810,18 @@
             ],
             "title": "Allow Discount Codes",
             "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it."
+          },
+          "require_billing_address": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Require Billing Address",
+            "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting. If you preset the billing address, this setting will be automatically set to `true`."
           },
           "customer_ip_address": {
             "anyOf": [
@@ -24220,12 +24198,6 @@
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
-          "amount": {
-            "type": "integer",
-            "title": "Amount",
-            "description": "Amount in cents, after discounts but before taxes.",
-            "deprecated": true
-          },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
@@ -24260,12 +24232,6 @@
             "format": "uuid4",
             "title": "Product Id"
           },
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "deprecated": true
-          },
           "subscription_id": {
             "anyOf": [
               {
@@ -24286,18 +24252,6 @@
           },
           "product": {
             "$ref": "#/components/schemas/CustomerOrderProduct"
-          },
-          "product_price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Product Price",
-            "deprecated": true
           },
           "subscription": {
             "anyOf": [
@@ -24328,7 +24282,6 @@
           "subtotal_amount",
           "discount_amount",
           "net_amount",
-          "amount",
           "tax_amount",
           "total_amount",
           "refunded_amount",
@@ -24336,11 +24289,9 @@
           "currency",
           "customer_id",
           "product_id",
-          "product_price_id",
           "subscription_id",
           "user_id",
           "product",
-          "product_price",
           "subscription",
           "items"
         ],
@@ -24679,12 +24630,6 @@
               }
             ],
             "title": "Customer Cancellation Comment"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id",
-            "deprecated": true
           }
         },
         "type": "object",
@@ -24708,8 +24653,7 @@
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
-          "customer_cancellation_comment",
-          "price_id"
+          "customer_cancellation_comment"
         ],
         "title": "CustomerOrderSubscription"
       },
@@ -25747,15 +25691,6 @@
               null
             ]
           },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id",
-            "deprecated": true,
-            "examples": [
-              "196ca717-4d84-4d28-a1b8-777255797dbc"
-            ]
-          },
           "meters": {
             "items": {
               "$ref": "#/components/schemas/CustomerStateSubscriptionMeter"
@@ -25783,7 +25718,6 @@
           "ends_at",
           "product_id",
           "discount_id",
-          "price_id",
           "meters"
         ],
         "title": "CustomerStateSubscription",
@@ -26042,32 +25976,8 @@
             ],
             "title": "Customer Cancellation Comment"
           },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id",
-            "deprecated": true
-          },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "product": {
             "$ref": "#/components/schemas/CustomerSubscriptionProduct"
-          },
-          "price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Price",
-            "deprecated": true
           },
           "prices": {
             "items": {
@@ -26115,10 +26025,7 @@
           "checkout_id",
           "customer_cancellation_reason",
           "customer_cancellation_comment",
-          "price_id",
-          "user_id",
           "product",
-          "price",
           "prices",
           "meters"
         ],
@@ -30336,14 +30243,60 @@
             "title": "Label"
           },
           "conditions": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Conditions",
-            "default": {}
+            "description": "Key-value object allowing you to set conditions that must match when validating the license key.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Meta",
-            "default": {}
+            "description": "Key-value object allowing you to store additional information about the activation\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           }
         },
         "type": "object",
@@ -30371,6 +30324,22 @@
             "title": "Label"
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
             "type": "object",
             "title": "Meta"
           },
@@ -30420,6 +30389,22 @@
             "title": "Label"
           },
           "meta": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
             "type": "object",
             "title": "Meta"
           },
@@ -30679,20 +30664,10 @@
             "format": "uuid4",
             "title": "Organization Id"
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
-          },
-          "user": {
-            "$ref": "#/components/schemas/LicenseKeyUser",
-            "deprecated": true
           },
           "customer": {
             "$ref": "#/components/schemas/LicenseKeyCustomer"
@@ -30778,9 +30753,7 @@
         "required": [
           "id",
           "organization_id",
-          "user_id",
           "customer_id",
-          "user",
           "customer",
           "benefit_id",
           "key",
@@ -30962,9 +30935,32 @@
             "title": "Increment Usage"
           },
           "conditions": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
             "type": "object",
+            "maxProperties": 50,
             "title": "Conditions",
-            "default": {}
+            "description": "Key-value object allowing you to set conditions that must match when validating the license key.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           }
         },
         "type": "object",
@@ -30986,20 +30982,10 @@
             "format": "uuid4",
             "title": "Organization Id"
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
-          },
-          "user": {
-            "$ref": "#/components/schemas/LicenseKeyUser",
-            "deprecated": true
           },
           "customer": {
             "$ref": "#/components/schemas/LicenseKeyCustomer"
@@ -31092,9 +31078,7 @@
         "required": [
           "id",
           "organization_id",
-          "user_id",
           "customer_id",
-          "user",
           "customer",
           "benefit_id",
           "key",
@@ -32924,12 +32908,6 @@
             "format": "uuid4",
             "title": "Product Id"
           },
-          "product_price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Product Price Id",
-            "deprecated": true
-          },
           "discount_id": {
             "anyOf": [
               {
@@ -32975,24 +32953,8 @@
             "title": "User Id",
             "deprecated": true
           },
-          "user": {
-            "$ref": "#/components/schemas/OrderUser",
-            "deprecated": true
-          },
           "product": {
             "$ref": "#/components/schemas/OrderProduct"
-          },
-          "product_price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Product Price",
-            "deprecated": true
           },
           "discount": {
             "anyOf": [
@@ -33059,15 +33021,12 @@
           "billing_address",
           "customer_id",
           "product_id",
-          "product_price_id",
           "discount_id",
           "subscription_id",
           "checkout_id",
           "customer",
           "user_id",
-          "user",
           "product",
-          "product_price",
           "discount",
           "subscription",
           "items"
@@ -33695,18 +33654,6 @@
               }
             ],
             "title": "Customer Cancellation Comment"
-          },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id",
-            "deprecated": true
-          },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
           }
         },
         "type": "object",
@@ -33731,9 +33678,7 @@
           "discount_id",
           "checkout_id",
           "customer_cancellation_reason",
-          "customer_cancellation_comment",
-          "price_id",
-          "user_id"
+          "customer_cancellation_comment"
         ],
         "title": "OrderSubscription"
       },
@@ -33899,66 +33844,6 @@
           "subscription_settings": {
             "$ref": "#/components/schemas/OrganizationSubscriptionSettings",
             "description": "Settings related to subscriptions management"
-          },
-          "bio": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Bio",
-            "deprecated": true
-          },
-          "company": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Company",
-            "deprecated": true
-          },
-          "blog": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Blog",
-            "deprecated": true
-          },
-          "location": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Location",
-            "deprecated": true
-          },
-          "twitter_username": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Twitter Username",
-            "deprecated": true
           }
         },
         "type": "object",
@@ -33974,12 +33859,7 @@
           "socials",
           "details_submitted_at",
           "feature_settings",
-          "subscription_settings",
-          "bio",
-          "company",
-          "blog",
-          "location",
-          "twitter_username"
+          "subscription_settings"
         ],
         "title": "Organization"
       },
@@ -36960,12 +36840,6 @@
             ],
             "title": "Customer Cancellation Comment"
           },
-          "price_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Price Id",
-            "deprecated": true
-          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -37014,16 +36888,6 @@
           "customer": {
             "$ref": "#/components/schemas/SubscriptionCustomer"
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
-          "user": {
-            "$ref": "#/components/schemas/SubscriptionUser",
-            "deprecated": true
-          },
           "product": {
             "$ref": "#/components/schemas/Product"
           },
@@ -37051,18 +36915,6 @@
               }
             ],
             "title": "Discount"
-          },
-          "price": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LegacyRecurringProductPrice"
-              },
-              {
-                "$ref": "#/components/schemas/ProductPrice"
-              }
-            ],
-            "title": "Price",
-            "deprecated": true
           },
           "prices": {
             "items": {
@@ -37110,14 +36962,10 @@
           "checkout_id",
           "customer_cancellation_reason",
           "customer_cancellation_comment",
-          "price_id",
           "metadata",
           "customer",
-          "user_id",
-          "user",
           "product",
           "discount",
-          "price",
           "prices",
           "meters"
         ],
@@ -37125,31 +36973,6 @@
       },
       "SubscriptionCancel": {
         "properties": {
-          "cancel_at_period_end": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cancel At Period End",
-            "description": "Cancel an active subscription once the current period ends.\n\nOr uncancel a subscription currently set to be revoked at period end."
-          },
-          "revoke": {
-            "anyOf": [
-              {
-                "type": "boolean",
-                "const": true
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Revoke",
-            "description": "Cancel and revoke an active subscription immediately"
-          },
           "customer_cancellation_reason": {
             "anyOf": [
               {
@@ -37172,9 +36995,17 @@
             ],
             "title": "Customer Cancellation Comment",
             "description": "Customer feedback and why they decided to cancel.\n\n**IMPORTANT:**\nDo not use this to store internal notes! It's intended to be input\nfrom the customer and is therefore also available in their Polar\npurchases library.\n\nOnly set this in case your own service is requesting the reason from the\ncustomer. Or you copy a message directly from a customer\nconversation, i.e support."
+          },
+          "cancel_at_period_end": {
+            "type": "boolean",
+            "title": "Cancel At Period End",
+            "description": "Cancel an active subscription once the current period ends.\n\nOr uncancel a subscription currently set to be revoked at period end."
           }
         },
         "type": "object",
+        "required": [
+          "cancel_at_period_end"
+        ],
         "title": "SubscriptionCancel"
       },
       "SubscriptionCustomer": {
@@ -37458,6 +37289,44 @@
         ],
         "title": "SubscriptionRecurringInterval"
       },
+      "SubscriptionRevoke": {
+        "properties": {
+          "customer_cancellation_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerCancellationReason"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Customer reason for cancellation.\n\nHelpful to monitor reasons behind churn for future improvements.\n\nOnly set this in case your own service is requesting the reason from the\ncustomer. Or you know based on direct conversations, i.e support, with\nthe customer.\n\n* `too_expensive`: Too expensive for the customer.\n* `missing_features`: Customer is missing certain features.\n* `switched_service`: Customer switched to another service.\n* `unused`: Customer is not using it enough.\n* `customer_service`: Customer is not satisfied with the customer service.\n* `low_quality`: Customer is unhappy with the quality.\n* `too_complex`: Customer considers the service too complicated.\n* `other`: Other reason(s)."
+          },
+          "customer_cancellation_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Cancellation Comment",
+            "description": "Customer feedback and why they decided to cancel.\n\n**IMPORTANT:**\nDo not use this to store internal notes! It's intended to be input\nfrom the customer and is therefore also available in their Polar\npurchases library.\n\nOnly set this in case your own service is requesting the reason from the\ncustomer. Or you copy a message directly from a customer\nconversation, i.e support."
+          },
+          "revoke": {
+            "type": "boolean",
+            "const": true,
+            "title": "Revoke",
+            "description": "Cancel and revoke an active subscription immediately"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revoke"
+        ],
+        "title": "SubscriptionRevoke"
+      },
       "SubscriptionSortProperty": {
         "type": "string",
         "enum": [
@@ -37498,6 +37367,9 @@
           },
           {
             "$ref": "#/components/schemas/SubscriptionCancel"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionRevoke"
           }
         ]
       },
@@ -37815,20 +37687,10 @@
             "format": "uuid4",
             "title": "Organization Id"
           },
-          "user_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "User Id",
-            "deprecated": true
-          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
-          },
-          "user": {
-            "$ref": "#/components/schemas/LicenseKeyUser",
-            "deprecated": true
           },
           "customer": {
             "$ref": "#/components/schemas/LicenseKeyCustomer"
@@ -37924,9 +37786,7 @@
         "required": [
           "id",
           "organization_id",
-          "user_id",
           "customer_id",
-          "user",
           "customer",
           "benefit_id",
           "key",
