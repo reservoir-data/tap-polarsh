@@ -8179,7 +8179,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CustomerUpdate"
+                "$ref": "#/components/schemas/CustomerUpdateExternalID"
               }
             }
           }
@@ -24145,6 +24145,12 @@
       },
       "CustomerOrder": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -24163,11 +24169,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id"
           },
           "status": {
             "$ref": "#/components/schemas/OrderStatus",
@@ -24198,6 +24199,12 @@
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents, after discounts but before taxes.",
+            "deprecated": true
+          },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
@@ -24222,6 +24229,19 @@
             "type": "string",
             "title": "Currency"
           },
+          "billing_reason": {
+            "$ref": "#/components/schemas/OrderBillingReason"
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
@@ -24231,6 +24251,18 @@
             "type": "string",
             "format": "uuid4",
             "title": "Product Id"
+          },
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id"
           },
           "subscription_id": {
             "anyOf": [
@@ -24243,6 +24275,18 @@
               }
             ],
             "title": "Subscription Id"
+          },
+          "checkout_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Id"
           },
           "user_id": {
             "type": "string",
@@ -24274,22 +24318,27 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "status",
           "paid",
           "subtotal_amount",
           "discount_amount",
           "net_amount",
+          "amount",
           "tax_amount",
           "total_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
+          "billing_reason",
+          "billing_address",
           "customer_id",
           "product_id",
+          "discount_id",
           "subscription_id",
+          "checkout_id",
           "user_id",
           "product",
           "subscription",
@@ -26386,6 +26435,78 @@
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "The email address of the customer. This must be unique within the organization.",
+            "examples": [
+              "customer@example.com"
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "The name of the customer.",
+            "examples": [
+              "John Doe"
+            ]
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_id": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TaxIDFormat"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2,
+                "examples": [
+                  [
+                    "911144442",
+                    "us_ein"
+                  ],
+                  [
+                    "FR61954506077",
+                    "eu_vat"
+                  ]
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Id"
+          },
           "external_id": {
             "anyOf": [
               {
@@ -26400,6 +26521,40 @@
             "examples": [
               "usr_1337"
             ]
+          }
+        },
+        "type": "object",
+        "title": "CustomerUpdate"
+      },
+      "CustomerUpdateExternalID": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
           "email": {
             "anyOf": [
@@ -26475,7 +26630,7 @@
           }
         },
         "type": "object",
-        "title": "CustomerUpdate"
+        "title": "CustomerUpdateExternalID"
       },
       "Discount": {
         "oneOf": [
@@ -30657,7 +30812,27 @@
           "id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Id"
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
           },
           "organization_id": {
             "type": "string",
@@ -30752,6 +30927,8 @@
         "type": "object",
         "required": [
           "id",
+          "created_at",
+          "modified_at",
           "organization_id",
           "customer_id",
           "customer",
@@ -30975,7 +31152,27 @@
           "id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Id"
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
           },
           "organization_id": {
             "type": "string",
@@ -31077,6 +31274,8 @@
         "type": "object",
         "required": [
           "id",
+          "created_at",
+          "modified_at",
           "organization_id",
           "customer_id",
           "customer",
@@ -32756,6 +32955,12 @@
       },
       "Order": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -32774,57 +32979,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
-          },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
-          },
-          "custom_field_data": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Custom Field Data",
-            "description": "Key-value object storing custom field values."
           },
           "status": {
             "$ref": "#/components/schemas/OrderStatus",
@@ -32944,6 +33098,51 @@
             ],
             "title": "Checkout Id"
           },
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "custom_field_data": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Custom Field Data",
+            "description": "Key-value object storing custom field values."
+          },
           "customer": {
             "$ref": "#/components/schemas/OrderCustomer"
           },
@@ -33002,10 +33201,9 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
-          "metadata",
           "status",
           "paid",
           "subtotal_amount",
@@ -33024,6 +33222,7 @@
           "discount_id",
           "subscription_id",
           "checkout_id",
+          "metadata",
           "customer",
           "user_id",
           "product",
@@ -37680,7 +37879,27 @@
           "id": {
             "type": "string",
             "format": "uuid4",
-            "title": "Id"
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
           },
           "organization_id": {
             "type": "string",
@@ -37785,6 +38004,8 @@
         "type": "object",
         "required": [
           "id",
+          "created_at",
+          "modified_at",
           "organization_id",
           "customer_id",
           "customer",
