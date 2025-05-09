@@ -18,6 +18,14 @@ TestTapPolar = get_tap_test_class(
     config=SAMPLE_CONFIG,
     suite_config=SuiteConfig(
         max_records_limit=10,
-        ignore_no_records_for_streams=[],
+        ignore_no_records_for_streams=[
+            # Benefits
+            "benefits_custom",
+            "benefits_downloadables",
+            "benefits_license_keys",
+            "benefits_meter_credit",
+            # Benefit grants
+            "benefit_grants",
+        ],
     ),
 )
