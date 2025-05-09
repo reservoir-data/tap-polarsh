@@ -17058,6 +17058,10 @@
             "exclusiveMinimum": 0.0,
             "title": "Units"
           },
+          "rollover": {
+            "type": "boolean",
+            "title": "Rollover"
+          },
           "meter_id": {
             "type": "string",
             "format": "uuid4",
@@ -17067,6 +17071,7 @@
         "type": "object",
         "required": [
           "units",
+          "rollover",
           "meter_id"
         ],
         "title": "BenefitMeterCreditCreateProperties",
@@ -17078,6 +17083,10 @@
             "type": "integer",
             "title": "Units"
           },
+          "rollover": {
+            "type": "boolean",
+            "title": "Rollover"
+          },
           "meter_id": {
             "type": "string",
             "format": "uuid4",
@@ -17087,6 +17096,7 @@
         "type": "object",
         "required": [
           "units",
+          "rollover",
           "meter_id"
         ],
         "title": "BenefitMeterCreditProperties",
@@ -17194,6 +17204,10 @@
             "type": "integer",
             "title": "Units"
           },
+          "rollover": {
+            "type": "boolean",
+            "title": "Rollover"
+          },
           "meter_id": {
             "type": "string",
             "format": "uuid4",
@@ -17203,6 +17217,7 @@
         "type": "object",
         "required": [
           "units",
+          "rollover",
           "meter_id"
         ],
         "title": "BenefitMeterCreditSubscriberProperties",
@@ -23940,7 +23955,7 @@
           "balance": {
             "type": "number",
             "title": "Balance",
-            "description": "The balance of the meter, i.e. the difference between credited and consumed units. Never goes negative.",
+            "description": "The balance of the meter, i.e. the difference between credited and consumed units.",
             "examples": [
               75.0
             ]
@@ -24089,7 +24104,7 @@
           "balance": {
             "type": "number",
             "title": "Balance",
-            "description": "The balance of the meter, i.e. the difference between credited and consumed units. Never goes negative.",
+            "description": "The balance of the meter, i.e. the difference between credited and consumed units.",
             "examples": [
               75.0
             ]
@@ -25513,7 +25528,7 @@
           "balance": {
             "type": "number",
             "title": "Balance",
-            "description": "The balance of the meter, i.e. the difference between credited and consumed units. Never goes negative.",
+            "description": "The balance of the meter, i.e. the difference between credited and consumed units.",
             "examples": [
               75.0
             ]
