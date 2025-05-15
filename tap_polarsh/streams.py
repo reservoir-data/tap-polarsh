@@ -195,3 +195,27 @@ class Products(_OrganizationStream):
     swagger_ref: str = "Product"
 
     parent_stream_type = Organizations
+
+
+class Subscriptions(_OrganizationStream):
+    """Subscriptions stream."""
+
+    name = "subscriptions"
+    path = "/api/v1/subscriptions"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "Subscription"
+
+    parent_stream_type = Organizations
+
+
+class Orders(_OrganizationStream):
+    """Orders stream."""
+
+    name = "orders"
+    path = "/api/v1/orders"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "Order"
+
+    parent_stream_type = Organizations
