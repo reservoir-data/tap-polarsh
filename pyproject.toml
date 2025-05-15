@@ -29,13 +29,14 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dynamic = [
   "version",
 ]
 dependencies = [
   "requests~=2.31",
-  "singer-sdk @ git+https://github.com/meltano/sdk.git",
+  "singer-sdk~=0.46.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-polarsh"
@@ -56,9 +57,6 @@ typing = [
   "mypy~=1.15.0",
   "types-requests~=2.31",
 ]
-
-[tool.hatch.metadata]
-allow-direct-references = true
 
 [tool.hatch.version]
 source = "vcs"
@@ -108,7 +106,7 @@ DEP002 = [
 ]
 
 [tool.pyproject-fmt]
-max_supported_python = "3.13"
+max_supported_python = "3.14"
 
 [tool.pytest.ini_options]
 addopts = [
