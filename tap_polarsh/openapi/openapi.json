@@ -658,6 +658,16 @@
               "title": "Sorting"
             },
             "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -3334,6 +3344,16 @@
               "title": "Sorting"
             },
             "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -4790,11 +4810,29 @@
                   }
                 },
                 {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
                   "type": "null"
                 }
               ],
-              "title": "Organization Id"
-            }
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
           },
           {
             "name": "ids",
@@ -4802,6 +4840,10 @@
             "required": false,
             "schema": {
               "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
                 {
                   "type": "array",
                   "items": {
@@ -4813,10 +4855,10 @@
                   "type": "null"
                 }
               ],
-              "description": "List of file IDs to get. ",
-              "title": "Ids"
+              "title": "FileID Filter",
+              "description": "Filter by file ID."
             },
-            "description": "List of file IDs to get. "
+            "description": "Filter by file ID."
           },
           {
             "name": "page",
@@ -5554,7 +5596,7 @@
         "x-speakeasy-name-override": "limits"
       }
     },
-    "/v1/license-keys": {
+    "/v1/license-keys/": {
       "get": {
         "tags": [
           "license_keys",
@@ -16474,6 +16516,17 @@
             "title": "Benefit Id",
             "description": "The ID of the benefit concerned by this grant."
           },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
@@ -16549,6 +16602,29 @@
         },
         "type": "object",
         "title": "BenefitGrantDownloadablesProperties"
+      },
+      "BenefitGrantError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "type",
+          "timestamp"
+        ],
+        "title": "BenefitGrantError"
       },
       "BenefitGrantGitHubRepositoryProperties": {
         "properties": {
@@ -16716,6 +16792,17 @@
             "format": "uuid4",
             "title": "Benefit Id",
             "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
           },
           "customer": {
             "$ref": "#/components/schemas/Customer"
