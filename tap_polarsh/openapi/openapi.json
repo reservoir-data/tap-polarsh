@@ -15180,6 +15180,101 @@
         ],
         "title": "BenefitCustomUpdate"
       },
+      "BenefitCycledEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "benefit.cycled",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BenefitGrantMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BenefitCycledEvent",
+        "description": "An event created by Polar when a benefit is cycled."
+      },
       "BenefitDiscord": {
         "properties": {
           "id": {
@@ -16669,6 +16764,28 @@
         "type": "object",
         "title": "BenefitGrantLicenseKeysProperties"
       },
+      "BenefitGrantMetadata": {
+        "properties": {
+          "benefit_id": {
+            "type": "string",
+            "title": "Benefit Id"
+          },
+          "benefit_grant_id": {
+            "type": "string",
+            "title": "Benefit Grant Id"
+          },
+          "benefit_type": {
+            "$ref": "#/components/schemas/BenefitType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "benefit_id",
+          "benefit_grant_id",
+          "benefit_type"
+        ],
+        "title": "BenefitGrantMetadata"
+      },
       "BenefitGrantMeterCreditProperties": {
         "properties": {
           "last_credited_meter_id": {
@@ -16871,6 +16988,101 @@
           "benefit"
         ],
         "title": "BenefitGrantWebhook"
+      },
+      "BenefitGrantedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "benefit.granted",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BenefitGrantMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BenefitGrantedEvent",
+        "description": "An event created by Polar when a benefit is granted to a customer."
       },
       "BenefitLicenseKeyActivationCreateProperties": {
         "properties": {
@@ -17895,6 +18107,101 @@
         ],
         "title": "BenefitPublic"
       },
+      "BenefitRevokedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "benefit.revoked",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BenefitGrantMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BenefitRevokedEvent",
+        "description": "An event created by Polar when a benefit is revoked from a customer."
+      },
       "BenefitSortProperty": {
         "type": "string",
         "enum": [
@@ -17916,6 +18223,101 @@
           "meter_credit"
         ],
         "title": "BenefitType"
+      },
+      "BenefitUpdatedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "benefit.updated",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BenefitGrantMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BenefitUpdatedEvent",
+        "description": "An event created by Polar when a benefit is updated."
       },
       "CardPayment": {
         "properties": {
@@ -29916,112 +30318,21 @@
         "title": "DownloadableRead"
       },
       "Event": {
-        "properties": {
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SystemEvent"
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Timestamp",
-            "description": "The timestamp of the event."
-          },
-          "name": {
-            "type": "string",
-            "title": "Name",
-            "description": "The name of the event."
-          },
-          "source": {
-            "$ref": "#/components/schemas/EventSource",
-            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
-          },
-          "organization_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Organization Id",
-            "description": "The ID of the organization owning the event.",
-            "examples": [
-              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
-            ],
-            "x-polar-selector-widget": {
-              "displayProperty": "name",
-              "resourceName": "Organization",
-              "resourceRoot": "/v1/organizations"
-            }
-          },
-          "customer_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Id",
-            "description": "ID of the customer in your Polar organization associated with the event."
-          },
-          "customer": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Customer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The customer associated with the event."
-          },
-          "external_customer_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Customer Id",
-            "description": "ID of the customer in your system associated with the event."
+          {
+            "$ref": "#/components/schemas/UserEvent"
           }
-        },
-        "type": "object",
-        "required": [
-          "metadata",
-          "id",
-          "timestamp",
-          "name",
-          "source",
-          "organization_id",
-          "customer_id",
-          "customer",
-          "external_customer_id"
         ],
-        "title": "Event"
+        "discriminator": {
+          "propertyName": "source",
+          "mapping": {
+            "system": "#/components/schemas/SystemEvent",
+            "user": "#/components/schemas/UserEvent"
+          }
+        }
       },
       "EventCreateCustomer": {
         "properties": {
@@ -32936,6 +33247,124 @@
         ],
         "title": "MeterCreate"
       },
+      "MeterCreditEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "meter.credited",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MeterCreditedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "MeterCreditEvent",
+        "description": "An event created by Polar when credits are added to a customer meter."
+      },
+      "MeterCreditedMetadata": {
+        "properties": {
+          "meter_id": {
+            "type": "string",
+            "title": "Meter Id"
+          },
+          "units": {
+            "type": "integer",
+            "title": "Units"
+          },
+          "rollover": {
+            "type": "boolean",
+            "title": "Rollover"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meter_id",
+          "units",
+          "rollover"
+        ],
+        "title": "MeterCreditedMetadata"
+      },
       "MeterQuantities": {
         "properties": {
           "quantities": {
@@ -32984,6 +33413,114 @@
           "quantity"
         ],
         "title": "MeterQuantity"
+      },
+      "MeterResetEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "meter.reset",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MeterResetMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "MeterResetEvent",
+        "description": "An event created by Polar when a customer meter is reset."
+      },
+      "MeterResetMetadata": {
+        "properties": {
+          "meter_id": {
+            "type": "string",
+            "title": "Meter Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meter_id"
+        ],
+        "title": "MeterResetMetadata"
       },
       "MeterSortProperty": {
         "type": "string",
@@ -38927,6 +39464,39 @@
         ],
         "title": "SubscriptionUser"
       },
+      "SystemEvent": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MeterCreditEvent"
+          },
+          {
+            "$ref": "#/components/schemas/MeterResetEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitCycledEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitUpdatedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitRevokedEvent"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "name",
+          "mapping": {
+            "benefit.cycled": "#/components/schemas/BenefitCycledEvent",
+            "benefit.granted": "#/components/schemas/BenefitGrantedEvent",
+            "benefit.revoked": "#/components/schemas/BenefitRevokedEvent",
+            "benefit.updated": "#/components/schemas/BenefitUpdatedEvent",
+            "meter.credited": "#/components/schemas/MeterCreditEvent",
+            "meter.reset": "#/components/schemas/MeterResetEvent"
+          }
+        }
+      },
       "TaxIDFormat": {
         "type": "string",
         "enum": [
@@ -39086,6 +39656,117 @@
           "detail"
         ],
         "title": "Unauthorized"
+      },
+      "UserEvent": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Metadata"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "user",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "name",
+          "source"
+        ],
+        "title": "UserEvent",
+        "description": "An event you created through the ingestion API."
       },
       "UserInfoOrganization": {
         "properties": {
