@@ -18710,6 +18710,11 @@
             ],
             "title": "Customer Id"
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name."
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -18745,6 +18750,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -18926,9 +18942,11 @@
           "is_payment_setup_required",
           "is_payment_form_required",
           "customer_id",
+          "is_business_customer",
           "customer_name",
           "customer_email",
           "customer_ip_address",
+          "customer_billing_name",
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
@@ -19014,6 +19032,17 @@
             ],
             "title": "Amount"
           },
+          "is_business_customer": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Business Customer"
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -19038,6 +19067,17 @@
               }
             ],
             "title": "Customer Email"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -20210,6 +20250,12 @@
             "title": "Customer Id",
             "description": "ID of an existing customer in the organization. The customer data will be pre-filled in the checkout form. The resulting order will be linked to this customer."
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
+            "default": false
+          },
           "customer_external_id": {
             "anyOf": [
               {
@@ -20258,6 +20304,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -20591,6 +20648,12 @@
             "title": "Customer Id",
             "description": "ID of an existing customer in the organization. The customer data will be pre-filled in the checkout form. The resulting order will be linked to this customer."
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
+            "default": false
+          },
           "customer_external_id": {
             "anyOf": [
               {
@@ -20639,6 +20702,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -20851,6 +20925,12 @@
             "title": "Customer Id",
             "description": "ID of an existing customer in the organization. The customer data will be pre-filled in the checkout form. The resulting order will be linked to this customer."
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
+            "default": false
+          },
           "customer_external_id": {
             "anyOf": [
               {
@@ -20899,6 +20979,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -21210,6 +21301,11 @@
             ],
             "title": "Customer Id"
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name."
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -21245,6 +21341,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -21368,9 +21475,11 @@
           "is_payment_setup_required",
           "is_payment_form_required",
           "customer_id",
+          "is_business_customer",
           "customer_name",
           "customer_email",
           "customer_ip_address",
+          "customer_billing_name",
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
@@ -21588,6 +21697,11 @@
             ],
             "title": "Customer Id"
           },
+          "is_business_customer": {
+            "type": "boolean",
+            "title": "Is Business Customer",
+            "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name."
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -21623,6 +21737,17 @@
               }
             ],
             "title": "Customer Ip Address"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -21750,9 +21875,11 @@
           "is_payment_setup_required",
           "is_payment_form_required",
           "customer_id",
+          "is_business_customer",
           "customer_name",
           "customer_email",
           "customer_ip_address",
+          "customer_billing_name",
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
@@ -21859,6 +21986,17 @@
             ],
             "title": "Amount"
           },
+          "is_business_customer": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Business Customer"
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -21883,6 +22021,17 @@
               }
             ],
             "title": "Customer Email"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -22119,6 +22268,17 @@
             ],
             "title": "Amount"
           },
+          "is_business_customer": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Business Customer"
+          },
           "customer_name": {
             "anyOf": [
               {
@@ -22143,6 +22303,17 @@
               }
             ],
             "title": "Customer Email"
+          },
+          "customer_billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Billing Name"
           },
           "customer_billing_address": {
             "anyOf": [
@@ -36504,7 +36675,8 @@
           "email": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "format": "email"
               },
               {
                 "type": "null"
@@ -36516,7 +36688,10 @@
           "website": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
               },
               {
                 "type": "null"
