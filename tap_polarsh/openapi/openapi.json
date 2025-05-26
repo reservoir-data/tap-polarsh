@@ -26785,6 +26785,12 @@
       },
       "CustomerStateMeter": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -26840,6 +26846,7 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
           "meter_id",
