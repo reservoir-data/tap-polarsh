@@ -3494,9 +3494,189 @@
         },
         "x-speakeasy-group": "orders",
         "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "tags": [
+          "orders",
+          "documented",
+          "mcp"
+        ],
+        "summary": "Update Order",
+        "description": "Update an order.\n\n**Scopes**: `orders:write`",
+        "operationId": "orders:update",
+        "security": [
+          {
+            "oidc": [
+              "orders:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The order ID.",
+              "title": "Id"
+            },
+            "description": "The order ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "write",
+            "orders"
+          ]
+        },
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-name-override": "update"
       }
     },
     "/v1/orders/{id}/invoice": {
+      "post": {
+        "tags": [
+          "orders",
+          "documented",
+          "mcp"
+        ],
+        "summary": "Generate Order Invoice",
+        "description": "Trigger generation of an order's invoice.\n\n**Scopes**: `orders:read`",
+        "operationId": "orders:generate_invoice",
+        "security": [
+          {
+            "oidc": [
+              "orders:read"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The order ID.",
+              "title": "Id"
+            },
+            "description": "The order ID."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Order already has an invoice.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceAlreadyExists"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Order is not paid or is missing billing name or address.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/MissingInvoiceBillingDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/NotPaidOrder"
+                    }
+                  ],
+                  "title": "Response 422 Orders:Generate Invoice"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "write",
+            "orders"
+          ]
+        },
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-name-override": "generate_invoice"
+      },
       "get": {
         "tags": [
           "orders",
@@ -10604,9 +10784,163 @@
         },
         "x-speakeasy-group": "customer_portal.orders",
         "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "tags": [
+          "customer_portal",
+          "orders",
+          "documented"
+        ],
+        "summary": "Update Order",
+        "description": "Update an order for the authenticated customer.\n\n**Scopes**: `customer_portal:write`",
+        "operationId": "customer_portal:orders:update",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The order ID.",
+              "title": "Id"
+            },
+            "description": "The order ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerOrderUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerOrder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.orders",
+        "x-speakeasy-name-override": "update"
       }
     },
     "/v1/customer-portal/orders/{id}/invoice": {
+      "post": {
+        "tags": [
+          "customer_portal",
+          "orders",
+          "documented"
+        ],
+        "summary": "Generate Order Invoice",
+        "description": "Trigger generation of an order's invoice.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:orders:generate_invoice",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The order ID.",
+              "title": "Id"
+            },
+            "description": "The order ID."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Order already has an invoice.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceAlreadyExists"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Order is not paid or is missing billing name or address.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/MissingInvoiceBillingDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/NotPaidOrder"
+                    }
+                  ],
+                  "title": "Response 422 Customer Portal:Orders:Generate Invoice"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.orders",
+        "x-speakeasy-name-override": "generate_invoice"
+      },
       "get": {
         "tags": [
           "customer_portal",
@@ -25551,6 +25885,18 @@
           "billing_reason": {
             "$ref": "#/components/schemas/OrderBillingReason"
           },
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Name",
+            "description": "The name of the customer that should appear on the invoice. "
+          },
           "billing_address": {
             "anyOf": [
               {
@@ -25560,6 +25906,11 @@
                 "type": "null"
               }
             ]
+          },
+          "is_invoice_generated": {
+            "type": "boolean",
+            "title": "Is Invoice Generated",
+            "description": "Whether an invoice has been generated for this order."
           },
           "customer_id": {
             "type": "string",
@@ -25652,7 +26003,9 @@
           "refunded_tax_amount",
           "currency",
           "billing_reason",
+          "billing_name",
           "billing_address",
+          "is_invoice_generated",
           "customer_id",
           "product_id",
           "discount_id",
@@ -26024,6 +26377,40 @@
           "customer_cancellation_comment"
         ],
         "title": "CustomerOrderSubscription"
+      },
+      "CustomerOrderUpdate": {
+        "properties": {
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Name",
+            "description": "The name of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The address of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+          }
+        },
+        "type": "object",
+        "required": [
+          "billing_name",
+          "billing_address"
+        ],
+        "title": "CustomerOrderUpdate",
+        "description": "Schema to update an order."
       },
       "CustomerOrganization": {
         "properties": {
@@ -31470,6 +31857,28 @@
         ],
         "title": "IntrospectTokenResponse"
       },
+      "InvoiceAlreadyExists": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "InvoiceAlreadyExists",
+            "title": "Error",
+            "examples": [
+              "InvoiceAlreadyExists"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "InvoiceAlreadyExists"
+      },
       "LegacyRecurringProductPrice": {
         "oneOf": [
           {
@@ -34381,6 +34790,28 @@
         ],
         "title": "MetricsTotals"
       },
+      "MissingInvoiceBillingDetails": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "MissingInvoiceBillingDetails",
+            "title": "Error",
+            "examples": [
+              "MissingInvoiceBillingDetails"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "MissingInvoiceBillingDetails"
+      },
       "NotOpenCheckout": {
         "properties": {
           "error": {
@@ -34402,6 +34833,28 @@
           "detail"
         ],
         "title": "NotOpenCheckout"
+      },
+      "NotPaidOrder": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "NotPaidOrder",
+            "title": "Error",
+            "examples": [
+              "NotPaidOrder"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "NotPaidOrder"
       },
       "NotPermitted": {
         "properties": {
@@ -34475,7 +34928,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -34633,7 +35086,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -34750,7 +35203,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -35005,6 +35458,18 @@
           "billing_reason": {
             "$ref": "#/components/schemas/OrderBillingReason"
           },
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Name",
+            "description": "The name of the customer that should appear on the invoice. "
+          },
           "billing_address": {
             "anyOf": [
               {
@@ -35014,6 +35479,11 @@
                 "type": "null"
               }
             ]
+          },
+          "is_invoice_generated": {
+            "type": "boolean",
+            "title": "Is Invoice Generated",
+            "description": "Whether an invoice has been generated for this order."
           },
           "customer_id": {
             "type": "string",
@@ -35179,7 +35649,9 @@
           "refunded_tax_amount",
           "currency",
           "billing_reason",
+          "billing_name",
           "billing_address",
+          "is_invoice_generated",
           "customer_id",
           "product_id",
           "discount_id",
@@ -35843,6 +36315,40 @@
           "customer_cancellation_comment"
         ],
         "title": "OrderSubscription"
+      },
+      "OrderUpdate": {
+        "properties": {
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Name",
+            "description": "The name of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+          },
+          "billing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The address of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+          }
+        },
+        "type": "object",
+        "required": [
+          "billing_name",
+          "billing_address"
+        ],
+        "title": "OrderUpdate",
+        "description": "Schema to update an order."
       },
       "OrderUser": {
         "properties": {
@@ -38790,6 +39296,7 @@
           "customer_meters:read",
           "customer_sessions:write",
           "orders:read",
+          "orders:write",
           "refunds:read",
           "refunds:write",
           "payments:read",
@@ -38805,6 +39312,8 @@
           "issues:write",
           "customer_portal:read",
           "customer_portal:write",
+          "notifications:read",
+          "notifications:write",
           "notification_recipients:read",
           "notification_recipients:write"
         ],
@@ -38836,8 +39345,11 @@
           "metrics:read": "Read metrics",
           "notification_recipients:read": "Read notification recipients",
           "notification_recipients:write": "Create or modify notification recipients",
+          "notifications:read": "Read notifications",
+          "notifications:write": "Mark notifications as read",
           "openid": "OpenID",
           "orders:read": "Read orders made on your organizations",
+          "orders:write": "Modify orders made on your organizations",
           "organizations:read": "Read your organizations",
           "organizations:write": "Create or modify organizations",
           "payments:read": "Read payments made on your organizations",
