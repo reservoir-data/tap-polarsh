@@ -85,6 +85,94 @@ class _OrganizationStream(PolarStream):
         }
 
 
+class _BaseBenefits(_OrganizationStream):
+    """Base benefits stream."""
+
+    path = "/api/v1/benefits"
+    primary_keys = ("id",)
+
+    parent_stream_type = Organizations
+
+    benefit_type: str
+
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: int | None,
+    ) -> dict[str, t.Any]:
+        return {
+            **super().get_url_params(context, next_page_token),
+            "type": self.benefit_type,
+        }
+
+    def get_child_context(  # noqa: PLR6301
+        self,
+        record: dict[str, t.Any],
+        context: Context | None,  # noqa: ARG002
+    ) -> dict[str, t.Any]:
+        return {
+            "benefit_id": record["id"],
+        }
+
+
+class BenefitsCustom(_BaseBenefits):
+    """Custom benefits stream."""
+
+    name = "benefits_custom"
+    benefit_type = "custom"
+    swagger_ref: str = "BenefitCustom"
+
+
+class BenefitsDiscord(_BaseBenefits):
+    """Discord benefits stream."""
+
+    name = "benefits_discord"
+    benefit_type = "discord"
+    swagger_ref: str = "BenefitDiscord"
+
+
+class BenefitsGitHubRepo(_BaseBenefits):
+    """Benefits stream."""
+
+    name = "benefits_github_repo"
+    benefit_type = "github_repository"
+    swagger_ref: str = "BenefitGitHubRepository"
+
+
+class BenefitsDownloadables(_BaseBenefits):
+    """Downloadable benefits stream."""
+
+    name = "benefits_downloadables"
+    benefit_type = "downloadables"
+    swagger_ref: str = "BenefitDownloadables"
+
+
+class BenefitsLicenseKeys(_BaseBenefits):
+    """License keys benefits stream."""
+
+    name = "benefits_license_keys"
+    benefit_type = "license_keys"
+    swagger_ref: str = "BenefitLicenseKeys"
+
+
+class BenefitsMeterCredit(_BaseBenefits):
+    """Meter credit benefits stream."""
+
+    name = "benefits_meter_credit"
+    benefit_type = "meter_credit"
+    swagger_ref: str = "BenefitMeterCredit"
+
+
+class BenefitGrants(PolarStream):
+    """Base benefits grants stream."""
+
+    name = "benefit_grants"
+    path = "/api/v1/benefits/{benefit_id}/grants"
+    primary_keys = ("id",)
+
+    swagger_ref: str = "BenefitGrant"
+
+
 class CheckoutLinks(_OrganizationStream):
     """Checkout links stream."""
 
