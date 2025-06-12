@@ -34928,7 +34928,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -35086,7 +35086,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -35203,7 +35203,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -39279,6 +39279,10 @@
           "checkout_links:write",
           "checkouts:read",
           "checkouts:write",
+          "transactions:read",
+          "transactions:write",
+          "payouts:read",
+          "payouts:write",
           "products:read",
           "products:write",
           "benefits:read",
@@ -39327,8 +39331,10 @@
           "checkouts:write": "Create or modify checkout sessions",
           "custom_fields:read": "Read custom fields",
           "custom_fields:write": "Create or modify custom fields",
+          "customer_meters:read": "Read customer meters",
           "customer_portal:read": "Read your orders, subscriptions and benefits",
           "customer_portal:write": "Create or modify your orders, subscriptions and benefits",
+          "customer_sessions:write": "Create or modify customer sessions",
           "customers:read": "Read customers",
           "customers:write": "Create or modify customers",
           "discounts:read": "Read discounts",
@@ -39336,6 +39342,7 @@
           "email": "Read your email address",
           "events:read": "Read events",
           "events:write": "Create events",
+          "external_organizations:read": "Read external organizations",
           "files:read": "Read file uploads",
           "files:write": "Create or modify file uploads",
           "license_keys:read": "Read license keys",
@@ -39353,6 +39360,8 @@
           "organizations:read": "Read your organizations",
           "organizations:write": "Create or modify organizations",
           "payments:read": "Read payments made on your organizations",
+          "payouts:read": "Read payouts",
+          "payouts:write": "Create or modify payouts",
           "products:read": "Read products",
           "products:write": "Create or modify products",
           "profile": "Read your profile",
@@ -39360,6 +39369,8 @@
           "refunds:write": "Create or modify refunds",
           "subscriptions:read": "Read subscriptions made on your organizations",
           "subscriptions:write": "Create or modify subscriptions made on your organizations",
+          "transactions:read": "Read transactions",
+          "transactions:write": "Create or modify transactions",
           "user:read": "User Read",
           "web_default": "Web Default",
           "webhooks:read": "Read webhooks",
@@ -40079,12 +40090,37 @@
             "$ref": "#/components/schemas/SubscriptionUpdateProduct"
           },
           {
+            "$ref": "#/components/schemas/SubscriptionUpdateDiscount"
+          },
+          {
             "$ref": "#/components/schemas/SubscriptionCancel"
           },
           {
             "$ref": "#/components/schemas/SubscriptionRevoke"
           }
         ]
+      },
+      "SubscriptionUpdateDiscount": {
+        "properties": {
+          "discount_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Id",
+            "description": "Update the subscription to apply a new discount. If set to `null`, the discount will be removed. The change will be applied on the next billing cycle."
+          }
+        },
+        "type": "object",
+        "required": [
+          "discount_id"
+        ],
+        "title": "SubscriptionUpdateDiscount"
       },
       "SubscriptionUpdateProduct": {
         "properties": {
