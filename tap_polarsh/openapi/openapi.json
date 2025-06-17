@@ -2403,6 +2403,659 @@
         "x-speakeasy-name-override": "grants"
       }
     },
+    "/v1/webhooks/endpoints": {
+      "get": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "List Webhook Endpoints",
+        "description": "List webhook endpoints.\n\n**Scopes**: `webhooks:read` `webhooks:write`",
+        "operationId": "webhooks:list_webhook_endpoints",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:read",
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by organization ID.",
+              "title": "Organization Id"
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_WebhookEndpoint_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "list_webhook_endpoints"
+      },
+      "post": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Create Webhook Endpoint",
+        "description": "Create a webhook endpoint.\n\n**Scopes**: `webhooks:write`",
+        "operationId": "webhooks:create_webhook_endpoint",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookEndpointCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Webhook endpoint created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookEndpoint"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "create_webhook_endpoint"
+      }
+    },
+    "/v1/webhooks/endpoints/{id}": {
+      "get": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Get Webhook Endpoint",
+        "description": "Get a webhook endpoint by ID.\n\n**Scopes**: `webhooks:read` `webhooks:write`",
+        "operationId": "webhooks:get_webhook_endpoint",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:read",
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The webhook endpoint ID.",
+              "title": "Id"
+            },
+            "description": "The webhook endpoint ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookEndpoint"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook endpoint not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "get_webhook_endpoint"
+      },
+      "patch": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Update Webhook Endpoint",
+        "description": "Update a webhook endpoint.\n\n**Scopes**: `webhooks:write`",
+        "operationId": "webhooks:update_webhook_endpoint",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The webhook endpoint ID.",
+              "title": "Id"
+            },
+            "description": "The webhook endpoint ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookEndpointUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook endpoint updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookEndpoint"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook endpoint not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "update_webhook_endpoint"
+      },
+      "delete": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Delete Webhook Endpoint",
+        "description": "Delete a webhook endpoint.\n\n**Scopes**: `webhooks:write`",
+        "operationId": "webhooks:delete_webhook_endpoint",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The webhook endpoint ID.",
+              "title": "Id"
+            },
+            "description": "The webhook endpoint ID."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook endpoint deleted."
+          },
+          "404": {
+            "description": "Webhook endpoint not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "delete_webhook_endpoint"
+      }
+    },
+    "/v1/webhooks/deliveries": {
+      "get": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "List Webhook Deliveries",
+        "description": "List webhook deliveries.\n\nDeliveries are all the attempts to deliver a webhook event to an endpoint.\n\n**Scopes**: `webhooks:read` `webhooks:write`",
+        "operationId": "webhooks:list_webhook_deliveries",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:read",
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "endpoint_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by webhook endpoint ID.",
+              "title": "Endpoint Id"
+            },
+            "description": "Filter by webhook endpoint ID."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_WebhookDelivery_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "list_webhook_deliveries"
+      }
+    },
+    "/v1/webhooks/events/{id}/redeliver": {
+      "post": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Redeliver Webhook Event",
+        "description": "Schedule the re-delivery of a webhook event.\n\n**Scopes**: `webhooks:write`",
+        "operationId": "webhooks:redeliver_webhook_event",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The webhook event ID.",
+              "title": "Id"
+            },
+            "description": "The webhook event ID."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Webhook event re-delivery scheduled.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook event not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "redeliver_webhook_event"
+      }
+    },
     "/v1/products/": {
       "get": {
         "tags": [
@@ -33623,6 +34276,46 @@
         ],
         "title": "ListResource[Union[PaymentMethodCard, PaymentMethodGeneric]]"
       },
+      "ListResource_WebhookDelivery_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookDelivery"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[WebhookDelivery]"
+      },
+      "ListResource_WebhookEndpoint_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookEndpoint"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[WebhookEndpoint]"
+      },
       "ListResource__": {
         "properties": {
           "items": {
@@ -41014,6 +41707,379 @@
         ],
         "title": "WebhookCustomerUpdatedPayload",
         "description": "Sent when a customer is updated.\n\nThis event is fired when the customer details are updated.\n\nIf you want to be notified when a customer subscription or benefit state changes, you should listen to the `customer_state_changed` event.\n\n**Discord & Slack support:** Basic"
+      },
+      "WebhookDelivery": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "http_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Http Code",
+            "description": "The HTTP code returned by the URL. `null` if the endpoint was unreachable."
+          },
+          "succeeded": {
+            "type": "boolean",
+            "title": "Succeeded",
+            "description": "Whether the delivery was successful."
+          },
+          "webhook_event": {
+            "$ref": "#/components/schemas/WebhookEvent",
+            "description": "The webhook event sent by this delivery."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "succeeded",
+          "webhook_event"
+        ],
+        "title": "WebhookDelivery",
+        "description": "A webhook delivery for a webhook event."
+      },
+      "WebhookEndpoint": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url",
+            "description": "The URL where the webhook events will be sent.",
+            "examples": [
+              "https://webhook.site/cb791d80-f26e-4f8c-be88-6e56054192b0"
+            ]
+          },
+          "format": {
+            "$ref": "#/components/schemas/WebhookFormat",
+            "description": "The format of the webhook payload."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The organization ID associated with the webhook endpoint."
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "The events that will trigger the webhook."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "url",
+          "format",
+          "organization_id",
+          "events"
+        ],
+        "title": "WebhookEndpoint",
+        "description": "A webhook endpoint."
+      },
+      "WebhookEndpointCreate": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url",
+            "description": "The URL where the webhook events will be sent.",
+            "examples": [
+              "https://webhook.site/cb791d80-f26e-4f8c-be88-6e56054192b0"
+            ]
+          },
+          "format": {
+            "$ref": "#/components/schemas/WebhookFormat",
+            "description": "The format of the webhook payload."
+          },
+          "secret": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Secret",
+            "description": "The secret used to sign the webhook events.",
+            "examples": [
+              "f_z6mfSpxkjogyw3FkA2aH2gYE5huxruNf34MpdWMcA"
+            ]
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "The events that will trigger the webhook."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The organization ID associated with the webhook endpoint. **Required unless you use an organization token.**"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "format",
+          "secret",
+          "events"
+        ],
+        "title": "WebhookEndpointCreate",
+        "description": "Schema to create a webhook endpoint."
+      },
+      "WebhookEndpointUpdate": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri",
+                "description": "The URL where the webhook events will be sent.",
+                "examples": [
+                  "https://webhook.site/cb791d80-f26e-4f8c-be88-6e56054192b0"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFormat",
+                "description": "The format of the webhook payload."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "secret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "description": "The secret used to sign the webhook events.",
+                "examples": [
+                  "f_z6mfSpxkjogyw3FkA2aH2gYE5huxruNf34MpdWMcA"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secret"
+          },
+          "events": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/WebhookEventType"
+                },
+                "type": "array",
+                "description": "The events that will trigger the webhook."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Events"
+          }
+        },
+        "type": "object",
+        "title": "WebhookEndpointUpdate",
+        "description": "Schema to update a webhook endpoint."
+      },
+      "WebhookEvent": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "last_http_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Http Code",
+            "description": "Last HTTP code returned by the URL. `null` if no delviery has been attempted or if the endpoint was unreachable."
+          },
+          "succeeded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Succeeded",
+            "description": "Whether this event was successfully delivered. `null` if no delivery has been attempted."
+          },
+          "payload": {
+            "type": "string",
+            "title": "Payload",
+            "description": "The payload of the webhook event."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "payload"
+        ],
+        "title": "WebhookEvent",
+        "description": "A webhook event.\n\nAn event represent something that happened in the system\nthat should be sent to the webhook endpoint.\n\nIt can be delivered multiple times until it's marked as succeeded,\neach one creating a new delivery."
+      },
+      "WebhookEventType": {
+        "type": "string",
+        "enum": [
+          "checkout.created",
+          "checkout.updated",
+          "customer.created",
+          "customer.updated",
+          "customer.deleted",
+          "customer.state_changed",
+          "order.created",
+          "order.updated",
+          "order.paid",
+          "order.refunded",
+          "subscription.created",
+          "subscription.updated",
+          "subscription.active",
+          "subscription.canceled",
+          "subscription.uncanceled",
+          "subscription.revoked",
+          "refund.created",
+          "refund.updated",
+          "product.created",
+          "product.updated",
+          "benefit.created",
+          "benefit.updated",
+          "benefit_grant.created",
+          "benefit_grant.cycled",
+          "benefit_grant.updated",
+          "benefit_grant.revoked",
+          "organization.updated"
+        ],
+        "title": "WebhookEventType"
+      },
+      "WebhookFormat": {
+        "type": "string",
+        "enum": [
+          "raw",
+          "discord",
+          "slack"
+        ],
+        "title": "WebhookFormat"
       },
       "WebhookOrderCreatedPayload": {
         "properties": {
