@@ -19798,6 +19798,18 @@
             "type": "object",
             "title": "Metadata"
           },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
+          },
           "customer_external_id": {
             "anyOf": [
               {
@@ -19808,7 +19820,7 @@
               }
             ],
             "title": "Customer External Id",
-            "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
+            "deprecated": true
           },
           "products": {
             "items": {
@@ -19938,6 +19950,7 @@
           "customer_tax_id",
           "payment_processor_metadata",
           "metadata",
+          "external_customer_id",
           "customer_external_id",
           "products",
           "product",
@@ -21243,7 +21256,7 @@
             "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
             "default": false
           },
-          "customer_external_id": {
+          "external_customer_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -21252,7 +21265,7 @@
                 "type": "null"
               }
             ],
-            "title": "Customer External Id",
+            "title": "External Customer Id",
             "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
           },
           "customer_name": {
@@ -21641,7 +21654,7 @@
             "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
             "default": false
           },
-          "customer_external_id": {
+          "external_customer_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -21650,7 +21663,7 @@
                 "type": "null"
               }
             ],
-            "title": "Customer External Id",
+            "title": "External Customer Id",
             "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
           },
           "customer_name": {
@@ -21918,7 +21931,7 @@
             "description": "Whether the customer is a business or an individual. If `true`, the customer will be required to fill their full billing address and billing name.",
             "default": false
           },
-          "customer_external_id": {
+          "external_customer_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -21927,7 +21940,7 @@
                 "type": "null"
               }
             ],
-            "title": "Customer External Id",
+            "title": "External Customer Id",
             "description": "ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set."
           },
           "customer_name": {
@@ -27479,15 +27492,15 @@
       },
       "CustomerSessionCustomerExternalIDCreate": {
         "properties": {
-          "customer_external_id": {
+          "external_customer_id": {
             "type": "string",
-            "title": "Customer External Id",
+            "title": "External Customer Id",
             "description": "External ID of the customer to create a session for."
           }
         },
         "type": "object",
         "required": [
-          "customer_external_id"
+          "external_customer_id"
         ],
         "title": "CustomerSessionCustomerExternalIDCreate",
         "description": "Schema for creating a customer session using an external customer ID."
@@ -27789,6 +27802,32 @@
               "custom"
             ]
           },
+          "benefit_metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Benefit Metadata",
+            "description": "The metadata of the benefit concerned by this grant.",
+            "examples": [
+              {
+                "key": "value"
+              }
+            ]
+          },
           "properties": {
             "anyOf": [
               {
@@ -27818,6 +27857,7 @@
           "granted_at",
           "benefit_id",
           "benefit_type",
+          "benefit_metadata",
           "properties"
         ],
         "title": "CustomerStateBenefitGrant",
