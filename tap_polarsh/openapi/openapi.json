@@ -1829,6 +1829,16 @@
               "title": "Sorting"
             },
             "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -3305,6 +3315,16 @@
               "title": "Sorting"
             },
             "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -13605,6 +13625,16 @@
               "description": "Filter by external customer ID."
             },
             "description": "Filter by external customer ID."
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/MetadataQuery"
+            },
+            "description": "Filter by metadata key-value pairs. It uses the `deepObject` style, e.g. `?metadata[key]=value`."
           }
         ],
         "responses": {
@@ -19778,6 +19808,10 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -19905,11 +19939,6 @@
             },
             "type": "object",
             "title": "Customer Metadata"
-          },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form.",
-            "readOnly": true
           }
         },
         "type": "object",
@@ -19949,6 +19978,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
+          "customer_billing_address_fields",
           "metadata",
           "external_customer_id",
           "customer_external_id",
@@ -19958,8 +19988,7 @@
           "discount",
           "subscription_id",
           "attached_custom_fields",
-          "customer_metadata",
-          "customer_billing_address_fields"
+          "customer_metadata"
         ],
         "title": "Checkout",
         "description": "Checkout session data retrieved using an access token."
@@ -22382,6 +22411,10 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form."
+          },
           "products": {
             "items": {
               "$ref": "#/components/schemas/CheckoutProduct"
@@ -22439,11 +22472,6 @@
             },
             "type": "array",
             "title": "Attached Custom Fields"
-          },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form.",
-            "readOnly": true
           }
         },
         "type": "object",
@@ -22483,13 +22511,13 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
+          "customer_billing_address_fields",
           "products",
           "product",
           "product_price",
           "discount",
           "organization",
-          "attached_custom_fields",
-          "customer_billing_address_fields"
+          "attached_custom_fields"
         ],
         "title": "CheckoutPublic",
         "description": "Checkout session data retrieved using the client secret."
@@ -22778,6 +22806,10 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
+          "customer_billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
+            "description": "Determine which billing address fields should be shown in the checkout form."
+          },
           "products": {
             "items": {
               "$ref": "#/components/schemas/CheckoutProduct"
@@ -22839,11 +22871,6 @@
           "customer_session_token": {
             "type": "string",
             "title": "Customer Session Token"
-          },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form.",
-            "readOnly": true
           }
         },
         "type": "object",
@@ -22883,14 +22910,14 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
+          "customer_billing_address_fields",
           "products",
           "product",
           "product_price",
           "discount",
           "organization",
           "attached_custom_fields",
-          "customer_session_token",
-          "customer_billing_address_fields"
+          "customer_session_token"
         ],
         "title": "CheckoutPublicConfirmed",
         "description": "Checkout session data retrieved using the client secret after confirmation.\n\nIt contains a customer session token to retrieve order information\nright after the checkout."
