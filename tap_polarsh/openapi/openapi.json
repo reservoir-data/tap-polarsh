@@ -9998,9 +9998,9 @@
           "customers",
           "documented"
         ],
-        "summary": "Get Customer Payment Methods",
+        "summary": "List Customer Payment Methods",
         "description": "Get saved payment methods of the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
-        "operationId": "customer_portal:customers:get_payment_methods",
+        "operationId": "customer_portal:customers:list_payment_methods",
         "security": [
           {
             "customer_session": []
@@ -10082,7 +10082,7 @@
           "disabled": true
         },
         "x-speakeasy-group": "customer_portal.customers",
-        "x-speakeasy-name-override": "get_payment_methods"
+        "x-speakeasy-name-override": "list_payment_methods"
       },
       "post": {
         "tags": [
@@ -10170,6 +10170,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "format": "uuid4",
               "title": "Id"
             }
           }
@@ -19505,7 +19506,8 @@
             "title": "Brand",
             "description": "The brand of the card used for the payment.",
             "examples": [
-              "visa"
+              "visa",
+              "amex"
             ]
           },
           "last4": {
@@ -27242,6 +27244,18 @@
             },
             "type": "object",
             "title": "Oauth Accounts"
+          },
+          "default_payment_method_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Payment Method Id"
           }
         },
         "type": "object",
@@ -38077,37 +38091,59 @@
         "properties": {
           "id": {
             "type": "string",
-            "title": "Id"
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "processor": {
+            "$ref": "#/components/schemas/PaymentProcessor"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id"
           },
           "type": {
             "type": "string",
             "const": "card",
             "title": "Type"
           },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At"
-          },
-          "default": {
-            "type": "boolean",
-            "title": "Default"
-          },
-          "card": {
-            "$ref": "#/components/schemas/PaymentMethodCardData"
+          "method_metadata": {
+            "$ref": "#/components/schemas/PaymentMethodCardMetadata"
           }
         },
         "type": "object",
         "required": [
           "id",
-          "type",
           "created_at",
-          "default",
-          "card"
+          "modified_at",
+          "processor",
+          "customer_id",
+          "type",
+          "method_metadata"
         ],
         "title": "PaymentMethodCard"
       },
-      "PaymentMethodCardData": {
+      "PaymentMethodCardMetadata": {
         "properties": {
           "brand": {
             "type": "string",
@@ -38144,34 +38180,56 @@
           "exp_month",
           "exp_year"
         ],
-        "title": "PaymentMethodCardData"
+        "title": "PaymentMethodCardMetadata"
       },
       "PaymentMethodGeneric": {
         "properties": {
           "id": {
             "type": "string",
-            "title": "Id"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
           },
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "title": "Created At"
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
           },
-          "default": {
-            "type": "boolean",
-            "title": "Default"
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "processor": {
+            "$ref": "#/components/schemas/PaymentProcessor"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
           }
         },
         "type": "object",
         "required": [
           "id",
-          "type",
           "created_at",
-          "default"
+          "modified_at",
+          "processor",
+          "customer_id",
+          "type"
         ],
         "title": "PaymentMethodGeneric"
       },
