@@ -37717,12 +37717,6 @@
             "title": "Issue Funding Enabled",
             "description": "If this organization has issue funding enabled",
             "default": false
-          },
-          "usage_based_billing_enabled": {
-            "type": "boolean",
-            "title": "Usage Based Billing Enabled",
-            "description": "If this organization has usage-based billing enabled",
-            "default": false
           }
         },
         "type": "object",
