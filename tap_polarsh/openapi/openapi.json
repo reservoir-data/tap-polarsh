@@ -19951,6 +19951,15 @@
         "title": "BenefitUpdatedEvent",
         "description": "An event created by Polar when a benefit is updated."
       },
+      "BillingAddressFieldMode": {
+        "type": "string",
+        "enum": [
+          "required",
+          "optional",
+          "disabled"
+        ],
+        "title": "BillingAddressFieldMode"
+      },
       "CardPayment": {
         "properties": {
           "created_at": {
@@ -20424,9 +20433,9 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form."
+          "billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutBillingAddressFields",
+            "description": "Determine which billing address fields should be disabled, optional or required in the checkout form."
           },
           "metadata": {
             "additionalProperties": {
@@ -20594,7 +20603,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "customer_billing_address_fields",
+          "billing_address_fields",
           "metadata",
           "external_customer_id",
           "customer_external_id",
@@ -20608,6 +20617,38 @@
         ],
         "title": "Checkout",
         "description": "Checkout session data retrieved using an access token."
+      },
+      "CheckoutBillingAddressFields": {
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          },
+          "state": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          },
+          "city": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          },
+          "line1": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          },
+          "line2": {
+            "$ref": "#/components/schemas/BillingAddressFieldMode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "country",
+          "state",
+          "city",
+          "postal_code",
+          "line1",
+          "line2"
+        ],
+        "title": "CheckoutBillingAddressFields"
       },
       "CheckoutConfirmStripe": {
         "properties": {
@@ -20814,7 +20855,8 @@
           "line1",
           "line2"
         ],
-        "title": "CheckoutCustomerBillingAddressFields"
+        "title": "CheckoutCustomerBillingAddressFields",
+        "description": "Deprecated: Use CheckoutBillingAddressFields instead."
       },
       "CheckoutDiscountFixedOnceForeverDuration": {
         "properties": {
@@ -23027,9 +23069,9 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form."
+          "billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutBillingAddressFields",
+            "description": "Determine which billing address fields should be disabled, optional or required in the checkout form."
           },
           "products": {
             "items": {
@@ -23127,7 +23169,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "customer_billing_address_fields",
+          "billing_address_fields",
           "products",
           "product",
           "product_price",
@@ -23422,9 +23464,9 @@
             "type": "object",
             "title": "Payment Processor Metadata"
           },
-          "customer_billing_address_fields": {
-            "$ref": "#/components/schemas/CheckoutCustomerBillingAddressFields",
-            "description": "Determine which billing address fields should be shown in the checkout form."
+          "billing_address_fields": {
+            "$ref": "#/components/schemas/CheckoutBillingAddressFields",
+            "description": "Determine which billing address fields should be disabled, optional or required in the checkout form."
           },
           "products": {
             "items": {
@@ -23526,7 +23568,7 @@
           "customer_billing_address",
           "customer_tax_id",
           "payment_processor_metadata",
-          "customer_billing_address_fields",
+          "billing_address_fields",
           "products",
           "product",
           "product_price",
