@@ -37942,6 +37942,10 @@
           "subscription_settings": {
             "$ref": "#/components/schemas/OrganizationSubscriptionSettings",
             "description": "Settings related to subscriptions management"
+          },
+          "notification_settings": {
+            "$ref": "#/components/schemas/OrganizationNotificationSettings",
+            "description": "Settings related to notifications"
           }
         },
         "type": "object",
@@ -37957,7 +37961,8 @@
           "socials",
           "details_submitted_at",
           "feature_settings",
-          "subscription_settings"
+          "subscription_settings",
+          "notification_settings"
         ],
         "title": "Organization"
       },
@@ -38285,6 +38290,16 @@
                 "type": "null"
               }
             ]
+          },
+          "notification_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationNotificationSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -38377,6 +38392,24 @@
         },
         "type": "object",
         "title": "OrganizationFeatureSettings"
+      },
+      "OrganizationNotificationSettings": {
+        "properties": {
+          "new_order": {
+            "type": "boolean",
+            "title": "New Order"
+          },
+          "new_subscription": {
+            "type": "boolean",
+            "title": "New Subscription"
+          }
+        },
+        "type": "object",
+        "required": [
+          "new_order",
+          "new_subscription"
+        ],
+        "title": "OrganizationNotificationSettings"
       },
       "OrganizationProfileSettings": {
         "properties": {
@@ -38677,6 +38710,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/OrganizationSubscriptionSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notification_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationNotificationSettings"
               },
               {
                 "type": "null"
