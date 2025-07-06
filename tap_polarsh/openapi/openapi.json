@@ -11237,65 +11237,6 @@
         "x-speakeasy-name-override": "list"
       }
     },
-    "/v1/customer-portal/downloadables/{token}": {
-      "get": {
-        "tags": [
-          "customer_portal",
-          "downloadables",
-          "documented"
-        ],
-        "summary": "Get Downloadable",
-        "operationId": "customer_portal:downloadables:customer_portal.downloadables.get",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Token"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "302": {
-            "description": "Redirected to download"
-          },
-          "400": {
-            "description": "Invalid signature"
-          },
-          "404": {
-            "description": "Downloadable not found"
-          },
-          "410": {
-            "description": "Expired signature"
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "customer_portal.downloadables",
-        "x-speakeasy-name-override": "get"
-      }
-    },
     "/v1/customer-portal/license-keys/": {
       "get": {
         "tags": [
