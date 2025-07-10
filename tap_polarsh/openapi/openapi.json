@@ -554,6 +554,32 @@
             "description": "Filter by customer ID."
           },
           {
+            "name": "external_customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "description": "The customer external ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "The customer external ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "ExternalCustomerID Filter",
+              "description": "Filter by customer external ID."
+            },
+            "description": "Filter by customer external ID."
+          },
+          {
             "name": "discount_id",
             "in": "query",
             "required": false,
@@ -1107,347 +1133,6 @@
         },
         "x-speakeasy-group": "subscriptions",
         "x-speakeasy-name-override": "revoke"
-      }
-    },
-    "/v1/oauth2/": {
-      "get": {
-        "tags": [
-          "oauth2",
-          "clients",
-          "documented"
-        ],
-        "summary": "List Clients",
-        "description": "List OAuth2 clients.",
-        "operationId": "oauth2:clients:list",
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "exclusiveMinimum": 0,
-              "description": "Page number, defaults to 1.",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number, defaults to 1."
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "exclusiveMinimum": 0,
-              "description": "Size of a page, defaults to 10. Maximum is 100.",
-              "default": 10,
-              "title": "Limit"
-            },
-            "description": "Size of a page, defaults to 10. Maximum is 100."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListResource_OAuth2Client_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-polar-allowed-subjects": [
-          "User"
-        ],
-        "x-speakeasy-pagination": {
-          "type": "offsetLimit",
-          "inputs": [
-            {
-              "name": "page",
-              "in": "parameters",
-              "type": "page"
-            },
-            {
-              "name": "limit",
-              "in": "parameters",
-              "type": "limit"
-            }
-          ],
-          "outputs": {
-            "results": "$.items",
-            "numPages": "$.pagination.max_page"
-          }
-        },
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "oauth2.clients",
-        "x-speakeasy-name-override": "list"
-      }
-    },
-    "/v1/oauth2/register": {
-      "post": {
-        "tags": [
-          "oauth2",
-          "clients",
-          "documented"
-        ],
-        "summary": "Create Client",
-        "description": "Create an OAuth2 client.",
-        "operationId": "oauth2:clients:oauth2:create_client",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuth2ClientConfiguration"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "x-polar-allowed-subjects": [
-          "User"
-        ],
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "oauth2.clients",
-        "x-speakeasy-name-override": "create"
-      }
-    },
-    "/v1/oauth2/register/{client_id}": {
-      "get": {
-        "tags": [
-          "oauth2",
-          "clients",
-          "documented"
-        ],
-        "summary": "Get Client",
-        "description": "Get an OAuth2 client by Client ID.",
-        "operationId": "oauth2:clients:oauth2:get_client",
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "client_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Client Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-polar-allowed-subjects": [
-          "Anonymous",
-          "User"
-        ],
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "oauth2.clients",
-        "x-speakeasy-name-override": "get"
-      },
-      "put": {
-        "tags": [
-          "oauth2",
-          "clients",
-          "documented"
-        ],
-        "summary": "Update Client",
-        "description": "Update an OAuth2 client.",
-        "operationId": "oauth2:clients:oauth2:update_client",
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "client_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Client Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuth2ClientConfigurationUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-polar-allowed-subjects": [
-          "Anonymous",
-          "User"
-        ],
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "oauth2.clients",
-        "x-speakeasy-name-override": "update"
-      },
-      "delete": {
-        "tags": [
-          "oauth2",
-          "clients",
-          "documented"
-        ],
-        "summary": "Delete Client",
-        "description": "Delete an OAuth2 client.",
-        "operationId": "oauth2:clients:oauth2:delete_client",
-        "security": [
-          {
-            "oidc": []
-          },
-          {
-            "pat": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "client_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Client Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "x-polar-allowed-subjects": [
-          "Anonymous",
-          "User"
-        ],
-        "x-speakeasy-mcp": {
-          "disabled": true
-        },
-        "x-speakeasy-group": "oauth2.clients",
-        "x-speakeasy-name-override": "delete"
       }
     },
     "/v1/oauth2/authorize": {
@@ -17027,12 +16712,18 @@
             "type": "string",
             "title": "Role Id",
             "description": "The ID of the Discord role to grant."
+          },
+          "kick_member": {
+            "type": "boolean",
+            "title": "Kick Member",
+            "description": "Whether to kick the member from the Discord server on revocation."
           }
         },
         "type": "object",
         "required": [
           "guild_token",
-          "role_id"
+          "role_id",
+          "kick_member"
         ],
         "title": "BenefitDiscordCreateProperties",
         "description": "Properties to create a benefit of type `discord`."
@@ -17049,6 +16740,11 @@
             "title": "Role Id",
             "description": "The ID of the Discord role to grant."
           },
+          "kick_member": {
+            "type": "boolean",
+            "title": "Kick Member",
+            "description": "Whether to kick the member from the Discord server on revocation."
+          },
           "guild_token": {
             "type": "string",
             "title": "Guild Token",
@@ -17059,6 +16755,7 @@
         "required": [
           "guild_id",
           "role_id",
+          "kick_member",
           "guild_token"
         ],
         "title": "BenefitDiscordProperties",
@@ -34807,26 +34504,6 @@
         ],
         "title": "ListResource[Meter]"
       },
-      "ListResource_OAuth2Client_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/OAuth2Client"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/Pagination"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "pagination"
-        ],
-        "title": "ListResource[OAuth2Client]"
-      },
       "ListResource_Order_": {
         "properties": {
           "items": {
@@ -36248,403 +35925,6 @@
           "detail"
         ],
         "title": "NotPermitted"
-      },
-      "OAuth2Client": {
-        "properties": {
-          "redirect_uris": {
-            "items": {
-              "type": "string",
-              "minLength": 1,
-              "format": "uri"
-            },
-            "type": "array",
-            "title": "Redirect Uris"
-          },
-          "token_endpoint_auth_method": {
-            "type": "string",
-            "enum": [
-              "client_secret_basic",
-              "client_secret_post",
-              "none"
-            ],
-            "title": "Token Endpoint Auth Method",
-            "default": "client_secret_post"
-          },
-          "grant_types": {
-            "items": {
-              "type": "string",
-              "enum": [
-                "authorization_code",
-                "refresh_token"
-              ]
-            },
-            "type": "array",
-            "title": "Grant Types",
-            "default": [
-              "authorization_code",
-              "refresh_token"
-            ]
-          },
-          "response_types": {
-            "items": {
-              "type": "string",
-              "const": "code"
-            },
-            "type": "array",
-            "title": "Response Types",
-            "default": [
-              "code"
-            ]
-          },
-          "scope": {
-            "type": "string",
-            "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
-          },
-          "client_name": {
-            "type": "string",
-            "title": "Client Name"
-          },
-          "client_uri": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Client Uri"
-          },
-          "logo_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logo Uri"
-          },
-          "tos_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tos Uri"
-          },
-          "policy_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Policy Uri"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Creation timestamp of the object."
-          },
-          "modified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modified At",
-            "description": "Last modification timestamp of the object."
-          },
-          "client_id": {
-            "type": "string",
-            "title": "Client Id"
-          },
-          "client_secret": {
-            "type": "string",
-            "title": "Client Secret"
-          },
-          "client_id_issued_at": {
-            "type": "integer",
-            "title": "Client Id Issued At"
-          },
-          "client_secret_expires_at": {
-            "type": "integer",
-            "title": "Client Secret Expires At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "redirect_uris",
-          "client_name",
-          "created_at",
-          "modified_at",
-          "client_id",
-          "client_secret",
-          "client_id_issued_at",
-          "client_secret_expires_at"
-        ],
-        "title": "OAuth2Client"
-      },
-      "OAuth2ClientConfiguration": {
-        "properties": {
-          "redirect_uris": {
-            "items": {
-              "type": "string",
-              "minLength": 1,
-              "format": "uri"
-            },
-            "type": "array",
-            "title": "Redirect Uris"
-          },
-          "token_endpoint_auth_method": {
-            "type": "string",
-            "enum": [
-              "client_secret_basic",
-              "client_secret_post",
-              "none"
-            ],
-            "title": "Token Endpoint Auth Method",
-            "default": "client_secret_post"
-          },
-          "grant_types": {
-            "items": {
-              "type": "string",
-              "enum": [
-                "authorization_code",
-                "refresh_token"
-              ]
-            },
-            "type": "array",
-            "title": "Grant Types",
-            "default": [
-              "authorization_code",
-              "refresh_token"
-            ]
-          },
-          "response_types": {
-            "items": {
-              "type": "string",
-              "const": "code"
-            },
-            "type": "array",
-            "title": "Response Types",
-            "default": [
-              "code"
-            ]
-          },
-          "scope": {
-            "type": "string",
-            "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
-          },
-          "client_name": {
-            "type": "string",
-            "title": "Client Name"
-          },
-          "client_uri": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Client Uri"
-          },
-          "logo_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logo Uri"
-          },
-          "tos_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tos Uri"
-          },
-          "policy_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Policy Uri"
-          }
-        },
-        "type": "object",
-        "required": [
-          "redirect_uris",
-          "client_name"
-        ],
-        "title": "OAuth2ClientConfiguration"
-      },
-      "OAuth2ClientConfigurationUpdate": {
-        "properties": {
-          "redirect_uris": {
-            "items": {
-              "type": "string",
-              "minLength": 1,
-              "format": "uri"
-            },
-            "type": "array",
-            "title": "Redirect Uris"
-          },
-          "token_endpoint_auth_method": {
-            "type": "string",
-            "enum": [
-              "client_secret_basic",
-              "client_secret_post",
-              "none"
-            ],
-            "title": "Token Endpoint Auth Method",
-            "default": "client_secret_post"
-          },
-          "grant_types": {
-            "items": {
-              "type": "string",
-              "enum": [
-                "authorization_code",
-                "refresh_token"
-              ]
-            },
-            "type": "array",
-            "title": "Grant Types",
-            "default": [
-              "authorization_code",
-              "refresh_token"
-            ]
-          },
-          "response_types": {
-            "items": {
-              "type": "string",
-              "const": "code"
-            },
-            "type": "array",
-            "title": "Response Types",
-            "default": [
-              "code"
-            ]
-          },
-          "scope": {
-            "type": "string",
-            "title": "Scope",
-            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
-          },
-          "client_name": {
-            "type": "string",
-            "title": "Client Name"
-          },
-          "client_uri": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Client Uri"
-          },
-          "logo_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logo Uri"
-          },
-          "tos_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tos Uri"
-          },
-          "policy_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "minLength": 1,
-                "format": "uri"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Policy Uri"
-          },
-          "client_id": {
-            "type": "string",
-            "title": "Client Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "redirect_uris",
-          "client_name",
-          "client_id"
-        ],
-        "title": "OAuth2ClientConfigurationUpdate"
       },
       "OAuth2ClientPublic": {
         "properties": {
