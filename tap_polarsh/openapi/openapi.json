@@ -25425,7 +25425,7 @@
             "title": "Avatar Url",
             "readOnly": true,
             "examples": [
-              "https://www.gravatar.com/avatar/xxx?d=blank"
+              "https://www.gravatar.com/avatar/xxx?d=404"
             ]
           }
         },
@@ -28056,7 +28056,7 @@
             "title": "Avatar Url",
             "readOnly": true,
             "examples": [
-              "https://www.gravatar.com/avatar/xxx?d=blank"
+              "https://www.gravatar.com/avatar/xxx?d=404"
             ]
           }
         },
@@ -33588,7 +33588,7 @@
             "title": "Avatar Url",
             "readOnly": true,
             "examples": [
-              "https://www.gravatar.com/avatar/xxx?d=blank"
+              "https://www.gravatar.com/avatar/xxx?d=404"
             ]
           }
         },
@@ -36492,7 +36492,7 @@
             "title": "Avatar Url",
             "readOnly": true,
             "examples": [
-              "https://www.gravatar.com/avatar/xxx?d=blank"
+              "https://www.gravatar.com/avatar/xxx?d=404"
             ]
           }
         },
@@ -40628,7 +40628,7 @@
             "title": "Avatar Url",
             "readOnly": true,
             "examples": [
-              "https://www.gravatar.com/avatar/xxx?d=blank"
+              "https://www.gravatar.com/avatar/xxx?d=404"
             ]
           }
         },
