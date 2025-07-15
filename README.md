@@ -52,7 +52,6 @@ Get a [Personal Access Token](https://polar.sh/settings) and provide it as the `
 
 ## Supported Python Versions
 
-* 3.9
 * 3.10
 * 3.11
 * 3.12
