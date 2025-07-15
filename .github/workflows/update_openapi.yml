@@ -3,8 +3,8 @@ name: Update OpenAPI Specification for polar.sh
 on:
   workflow_dispatch:
   schedule:
-  # Daily at noon
-  - cron: '0 12 * * *'
+  # On Fridays
+  - cron: '0 12 * * 5'
 
 env:
   # renovate: datasource=pypi depName=uv
