@@ -865,11 +865,12 @@
           "mcp"
         ],
         "summary": "Get Subscription",
-        "description": "Get a subscription by ID.\n\n**Scopes**: `subscriptions:write`",
+        "description": "Get a subscription by ID.\n\n**Scopes**: `subscriptions:read` `subscriptions:write`",
         "operationId": "subscriptions:get",
         "security": [
           {
             "oidc": [
+              "subscriptions:read",
               "subscriptions:write"
             ]
           },
@@ -2543,6 +2544,85 @@
         },
         "x-speakeasy-group": "webhooks",
         "x-speakeasy-name-override": "delete_webhook_endpoint"
+      }
+    },
+    "/v1/webhooks/endpoints/{id}/secret": {
+      "patch": {
+        "tags": [
+          "webhooks",
+          "documented"
+        ],
+        "summary": "Reset Webhook Endpoint Secret",
+        "description": "Regenerate a webhook endpoint secret.\n\n**Scopes**: `webhooks:write`",
+        "operationId": "webhooks:reset_webhook_endpoint_secret",
+        "security": [
+          {
+            "oidc": [
+              "webhooks:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The webhook endpoint ID.",
+              "title": "Id"
+            },
+            "description": "The webhook endpoint ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook endpoint secret reset.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookEndpoint"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook endpoint not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "webhooks",
+        "x-speakeasy-name-override": "reset_webhook_endpoint_secret"
       }
     },
     "/v1/webhooks/deliveries": {
@@ -10339,7 +10419,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListResource_Union_PaymentMethodCard__PaymentMethodGeneric__"
+                  "$ref": "#/components/schemas/ListResource_CustomerPaymentMethod_"
                 }
               }
             }
@@ -10413,15 +10493,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/PaymentMethodCard"
-                    },
-                    {
-                      "$ref": "#/components/schemas/PaymentMethodGeneric"
-                    }
-                  ],
-                  "title": "Response Customer Portal:Customers:Add Payment Method"
+                  "$ref": "#/components/schemas/CustomerPaymentMethod",
+                  "title": "CustomerPaymentMethod"
                 }
               }
             }
@@ -11923,6 +11996,85 @@
         },
         "x-speakeasy-group": "customer_portal.orders",
         "x-speakeasy-name-override": "invoice"
+      }
+    },
+    "/v1/customer-portal/orders/{id}/retry-payment": {
+      "post": {
+        "tags": [
+          "customer_portal",
+          "orders",
+          "documented"
+        ],
+        "summary": "Retry Payment",
+        "description": "Manually retry payment for a failed order.\n\n**Scopes**: `customer_portal:write`",
+        "operationId": "customer_portal:orders:retry_payment",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The order ID.",
+              "title": "Id"
+            },
+            "description": "The order ID."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Payment already in progress.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentAlreadyInProgress"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Order not eligible for retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderNotEligibleForRetry"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.orders",
+        "x-speakeasy-name-override": "retry_payment"
       }
     },
     "/v1/customer-portal/organizations/{slug}": {
@@ -26974,6 +27126,19 @@
             "type": "array",
             "title": "Items",
             "description": "Line items composing the order."
+          },
+          "next_payment_attempt_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Payment Attempt At",
+            "description": "When the next payment retry is scheduled"
           }
         },
         "type": "object",
@@ -27422,6 +27587,16 @@
         ],
         "title": "CustomerOrganization",
         "description": "Schema of an organization and related data for customer portal."
+      },
+      "CustomerPaymentMethod": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PaymentMethodCard"
+          },
+          {
+            "$ref": "#/components/schemas/PaymentMethodGeneric"
+          }
+        ]
       },
       "CustomerPaymentMethodCreate": {
         "properties": {
@@ -34305,6 +34480,27 @@
         ],
         "title": "ListResource[CustomerOrder]"
       },
+      "ListResource_CustomerPaymentMethod_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerPaymentMethod",
+              "title": "CustomerPaymentMethod"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[CustomerPaymentMethod]"
+      },
       "ListResource_CustomerSubscription_": {
         "properties": {
           "items": {
@@ -34604,33 +34800,6 @@
           "pagination"
         ],
         "title": "ListResource[Subscription]"
-      },
-      "ListResource_Union_PaymentMethodCard__PaymentMethodGeneric__": {
-        "properties": {
-          "items": {
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/PaymentMethodCard"
-                },
-                {
-                  "$ref": "#/components/schemas/PaymentMethodGeneric"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/Pagination"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "pagination"
-        ],
-        "title": "ListResource[Union[PaymentMethodCard, PaymentMethodGeneric]]"
       },
       "ListResource_WebhookDelivery_": {
         "properties": {
@@ -35421,6 +35590,17 @@
             ],
             "title": "Monthly Recurring Revenue"
           },
+          "committed_monthly_recurring_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Committed Monthly Recurring Revenue"
+          },
           "checkouts": {
             "anyOf": [
               {
@@ -35470,6 +35650,7 @@
           "renewed_subscriptions_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
+          "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
           "checkouts_conversion"
@@ -35523,6 +35704,9 @@
           "monthly_recurring_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
+          "committed_monthly_recurring_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "checkouts": {
             "$ref": "#/components/schemas/Metric"
           },
@@ -35547,6 +35731,7 @@
           "renewed_subscriptions_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
+          "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
           "checkouts_conversion"
@@ -35785,6 +35970,17 @@
             ],
             "title": "Monthly Recurring Revenue"
           },
+          "committed_monthly_recurring_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Committed Monthly Recurring Revenue"
+          },
           "checkouts": {
             "anyOf": [
               {
@@ -35833,6 +36029,7 @@
           "renewed_subscriptions_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
+          "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
           "checkouts_conversion"
@@ -36605,6 +36802,28 @@
         "title": "OrderItemSchema",
         "description": "An order line item."
       },
+      "OrderNotEligibleForRetry": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "OrderNotEligibleForRetry",
+            "title": "Error",
+            "examples": [
+              "OrderNotEligibleForRetry"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "OrderNotEligibleForRetry"
+      },
       "OrderProduct": {
         "properties": {
           "metadata": {
@@ -36717,6 +36936,10 @@
         "enum": [
           "created_at",
           "-created_at",
+          "status",
+          "-status",
+          "invoice_number",
+          "-invoice_number",
           "amount",
           "-amount",
           "net_amount",
@@ -37979,6 +38202,28 @@
             "$ref": "#/components/schemas/GenericPayment"
           }
         ]
+      },
+      "PaymentAlreadyInProgress": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "PaymentAlreadyInProgress",
+            "title": "Error",
+            "examples": [
+              "PaymentAlreadyInProgress"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "PaymentAlreadyInProgress"
       },
       "PaymentError": {
         "properties": {
@@ -40000,7 +40245,6 @@
           "profile",
           "email",
           "user:read",
-          "admin",
           "web_default",
           "organizations:read",
           "organizations:write",
@@ -41850,6 +42094,14 @@
             "$ref": "#/components/schemas/WebhookFormat",
             "description": "The format of the webhook payload."
           },
+          "secret": {
+            "type": "string",
+            "title": "Secret",
+            "description": "The secret used to sign the webhook events.",
+            "examples": [
+              "polar_whs_ovyN6cPrTv56AApvzCaJno08SSmGJmgbWilb33N2JuK"
+            ]
+          },
           "organization_id": {
             "type": "string",
             "format": "uuid4",
@@ -41872,6 +42124,7 @@
           "id",
           "url",
           "format",
+          "secret",
           "organization_id",
           "events"
         ],
@@ -41891,18 +42144,26 @@
               "https://webhook.site/cb791d80-f26e-4f8c-be88-6e56054192b0"
             ]
           },
+          "secret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 32,
+                "description": "The secret used to sign the webhook events.",
+                "examples": [
+                  "polar_whs_ovyN6cPrTv56AApvzCaJno08SSmGJmgbWilb33N2JuK"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secret",
+            "deprecated": true
+          },
           "format": {
             "$ref": "#/components/schemas/WebhookFormat",
             "description": "The format of the webhook payload."
-          },
-          "secret": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Secret",
-            "description": "The secret used to sign the webhook events.",
-            "examples": [
-              "f_z6mfSpxkjogyw3FkA2aH2gYE5huxruNf34MpdWMcA"
-            ]
           },
           "events": {
             "items": {
@@ -41939,7 +42200,6 @@
         "required": [
           "url",
           "format",
-          "secret",
           "events"
         ],
         "title": "WebhookEndpointCreate",
@@ -41965,6 +42225,23 @@
             ],
             "title": "Url"
           },
+          "secret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 32,
+                "description": "The secret used to sign the webhook events.",
+                "examples": [
+                  "polar_whs_ovyN6cPrTv56AApvzCaJno08SSmGJmgbWilb33N2JuK"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secret",
+            "deprecated": true
+          },
           "format": {
             "anyOf": [
               {
@@ -41975,22 +42252,6 @@
                 "type": "null"
               }
             ]
-          },
-          "secret": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1,
-                "description": "The secret used to sign the webhook events.",
-                "examples": [
-                  "f_z6mfSpxkjogyw3FkA2aH2gYE5huxruNf34MpdWMcA"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Secret"
           },
           "events": {
             "anyOf": [
