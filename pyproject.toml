@@ -36,6 +36,7 @@ dynamic = [
 dependencies = [
   "requests~=2.31",
   "singer-sdk~=0.47.1",
+  "typing-extensions>=4.14.1; python_full_version<'3.12'",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-polarsh"
