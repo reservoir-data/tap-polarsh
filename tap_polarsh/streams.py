@@ -5,12 +5,24 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
+import sys
 import typing as t
+from importlib import resources
 
+from singer_sdk import OpenAPISchema, StreamSchema
+
+from tap_polarsh import openapi
 from tap_polarsh.client import PolarStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
+
+OPENAPI_SCHEMA = OpenAPISchema(resources.files(openapi) / "openapi.json")
 
 
 class Organizations(PolarStream):
@@ -18,11 +30,11 @@ class Organizations(PolarStream):
 
     name = "organizations"
     path = "/api/v1/organizations"
-    primary_keys = ("id",)
     replication_key = None
 
-    swagger_ref: str = "Organization"
+    schema = StreamSchema(OPENAPI_SCHEMA, key="Organization")
 
+    @override
     def get_url_params(
         self,
         context: Context | None,
@@ -41,10 +53,11 @@ class Organizations(PolarStream):
         params["is_member"] = self.config.get("is_member", False)
         return params
 
-    def generate_child_contexts(  # noqa: PLR6301
+    @override
+    def generate_child_contexts(
         self,
         record: dict[str, t.Any],
-        context: Context | None,  # noqa: ARG002
+        context: Context | None,
     ) -> t.Iterable[dict[str, t.Any] | None]:
         """Generate child contexts.
 
@@ -65,6 +78,7 @@ class _OrganizationStream(PolarStream):
 
     parent_stream_type = Organizations
 
+    @override
     def get_url_params(
         self,
         context: Context | None,
@@ -90,11 +104,8 @@ class CheckoutLinks(_OrganizationStream):
 
     name = "checkout_links"
     path = "/api/v1/checkout-links"
-    primary_keys = ("id",)
 
-    swagger_ref: str = "CheckoutLink"
-
-    parent_stream_type = Organizations
+    schema = StreamSchema(OPENAPI_SCHEMA, key="CheckoutLink")
 
 
 class Products(_OrganizationStream):
@@ -102,11 +113,8 @@ class Products(_OrganizationStream):
 
     name = "products"
     path = "/api/v1/products"
-    primary_keys = ("id",)
 
-    swagger_ref: str = "Product"
-
-    parent_stream_type = Organizations
+    schema = StreamSchema(OPENAPI_SCHEMA, key="Product")
 
 
 class Subscriptions(_OrganizationStream):
@@ -114,11 +122,8 @@ class Subscriptions(_OrganizationStream):
 
     name = "subscriptions"
     path = "/api/v1/subscriptions"
-    primary_keys = ("id",)
 
-    swagger_ref: str = "Subscription"
-
-    parent_stream_type = Organizations
+    schema = StreamSchema(OPENAPI_SCHEMA, key="Subscription")
 
 
 class Orders(_OrganizationStream):
@@ -126,8 +131,5 @@ class Orders(_OrganizationStream):
 
     name = "orders"
     path = "/api/v1/orders"
-    primary_keys = ("id",)
 
-    swagger_ref: str = "Order"
-
-    parent_stream_type = Organizations
+    schema = StreamSchema(OPENAPI_SCHEMA, key="Order")

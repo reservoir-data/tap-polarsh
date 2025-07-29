@@ -5,26 +5,17 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
-import json
-import typing as t
-from importlib import resources
+import sys
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk.singerlib import resolve_schema_references
 
-from tap_polarsh import openapi, streams
+from tap_polarsh import streams
 
-if t.TYPE_CHECKING:
-    from tap_polarsh.client import PolarStream
-
-STREAMS: t.Sequence[type[PolarStream]] = [
-    streams.Organizations,
-    streams.CheckoutLinks,
-    streams.Products,
-    streams.Subscriptions,
-    streams.Orders,
-]
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 
 class TapPolar(Tap):
@@ -55,30 +46,17 @@ class TapPolar(Tap):
         ),
     ).to_dict()
 
-    def get_openapi_schema(self) -> dict[t.Any, t.Any]:  # noqa: PLR6301
-        """Retrieve Swagger/OpenAPI schema for this API.
-
-        Returns:
-            OpenAPI schema.
-        """
-        with resources.files(openapi).joinpath("openapi.json").open() as file:
-            return json.load(file)  # type: ignore[no-any-return]
-
+    @override
     def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams.
 
         Returns:
             A list of Neon Serverless Postgres streams.
         """
-        streams: list[PolarStream] = []
-        openapi_schema = self.get_openapi_schema()
-
-        for stream_type in STREAMS:
-            schema = {
-                "$ref": f"#/components/schemas/{stream_type.swagger_ref}",
-                "components": openapi_schema["components"],
-            }
-            resolved_schema = resolve_schema_references(schema)
-            streams.append(stream_type(tap=self, schema=resolved_schema))
-
-        return sorted(streams, key=lambda x: x.name)
+        return [
+            streams.Organizations(tap=self),
+            streams.CheckoutLinks(tap=self),
+            streams.Products(tap=self),
+            streams.Subscriptions(tap=self),
+            streams.Orders(tap=self),
+        ]
