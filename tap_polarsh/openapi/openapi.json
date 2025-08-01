@@ -5077,7 +5077,7 @@
             }
           },
           "403": {
-            "description": "The checkout is expired or the customer already has an active subscription.",
+            "description": "The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5233,7 +5233,7 @@
             }
           },
           "403": {
-            "description": "The checkout is expired or the customer already has an active subscription.",
+            "description": "The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5343,7 +5343,7 @@
             }
           },
           "403": {
-            "description": "The checkout is expired or the customer already has an active subscription.",
+            "description": "The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11342,7 +11342,7 @@
             }
           },
           "403": {
-            "description": "License key activation not required or permitted (limit reached).",
+            "description": "License key activation not supported or limit reached. Use /validate endpoint for licenses without activations.",
             "content": {
               "application/json": {
                 "schema": {
@@ -20860,6 +20860,9 @@
           },
           {
             "$ref": "#/components/schemas/NotOpenCheckout"
+          },
+          {
+            "$ref": "#/components/schemas/PaymentNotReady"
           }
         ]
       },
@@ -37781,6 +37784,7 @@
           },
           "future_annual_revenue": {
             "type": "integer",
+            "minimum": 0.0,
             "title": "Future Annual Revenue",
             "description": "Estimated revenue in the next 12 months"
           },
@@ -37811,6 +37815,7 @@
           },
           "previous_annual_revenue": {
             "type": "integer",
+            "minimum": 0.0,
             "title": "Previous Annual Revenue",
             "description": "Revenue from last year if applicable.",
             "default": 0
@@ -38392,6 +38397,28 @@
           "type"
         ],
         "title": "PaymentMethodGeneric"
+      },
+      "PaymentNotReady": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "PaymentNotReady",
+            "title": "Error",
+            "examples": [
+              "PaymentNotReady"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "PaymentNotReady"
       },
       "PaymentProcessor": {
         "type": "string",
