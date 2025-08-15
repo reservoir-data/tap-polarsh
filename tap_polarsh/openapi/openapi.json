@@ -19888,6 +19888,12 @@
               "e4b478fa-cd25-4253-9f1f-8a41e6370ede"
             ]
           },
+          "processor_metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Processor Metadata",
+            "description": "Additional metadata from the payment processor for internal use."
+          },
           "method_metadata": {
             "$ref": "#/components/schemas/CardPaymentMetadata",
             "description": "Additional metadata for the card payment method."
@@ -26997,12 +27003,6 @@
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
-          "amount": {
-            "type": "integer",
-            "title": "Amount",
-            "description": "Amount in cents, after discounts but before taxes.",
-            "deprecated": true
-          },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
@@ -27154,7 +27154,6 @@
           "subtotal_amount",
           "discount_amount",
           "net_amount",
-          "amount",
           "tax_amount",
           "total_amount",
           "refunded_amount",
@@ -29925,6 +29924,7 @@
           },
           "amount": {
             "type": "integer",
+            "maximum": 999999999999.0,
             "minimum": 0.0,
             "title": "Amount",
             "description": "Fixed amount to discount from the invoice total."
@@ -30418,6 +30418,7 @@
           },
           "amount": {
             "type": "integer",
+            "maximum": 999999999999.0,
             "minimum": 0.0,
             "title": "Amount",
             "description": "Fixed amount to discount from the invoice total."
@@ -31792,6 +31793,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 999999999999.0,
                 "minimum": 0.0,
                 "description": "Fixed amount to discount from the invoice total."
               },
@@ -32969,6 +32971,12 @@
             "examples": [
               "e4b478fa-cd25-4253-9f1f-8a41e6370ede"
             ]
+          },
+          "processor_metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Processor Metadata",
+            "description": "Additional metadata from the payment processor for internal use."
           }
         },
         "type": "object",
@@ -35386,7 +35394,8 @@
           "filter": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Filter"
+                "$ref": "#/components/schemas/Filter",
+                "description": "The filter to apply on events that'll be used to calculate the meter."
               },
               {
                 "type": "null"
@@ -35483,6 +35492,17 @@
             ],
             "title": "Revenue"
           },
+          "net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Revenue"
+          },
           "cumulative_revenue": {
             "anyOf": [
               {
@@ -35494,6 +35514,17 @@
             ],
             "title": "Cumulative Revenue"
           },
+          "net_cumulative_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Cumulative Revenue"
+          },
           "average_order_value": {
             "anyOf": [
               {
@@ -35504,6 +35535,17 @@
               }
             ],
             "title": "Average Order Value"
+          },
+          "net_average_order_value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Average Order Value"
           },
           "one_time_products": {
             "anyOf": [
@@ -35527,6 +35569,17 @@
             ],
             "title": "One Time Products Revenue"
           },
+          "one_time_products_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "One Time Products Net Revenue"
+          },
           "new_subscriptions": {
             "anyOf": [
               {
@@ -35549,6 +35602,17 @@
             ],
             "title": "New Subscriptions Revenue"
           },
+          "new_subscriptions_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "New Subscriptions Net Revenue"
+          },
           "renewed_subscriptions": {
             "anyOf": [
               {
@@ -35570,6 +35634,17 @@
               }
             ],
             "title": "Renewed Subscriptions Revenue"
+          },
+          "renewed_subscriptions_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Renewed Subscriptions Net Revenue"
           },
           "active_subscriptions": {
             "anyOf": [
@@ -35643,14 +35718,20 @@
           "timestamp",
           "orders",
           "revenue",
+          "net_revenue",
           "cumulative_revenue",
+          "net_cumulative_revenue",
           "average_order_value",
+          "net_average_order_value",
           "one_time_products",
           "one_time_products_revenue",
+          "one_time_products_net_revenue",
           "new_subscriptions",
           "new_subscriptions_revenue",
+          "new_subscriptions_net_revenue",
           "renewed_subscriptions",
           "renewed_subscriptions_revenue",
+          "renewed_subscriptions_net_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
           "committed_monthly_recurring_revenue",
@@ -35677,10 +35758,19 @@
           "revenue": {
             "$ref": "#/components/schemas/Metric"
           },
+          "net_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "cumulative_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
+          "net_cumulative_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "average_order_value": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "net_average_order_value": {
             "$ref": "#/components/schemas/Metric"
           },
           "one_time_products": {
@@ -35689,16 +35779,25 @@
           "one_time_products_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
+          "one_time_products_net_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "new_subscriptions": {
             "$ref": "#/components/schemas/Metric"
           },
           "new_subscriptions_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
+          "new_subscriptions_net_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "renewed_subscriptions": {
             "$ref": "#/components/schemas/Metric"
           },
           "renewed_subscriptions_revenue": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "renewed_subscriptions_net_revenue": {
             "$ref": "#/components/schemas/Metric"
           },
           "active_subscriptions": {
@@ -35724,14 +35823,20 @@
         "required": [
           "orders",
           "revenue",
+          "net_revenue",
           "cumulative_revenue",
+          "net_cumulative_revenue",
           "average_order_value",
+          "net_average_order_value",
           "one_time_products",
           "one_time_products_revenue",
+          "one_time_products_net_revenue",
           "new_subscriptions",
           "new_subscriptions_revenue",
+          "new_subscriptions_net_revenue",
           "renewed_subscriptions",
           "renewed_subscriptions_revenue",
+          "renewed_subscriptions_net_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
           "committed_monthly_recurring_revenue",
@@ -35863,6 +35968,17 @@
             ],
             "title": "Revenue"
           },
+          "net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Revenue"
+          },
           "cumulative_revenue": {
             "anyOf": [
               {
@@ -35874,6 +35990,17 @@
             ],
             "title": "Cumulative Revenue"
           },
+          "net_cumulative_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Cumulative Revenue"
+          },
           "average_order_value": {
             "anyOf": [
               {
@@ -35884,6 +36011,17 @@
               }
             ],
             "title": "Average Order Value"
+          },
+          "net_average_order_value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Net Average Order Value"
           },
           "one_time_products": {
             "anyOf": [
@@ -35907,6 +36045,17 @@
             ],
             "title": "One Time Products Revenue"
           },
+          "one_time_products_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "One Time Products Net Revenue"
+          },
           "new_subscriptions": {
             "anyOf": [
               {
@@ -35929,6 +36078,17 @@
             ],
             "title": "New Subscriptions Revenue"
           },
+          "new_subscriptions_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "New Subscriptions Net Revenue"
+          },
           "renewed_subscriptions": {
             "anyOf": [
               {
@@ -35950,6 +36110,17 @@
               }
             ],
             "title": "Renewed Subscriptions Revenue"
+          },
+          "renewed_subscriptions_net_revenue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Renewed Subscriptions Net Revenue"
           },
           "active_subscriptions": {
             "anyOf": [
@@ -36022,14 +36193,20 @@
         "required": [
           "orders",
           "revenue",
+          "net_revenue",
           "cumulative_revenue",
+          "net_cumulative_revenue",
           "average_order_value",
+          "net_average_order_value",
           "one_time_products",
           "one_time_products_revenue",
+          "one_time_products_net_revenue",
           "new_subscriptions",
           "new_subscriptions_revenue",
+          "new_subscriptions_net_revenue",
           "renewed_subscriptions",
           "renewed_subscriptions_revenue",
+          "renewed_subscriptions_net_revenue",
           "active_subscriptions",
           "monthly_recurring_revenue",
           "committed_monthly_recurring_revenue",
@@ -36277,12 +36454,6 @@
             "title": "Net Amount",
             "description": "Amount in cents, after discounts but before taxes."
           },
-          "amount": {
-            "type": "integer",
-            "title": "Amount",
-            "description": "Amount in cents, after discounts but before taxes.",
-            "deprecated": true
-          },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
@@ -36494,7 +36665,6 @@
           "subtotal_amount",
           "discount_amount",
           "net_amount",
-          "amount",
           "tax_amount",
           "total_amount",
           "refunded_amount",
@@ -37861,115 +38031,6 @@
         ],
         "title": "OrganizationNotificationSettings"
       },
-      "OrganizationProfileSettings": {
-        "properties": {
-          "enabled": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enabled",
-            "description": "If this organization has a profile enabled"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 160
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description",
-            "description": "A description of the organization"
-          },
-          "featured_projects": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Featured Projects",
-            "description": "A list of featured projects"
-          },
-          "featured_organizations": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Featured Organizations",
-            "description": "A list of featured organizations"
-          },
-          "links": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "maxLength": 2083,
-                  "minLength": 1,
-                  "format": "uri"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Links",
-            "description": "A list of links associated with the organization"
-          },
-          "subscribe": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OrganizationSubscribePromoteSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Subscription promotion settings",
-            "default": {
-              "promote": true,
-              "show_count": true,
-              "count_free": true
-            }
-          },
-          "accent_color": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Accent Color",
-            "description": "Accent color for the organization"
-          }
-        },
-        "type": "object",
-        "title": "OrganizationProfileSettings"
-      },
       "OrganizationSocialLink": {
         "properties": {
           "platform": {
@@ -38017,30 +38078,6 @@
           "-name"
         ],
         "title": "OrganizationSortProperty"
-      },
-      "OrganizationSubscribePromoteSettings": {
-        "properties": {
-          "promote": {
-            "type": "boolean",
-            "title": "Promote",
-            "description": "Promote email subscription (free)",
-            "default": true
-          },
-          "show_count": {
-            "type": "boolean",
-            "title": "Show Count",
-            "description": "Show subscription count publicly",
-            "default": true
-          },
-          "count_free": {
-            "type": "boolean",
-            "title": "Count Free",
-            "description": "Include free subscribers in total count",
-            "default": true
-          }
-        },
-        "type": "object",
-        "title": "OrganizationSubscribePromoteSettings"
       },
       "OrganizationSubscriptionSettings": {
         "properties": {
