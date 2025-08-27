@@ -38,9 +38,9 @@ dependencies = [
   "singer-sdk~=0.48.0",
   "typing-extensions>=4.14.1; python_full_version<'3.12'",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-polarsh#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-polarsh"
-urls.Repository = "https://github.com/edgarrmondragon/tap-polarsh"
+urls.Documentation = "https://github.com/reservoir-data/tap-polarsh#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-polarsh"
+urls.Repository = "https://github.com/reservoir-data/tap-polarsh"
 scripts."tap-polarsh" = "tap_polarsh.tap:TapPolar.cli"
 
 [dependency-groups]
