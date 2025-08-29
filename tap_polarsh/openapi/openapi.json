@@ -1014,6 +1014,16 @@
               }
             }
           },
+          "409": {
+            "description": "Subscription is pending an update.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionLocked"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Validation Error",
             "content": {
@@ -1102,6 +1112,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Subscription is pending an update.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionLocked"
                 }
               }
             }
@@ -21681,7 +21701,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -22209,7 +22229,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -27596,7 +27616,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -28225,7 +28245,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -29565,7 +29585,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -31930,7 +31950,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -37434,7 +37454,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -38909,7 +38929,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "is_recurring": {
             "type": "boolean",
@@ -39098,7 +39118,7 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "prices": {
             "items": {
@@ -40678,7 +40698,8 @@
           "profile",
           "email",
           "user:read",
-          "web_default",
+          "web:read",
+          "web:write",
           "organizations:read",
           "organizations:write",
           "custom_fields:read",
@@ -40782,7 +40803,8 @@
           "transactions:read": "Read transactions",
           "transactions:write": "Create or modify transactions",
           "user:read": "User Read",
-          "web_default": "Web Default",
+          "web:read": "Web Read Access",
+          "web:write": "Web Write Access",
           "webhooks:read": "Read webhooks",
           "webhooks:write": "Create or modify webhooks"
         }
@@ -41339,6 +41361,28 @@
         ],
         "title": "SubscriptionCustomer"
       },
+      "SubscriptionLocked": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "SubscriptionLocked",
+            "title": "Error",
+            "examples": [
+              "SubscriptionLocked"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "SubscriptionLocked"
+      },
       "SubscriptionMeter": {
         "properties": {
           "created_at": {
@@ -41429,6 +41473,8 @@
       "SubscriptionRecurringInterval": {
         "type": "string",
         "enum": [
+          "day",
+          "week",
           "month",
           "year"
         ],
