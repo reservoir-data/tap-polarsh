@@ -10760,6 +10760,16 @@
           "204": {
             "description": "Payment method deleted."
           },
+          "400": {
+            "description": "Payment method is used by active subscription(s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodInUseByActiveSubscription"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Payment method not found.",
             "content": {
@@ -13824,6 +13834,24 @@
               "title": "Query"
             },
             "description": "Filter by name."
+          },
+          {
+            "name": "is_archived",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter on archived meters.",
+              "title": "Is Archived"
+            },
+            "description": "Filter on archived meters."
           },
           {
             "name": "page",
@@ -18361,7 +18389,14 @@
       "BenefitGrantDiscordProperties": {
         "properties": {
           "account_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Account Id"
           },
           "guild_id": {
@@ -18371,6 +18406,10 @@
           "role_id": {
             "type": "string",
             "title": "Role Id"
+          },
+          "granted_account_id": {
+            "type": "string",
+            "title": "Granted Account Id"
           }
         },
         "type": "object",
@@ -18415,7 +18454,14 @@
       "BenefitGrantGitHubRepositoryProperties": {
         "properties": {
           "account_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Account Id"
           },
           "repository_owner": {
@@ -18436,6 +18482,10 @@
               "admin"
             ],
             "title": "Permission"
+          },
+          "granted_account_id": {
+            "type": "string",
+            "title": "Granted Account Id"
           }
         },
         "type": "object",
@@ -20274,7 +20324,7 @@
           },
           "status": {
             "$ref": "#/components/schemas/CheckoutStatus",
-            "description": "Status of the checkout session."
+            "description": "\n        Status of the checkout session.\n\n        - Open: the checkout session was opened.\n        - Expired: the checkout session was expired and is no more accessible.\n        - Confirmed: the user on the checkout session clicked Pay. This is not indicative of the payment's success status.\n        - Failed: the checkout definitely failed for technical reasons and cannot be retried. In most cases, this state is never reached.\n        - Succeeded: the payment on the checkout was performed successfully.\n        "
           },
           "client_secret": {
             "type": "string",
@@ -22913,7 +22963,7 @@
           },
           "status": {
             "$ref": "#/components/schemas/CheckoutStatus",
-            "description": "Status of the checkout session."
+            "description": "\n        Status of the checkout session.\n\n        - Open: the checkout session was opened.\n        - Expired: the checkout session was expired and is no more accessible.\n        - Confirmed: the user on the checkout session clicked Pay. This is not indicative of the payment's success status.\n        - Failed: the checkout definitely failed for technical reasons and cannot be retried. In most cases, this state is never reached.\n        - Succeeded: the payment on the checkout was performed successfully.\n        "
           },
           "client_secret": {
             "type": "string",
@@ -26163,7 +26213,14 @@
       "CustomerBenefitGrantDiscordPropertiesUpdate": {
         "properties": {
           "account_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Account Id"
           }
         },
@@ -26452,7 +26509,14 @@
       "CustomerBenefitGrantGitHubRepositoryPropertiesUpdate": {
         "properties": {
           "account_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Account Id"
           }
         },
@@ -33167,10 +33231,13 @@
           "value": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 1000
               },
               {
-                "type": "integer"
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": -2147483648.0
               },
               {
                 "type": "boolean"
@@ -35332,6 +35399,19 @@
             "format": "uuid4",
             "title": "Organization Id",
             "description": "The ID of the organization owning the meter."
+          },
+          "archived_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived At",
+            "description": "Whether the meter is archived and the time it was archived."
           }
         },
         "type": "object",
@@ -35815,6 +35895,18 @@
             ],
             "title": "Aggregation",
             "description": "The aggregation to apply on the filtered events to calculate the meter."
+          },
+          "is_archived": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Archived",
+            "description": "Whether the meter is archived. Archived meters are no longer used for billing."
           }
         },
         "type": "object",
@@ -38824,6 +38916,28 @@
         ],
         "title": "PaymentMethodGeneric"
       },
+      "PaymentMethodInUseByActiveSubscription": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "PaymentMethodInUseByActiveSubscription",
+            "title": "Error",
+            "examples": [
+              "PaymentMethodInUseByActiveSubscription"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "PaymentMethodInUseByActiveSubscription"
+      },
       "PaymentNotReady": {
         "properties": {
           "error": {
@@ -41361,6 +41475,114 @@
         ],
         "title": "SubscriptionCustomer"
       },
+      "SubscriptionCycledEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.cycled",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionCycledMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionCycledEvent",
+        "description": "An event created by Polar when a subscription is cycled."
+      },
+      "SubscriptionCycledMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id"
+        ],
+        "title": "SubscriptionCycledMetadata"
+      },
       "SubscriptionLocked": {
         "properties": {
           "error": {
@@ -41462,6 +41684,124 @@
         "title": "SubscriptionMeter",
         "description": "Current consumption and spending for a subscription meter."
       },
+      "SubscriptionProductUpdatedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.product_updated",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionProductUpdatedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionProductUpdatedEvent",
+        "description": "An event created by Polar when a subscription changes the product."
+      },
+      "SubscriptionProductUpdatedMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "old_product_id": {
+            "type": "string",
+            "title": "Old Product Id"
+          },
+          "new_product_id": {
+            "type": "string",
+            "title": "New Product Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id",
+          "old_product_id",
+          "new_product_id"
+        ],
+        "title": "SubscriptionProductUpdatedMetadata"
+      },
       "SubscriptionProrationBehavior": {
         "type": "string",
         "enum": [
@@ -41517,6 +41857,114 @@
           "revoke"
         ],
         "title": "SubscriptionRevoke"
+      },
+      "SubscriptionRevokedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.revoked",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionRevokedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionRevokedEvent",
+        "description": "An event created by Polar when a subscription is revoked from a customer."
+      },
+      "SubscriptionRevokedMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id"
+        ],
+        "title": "SubscriptionRevokedMetadata"
       },
       "SubscriptionSortProperty": {
         "type": "string",
@@ -41680,6 +42128,15 @@
           },
           {
             "$ref": "#/components/schemas/BenefitRevokedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionCycledEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionRevokedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionProductUpdatedEvent"
           }
         ],
         "discriminator": {
@@ -41690,7 +42147,10 @@
             "benefit.revoked": "#/components/schemas/BenefitRevokedEvent",
             "benefit.updated": "#/components/schemas/BenefitUpdatedEvent",
             "meter.credited": "#/components/schemas/MeterCreditEvent",
-            "meter.reset": "#/components/schemas/MeterResetEvent"
+            "meter.reset": "#/components/schemas/MeterResetEvent",
+            "subscription.cycled": "#/components/schemas/SubscriptionCycledEvent",
+            "subscription.product_updated": "#/components/schemas/SubscriptionProductUpdatedEvent",
+            "subscription.revoked": "#/components/schemas/SubscriptionRevokedEvent"
           }
         }
       },
