@@ -19950,7 +19950,9 @@
           "created_at",
           "-created_at",
           "description",
-          "-description"
+          "-description",
+          "type",
+          "-type"
         ],
         "title": "BenefitSortProperty"
       },
@@ -42705,6 +42707,11 @@
               "benefit.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Benefit",
             "title": "Benefit"
@@ -42713,6 +42720,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitCreatedPayload",
@@ -42728,6 +42736,11 @@
               "benefit_grant.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
           }
@@ -42735,6 +42748,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitGrantCreatedPayload",
@@ -42750,6 +42764,11 @@
               "benefit_grant.cycled"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
           }
@@ -42757,6 +42776,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitGrantCycledPayload",
@@ -42772,6 +42792,11 @@
               "benefit_grant.revoked"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
           }
@@ -42779,6 +42804,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitGrantRevokedPayload",
@@ -42794,6 +42820,11 @@
               "benefit_grant.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/BenefitGrantWebhook"
           }
@@ -42801,6 +42832,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitGrantUpdatedPayload",
@@ -42816,6 +42848,11 @@
               "benefit.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Benefit",
             "title": "Benefit"
@@ -42824,6 +42861,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookBenefitUpdatedPayload",
@@ -42839,6 +42877,11 @@
               "checkout.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Checkout"
           }
@@ -42846,6 +42889,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCheckoutCreatedPayload",
@@ -42861,6 +42905,11 @@
               "checkout.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Checkout"
           }
@@ -42868,6 +42917,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCheckoutUpdatedPayload",
@@ -42883,6 +42933,11 @@
               "customer.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Customer"
           }
@@ -42890,6 +42945,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCustomerCreatedPayload",
@@ -42905,6 +42961,11 @@
               "customer.deleted"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Customer"
           }
@@ -42912,6 +42973,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCustomerDeletedPayload",
@@ -42927,6 +42989,11 @@
               "customer.state_changed"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/CustomerState"
           }
@@ -42934,6 +43001,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCustomerStateChangedPayload",
@@ -42949,6 +43017,11 @@
               "customer.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Customer"
           }
@@ -42956,6 +43029,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookCustomerUpdatedPayload",
@@ -43294,9 +43368,25 @@
             "description": "Whether this event was successfully delivered. `null` if no delivery has been attempted."
           },
           "payload": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Payload",
             "description": "The payload of the webhook event."
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookEventType",
+            "description": "The type of the webhook event."
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether this event is archived. Archived events can't be redelivered, and the payload is not accessible anymore."
           }
         },
         "type": "object",
@@ -43304,7 +43394,9 @@
           "created_at",
           "modified_at",
           "id",
-          "payload"
+          "payload",
+          "type",
+          "is_archived"
         ],
         "title": "WebhookEvent",
         "description": "A webhook event.\n\nAn event represent something that happened in the system\nthat should be sent to the webhook endpoint.\n\nIt can be delivered multiple times until it's marked as succeeded,\neach one creating a new delivery."
@@ -43361,6 +43453,11 @@
               "order.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Order"
           }
@@ -43368,6 +43465,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookOrderCreatedPayload",
@@ -43383,6 +43481,11 @@
               "order.paid"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Order"
           }
@@ -43390,6 +43493,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookOrderPaidPayload",
@@ -43405,6 +43509,11 @@
               "order.refunded"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Order"
           }
@@ -43412,6 +43521,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookOrderRefundedPayload",
@@ -43427,6 +43537,11 @@
               "order.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Order"
           }
@@ -43434,6 +43549,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookOrderUpdatedPayload",
@@ -43449,6 +43565,11 @@
               "organization.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Organization"
           }
@@ -43456,6 +43577,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookOrganizationUpdatedPayload",
@@ -43471,6 +43593,11 @@
               "product.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Product"
           }
@@ -43478,6 +43605,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookProductCreatedPayload",
@@ -43493,6 +43621,11 @@
               "product.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Product"
           }
@@ -43500,6 +43633,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookProductUpdatedPayload",
@@ -43515,6 +43649,11 @@
               "refund.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Refund"
           }
@@ -43522,6 +43661,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookRefundCreatedPayload",
@@ -43537,6 +43677,11 @@
               "refund.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Refund"
           }
@@ -43544,6 +43689,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookRefundUpdatedPayload",
@@ -43559,6 +43705,11 @@
               "subscription.active"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43566,6 +43717,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionActivePayload",
@@ -43581,6 +43733,11 @@
               "subscription.canceled"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43588,6 +43745,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionCanceledPayload",
@@ -43603,6 +43761,11 @@
               "subscription.created"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43610,6 +43773,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionCreatedPayload",
@@ -43625,6 +43789,11 @@
               "subscription.revoked"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43632,6 +43801,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionRevokedPayload",
@@ -43647,6 +43817,11 @@
               "subscription.uncanceled"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43654,6 +43829,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionUncanceledPayload",
@@ -43669,6 +43845,11 @@
               "subscription.updated"
             ]
           },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
           "data": {
             "$ref": "#/components/schemas/Subscription"
           }
@@ -43676,6 +43857,7 @@
         "type": "object",
         "required": [
           "type",
+          "timestamp",
           "data"
         ],
         "title": "WebhookSubscriptionUpdatedPayload",
