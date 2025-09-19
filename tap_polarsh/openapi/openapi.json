@@ -3,7 +3,7 @@
   "info": {
     "title": "Polar API",
     "summary": "Polar HTTP and Webhooks API",
-    "description": "Read the docs at https://docs.polar.sh/api-reference",
+    "description": "Read the docs at https://polar.sh/docs/api-reference",
     "version": "0.1.0"
   },
   "servers": [
@@ -2686,6 +2686,44 @@
               "title": "Endpoint Id"
             },
             "description": "Filter by webhook endpoint ID."
+          },
+          {
+            "name": "start_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter deliveries after this timestamp.",
+              "title": "Start Timestamp"
+            },
+            "description": "Filter deliveries after this timestamp."
+          },
+          {
+            "name": "end_timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter deliveries before this timestamp.",
+              "title": "End Timestamp"
+            },
+            "description": "Filter deliveries before this timestamp."
           },
           {
             "name": "page",
@@ -7776,18 +7814,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/CheckoutLinkCreateProductPrice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/CheckoutLinkCreateProduct"
-                  },
-                  {
-                    "$ref": "#/components/schemas/CheckoutLinkCreateProducts"
-                  }
-                ],
-                "title": "Checkout Link Create"
+                "$ref": "#/components/schemas/CheckoutLinkCreate"
               }
             }
           }
@@ -9358,6 +9385,111 @@
         },
         "x-speakeasy-group": "customers",
         "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/customers/export": {
+      "get": {
+        "tags": [
+          "customers",
+          "public",
+          "mcp"
+        ],
+        "summary": "Export Customers",
+        "description": "Export customers as a CSV file.\n\n**Scopes**: `customers:read` `customers:write`",
+        "operationId": "customers:export",
+        "security": [
+          {
+            "oidc": [
+              "customers:read",
+              "customers:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by organization ID.",
+              "title": "Organization Id"
+            },
+            "description": "Filter by organization ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customers"
+          ]
+        },
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-name-override": "export"
       }
     },
     "/v1/customers/{id}": {
@@ -18386,171 +18518,7 @@
         "type": "object",
         "title": "BenefitGrantCustomProperties"
       },
-      "BenefitGrantDiscordProperties": {
-        "properties": {
-          "account_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Id"
-          },
-          "guild_id": {
-            "type": "string",
-            "title": "Guild Id"
-          },
-          "role_id": {
-            "type": "string",
-            "title": "Role Id"
-          },
-          "granted_account_id": {
-            "type": "string",
-            "title": "Granted Account Id"
-          }
-        },
-        "type": "object",
-        "title": "BenefitGrantDiscordProperties"
-      },
-      "BenefitGrantDownloadablesProperties": {
-        "properties": {
-          "files": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Files"
-          }
-        },
-        "type": "object",
-        "title": "BenefitGrantDownloadablesProperties"
-      },
-      "BenefitGrantError": {
-        "properties": {
-          "message": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "timestamp": {
-            "type": "string",
-            "title": "Timestamp"
-          }
-        },
-        "type": "object",
-        "required": [
-          "message",
-          "type",
-          "timestamp"
-        ],
-        "title": "BenefitGrantError"
-      },
-      "BenefitGrantGitHubRepositoryProperties": {
-        "properties": {
-          "account_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Id"
-          },
-          "repository_owner": {
-            "type": "string",
-            "title": "Repository Owner"
-          },
-          "repository_name": {
-            "type": "string",
-            "title": "Repository Name"
-          },
-          "permission": {
-            "type": "string",
-            "enum": [
-              "pull",
-              "triage",
-              "push",
-              "maintain",
-              "admin"
-            ],
-            "title": "Permission"
-          },
-          "granted_account_id": {
-            "type": "string",
-            "title": "Granted Account Id"
-          }
-        },
-        "type": "object",
-        "title": "BenefitGrantGitHubRepositoryProperties"
-      },
-      "BenefitGrantLicenseKeysProperties": {
-        "properties": {
-          "license_key_id": {
-            "type": "string",
-            "title": "License Key Id"
-          },
-          "display_key": {
-            "type": "string",
-            "title": "Display Key"
-          }
-        },
-        "type": "object",
-        "title": "BenefitGrantLicenseKeysProperties"
-      },
-      "BenefitGrantMetadata": {
-        "properties": {
-          "benefit_id": {
-            "type": "string",
-            "title": "Benefit Id"
-          },
-          "benefit_grant_id": {
-            "type": "string",
-            "title": "Benefit Grant Id"
-          },
-          "benefit_type": {
-            "$ref": "#/components/schemas/BenefitType"
-          }
-        },
-        "type": "object",
-        "required": [
-          "benefit_id",
-          "benefit_grant_id",
-          "benefit_type"
-        ],
-        "title": "BenefitGrantMetadata"
-      },
-      "BenefitGrantMeterCreditProperties": {
-        "properties": {
-          "last_credited_meter_id": {
-            "type": "string",
-            "title": "Last Credited Meter Id"
-          },
-          "last_credited_units": {
-            "type": "integer",
-            "title": "Last Credited Units"
-          },
-          "last_credited_at": {
-            "type": "string",
-            "title": "Last Credited At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "last_credited_meter_id",
-          "last_credited_units",
-          "last_credited_at"
-        ],
-        "title": "BenefitGrantMeterCreditProperties"
-      },
-      "BenefitGrantWebhook": {
+      "BenefitGrantCustomWebhook": {
         "properties": {
           "created_at": {
             "type": "string",
@@ -18665,52 +18633,21 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
-          "properties": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/BenefitGrantDiscordProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantDownloadablesProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantLicenseKeysProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantCustomProperties"
-              }
-            ],
-            "title": "Properties"
-          },
           "benefit": {
-            "$ref": "#/components/schemas/Benefit",
-            "title": "Benefit"
+            "$ref": "#/components/schemas/BenefitCustom"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantCustomProperties"
           },
           "previous_properties": {
             "anyOf": [
-              {
-                "$ref": "#/components/schemas/BenefitGrantDiscordProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantDownloadablesProperties"
-              },
-              {
-                "$ref": "#/components/schemas/BenefitGrantLicenseKeysProperties"
-              },
               {
                 "$ref": "#/components/schemas/BenefitGrantCustomProperties"
               },
               {
                 "type": "null"
               }
-            ],
-            "title": "Previous Properties"
+            ]
           }
         },
         "type": "object",
@@ -18725,10 +18662,936 @@
           "customer_id",
           "benefit_id",
           "customer",
-          "properties",
-          "benefit"
+          "benefit",
+          "properties"
         ],
-        "title": "BenefitGrantWebhook"
+        "title": "BenefitGrantCustomWebhook"
+      },
+      "BenefitGrantDiscordProperties": {
+        "properties": {
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Id"
+          },
+          "guild_id": {
+            "type": "string",
+            "title": "Guild Id"
+          },
+          "role_id": {
+            "type": "string",
+            "title": "Role Id"
+          },
+          "granted_account_id": {
+            "type": "string",
+            "title": "Granted Account Id"
+          }
+        },
+        "type": "object",
+        "title": "BenefitGrantDiscordProperties"
+      },
+      "BenefitGrantDiscordWebhook": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted."
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted",
+            "description": "Whether the benefit is granted."
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked."
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked",
+            "description": "Whether the benefit is revoked."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "The ID of the subscription that granted this benefit."
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id",
+            "description": "The ID of the order that granted this benefit."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer concerned by this grant."
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitDiscord"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantDiscordProperties"
+          },
+          "previous_properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantDiscordProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "is_granted",
+          "is_revoked",
+          "subscription_id",
+          "order_id",
+          "customer_id",
+          "benefit_id",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "BenefitGrantDiscordWebhook"
+      },
+      "BenefitGrantDownloadablesProperties": {
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Files"
+          }
+        },
+        "type": "object",
+        "title": "BenefitGrantDownloadablesProperties"
+      },
+      "BenefitGrantDownloadablesWebhook": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted."
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted",
+            "description": "Whether the benefit is granted."
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked."
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked",
+            "description": "Whether the benefit is revoked."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "The ID of the subscription that granted this benefit."
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id",
+            "description": "The ID of the order that granted this benefit."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer concerned by this grant."
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitDownloadables"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantDownloadablesProperties"
+          },
+          "previous_properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantDownloadablesProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "is_granted",
+          "is_revoked",
+          "subscription_id",
+          "order_id",
+          "customer_id",
+          "benefit_id",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "BenefitGrantDownloadablesWebhook"
+      },
+      "BenefitGrantError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "type",
+          "timestamp"
+        ],
+        "title": "BenefitGrantError"
+      },
+      "BenefitGrantGitHubRepositoryProperties": {
+        "properties": {
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Id"
+          },
+          "repository_owner": {
+            "type": "string",
+            "title": "Repository Owner"
+          },
+          "repository_name": {
+            "type": "string",
+            "title": "Repository Name"
+          },
+          "permission": {
+            "type": "string",
+            "enum": [
+              "pull",
+              "triage",
+              "push",
+              "maintain",
+              "admin"
+            ],
+            "title": "Permission"
+          },
+          "granted_account_id": {
+            "type": "string",
+            "title": "Granted Account Id"
+          }
+        },
+        "type": "object",
+        "title": "BenefitGrantGitHubRepositoryProperties"
+      },
+      "BenefitGrantGitHubRepositoryWebhook": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted."
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted",
+            "description": "Whether the benefit is granted."
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked."
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked",
+            "description": "Whether the benefit is revoked."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "The ID of the subscription that granted this benefit."
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id",
+            "description": "The ID of the order that granted this benefit."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer concerned by this grant."
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitGitHubRepository"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryProperties"
+          },
+          "previous_properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "is_granted",
+          "is_revoked",
+          "subscription_id",
+          "order_id",
+          "customer_id",
+          "benefit_id",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "BenefitGrantGitHubRepositoryWebhook"
+      },
+      "BenefitGrantLicenseKeysProperties": {
+        "properties": {
+          "license_key_id": {
+            "type": "string",
+            "title": "License Key Id"
+          },
+          "display_key": {
+            "type": "string",
+            "title": "Display Key"
+          }
+        },
+        "type": "object",
+        "title": "BenefitGrantLicenseKeysProperties"
+      },
+      "BenefitGrantLicenseKeysWebhook": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted."
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted",
+            "description": "Whether the benefit is granted."
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked."
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked",
+            "description": "Whether the benefit is revoked."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "The ID of the subscription that granted this benefit."
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id",
+            "description": "The ID of the order that granted this benefit."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer concerned by this grant."
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitLicenseKeys"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantLicenseKeysProperties"
+          },
+          "previous_properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantLicenseKeysProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "is_granted",
+          "is_revoked",
+          "subscription_id",
+          "order_id",
+          "customer_id",
+          "benefit_id",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "BenefitGrantLicenseKeysWebhook"
+      },
+      "BenefitGrantMetadata": {
+        "properties": {
+          "benefit_id": {
+            "type": "string",
+            "title": "Benefit Id"
+          },
+          "benefit_grant_id": {
+            "type": "string",
+            "title": "Benefit Grant Id"
+          },
+          "benefit_type": {
+            "$ref": "#/components/schemas/BenefitType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "benefit_id",
+          "benefit_grant_id",
+          "benefit_type"
+        ],
+        "title": "BenefitGrantMetadata"
+      },
+      "BenefitGrantMeterCreditProperties": {
+        "properties": {
+          "last_credited_meter_id": {
+            "type": "string",
+            "title": "Last Credited Meter Id"
+          },
+          "last_credited_units": {
+            "type": "integer",
+            "title": "Last Credited Units"
+          },
+          "last_credited_at": {
+            "type": "string",
+            "title": "Last Credited At"
+          }
+        },
+        "type": "object",
+        "title": "BenefitGrantMeterCreditProperties"
+      },
+      "BenefitGrantMeterCreditWebhook": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the grant."
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At",
+            "description": "The timestamp when the benefit was granted. If `None`, the benefit is not granted."
+          },
+          "is_granted": {
+            "type": "boolean",
+            "title": "Is Granted",
+            "description": "Whether the benefit is granted."
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "The timestamp when the benefit was revoked. If `None`, the benefit is not revoked."
+          },
+          "is_revoked": {
+            "type": "boolean",
+            "title": "Is Revoked",
+            "description": "Whether the benefit is revoked."
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "The ID of the subscription that granted this benefit."
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id",
+            "description": "The ID of the order that granted this benefit."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer concerned by this grant."
+          },
+          "benefit_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Benefit Id",
+            "description": "The ID of the benefit concerned by this grant."
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The error information if the benefit grant failed with an unrecoverable error."
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/BenefitMeterCredit"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/BenefitGrantMeterCreditProperties"
+          },
+          "previous_properties": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BenefitGrantMeterCreditProperties"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "is_granted",
+          "is_revoked",
+          "subscription_id",
+          "order_id",
+          "customer_id",
+          "benefit_id",
+          "customer",
+          "benefit",
+          "properties"
+        ],
+        "title": "BenefitGrantMeterCreditWebhook"
+      },
+      "BenefitGrantWebhook": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/BenefitGrantDiscordWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantCustomWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantGitHubRepositoryWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantDownloadablesWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantLicenseKeysWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/BenefitGrantMeterCreditWebhook"
+          }
+        ]
       },
       "BenefitGrantedEvent": {
         "properties": {
@@ -21368,6 +22231,19 @@
         ],
         "title": "CheckoutLink",
         "description": "Checkout link data."
+      },
+      "CheckoutLinkCreate": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/CheckoutLinkCreateProductPrice"
+          },
+          {
+            "$ref": "#/components/schemas/CheckoutLinkCreateProduct"
+          },
+          {
+            "$ref": "#/components/schemas/CheckoutLinkCreateProducts"
+          }
+        ]
       },
       "CheckoutLinkCreateProduct": {
         "properties": {
@@ -35857,7 +36733,8 @@
           "filter": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Filter"
+                "$ref": "#/components/schemas/Filter",
+                "description": "The filter to apply on events that'll be used to calculate the meter."
               },
               {
                 "type": "null"
@@ -36189,6 +37066,105 @@
               }
             ],
             "title": "Checkouts Conversion"
+          },
+          "canceled_subscriptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions"
+          },
+          "canceled_subscriptions_customer_service": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Customer Service"
+          },
+          "canceled_subscriptions_low_quality": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Low Quality"
+          },
+          "canceled_subscriptions_missing_features": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Missing Features"
+          },
+          "canceled_subscriptions_switched_service": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Switched Service"
+          },
+          "canceled_subscriptions_too_complex": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Too Complex"
+          },
+          "canceled_subscriptions_too_expensive": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Too Expensive"
+          },
+          "canceled_subscriptions_unused": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Unused"
+          },
+          "canceled_subscriptions_other": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Other"
           }
         },
         "type": "object",
@@ -36215,7 +37191,16 @@
           "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
-          "checkouts_conversion"
+          "checkouts_conversion",
+          "canceled_subscriptions",
+          "canceled_subscriptions_customer_service",
+          "canceled_subscriptions_low_quality",
+          "canceled_subscriptions_missing_features",
+          "canceled_subscriptions_switched_service",
+          "canceled_subscriptions_too_complex",
+          "canceled_subscriptions_too_expensive",
+          "canceled_subscriptions_unused",
+          "canceled_subscriptions_other"
         ],
         "title": "MetricPeriod"
       },
@@ -36295,6 +37280,33 @@
           },
           "checkouts_conversion": {
             "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_customer_service": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_low_quality": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_missing_features": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_switched_service": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_too_complex": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_too_expensive": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_unused": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "canceled_subscriptions_other": {
+            "$ref": "#/components/schemas/Metric"
           }
         },
         "type": "object",
@@ -36320,7 +37332,16 @@
           "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
-          "checkouts_conversion"
+          "checkouts_conversion",
+          "canceled_subscriptions",
+          "canceled_subscriptions_customer_service",
+          "canceled_subscriptions_low_quality",
+          "canceled_subscriptions_missing_features",
+          "canceled_subscriptions_switched_service",
+          "canceled_subscriptions_too_complex",
+          "canceled_subscriptions_too_expensive",
+          "canceled_subscriptions_unused",
+          "canceled_subscriptions_other"
         ],
         "title": "Metrics"
       },
@@ -36665,6 +37686,105 @@
               }
             ],
             "title": "Checkouts Conversion"
+          },
+          "canceled_subscriptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions"
+          },
+          "canceled_subscriptions_customer_service": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Customer Service"
+          },
+          "canceled_subscriptions_low_quality": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Low Quality"
+          },
+          "canceled_subscriptions_missing_features": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Missing Features"
+          },
+          "canceled_subscriptions_switched_service": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Switched Service"
+          },
+          "canceled_subscriptions_too_complex": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Too Complex"
+          },
+          "canceled_subscriptions_too_expensive": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Too Expensive"
+          },
+          "canceled_subscriptions_unused": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Unused"
+          },
+          "canceled_subscriptions_other": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Canceled Subscriptions Other"
           }
         },
         "type": "object",
@@ -36690,7 +37810,16 @@
           "committed_monthly_recurring_revenue",
           "checkouts",
           "succeeded_checkouts",
-          "checkouts_conversion"
+          "checkouts_conversion",
+          "canceled_subscriptions",
+          "canceled_subscriptions_customer_service",
+          "canceled_subscriptions_low_quality",
+          "canceled_subscriptions_missing_features",
+          "canceled_subscriptions_switched_service",
+          "canceled_subscriptions_too_complex",
+          "canceled_subscriptions_too_expensive",
+          "canceled_subscriptions_unused",
+          "canceled_subscriptions_other"
         ],
         "title": "MetricsTotals"
       },
@@ -38558,7 +39687,11 @@
           "slug",
           "-slug",
           "name",
-          "-name"
+          "-name",
+          "next_review_threshold",
+          "-next_review_threshold",
+          "days_in_status",
+          "-days_in_status"
         ],
         "title": "OrganizationSortProperty"
       },
@@ -40121,6 +41254,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 2147483647.0,
                 "minimum": 0.0
               },
               {
@@ -42742,7 +43876,8 @@
             "title": "Timestamp"
           },
           "data": {
-            "$ref": "#/components/schemas/BenefitGrantWebhook"
+            "$ref": "#/components/schemas/BenefitGrantWebhook",
+            "title": "BenefitGrantWebhook"
           }
         },
         "type": "object",
@@ -42770,7 +43905,8 @@
             "title": "Timestamp"
           },
           "data": {
-            "$ref": "#/components/schemas/BenefitGrantWebhook"
+            "$ref": "#/components/schemas/BenefitGrantWebhook",
+            "title": "BenefitGrantWebhook"
           }
         },
         "type": "object",
@@ -42798,7 +43934,8 @@
             "title": "Timestamp"
           },
           "data": {
-            "$ref": "#/components/schemas/BenefitGrantWebhook"
+            "$ref": "#/components/schemas/BenefitGrantWebhook",
+            "title": "BenefitGrantWebhook"
           }
         },
         "type": "object",
@@ -42826,7 +43963,8 @@
             "title": "Timestamp"
           },
           "data": {
-            "$ref": "#/components/schemas/BenefitGrantWebhook"
+            "$ref": "#/components/schemas/BenefitGrantWebhook",
+            "title": "BenefitGrantWebhook"
           }
         },
         "type": "object",
@@ -43062,6 +44200,11 @@
             "title": "Id",
             "description": "The ID of the object."
           },
+          "succeeded": {
+            "type": "boolean",
+            "title": "Succeeded",
+            "description": "Whether the delivery was successful."
+          },
           "http_code": {
             "anyOf": [
               {
@@ -43074,10 +44217,17 @@
             "title": "Http Code",
             "description": "The HTTP code returned by the URL. `null` if the endpoint was unreachable."
           },
-          "succeeded": {
-            "type": "boolean",
-            "title": "Succeeded",
-            "description": "Whether the delivery was successful."
+          "response": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response",
+            "description": "The response body returned by the URL, or the error message if the endpoint was unreachable."
           },
           "webhook_event": {
             "$ref": "#/components/schemas/WebhookEvent",
@@ -43090,6 +44240,8 @@
           "modified_at",
           "id",
           "succeeded",
+          "http_code",
+          "response",
           "webhook_event"
         ],
         "title": "WebhookDelivery",
