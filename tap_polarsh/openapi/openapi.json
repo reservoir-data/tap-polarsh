@@ -2111,6 +2111,223 @@
         "x-speakeasy-name-override": "grants"
       }
     },
+    "/v1/benefit-grants/": {
+      "get": {
+        "tags": [
+          "benefit-grants",
+          "public"
+        ],
+        "summary": "List Benefit Grants",
+        "description": "List benefit grants across all benefits for the authenticated organization.\n\n**Scopes**: `benefits:read` `benefits:write`",
+        "operationId": "benefit-grants:list",
+        "security": [
+          {
+            "oidc": [
+              "benefits:read",
+              "benefits:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The customer ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The customer ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "CustomerID Filter",
+              "description": "Filter by customer ID."
+            },
+            "description": "Filter by customer ID."
+          },
+          {
+            "name": "is_granted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by granted status. If `true`, only granted benefits will be returned. If `false`, only revoked benefits will be returned. ",
+              "title": "Is Granted"
+            },
+            "description": "Filter by granted status. If `true`, only granted benefits will be returned. If `false`, only revoked benefits will be returned. "
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BenefitGrantSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-created_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_BenefitGrant_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "benefit-grants",
+        "x-speakeasy-name-override": "list"
+      }
+    },
     "/v1/webhooks/endpoints": {
       "get": {
         "tags": [
@@ -10162,6 +10379,91 @@
         "x-speakeasy-name-override": "get_state_external"
       }
     },
+    "/v1/customers/{id}/balance": {
+      "get": {
+        "tags": [
+          "customers",
+          "public",
+          "mcp"
+        ],
+        "summary": "Get Customer Balance",
+        "description": "Get customer balance information.\n\n**Scopes**: `customers:read` `customers:write`",
+        "operationId": "customers:get_balance",
+        "security": [
+          {
+            "oidc": [
+              "customers:read",
+              "customers:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The customer ID.",
+              "title": "Id"
+            },
+            "description": "The customer ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerBalance"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "customers"
+          ]
+        },
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-name-override": "get_balance"
+      }
+    },
     "/v1/customer-portal/benefit-grants/": {
       "get": {
         "tags": [
@@ -10830,12 +11132,12 @@
         },
         "responses": {
           "201": {
-            "description": "Payment method created.",
+            "description": "Payment method created or setup initiated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomerPaymentMethod",
-                  "title": "CustomerPaymentMethod"
+                  "$ref": "#/components/schemas/CustomerPaymentMethodCreateResponse",
+                  "title": "CustomerPaymentMethodCreateResponse"
                 }
               }
             }
@@ -10859,6 +11161,74 @@
         },
         "x-speakeasy-group": "customer_portal.customers",
         "x-speakeasy-name-override": "add_payment_method"
+      }
+    },
+    "/v1/customer-portal/customers/me/payment-methods/confirm": {
+      "post": {
+        "tags": [
+          "customer_portal",
+          "customers",
+          "public"
+        ],
+        "summary": "Confirm Customer Payment Method",
+        "description": "Confirm a payment method for the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:customers:confirm_payment_method",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerPaymentMethodConfirm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Payment method created or setup initiated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerPaymentMethodCreateResponse",
+                  "title": "CustomerPaymentMethodCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Customer is not ready to confirm a payment method.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerNotReady"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.customers",
+        "x-speakeasy-name-override": "confirm_payment_method"
       }
     },
     "/v1/customer-portal/customers/me/payment-methods/{id}": {
@@ -16289,12 +16659,513 @@
           },
           "country": {
             "type": "string",
-            "pattern": "^\\w{2}$",
-            "title": "Country",
+            "enum": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CU",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HM",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IR",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KP",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SY",
+              "SZ",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "UM",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW"
+            ],
+            "title": "CountryAlpha2",
             "examples": [
               "US",
               "SE",
               "FR"
+            ],
+            "x-speakeasy-enums": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CU",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HM",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IR",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KP",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SY",
+              "SZ",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "UM",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW"
             ]
           }
         },
@@ -16303,6 +17174,571 @@
           "country"
         ],
         "title": "Address"
+      },
+      "AddressInput": {
+        "properties": {
+          "line1": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line1"
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2"
+          },
+          "postal_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Postal Code"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "country": {
+            "type": "string",
+            "enum": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HM",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SZ",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "UM",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW"
+            ],
+            "title": "CountryAlpha2Input",
+            "examples": [
+              "US",
+              "SE",
+              "FR"
+            ],
+            "x-speakeasy-enums": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HM",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SZ",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "UM",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "country"
+        ],
+        "title": "AddressInput"
       },
       "AlreadyActiveSubscriptionError": {
         "properties": {
@@ -18476,6 +19912,10 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
+          "benefit": {
+            "$ref": "#/components/schemas/Benefit",
+            "title": "Benefit"
+          },
           "properties": {
             "anyOf": [
               {
@@ -18509,6 +19949,7 @@
           "customer_id",
           "benefit_id",
           "customer",
+          "benefit",
           "properties"
         ],
         "title": "BenefitGrant"
@@ -19570,6 +21011,18 @@
           "properties"
         ],
         "title": "BenefitGrantMeterCreditWebhook"
+      },
+      "BenefitGrantSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "granted_at",
+          "-granted_at",
+          "revoked_at",
+          "-revoked_at"
+        ],
+        "title": "BenefitGrantSortProperty"
       },
       "BenefitGrantWebhook": {
         "anyOf": [
@@ -21133,6 +22586,12 @@
       },
       "Checkout": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -21151,12 +22610,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -21260,6 +22713,42 @@
             "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
+          },
+          "active_trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interval unit of the trial period, if any. This value is either set from the checkout, if `trial_interval` is set, or from the selected product."
+          },
+          "active_trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Trial Interval Count",
+            "description": "Number of interval units of the trial period, if any. This value is either set from the checkout, if `trial_interval_count` is set, or from the selected product."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "End date and time of the trial period, if any."
           },
           "product_id": {
             "type": "string",
@@ -21418,6 +22907,29 @@
             "$ref": "#/components/schemas/CheckoutBillingAddressFields",
             "description": "Determine which billing address fields should be disabled, optional or required in the checkout form."
           },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -21549,9 +23061,9 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "payment_processor",
           "status",
           "client_secret",
@@ -21565,6 +23077,9 @@
           "tax_amount",
           "total_amount",
           "currency",
+          "active_trial_interval",
+          "active_trial_interval_count",
+          "trial_end",
           "product_id",
           "product_price_id",
           "discount_id",
@@ -21585,6 +23100,8 @@
           "customer_tax_id",
           "payment_processor_metadata",
           "billing_address_fields",
+          "trial_interval",
+          "trial_interval_count",
           "metadata",
           "external_customer_id",
           "customer_external_id",
@@ -21749,7 +23266,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -22058,6 +23575,12 @@
       },
       "CheckoutLink": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -22077,11 +23600,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "metadata": {
             "additionalProperties": {
@@ -22213,9 +23753,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "metadata",
           "payment_processor",
           "client_secret",
@@ -22274,6 +23816,31 @@
             "maxProperties": 50,
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "payment_processor": {
             "type": "string",
@@ -22377,6 +23944,31 @@
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "payment_processor": {
             "type": "string",
             "const": "stripe",
@@ -22479,6 +24071,31 @@
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "payment_processor": {
             "type": "string",
             "const": "stripe",
@@ -22578,6 +24195,12 @@
             "type": "object",
             "title": "Metadata"
           },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -22597,11 +24220,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -22682,9 +24322,11 @@
         "type": "object",
         "required": [
           "metadata",
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -22714,6 +24356,31 @@
       },
       "CheckoutLinkUpdate": {
         "properties": {
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -22829,6 +24496,31 @@
       },
       "CheckoutPriceCreate": {
         "properties": {
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -23003,7 +24695,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -23106,6 +24798,12 @@
       },
       "CheckoutProduct": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -23125,11 +24823,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -23209,9 +24924,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -23227,6 +24944,31 @@
       },
       "CheckoutProductCreate": {
         "properties": {
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -23401,7 +25143,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -23504,6 +25246,31 @@
       },
       "CheckoutProductsCreate": {
         "properties": {
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "metadata": {
             "additionalProperties": {
               "anyOf": [
@@ -23678,7 +25445,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -23785,6 +25552,12 @@
       },
       "CheckoutPublic": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -23803,12 +25576,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -23912,6 +25679,42 @@
             "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
+          },
+          "active_trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interval unit of the trial period, if any. This value is either set from the checkout, if `trial_interval` is set, or from the selected product."
+          },
+          "active_trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Trial Interval Count",
+            "description": "Number of interval units of the trial period, if any. This value is either set from the checkout, if `trial_interval_count` is set, or from the selected product."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "End date and time of the trial period, if any."
           },
           "product_id": {
             "type": "string",
@@ -24131,9 +25934,9 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "payment_processor",
           "status",
           "client_secret",
@@ -24147,6 +25950,9 @@
           "tax_amount",
           "total_amount",
           "currency",
+          "active_trial_interval",
+          "active_trial_interval_count",
+          "trial_end",
           "product_id",
           "product_price_id",
           "discount_id",
@@ -24179,6 +25985,12 @@
       },
       "CheckoutPublicConfirmed": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -24197,12 +26009,6 @@
             ],
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the object."
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -24307,6 +26113,42 @@
             "type": "string",
             "title": "Currency",
             "description": "Currency code of the checkout session."
+          },
+          "active_trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interval unit of the trial period, if any. This value is either set from the checkout, if `trial_interval` is set, or from the selected product."
+          },
+          "active_trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Trial Interval Count",
+            "description": "Number of interval units of the trial period, if any. This value is either set from the checkout, if `trial_interval_count` is set, or from the selected product."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "End date and time of the trial period, if any."
           },
           "product_id": {
             "type": "string",
@@ -24530,9 +26372,9 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
           "payment_processor",
           "status",
           "client_secret",
@@ -24546,6 +26388,9 @@
           "tax_amount",
           "total_amount",
           "currency",
+          "active_trial_interval",
+          "active_trial_interval_count",
+          "trial_end",
           "product_id",
           "product_price_id",
           "discount_id",
@@ -24718,7 +26563,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -24736,6 +26581,31 @@
               }
             ],
             "title": "Customer Tax Id"
+          },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "metadata": {
             "additionalProperties": {
@@ -25000,7 +26870,7 @@
           "customer_billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address",
+                "$ref": "#/components/schemas/AddressInput",
                 "description": "Billing address of the customer."
               },
               {
@@ -25047,6 +26917,261 @@
         },
         "type": "object",
         "title": "CountAggregation"
+      },
+      "CountryAlpha2": {
+        "type": "string",
+        "enum": [
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AI",
+          "AL",
+          "AM",
+          "AO",
+          "AQ",
+          "AR",
+          "AS",
+          "AT",
+          "AU",
+          "AW",
+          "AX",
+          "AZ",
+          "BA",
+          "BB",
+          "BD",
+          "BE",
+          "BF",
+          "BG",
+          "BH",
+          "BI",
+          "BJ",
+          "BL",
+          "BM",
+          "BN",
+          "BO",
+          "BQ",
+          "BR",
+          "BS",
+          "BT",
+          "BV",
+          "BW",
+          "BY",
+          "BZ",
+          "CA",
+          "CC",
+          "CD",
+          "CF",
+          "CG",
+          "CH",
+          "CI",
+          "CK",
+          "CL",
+          "CM",
+          "CN",
+          "CO",
+          "CR",
+          "CU",
+          "CV",
+          "CW",
+          "CX",
+          "CY",
+          "CZ",
+          "DE",
+          "DJ",
+          "DK",
+          "DM",
+          "DO",
+          "DZ",
+          "EC",
+          "EE",
+          "EG",
+          "EH",
+          "ER",
+          "ES",
+          "ET",
+          "FI",
+          "FJ",
+          "FK",
+          "FM",
+          "FO",
+          "FR",
+          "GA",
+          "GB",
+          "GD",
+          "GE",
+          "GF",
+          "GG",
+          "GH",
+          "GI",
+          "GL",
+          "GM",
+          "GN",
+          "GP",
+          "GQ",
+          "GR",
+          "GS",
+          "GT",
+          "GU",
+          "GW",
+          "GY",
+          "HK",
+          "HM",
+          "HN",
+          "HR",
+          "HT",
+          "HU",
+          "ID",
+          "IE",
+          "IL",
+          "IM",
+          "IN",
+          "IO",
+          "IQ",
+          "IR",
+          "IS",
+          "IT",
+          "JE",
+          "JM",
+          "JO",
+          "JP",
+          "KE",
+          "KG",
+          "KH",
+          "KI",
+          "KM",
+          "KN",
+          "KP",
+          "KR",
+          "KW",
+          "KY",
+          "KZ",
+          "LA",
+          "LB",
+          "LC",
+          "LI",
+          "LK",
+          "LR",
+          "LS",
+          "LT",
+          "LU",
+          "LV",
+          "LY",
+          "MA",
+          "MC",
+          "MD",
+          "ME",
+          "MF",
+          "MG",
+          "MH",
+          "MK",
+          "ML",
+          "MM",
+          "MN",
+          "MO",
+          "MP",
+          "MQ",
+          "MR",
+          "MS",
+          "MT",
+          "MU",
+          "MV",
+          "MW",
+          "MX",
+          "MY",
+          "MZ",
+          "NA",
+          "NC",
+          "NE",
+          "NF",
+          "NG",
+          "NI",
+          "NL",
+          "NO",
+          "NP",
+          "NR",
+          "NU",
+          "NZ",
+          "OM",
+          "PA",
+          "PE",
+          "PF",
+          "PG",
+          "PH",
+          "PK",
+          "PL",
+          "PM",
+          "PN",
+          "PR",
+          "PS",
+          "PT",
+          "PW",
+          "PY",
+          "QA",
+          "RE",
+          "RO",
+          "RS",
+          "RU",
+          "RW",
+          "SA",
+          "SB",
+          "SC",
+          "SD",
+          "SE",
+          "SG",
+          "SH",
+          "SI",
+          "SJ",
+          "SK",
+          "SL",
+          "SM",
+          "SN",
+          "SO",
+          "SR",
+          "SS",
+          "ST",
+          "SV",
+          "SX",
+          "SY",
+          "SZ",
+          "TC",
+          "TD",
+          "TF",
+          "TG",
+          "TH",
+          "TJ",
+          "TK",
+          "TL",
+          "TM",
+          "TN",
+          "TO",
+          "TR",
+          "TT",
+          "TV",
+          "TW",
+          "TZ",
+          "UA",
+          "UG",
+          "UM",
+          "US",
+          "UY",
+          "UZ",
+          "VA",
+          "VC",
+          "VE",
+          "VG",
+          "VI",
+          "VN",
+          "VU",
+          "WF",
+          "WS",
+          "YE",
+          "YT",
+          "ZA",
+          "ZM",
+          "ZW"
+        ],
+        "title": "CountryAlpha2"
       },
       "CustomField": {
         "oneOf": [
@@ -26808,6 +28933,30 @@
         "title": "Customer",
         "description": "A customer in an organization."
       },
+      "CustomerBalance": {
+        "properties": {
+          "balance": {
+            "type": "integer",
+            "title": "Balance",
+            "description": "Customer balance in cents. Positive values represent credit (customer is owed money), negative values represent debit (customer owes money)."
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "The currency code (ISO 4217) for the balance amount.",
+            "examples": [
+              "USD"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "balance",
+          "currency"
+        ],
+        "title": "CustomerBalance",
+        "description": "Customer balance information."
+      },
       "CustomerBenefitGrant": {
         "anyOf": [
           {
@@ -27825,7 +29974,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -28159,6 +30308,28 @@
         ],
         "title": "CustomerMeterSortProperty"
       },
+      "CustomerNotReady": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "const": "CustomerNotReady",
+            "title": "Error",
+            "examples": [
+              "CustomerNotReady"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "CustomerNotReady"
+      },
       "CustomerOrder": {
         "properties": {
           "id": {
@@ -28225,6 +30396,11 @@
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
+          "from_balance_amount": {
+            "type": "integer",
+            "title": "From Balance Amount",
+            "description": "How much of this invoice was paid using the customer's balance. Amount in cents."
+          },
           "refunded_amount": {
             "type": "integer",
             "title": "Refunded Amount",
@@ -28263,6 +30439,11 @@
                 "type": "null"
               }
             ]
+          },
+          "invoice_number": {
+            "type": "string",
+            "title": "Invoice Number",
+            "description": "The invoice number associated with this order."
           },
           "is_invoice_generated": {
             "type": "boolean",
@@ -28368,12 +30549,14 @@
           "net_amount",
           "tax_amount",
           "total_amount",
+          "from_balance_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
           "billing_reason",
           "billing_name",
           "billing_address",
+          "invoice_number",
           "is_invoice_generated",
           "customer_id",
           "product_id",
@@ -28507,6 +30690,12 @@
       },
       "CustomerOrderProduct": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -28526,11 +30715,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -28613,9 +30819,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -28708,6 +30916,32 @@
             ],
             "title": "Current Period End",
             "description": "The end timestamp of the current billing period."
+          },
+          "trial_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Start",
+            "description": "The start timestamp of the trial period, if any."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "The end timestamp of the trial period, if any."
           },
           "cancel_at_period_end": {
             "type": "boolean",
@@ -28836,6 +31070,8 @@
           "status",
           "current_period_start",
           "current_period_end",
+          "trial_start",
+          "trial_end",
           "cancel_at_period_end",
           "canceled_at",
           "started_at",
@@ -28867,7 +31103,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -28915,6 +31151,24 @@
           }
         ]
       },
+      "CustomerPaymentMethodConfirm": {
+        "properties": {
+          "setup_intent_id": {
+            "type": "string",
+            "title": "Setup Intent Id"
+          },
+          "set_default": {
+            "type": "boolean",
+            "title": "Set Default"
+          }
+        },
+        "type": "object",
+        "required": [
+          "setup_intent_id",
+          "set_default"
+        ],
+        "title": "CustomerPaymentMethodConfirm"
+      },
       "CustomerPaymentMethodCreate": {
         "properties": {
           "confirmation_token_id": {
@@ -28937,6 +31191,61 @@
           "return_url"
         ],
         "title": "CustomerPaymentMethodCreate"
+      },
+      "CustomerPaymentMethodCreateRequiresActionResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "requires_action",
+            "title": "Status"
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "client_secret"
+        ],
+        "title": "CustomerPaymentMethodCreateRequiresActionResponse"
+      },
+      "CustomerPaymentMethodCreateResponse": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomerPaymentMethodCreateSucceededResponse"
+          },
+          {
+            "$ref": "#/components/schemas/CustomerPaymentMethodCreateRequiresActionResponse"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "status",
+          "mapping": {
+            "requires_action": "#/components/schemas/CustomerPaymentMethodCreateRequiresActionResponse",
+            "succeeded": "#/components/schemas/CustomerPaymentMethodCreateSucceededResponse"
+          }
+        }
+      },
+      "CustomerPaymentMethodCreateSucceededResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "succeeded",
+            "title": "Status"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/CustomerPaymentMethod",
+            "title": "CustomerPaymentMethod"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "payment_method"
+        ],
+        "title": "CustomerPaymentMethodCreateSucceededResponse"
       },
       "CustomerPortalCustomer": {
         "properties": {
@@ -29087,7 +31396,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -29136,6 +31445,12 @@
       },
       "CustomerProduct": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -29155,11 +31470,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -29239,9 +31571,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -29842,10 +32176,14 @@
           },
           "status": {
             "type": "string",
-            "const": "active",
+            "enum": [
+              "active",
+              "trialing"
+            ],
             "title": "Status",
             "examples": [
-              "active"
+              "active",
+              "trialing"
             ]
           },
           "amount": {
@@ -29889,6 +32227,38 @@
             ],
             "title": "Current Period End",
             "description": "The end timestamp of the current billing period.",
+            "examples": [
+              "2025-03-03T13:37:00Z"
+            ]
+          },
+          "trial_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Start",
+            "description": "The start timestamp of the trial period, if any.",
+            "examples": [
+              "2025-02-03T13:37:00Z"
+            ]
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "The end timestamp of the trial period, if any.",
             "examples": [
               "2025-03-03T13:37:00Z"
             ]
@@ -29995,6 +32365,8 @@
           "recurring_interval",
           "current_period_start",
           "current_period_end",
+          "trial_start",
+          "trial_end",
           "cancel_at_period_end",
           "canceled_at",
           "started_at",
@@ -30144,6 +32516,32 @@
             "title": "Current Period End",
             "description": "The end timestamp of the current billing period."
           },
+          "trial_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Start",
+            "description": "The start timestamp of the trial period, if any."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "The end timestamp of the trial period, if any."
+          },
           "cancel_at_period_end": {
             "type": "boolean",
             "title": "Cancel At Period End",
@@ -30284,6 +32682,12 @@
             "type": "array",
             "title": "Meters",
             "description": "List of meters associated with the subscription."
+          },
+          "is_polar_managed": {
+            "type": "boolean",
+            "title": "Is Polar Managed",
+            "description": "Whether the subscription is managed by Polar.",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -30297,6 +32701,8 @@
           "status",
           "current_period_start",
           "current_period_end",
+          "trial_start",
+          "trial_end",
           "cancel_at_period_end",
           "canceled_at",
           "started_at",
@@ -30310,7 +32716,8 @@
           "customer_cancellation_comment",
           "product",
           "prices",
-          "meters"
+          "meters",
+          "is_polar_managed"
         ],
         "title": "CustomerSubscription"
       },
@@ -30476,6 +32883,12 @@
       },
       "CustomerSubscriptionProduct": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -30495,11 +32908,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -30582,9 +33012,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -30703,7 +33135,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -30824,7 +33256,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -32841,6 +35273,12 @@
             "type": "object",
             "title": "Metadata"
           },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -32860,11 +35298,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -32914,9 +35369,11 @@
         "type": "object",
         "required": [
           "metadata",
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -36733,8 +39190,7 @@
           "filter": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Filter",
-                "description": "The filter to apply on events that'll be used to calculate the meter."
+                "$ref": "#/components/schemas/Filter"
               },
               {
                 "type": "null"
@@ -38071,6 +40527,11 @@
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
+          "from_balance_amount": {
+            "type": "integer",
+            "title": "From Balance Amount",
+            "description": "How much of this invoice was paid using the customer's balance. Amount in cents."
+          },
           "refunded_amount": {
             "type": "integer",
             "title": "Refunded Amount",
@@ -38109,6 +40570,11 @@
                 "type": "null"
               }
             ]
+          },
+          "invoice_number": {
+            "type": "string",
+            "title": "Invoice Number",
+            "description": "The invoice number associated with this order."
           },
           "is_invoice_generated": {
             "type": "boolean",
@@ -38274,12 +40740,14 @@
           "net_amount",
           "tax_amount",
           "total_amount",
+          "from_balance_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
           "billing_reason",
           "billing_name",
           "billing_address",
+          "invoice_number",
           "is_invoice_generated",
           "customer_id",
           "product_id",
@@ -38626,6 +41094,12 @@
             "type": "object",
             "title": "Metadata"
           },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -38645,11 +41119,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -38699,9 +41190,11 @@
         "type": "object",
         "required": [
           "metadata",
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -38828,6 +41321,32 @@
             ],
             "title": "Current Period End",
             "description": "The end timestamp of the current billing period."
+          },
+          "trial_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Start",
+            "description": "The start timestamp of the trial period, if any."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "The end timestamp of the trial period, if any."
           },
           "cancel_at_period_end": {
             "type": "boolean",
@@ -38957,6 +41476,8 @@
           "status",
           "current_period_start",
           "current_period_end",
+          "trial_start",
+          "trial_end",
           "cancel_at_period_end",
           "canceled_at",
           "started_at",
@@ -38988,7 +41509,7 @@
           "billing_address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressInput"
               },
               {
                 "type": "null"
@@ -40127,6 +42648,12 @@
       },
       "Product": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -40146,11 +42673,28 @@
             "title": "Modified At",
             "description": "Last modification timestamp of the object."
           },
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id",
-            "description": "The ID of the product."
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
           },
           "name": {
             "type": "string",
@@ -40259,9 +42803,11 @@
         },
         "type": "object",
         "required": [
+          "id",
           "created_at",
           "modified_at",
-          "id",
+          "trial_interval",
+          "trial_interval_count",
           "name",
           "description",
           "recurring_interval",
@@ -40311,6 +42857,16 @@
         "title": "ProductBillingType"
       },
       "ProductCreate": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ProductCreateRecurring"
+          },
+          {
+            "$ref": "#/components/schemas/ProductCreateOneTime"
+          }
+        ]
+      },
+      "ProductCreateOneTime": {
         "properties": {
           "metadata": {
             "additionalProperties": {
@@ -40357,17 +42913,6 @@
             ],
             "title": "Description",
             "description": "The description of the product."
-          },
-          "recurring_interval": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
           },
           "prices": {
             "items": {
@@ -40436,16 +42981,173 @@
             ],
             "title": "Organization Id",
             "description": "The ID of the organization owning the product. **Required unless you use an organization token.**"
+          },
+          "recurring_interval": {
+            "type": "null",
+            "title": "Recurring Interval",
+            "description": "States that the product is a one-time purchase."
           }
         },
         "type": "object",
         "required": [
           "name",
-          "recurring_interval",
           "prices"
         ],
-        "title": "ProductCreate",
-        "description": "Schema to create a product."
+        "title": "ProductCreateOneTime"
+      },
+      "ProductCreateRecurring": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500,
+                  "minLength": 1
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 40,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 50,
+            "title": "Metadata",
+            "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Name",
+            "description": "The name of the product."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "The description of the product."
+          },
+          "prices": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductPriceFixedCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceCustomCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
+                }
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "ProductPriceCreateList",
+            "description": "List of available prices for this product. It should contain at most one static price (fixed, custom or free), and any number of metered prices. Metered prices are not supported on one-time purchase products."
+          },
+          "medias": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Medias",
+            "description": "List of file IDs. Each one must be on the same organization as the product, of type `product_media` and correctly uploaded."
+          },
+          "attached_custom_fields": {
+            "items": {
+              "$ref": "#/components/schemas/AttachedCustomFieldCreate"
+            },
+            "type": "array",
+            "title": "Attached Custom Fields",
+            "description": "List of custom fields to attach."
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4",
+                "description": "The organization ID.",
+                "examples": [
+                  "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                ],
+                "x-polar-selector-widget": {
+                  "displayProperty": "name",
+                  "resourceName": "Organization",
+                  "resourceRoot": "/v1/organizations"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the product. **Required unless you use an organization token.**"
+          },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
+          "recurring_interval": {
+            "$ref": "#/components/schemas/SubscriptionRecurringInterval",
+            "description": "The recurring interval of the product. Note that the `day` and `week` values are for internal Polar staff use only."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "prices",
+          "recurring_interval"
+        ],
+        "title": "ProductCreateRecurring"
       },
       "ProductMediaFileCreate": {
         "properties": {
@@ -41326,6 +44028,31 @@
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
           },
+          "trial_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrialInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The interval unit for the trial period."
+          },
+          "trial_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Interval Count",
+            "description": "The number of interval units for the trial period."
+          },
           "name": {
             "anyOf": [
               {
@@ -42142,6 +44869,32 @@
             "title": "Current Period End",
             "description": "The end timestamp of the current billing period."
           },
+          "trial_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial Start",
+            "description": "The start timestamp of the trial period, if any."
+          },
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trial End",
+            "description": "The end timestamp of the trial period, if any."
+          },
           "cancel_at_period_end": {
             "type": "boolean",
             "title": "Cancel At Period End",
@@ -42368,6 +45121,8 @@
           "status",
           "current_period_start",
           "current_period_end",
+          "trial_start",
+          "trial_end",
           "cancel_at_period_end",
           "canceled_at",
           "started_at",
@@ -43144,6 +45899,9 @@
             "$ref": "#/components/schemas/SubscriptionUpdateDiscount"
           },
           {
+            "$ref": "#/components/schemas/SubscriptionUpdateTrial"
+          },
+          {
             "$ref": "#/components/schemas/SubscriptionCancel"
           },
           {
@@ -43198,6 +45956,29 @@
           "product_id"
         ],
         "title": "SubscriptionUpdateProduct"
+      },
+      "SubscriptionUpdateTrial": {
+        "properties": {
+          "trial_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string",
+                "const": "now"
+              }
+            ],
+            "title": "Trial End",
+            "description": "Set or extend the trial period of the subscription. If set to `now`, the trial will end immediately."
+          }
+        },
+        "type": "object",
+        "required": [
+          "trial_end"
+        ],
+        "title": "SubscriptionUpdateTrial"
       },
       "SubscriptionUser": {
         "properties": {
@@ -43427,6 +46208,16 @@
           "id_token"
         ],
         "title": "TokenResponse"
+      },
+      "TrialInterval": {
+        "type": "string",
+        "enum": [
+          "day",
+          "week",
+          "month",
+          "year"
+        ],
+        "title": "TrialInterval"
       },
       "Unauthorized": {
         "properties": {
