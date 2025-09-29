@@ -39,11 +39,7 @@ class PolarStream(RESTStream[t.Any]):
         Returns:
             The authenticator instance for this REST stream.
         """
-        token: str = self.config["token"]
-        return BearerTokenAuthenticator.create_for_stream(
-            self,
-            token=token,
-        )
+        return BearerTokenAuthenticator(token=self.config["token"])
 
     def get_new_paginator(self) -> BasePageNumberPaginator:  # noqa: PLR6301
         """Get a new paginator object.
