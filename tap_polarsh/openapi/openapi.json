@@ -14821,6 +14821,24 @@
             "description": "Filter by external customer ID."
           },
           {
+            "name": "customer_aggregation_function",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AggregationFunction"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "If set, will first compute the quantities per customer before aggregating them using the given function. If not set, the quantities will be aggregated across all events.",
+              "title": "Customer Aggregation Function"
+            },
+            "description": "If set, will first compute the quantities per customer before aggregating them using the given function. If not set, the quantities will be aggregated across all events."
+          },
+          {
             "name": "metadata",
             "in": "query",
             "required": false,
@@ -17739,6 +17757,18 @@
           "country"
         ],
         "title": "AddressInput"
+      },
+      "AggregationFunction": {
+        "type": "string",
+        "enum": [
+          "count",
+          "sum",
+          "max",
+          "min",
+          "avg",
+          "unique"
+        ],
+        "title": "AggregationFunction"
       },
       "AlreadyActiveSubscriptionError": {
         "properties": {
@@ -22682,6 +22712,18 @@
             "title": "Amount",
             "description": "Amount in cents, before discounts and taxes."
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
+          },
           "discount_amount": {
             "type": "integer",
             "title": "Discount Amount",
@@ -23215,6 +23257,19 @@
               }
             ],
             "title": "Amount"
+          },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
           },
           "is_business_customer": {
             "anyOf": [
@@ -24613,6 +24668,19 @@
             ],
             "title": "Amount"
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing. Required for seat-based products."
+          },
           "customer_id": {
             "anyOf": [
               {
@@ -25061,6 +25129,19 @@
             ],
             "title": "Amount"
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing. Required for seat-based products."
+          },
           "customer_id": {
             "anyOf": [
               {
@@ -25363,6 +25444,19 @@
             ],
             "title": "Amount"
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing. Required for seat-based products."
+          },
           "customer_id": {
             "anyOf": [
               {
@@ -25647,6 +25741,18 @@
             "type": "integer",
             "title": "Amount",
             "description": "Amount in cents, before discounts and taxes."
+          },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
           },
           "discount_amount": {
             "type": "integer",
@@ -26082,6 +26188,18 @@
             "title": "Amount",
             "description": "Amount in cents, before discounts and taxes."
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
+          },
           "discount_amount": {
             "type": "integer",
             "title": "Discount Amount",
@@ -26513,6 +26631,19 @@
             ],
             "title": "Amount"
           },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
+          },
           "is_business_customer": {
             "anyOf": [
               {
@@ -26819,6 +26950,19 @@
               }
             ],
             "title": "Amount"
+          },
+          "seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seats",
+            "description": "Number of seats for seat-based pricing."
           },
           "is_business_customer": {
             "anyOf": [
@@ -30396,10 +30540,15 @@
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
-          "from_balance_amount": {
+          "applied_balance_amount": {
             "type": "integer",
-            "title": "From Balance Amount",
-            "description": "How much of this invoice was paid using the customer's balance. Amount in cents."
+            "title": "Applied Balance Amount",
+            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents."
+          },
+          "due_amount": {
+            "type": "integer",
+            "title": "Due Amount",
+            "description": "Amount in cents that is due for this order."
           },
           "refunded_amount": {
             "type": "integer",
@@ -30549,7 +30698,8 @@
           "net_amount",
           "tax_amount",
           "total_amount",
-          "from_balance_amount",
+          "applied_balance_amount",
+          "due_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
@@ -40527,10 +40677,15 @@
             "title": "Total Amount",
             "description": "Amount in cents, after discounts and taxes."
           },
-          "from_balance_amount": {
+          "applied_balance_amount": {
             "type": "integer",
-            "title": "From Balance Amount",
-            "description": "How much of this invoice was paid using the customer's balance. Amount in cents."
+            "title": "Applied Balance Amount",
+            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents."
+          },
+          "due_amount": {
+            "type": "integer",
+            "title": "Due Amount",
+            "description": "Amount in cents that is due for this order."
           },
           "refunded_amount": {
             "type": "integer",
@@ -40740,7 +40895,8 @@
           "net_amount",
           "tax_amount",
           "total_amount",
-          "from_balance_amount",
+          "applied_balance_amount",
+          "due_amount",
           "refunded_amount",
           "refunded_tax_amount",
           "currency",
@@ -42141,6 +42297,12 @@
             "title": "Issue Funding Enabled",
             "description": "If this organization has issue funding enabled",
             "default": false
+          },
+          "seat_based_pricing_enabled": {
+            "type": "boolean",
+            "title": "Seat Based Pricing Enabled",
+            "description": "If this organization has seat-based pricing enabled",
+            "default": false
           }
         },
         "type": "object",
@@ -42927,6 +43089,9 @@
                   "$ref": "#/components/schemas/ProductPriceFreeCreate"
                 },
                 {
+                  "$ref": "#/components/schemas/ProductPriceSeatBasedCreate"
+                },
+                {
                   "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
                 }
               ]
@@ -43054,6 +43219,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductPriceSeatBasedCreate"
                 },
                 {
                   "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
@@ -43386,6 +43554,9 @@
             "$ref": "#/components/schemas/ProductPriceFree"
           },
           {
+            "$ref": "#/components/schemas/ProductPriceSeatBased"
+          },
+          {
             "$ref": "#/components/schemas/ProductPriceMeteredUnit"
           }
         ],
@@ -43395,7 +43566,8 @@
             "custom": "#/components/schemas/ProductPriceCustom",
             "fixed": "#/components/schemas/ProductPriceFixed",
             "free": "#/components/schemas/ProductPriceFree",
-            "metered_unit": "#/components/schemas/ProductPriceMeteredUnit"
+            "metered_unit": "#/components/schemas/ProductPriceMeteredUnit",
+            "seat_based": "#/components/schemas/ProductPriceSeatBased"
           }
         }
       },
@@ -43976,6 +44148,121 @@
         "title": "ProductPriceMeteredUnitCreate",
         "description": "Schema to create a metered price with a fixed unit price."
       },
+      "ProductPriceSeatBased": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the price."
+          },
+          "amount_type": {
+            "type": "string",
+            "const": "seat_based",
+            "title": "Amount Type"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "description": "Whether the price is archived and no longer available."
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Product Id",
+            "description": "The ID of the product owning the price."
+          },
+          "type": {
+            "$ref": "#/components/schemas/ProductPriceType",
+            "deprecated": true
+          },
+          "recurring_interval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubscriptionRecurringInterval"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
+          },
+          "price_currency": {
+            "type": "string",
+            "title": "Price Currency",
+            "description": "The currency."
+          },
+          "price_per_seat": {
+            "type": "integer",
+            "title": "Price Per Seat",
+            "description": "The price per seat in cents."
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "amount_type",
+          "is_archived",
+          "product_id",
+          "type",
+          "recurring_interval",
+          "price_currency",
+          "price_per_seat"
+        ],
+        "title": "ProductPriceSeatBased",
+        "description": "A seat-based price for a product."
+      },
+      "ProductPriceSeatBasedCreate": {
+        "properties": {
+          "amount_type": {
+            "type": "string",
+            "const": "seat_based",
+            "title": "Amount Type"
+          },
+          "price_currency": {
+            "type": "string",
+            "pattern": "usd",
+            "title": "Price Currency",
+            "description": "The currency. Currently, only `usd` is supported.",
+            "default": "usd"
+          },
+          "price_per_seat": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 50.0,
+            "title": "Price Per Seat",
+            "description": "The price per seat in cents."
+          }
+        },
+        "type": "object",
+        "required": [
+          "amount_type",
+          "price_per_seat"
+        ],
+        "title": "ProductPriceSeatBasedCreate",
+        "description": "Schema to create a seat-based price."
+      },
       "ProductPriceType": {
         "type": "string",
         "enum": [
@@ -44117,6 +44404,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ProductPriceSeatBasedCreate"
                     },
                     {
                       "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
