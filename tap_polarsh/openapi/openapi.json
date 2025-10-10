@@ -11538,6 +11538,281 @@
         "x-speakeasy-name-override": "get"
       }
     },
+    "/v1/customer-portal/seats": {
+      "get": {
+        "tags": [
+          "customer_portal",
+          "seats",
+          "public"
+        ],
+        "summary": "List Seats",
+        "description": "**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:seats:list_seats",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Subscription ID",
+              "title": "Subscription Id"
+            },
+            "description": "Subscription ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeatsList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Not permitted or seat-based pricing not enabled"
+          },
+          "404": {
+            "description": "Subscription not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.seats",
+        "x-speakeasy-name-override": "list_seats"
+      },
+      "post": {
+        "tags": [
+          "customer_portal",
+          "seats",
+          "public"
+        ],
+        "summary": "Assign Seat",
+        "description": "**Scopes**: `customer_portal:write`",
+        "operationId": "customer_portal:seats:assign_seat",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SeatAssign"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerSeat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No available seats or customer already has a seat"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Not permitted or seat-based pricing not enabled"
+          },
+          "404": {
+            "description": "Subscription or customer not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.seats",
+        "x-speakeasy-name-override": "assign_seat"
+      }
+    },
+    "/v1/customer-portal/seats/{seat_id}": {
+      "delete": {
+        "tags": [
+          "customer_portal",
+          "seats",
+          "public"
+        ],
+        "summary": "Revoke Seat",
+        "description": "**Scopes**: `customer_portal:write`",
+        "operationId": "customer_portal:seats:revoke_seat",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "seat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Seat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerSeat"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Not permitted or seat-based pricing not enabled"
+          },
+          "404": {
+            "description": "Seat not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.seats",
+        "x-speakeasy-name-override": "revoke_seat"
+      }
+    },
+    "/v1/customer-portal/seats/{seat_id}/resend": {
+      "post": {
+        "tags": [
+          "customer_portal",
+          "seats",
+          "public"
+        ],
+        "summary": "Resend Invitation",
+        "description": "**Scopes**: `customer_portal:write`",
+        "operationId": "customer_portal:seats:resend_invitation",
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "seat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Seat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerSeat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Seat is not pending or already claimed"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Not permitted or seat-based pricing not enabled"
+          },
+          "404": {
+            "description": "Seat not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.seats",
+        "x-speakeasy-name-override": "resend_invitation"
+      }
+    },
     "/v1/customer-portal/downloadables/": {
       "get": {
         "tags": [
@@ -31739,6 +32014,131 @@
         "title": "CustomerProduct",
         "description": "Schema of a product for customer portal."
       },
+      "CustomerSeat": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The seat ID"
+          },
+          "subscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Subscription Id",
+            "description": "The subscription ID"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SeatStatus",
+            "description": "Status of the seat"
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "The assigned customer ID"
+          },
+          "customer_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Email",
+            "description": "The assigned customer email"
+          },
+          "invitation_token_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Invitation Token Expires At",
+            "description": "When the invitation token expires"
+          },
+          "claimed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Claimed At",
+            "description": "When the seat was claimed"
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At",
+            "description": "When the seat was revoked"
+          },
+          "seat_metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seat Metadata",
+            "description": "Additional metadata for the seat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "subscription_id",
+          "status"
+        ],
+        "title": "CustomerSeat"
+      },
       "CustomerSession": {
         "properties": {
           "created_at": {
@@ -35602,81 +36002,53 @@
           "code": {
             "anyOf": [
               {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Code"
+            "title": "Code",
+            "description": "Code customers can use to apply the discount during checkout. Must be between 3 and 256 characters long and contain only alphanumeric characters.If not provided, the discount can only be applied via the API."
           },
           "starts_at": {
             "anyOf": [
               {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Optional timestamp after which the discount is redeemable."
+                "type": "string",
+                "format": "date-time"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Starts At"
+            "title": "Starts At",
+            "description": "Optional timestamp after which the discount is redeemable."
           },
           "ends_at": {
             "anyOf": [
               {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Optional timestamp after which the discount is no longer redeemable."
+                "type": "string",
+                "format": "date-time"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Ends At"
+            "title": "Ends At",
+            "description": "Optional timestamp after which the discount is no longer redeemable."
           },
           "max_redemptions": {
             "anyOf": [
               {
-                "anyOf": [
-                  {
-                    "type": "integer",
-                    "minimum": 1.0
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Optional maximum number of times the discount can be redeemed."
+                "type": "integer",
+                "minimum": 1.0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Max Redemptions"
+            "title": "Max Redemptions",
+            "description": "Optional maximum number of times the discount can be redeemed."
           },
           "duration": {
             "anyOf": [
@@ -35730,8 +36102,7 @@
               {
                 "type": "string",
                 "pattern": "usd",
-                "description": "The currency. Currently, only `usd` is supported.",
-                "default": "usd"
+                "description": "The currency. Currently, only `usd` is supported."
               },
               {
                 "type": "null"
@@ -44046,6 +44417,7 @@
           },
           "unit_amount": {
             "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
             "title": "Unit Amount",
             "description": "The price per unit in cents."
           },
@@ -44118,7 +44490,8 @@
                 "exclusiveMinimum": 0.0
               },
               {
-                "type": "string"
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,5}|(?=[\\d.]{1,18}0*$)\\d{0,5}\\.\\d{0,12}0*$)"
               }
             ],
             "title": "Unit Amount",
@@ -45075,6 +45448,127 @@
           "webhooks:read": "Read webhooks",
           "webhooks:write": "Create or modify webhooks"
         }
+      },
+      "SeatAssign": {
+        "properties": {
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id",
+            "description": "Subscription ID. Required if checkout_id is not provided."
+          },
+          "checkout_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Id",
+            "description": "Checkout ID. Used to look up subscription. Required if subscription_id is not provided."
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "Email of the customer to assign the seat to"
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "External customer ID for the seat assignment"
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "Customer ID for the seat assignment"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata",
+            "description": "Additional metadata for the seat (max 10 keys, 1KB total)"
+          }
+        },
+        "type": "object",
+        "title": "SeatAssign"
+      },
+      "SeatStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "claimed",
+          "revoked"
+        ],
+        "title": "SeatStatus"
+      },
+      "SeatsList": {
+        "properties": {
+          "seats": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerSeat"
+            },
+            "type": "array",
+            "title": "Seats",
+            "description": "List of seats"
+          },
+          "available_seats": {
+            "type": "integer",
+            "title": "Available Seats",
+            "description": "Number of available seats"
+          },
+          "total_seats": {
+            "type": "integer",
+            "title": "Total Seats",
+            "description": "Total number of seats for the subscription"
+          }
+        },
+        "type": "object",
+        "required": [
+          "seats",
+          "available_seats",
+          "total_seats"
+        ],
+        "title": "SeatsList"
       },
       "Status": {
         "type": "string",
