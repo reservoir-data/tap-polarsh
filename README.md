@@ -119,26 +119,12 @@ tox run-parallel
 _**Note:** This tap will work in any Singer environment and does not require Meltano.
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
 
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
-the file. Go ahead and [install Meltano](https://docs.meltano.com/getting-started/installation/) if you haven't already.
+Use Meltano to run an EL pipeline:
 
-1. Install all plugins
-
-   ```bash
-   meltano install
-   ```
-
-1. Check that the extractor is working properly
-
-   ```bash
-   meltano invoke tap-polarsh --version
-   ```
-
-1. Execute an ELT pipeline
-
-   ```bash
-   meltano run tap-polarsh target-jsonl
-   ```
+```bash
+uvx meltano invoke tap-polarsh --version
+uvx meltano run tap-polarsh target-jsonl
+```
 
 ### SDK Dev Guide
 
