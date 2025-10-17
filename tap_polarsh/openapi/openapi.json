@@ -1152,6 +1152,251 @@
         "x-speakeasy-name-override": "revoke"
       }
     },
+    "/v1/oauth2/register": {
+      "post": {
+        "tags": [
+          "oauth2",
+          "clients",
+          "public"
+        ],
+        "summary": "Create Client",
+        "description": "Create an OAuth2 client.",
+        "operationId": "oauth2:clients:oauth2:create_client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuth2ClientConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oidc": []
+          },
+          {
+            "pat": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Anonymous",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "oauth2.clients",
+        "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/oauth2/register/{client_id}": {
+      "get": {
+        "tags": [
+          "oauth2",
+          "clients",
+          "public"
+        ],
+        "summary": "Get Client",
+        "description": "Get an OAuth2 client by Client ID.",
+        "operationId": "oauth2:clients:oauth2:get_client",
+        "security": [
+          {
+            "oidc": []
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Anonymous",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "oauth2.clients",
+        "x-speakeasy-name-override": "get"
+      },
+      "put": {
+        "tags": [
+          "oauth2",
+          "clients",
+          "public"
+        ],
+        "summary": "Update Client",
+        "description": "Update an OAuth2 client.",
+        "operationId": "oauth2:clients:oauth2:update_client",
+        "security": [
+          {
+            "oidc": []
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuth2ClientConfigurationUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Anonymous",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "oauth2.clients",
+        "x-speakeasy-name-override": "update"
+      },
+      "delete": {
+        "tags": [
+          "oauth2",
+          "clients",
+          "public"
+        ],
+        "summary": "Delete Client",
+        "description": "Delete an OAuth2 client.",
+        "operationId": "oauth2:clients:oauth2:delete_client",
+        "security": [
+          {
+            "oidc": []
+          },
+          {
+            "pat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Anonymous",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "oauth2.clients",
+        "x-speakeasy-name-override": "delete"
+      }
+    },
     "/v1/oauth2/authorize": {
       "get": {
         "tags": [
@@ -1225,6 +1470,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/RefreshTokenRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/WebTokenRequest"
                   }
                 ]
               }
@@ -9414,10 +9662,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Filter by name or email.",
+              "description": "Filter by name, email, or external ID.",
               "title": "Query"
             },
-            "description": "Filter by name or email."
+            "description": "Filter by name, email, or external ID."
           },
           {
             "name": "page",
@@ -11811,6 +12059,87 @@
         },
         "x-speakeasy-group": "customer_portal.seats",
         "x-speakeasy-name-override": "resend_invitation"
+      }
+    },
+    "/v1/customer-portal/seats/subscriptions": {
+      "get": {
+        "tags": [
+          "customer_portal",
+          "seats",
+          "public"
+        ],
+        "summary": "List Claimed Subscriptions",
+        "description": "List all subscriptions where the authenticated customer has claimed a seat.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:seats:list_claimed_subscriptions",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerSubscription"
+                  },
+                  "type": "array",
+                  "title": "Response Customer Portal:Seats:List Claimed Subscriptions"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          }
+        },
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.seats",
+        "x-speakeasy-name-override": "list_claimed_subscriptions"
+      }
+    },
+    "/v1/customer-portal/customer-session/introspect": {
+      "get": {
+        "tags": [
+          "customer_portal",
+          "customer-session",
+          "public"
+        ],
+        "summary": "Introspect Customer Session",
+        "description": "Introspect the current session and return its information.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:customer-session:introspect",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerCustomerSession"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "customer_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.customer-session",
+        "x-speakeasy-name-override": "introspect"
       }
     },
     "/v1/customer-portal/downloadables/": {
@@ -22970,6 +23299,18 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment."
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
+          },
           "embed_origin": {
             "anyOf": [
               {
@@ -22998,6 +23339,18 @@
             ],
             "title": "Seats",
             "description": "Number of seats for seat-based pricing."
+          },
+          "price_per_seat": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Per Seat",
+            "description": "Price per seat in cents for the current seat count, based on the applicable tier. Only relevant for seat-based pricing."
           },
           "discount_amount": {
             "type": "integer",
@@ -23387,6 +23740,7 @@
           "url",
           "expires_at",
           "success_url",
+          "return_url",
           "embed_origin",
           "amount",
           "discount_amount",
@@ -23537,6 +23891,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -23696,11 +24051,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "id": {
             "type": "string",
@@ -23751,11 +24112,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "id": {
             "type": "string",
@@ -23803,7 +24170,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "id": {
             "type": "string",
@@ -23853,7 +24224,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "id": {
             "type": "string",
@@ -24947,6 +25322,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -25112,6 +25488,21 @@
             ],
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
           },
           "embed_origin": {
             "anyOf": [
@@ -25408,6 +25799,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -25573,6 +25965,21 @@
             ],
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
+          },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
           },
           "embed_origin": {
             "anyOf": [
@@ -25723,6 +26130,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -25889,6 +26297,21 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
+          },
           "embed_origin": {
             "anyOf": [
               {
@@ -26000,6 +26423,18 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment."
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
+          },
           "embed_origin": {
             "anyOf": [
               {
@@ -26028,6 +26463,18 @@
             ],
             "title": "Seats",
             "description": "Number of seats for seat-based pricing."
+          },
+          "price_per_seat": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Per Seat",
+            "description": "Price per seat in cents for the current seat count, based on the applicable tier. Only relevant for seat-based pricing."
           },
           "discount_amount": {
             "type": "integer",
@@ -26324,6 +26771,7 @@
           "url",
           "expires_at",
           "success_url",
+          "return_url",
           "embed_origin",
           "amount",
           "discount_amount",
@@ -26446,6 +26894,18 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment."
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
+          },
           "embed_origin": {
             "anyOf": [
               {
@@ -26474,6 +26934,18 @@
             ],
             "title": "Seats",
             "description": "Number of seats for seat-based pricing."
+          },
+          "price_per_seat": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Per Seat",
+            "description": "Price per seat in cents for the current seat count, based on the applicable tier. Only relevant for seat-based pricing."
           },
           "discount_amount": {
             "type": "integer",
@@ -26774,6 +27246,7 @@
           "url",
           "expires_at",
           "success_url",
+          "return_url",
           "embed_origin",
           "amount",
           "discount_amount",
@@ -26910,6 +27383,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -27141,6 +27615,21 @@
             "title": "Success Url",
             "description": "URL where the customer will be redirected after a successful payment.You can add the `checkout_id={CHECKOUT_ID}` query parameter to retrieve the checkout session id."
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the checkout to return to this URL."
+          },
           "embed_origin": {
             "anyOf": [
               {
@@ -27230,6 +27719,7 @@
             "anyOf": [
               {
                 "type": "integer",
+                "maximum": 1000.0,
                 "minimum": 1.0
               },
               {
@@ -30609,6 +31099,32 @@
         ],
         "title": "CustomerCustomerMeterSortProperty"
       },
+      "CustomerCustomerSession": {
+        "properties": {
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "expires_at",
+          "return_url"
+        ],
+        "title": "CustomerCustomerSession"
+      },
       "CustomerMeter": {
         "properties": {
           "id": {
@@ -30793,51 +31309,81 @@
           "subtotal_amount": {
             "type": "integer",
             "title": "Subtotal Amount",
-            "description": "Amount in cents, before discounts and taxes."
+            "description": "Amount in cents, before discounts and taxes.",
+            "examples": [
+              10000
+            ]
           },
           "discount_amount": {
             "type": "integer",
             "title": "Discount Amount",
-            "description": "Discount amount in cents."
+            "description": "Discount amount in cents.",
+            "examples": [
+              1000
+            ]
           },
           "net_amount": {
             "type": "integer",
             "title": "Net Amount",
-            "description": "Amount in cents, after discounts but before taxes."
+            "description": "Amount in cents, after discounts but before taxes.",
+            "examples": [
+              9000
+            ]
           },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents.",
+            "examples": [
+              720
+            ]
           },
           "total_amount": {
             "type": "integer",
             "title": "Total Amount",
-            "description": "Amount in cents, after discounts and taxes."
+            "description": "Amount in cents, after discounts and taxes.",
+            "examples": [
+              9720
+            ]
           },
           "applied_balance_amount": {
             "type": "integer",
             "title": "Applied Balance Amount",
-            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents."
+            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents.",
+            "examples": [
+              0
+            ]
           },
           "due_amount": {
             "type": "integer",
             "title": "Due Amount",
-            "description": "Amount in cents that is due for this order."
+            "description": "Amount in cents that is due for this order.",
+            "examples": [
+              0
+            ]
           },
           "refunded_amount": {
             "type": "integer",
             "title": "Refunded Amount",
-            "description": "Amount refunded in cents."
+            "description": "Amount refunded in cents.",
+            "examples": [
+              0
+            ]
           },
           "refunded_tax_amount": {
             "type": "integer",
             "title": "Refunded Tax Amount",
-            "description": "Sales tax refunded in cents."
+            "description": "Sales tax refunded in cents.",
+            "examples": [
+              0
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "billing_reason": {
             "$ref": "#/components/schemas/OrderBillingReason"
@@ -31308,20 +31854,32 @@
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "The amount of the subscription."
+            "description": "The amount of the subscription.",
+            "examples": [
+              10000
+            ]
           },
           "currency": {
             "type": "string",
             "title": "Currency",
-            "description": "The currency of the subscription."
+            "description": "The currency of the subscription.",
+            "examples": [
+              "usd"
+            ]
           },
           "recurring_interval": {
             "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The interval at which the subscription recurs."
+            "description": "The interval at which the subscription recurs.",
+            "examples": [
+              "month"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/SubscriptionStatus",
-            "description": "The status of the subscription."
+            "description": "The status of the subscription.",
+            "examples": [
+              "active"
+            ]
           },
           "current_period_start": {
             "type": "string",
@@ -32175,6 +32733,17 @@
             "format": "date-time",
             "title": "Expires At"
           },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url"
+          },
           "customer_portal_url": {
             "type": "string",
             "title": "Customer Portal Url"
@@ -32195,6 +32764,7 @@
           "id",
           "token",
           "expires_at",
+          "return_url",
           "customer_portal_url",
           "customer_id",
           "customer"
@@ -32204,6 +32774,24 @@
       },
       "CustomerSessionCustomerExternalIDCreate": {
         "properties": {
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the customer portal to return to this URL.",
+            "examples": [
+              "https://example.com/account"
+            ]
+          },
           "external_customer_id": {
             "type": "string",
             "title": "External Customer Id",
@@ -32219,6 +32807,24 @@
       },
       "CustomerSessionCustomerIDCreate": {
         "properties": {
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the customer portal to return to this URL.",
+            "examples": [
+              "https://example.com/account"
+            ]
+          },
           "customer_id": {
             "type": "string",
             "format": "uuid4",
@@ -33032,20 +33638,32 @@
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "The amount of the subscription."
+            "description": "The amount of the subscription.",
+            "examples": [
+              10000
+            ]
           },
           "currency": {
             "type": "string",
             "title": "Currency",
-            "description": "The currency of the subscription."
+            "description": "The currency of the subscription.",
+            "examples": [
+              "usd"
+            ]
           },
           "recurring_interval": {
             "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The interval at which the subscription recurs."
+            "description": "The interval at which the subscription recurs.",
+            "examples": [
+              "month"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/SubscriptionStatus",
-            "description": "The status of the subscription."
+            "description": "The status of the subscription.",
+            "examples": [
+              "active"
+            ]
           },
           "current_period_start": {
             "type": "string",
@@ -33899,11 +34517,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "created_at": {
             "type": "string",
@@ -34064,11 +34688,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "created_at": {
             "type": "string",
@@ -34381,11 +35011,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "created_at": {
             "type": "string",
@@ -34551,11 +35187,17 @@
           },
           "amount": {
             "type": "integer",
-            "title": "Amount"
+            "title": "Amount",
+            "examples": [
+              1000
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "created_at": {
             "type": "string",
@@ -34872,7 +35514,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "created_at": {
             "type": "string",
@@ -35032,7 +35678,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "created_at": {
             "type": "string",
@@ -35337,7 +35987,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "created_at": {
             "type": "string",
@@ -35502,7 +36156,11 @@
           },
           "basis_points": {
             "type": "integer",
-            "title": "Basis Points"
+            "title": "Basis Points",
+            "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+            "examples": [
+              1000
+            ]
           },
           "created_at": {
             "type": "string",
@@ -40888,6 +41546,253 @@
         ],
         "title": "NotPermitted"
       },
+      "OAuth2ClientConfiguration": {
+        "properties": {
+          "redirect_uris": {
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "format": "uri"
+            },
+            "type": "array",
+            "title": "Redirect Uris"
+          },
+          "token_endpoint_auth_method": {
+            "type": "string",
+            "enum": [
+              "client_secret_basic",
+              "client_secret_post",
+              "none"
+            ],
+            "title": "Token Endpoint Auth Method",
+            "default": "client_secret_post"
+          },
+          "grant_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "authorization_code",
+                "refresh_token"
+              ]
+            },
+            "type": "array",
+            "title": "Grant Types",
+            "default": [
+              "authorization_code",
+              "refresh_token"
+            ]
+          },
+          "response_types": {
+            "items": {
+              "type": "string",
+              "const": "code"
+            },
+            "type": "array",
+            "title": "Response Types",
+            "default": [
+              "code"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+          },
+          "client_name": {
+            "type": "string",
+            "title": "Client Name"
+          },
+          "client_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Uri"
+          },
+          "logo_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Logo Uri"
+          },
+          "tos_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tos Uri"
+          },
+          "policy_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Uri"
+          },
+          "default_sub_type": {
+            "$ref": "#/components/schemas/SubType",
+            "default": "organization"
+          }
+        },
+        "type": "object",
+        "required": [
+          "redirect_uris",
+          "client_name"
+        ],
+        "title": "OAuth2ClientConfiguration"
+      },
+      "OAuth2ClientConfigurationUpdate": {
+        "properties": {
+          "redirect_uris": {
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "format": "uri"
+            },
+            "type": "array",
+            "title": "Redirect Uris"
+          },
+          "token_endpoint_auth_method": {
+            "type": "string",
+            "enum": [
+              "client_secret_basic",
+              "client_secret_post",
+              "none"
+            ],
+            "title": "Token Endpoint Auth Method",
+            "default": "client_secret_post"
+          },
+          "grant_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "authorization_code",
+                "refresh_token"
+              ]
+            },
+            "type": "array",
+            "title": "Grant Types",
+            "default": [
+              "authorization_code",
+              "refresh_token"
+            ]
+          },
+          "response_types": {
+            "items": {
+              "type": "string",
+              "const": "code"
+            },
+            "type": "array",
+            "title": "Response Types",
+            "default": [
+              "code"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": "openid profile email user:read organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write customer_meters:read customer_sessions:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+          },
+          "client_name": {
+            "type": "string",
+            "title": "Client Name"
+          },
+          "client_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Uri"
+          },
+          "logo_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Logo Uri"
+          },
+          "tos_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tos Uri"
+          },
+          "policy_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Uri"
+          },
+          "default_sub_type": {
+            "$ref": "#/components/schemas/SubType",
+            "default": "organization"
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "redirect_uris",
+          "client_name",
+          "client_id"
+        ],
+        "title": "OAuth2ClientConfigurationUpdate"
+      },
       "OAuth2ClientPublic": {
         "properties": {
           "created_at": {
@@ -41026,51 +41931,81 @@
           "subtotal_amount": {
             "type": "integer",
             "title": "Subtotal Amount",
-            "description": "Amount in cents, before discounts and taxes."
+            "description": "Amount in cents, before discounts and taxes.",
+            "examples": [
+              10000
+            ]
           },
           "discount_amount": {
             "type": "integer",
             "title": "Discount Amount",
-            "description": "Discount amount in cents."
+            "description": "Discount amount in cents.",
+            "examples": [
+              1000
+            ]
           },
           "net_amount": {
             "type": "integer",
             "title": "Net Amount",
-            "description": "Amount in cents, after discounts but before taxes."
+            "description": "Amount in cents, after discounts but before taxes.",
+            "examples": [
+              9000
+            ]
           },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents.",
+            "examples": [
+              720
+            ]
           },
           "total_amount": {
             "type": "integer",
             "title": "Total Amount",
-            "description": "Amount in cents, after discounts and taxes."
+            "description": "Amount in cents, after discounts and taxes.",
+            "examples": [
+              9720
+            ]
           },
           "applied_balance_amount": {
             "type": "integer",
             "title": "Applied Balance Amount",
-            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents."
+            "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents.",
+            "examples": [
+              0
+            ]
           },
           "due_amount": {
             "type": "integer",
             "title": "Due Amount",
-            "description": "Amount in cents that is due for this order."
+            "description": "Amount in cents that is due for this order.",
+            "examples": [
+              0
+            ]
           },
           "refunded_amount": {
             "type": "integer",
             "title": "Refunded Amount",
-            "description": "Amount refunded in cents."
+            "description": "Amount refunded in cents.",
+            "examples": [
+              0
+            ]
           },
           "refunded_tax_amount": {
             "type": "integer",
             "title": "Refunded Tax Amount",
-            "description": "Sales tax refunded in cents."
+            "description": "Sales tax refunded in cents.",
+            "examples": [
+              0
+            ]
           },
           "currency": {
             "type": "string",
-            "title": "Currency"
+            "title": "Currency",
+            "examples": [
+              "usd"
+            ]
           },
           "billing_reason": {
             "$ref": "#/components/schemas/OrderBillingReason"
@@ -41198,6 +42133,14 @@
             "title": "Custom Field Data",
             "description": "Key-value object storing custom field values."
           },
+          "platform_fee_amount": {
+            "type": "integer",
+            "title": "Platform Fee Amount",
+            "description": "Platform fee amount in cents.",
+            "examples": [
+              500
+            ]
+          },
           "customer": {
             "$ref": "#/components/schemas/OrderCustomer"
           },
@@ -41282,6 +42225,7 @@
           "subscription_id",
           "checkout_id",
           "metadata",
+          "platform_fee_amount",
           "customer",
           "user_id",
           "product",
@@ -41532,22 +42476,34 @@
           "label": {
             "type": "string",
             "title": "Label",
-            "description": "Description of the line item charge."
+            "description": "Description of the line item charge.",
+            "examples": [
+              "Pro Plan"
+            ]
           },
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "Amount in cents, before discounts and taxes."
+            "description": "Amount in cents, before discounts and taxes.",
+            "examples": [
+              10000
+            ]
           },
           "tax_amount": {
             "type": "integer",
             "title": "Tax Amount",
-            "description": "Sales tax amount in cents."
+            "description": "Sales tax amount in cents.",
+            "examples": [
+              720
+            ]
           },
           "proration": {
             "type": "boolean",
             "title": "Proration",
-            "description": "Whether this charge is due to a proration."
+            "description": "Whether this charge is due to a proration.",
+            "examples": [
+              false
+            ]
           },
           "product_price_id": {
             "anyOf": [
@@ -41815,20 +42771,32 @@
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "The amount of the subscription."
+            "description": "The amount of the subscription.",
+            "examples": [
+              10000
+            ]
           },
           "currency": {
             "type": "string",
             "title": "Currency",
-            "description": "The currency of the subscription."
+            "description": "The currency of the subscription.",
+            "examples": [
+              "usd"
+            ]
           },
           "recurring_interval": {
             "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The interval at which the subscription recurs."
+            "description": "The interval at which the subscription recurs.",
+            "examples": [
+              "month"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/SubscriptionStatus",
-            "description": "The status of the subscription."
+            "description": "The status of the subscription.",
+            "examples": [
+              "active"
+            ]
           },
           "current_period_start": {
             "type": "string",
@@ -42223,6 +43191,10 @@
           "notification_settings": {
             "$ref": "#/components/schemas/OrganizationNotificationSettings",
             "description": "Settings related to notifications"
+          },
+          "customer_email_settings": {
+            "$ref": "#/components/schemas/OrganizationCustomerEmailSettings",
+            "description": "Settings related to customer emails"
           }
         },
         "type": "object",
@@ -42240,7 +43212,8 @@
           "details_submitted_at",
           "feature_settings",
           "subscription_settings",
-          "notification_settings"
+          "notification_settings",
+          "customer_email_settings"
         ],
         "title": "Organization"
       },
@@ -42578,6 +43551,16 @@
                 "type": "null"
               }
             ]
+          },
+          "customer_email_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationCustomerEmailSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -42586,6 +43569,54 @@
           "slug"
         ],
         "title": "OrganizationCreate"
+      },
+      "OrganizationCustomerEmailSettings": {
+        "properties": {
+          "order_confirmation": {
+            "type": "boolean",
+            "title": "Order Confirmation"
+          },
+          "subscription_cancellation": {
+            "type": "boolean",
+            "title": "Subscription Cancellation"
+          },
+          "subscription_confirmation": {
+            "type": "boolean",
+            "title": "Subscription Confirmation"
+          },
+          "subscription_cycled": {
+            "type": "boolean",
+            "title": "Subscription Cycled"
+          },
+          "subscription_past_due": {
+            "type": "boolean",
+            "title": "Subscription Past Due"
+          },
+          "subscription_revoked": {
+            "type": "boolean",
+            "title": "Subscription Revoked"
+          },
+          "subscription_uncanceled": {
+            "type": "boolean",
+            "title": "Subscription Uncanceled"
+          },
+          "subscription_updated": {
+            "type": "boolean",
+            "title": "Subscription Updated"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order_confirmation",
+          "subscription_cancellation",
+          "subscription_confirmation",
+          "subscription_cycled",
+          "subscription_past_due",
+          "subscription_revoked",
+          "subscription_uncanceled",
+          "subscription_updated"
+        ],
+        "title": "OrganizationCustomerEmailSettings"
       },
       "OrganizationDetails": {
         "properties": {
@@ -42877,6 +43908,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/OrganizationNotificationSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_email_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationCustomerEmailSettings"
               },
               {
                 "type": "null"
@@ -43449,7 +44490,7 @@
           },
           "prices": {
             "items": {
-              "anyOf": [
+              "oneOf": [
                 {
                   "$ref": "#/components/schemas/ProductPriceFixedCreate"
                 },
@@ -43465,7 +44506,17 @@
                 {
                   "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
                 }
-              ]
+              ],
+              "discriminator": {
+                "propertyName": "amount_type",
+                "mapping": {
+                  "custom": "#/components/schemas/ProductPriceCustomCreate",
+                  "fixed": "#/components/schemas/ProductPriceFixedCreate",
+                  "free": "#/components/schemas/ProductPriceFreeCreate",
+                  "metered_unit": "#/components/schemas/ProductPriceMeteredUnitCreate",
+                  "seat_based": "#/components/schemas/ProductPriceSeatBasedCreate"
+                }
+              }
             },
             "type": "array",
             "minItems": 1,
@@ -43581,7 +44632,7 @@
           },
           "prices": {
             "items": {
-              "anyOf": [
+              "oneOf": [
                 {
                   "$ref": "#/components/schemas/ProductPriceFixedCreate"
                 },
@@ -43597,7 +44648,17 @@
                 {
                   "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
                 }
-              ]
+              ],
+              "discriminator": {
+                "propertyName": "amount_type",
+                "mapping": {
+                  "custom": "#/components/schemas/ProductPriceCustomCreate",
+                  "fixed": "#/components/schemas/ProductPriceFixedCreate",
+                  "free": "#/components/schemas/ProductPriceFreeCreate",
+                  "metered_unit": "#/components/schemas/ProductPriceMeteredUnitCreate",
+                  "seat_based": "#/components/schemas/ProductPriceSeatBasedCreate"
+                }
+              }
             },
             "type": "array",
             "minItems": 1,
@@ -44584,10 +45645,9 @@
             "title": "Price Currency",
             "description": "The currency."
           },
-          "price_per_seat": {
-            "type": "integer",
-            "title": "Price Per Seat",
-            "description": "The price per seat in cents."
+          "seat_tiers": {
+            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "description": "Tiered pricing based on seat quantity"
           }
         },
         "type": "object",
@@ -44601,7 +45661,7 @@
           "type",
           "recurring_interval",
           "price_currency",
-          "price_per_seat"
+          "seat_tiers"
         ],
         "title": "ProductPriceSeatBased",
         "description": "A seat-based price for a product."
@@ -44620,21 +45680,74 @@
             "description": "The currency. Currently, only `usd` is supported.",
             "default": "usd"
           },
-          "price_per_seat": {
-            "type": "integer",
-            "maximum": 99999999.0,
-            "minimum": 50.0,
-            "title": "Price Per Seat",
-            "description": "The price per seat in cents."
+          "seat_tiers": {
+            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "description": "Tiered pricing based on seat quantity"
           }
         },
         "type": "object",
         "required": [
           "amount_type",
-          "price_per_seat"
+          "seat_tiers"
         ],
         "title": "ProductPriceSeatBasedCreate",
-        "description": "Schema to create a seat-based price."
+        "description": "Schema to create a seat-based price with volume-based tiers."
+      },
+      "ProductPriceSeatTier": {
+        "properties": {
+          "min_seats": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Min Seats",
+            "description": "Minimum number of seats (inclusive)"
+          },
+          "max_seats": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Seats",
+            "description": "Maximum number of seats (inclusive). None for unlimited."
+          },
+          "price_per_seat": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 50.0,
+            "title": "Price Per Seat",
+            "description": "Price per seat in cents for this tier"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min_seats",
+          "price_per_seat"
+        ],
+        "title": "ProductPriceSeatTier",
+        "description": "A pricing tier for seat-based pricing."
+      },
+      "ProductPriceSeatTiers": {
+        "properties": {
+          "tiers": {
+            "items": {
+              "$ref": "#/components/schemas/ProductPriceSeatTier"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tiers",
+            "description": "List of pricing tiers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tiers"
+        ],
+        "title": "ProductPriceSeatTiers",
+        "description": "List of pricing tiers for seat-based pricing."
       },
       "ProductPriceType": {
         "type": "string",
@@ -44770,19 +45883,33 @@
                       "$ref": "#/components/schemas/ExistingProductPrice"
                     },
                     {
-                      "$ref": "#/components/schemas/ProductPriceFixedCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceCustomCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceFreeCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceSeatBasedCreate"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/ProductPriceFixedCreate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProductPriceCustomCreate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProductPriceFreeCreate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProductPriceSeatBasedCreate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ProductPriceMeteredUnitCreate"
+                        }
+                      ],
+                      "discriminator": {
+                        "propertyName": "amount_type",
+                        "mapping": {
+                          "custom": "#/components/schemas/ProductPriceCustomCreate",
+                          "fixed": "#/components/schemas/ProductPriceFixedCreate",
+                          "free": "#/components/schemas/ProductPriceFreeCreate",
+                          "metered_unit": "#/components/schemas/ProductPriceMeteredUnitCreate",
+                          "seat_based": "#/components/schemas/ProductPriceSeatBasedCreate"
+                        }
+                      }
                     }
                   ]
                 },
@@ -45619,20 +46746,32 @@
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "The amount of the subscription."
+            "description": "The amount of the subscription.",
+            "examples": [
+              10000
+            ]
           },
           "currency": {
             "type": "string",
             "title": "Currency",
-            "description": "The currency of the subscription."
+            "description": "The currency of the subscription.",
+            "examples": [
+              "usd"
+            ]
           },
           "recurring_interval": {
             "$ref": "#/components/schemas/SubscriptionRecurringInterval",
-            "description": "The interval at which the subscription recurs."
+            "description": "The interval at which the subscription recurs.",
+            "examples": [
+              "month"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/SubscriptionStatus",
-            "description": "The status of the subscription."
+            "description": "The status of the subscription.",
+            "examples": [
+              "active"
+            ]
           },
           "current_period_start": {
             "type": "string",
@@ -48696,6 +49835,69 @@
           "refresh_token"
         ],
         "title": "RefreshTokenRequest",
+        "type": "object"
+      },
+      "WebTokenRequest": {
+        "properties": {
+          "grant_type": {
+            "const": "web",
+            "title": "Grant Type",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          },
+          "session_token": {
+            "title": "Session Token",
+            "type": "string"
+          },
+          "sub_type": {
+            "default": "user",
+            "enum": [
+              "user",
+              "organization"
+            ],
+            "title": "Sub Type",
+            "type": "string"
+          },
+          "sub": {
+            "anyOf": [
+              {
+                "format": "uuid4",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sub"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          }
+        },
+        "required": [
+          "grant_type",
+          "client_id",
+          "client_secret",
+          "session_token"
+        ],
+        "title": "WebTokenRequest",
         "type": "object"
       },
       "RevokeTokenRequest": {
