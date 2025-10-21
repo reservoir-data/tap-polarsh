@@ -51,10 +51,13 @@ dev = [
 testing = [
   "deptry>=0.12",
   "pytest>=8",
+  "pytest-subtests>=0.15",
   "singer-sdk[testing]",
+  "syrupy>=5",
 ]
 typing = [
   "mypy~=1.18.2",
+  "ty>=0.0.1a23",
   "types-requests~=2.31",
 ]
 
@@ -138,7 +141,10 @@ commands = [ [ "deptry", "." ] ]
 
 [tool.tox.env.typing]
 dependency_groups = [ "testing", "typing" ]
-commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_polarsh", "tests" ], extend = true } ] ]
+commands = [
+  [ "mypy", "--strict", { replace = "posargs", default = [ "tap_polarsh", "tests" ], extend = true } ],
+  [ "ty", "check", { replace = "posargs", default = [ "tap_polarsh", "tests" ], extend = true } ],
+]
 
 [tool.mypy]
 python_version = "3.13"

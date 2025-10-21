@@ -1,4 +1,4 @@
-name: Update OpenAPI Specification for polar.sh
+name: Update Catalog for polar.sh
 
 on:
   workflow_dispatch:
@@ -7,11 +7,13 @@ on:
   - cron: '0 12 * * 5'
 
 env:
+  FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=uv
   UV_VERSION: 0.9.0
 
 jobs:
   update_openapi_specification:
+    name: Update Catalog
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -27,8 +29,12 @@ jobs:
       with:
         version: ${{ env.UV_VERSION }}
     - run: uv run scripts/update_openapi.py
+    - id: check_snapshot_changes
+      continue-on-error: true
+      run: git diff --quiet tests/__snapshots__
     - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+      if: steps.check_snapshot_changes.outcome == 'failure'
       with:
-        title: 'chore: Update OpenAPI Specification for polar.sh'
+        title: 'fix: Update catalog'
         token: ${{ steps.generate-token.outputs.token }}
         signoff: true
