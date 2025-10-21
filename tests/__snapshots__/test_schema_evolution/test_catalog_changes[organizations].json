@@ -1,0 +1,578 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "slug"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "avatar_url"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "email"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "website"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "socials"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "status"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "details_submitted_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "feature_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "allow_multiple_subscriptions"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "allow_customer_updates"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "proration_behavior"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "notification_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "notification_settings",
+        "properties",
+        "new_order"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "notification_settings",
+        "properties",
+        "new_subscription"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "order_confirmation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_cancellation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_confirmation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_cycled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_past_due"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_revoked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_uncanceled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_updated"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "properties": {
+      "avatar_url": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Avatar URL shown in checkout, customer portal, emails etc.",
+        "title": "Avatar Url"
+      },
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "customer_email_settings": {
+        "description": "Settings related to customer emails",
+        "properties": {
+          "order_confirmation": {
+            "title": "Order Confirmation",
+            "type": "boolean"
+          },
+          "subscription_cancellation": {
+            "title": "Subscription Cancellation",
+            "type": "boolean"
+          },
+          "subscription_confirmation": {
+            "title": "Subscription Confirmation",
+            "type": "boolean"
+          },
+          "subscription_cycled": {
+            "title": "Subscription Cycled",
+            "type": "boolean"
+          },
+          "subscription_past_due": {
+            "title": "Subscription Past Due",
+            "type": "boolean"
+          },
+          "subscription_revoked": {
+            "title": "Subscription Revoked",
+            "type": "boolean"
+          },
+          "subscription_uncanceled": {
+            "title": "Subscription Uncanceled",
+            "type": "boolean"
+          },
+          "subscription_updated": {
+            "title": "Subscription Updated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "order_confirmation",
+          "subscription_cancellation",
+          "subscription_confirmation",
+          "subscription_cycled",
+          "subscription_past_due",
+          "subscription_revoked",
+          "subscription_uncanceled",
+          "subscription_updated"
+        ],
+        "title": "OrganizationCustomerEmailSettings",
+        "type": "object"
+      },
+      "details_submitted_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "When the business details were submitted.",
+        "title": "Details Submitted At"
+      },
+      "email": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Public support email.",
+        "title": "Email"
+      },
+      "feature_settings": {
+        "anyOf": [
+          {
+            "properties": {
+              "issue_funding_enabled": {
+                "default": false,
+                "description": "If this organization has issue funding enabled",
+                "title": "Issue Funding Enabled",
+                "type": "boolean"
+              },
+              "seat_based_pricing_enabled": {
+                "default": false,
+                "description": "If this organization has seat-based pricing enabled",
+                "title": "Seat Based Pricing Enabled",
+                "type": "boolean"
+              }
+            },
+            "title": "OrganizationFeatureSettings",
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Organization feature settings"
+      },
+      "id": {
+        "description": "The organization ID.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "name": {
+        "description": "Organization name shown in checkout, customer portal, emails etc.",
+        "title": "Name",
+        "type": "string"
+      },
+      "notification_settings": {
+        "description": "Settings related to notifications",
+        "properties": {
+          "new_order": {
+            "title": "New Order",
+            "type": "boolean"
+          },
+          "new_subscription": {
+            "title": "New Subscription",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "new_order",
+          "new_subscription"
+        ],
+        "title": "OrganizationNotificationSettings",
+        "type": "object"
+      },
+      "slug": {
+        "description": "Unique organization slug in checkout, customer portal and credit card statements.",
+        "title": "Slug",
+        "type": "string"
+      },
+      "socials": {
+        "description": "Links to social profiles.",
+        "items": {
+          "properties": {
+            "platform": {
+              "description": "The social platform of the URL",
+              "enum": [
+                "x",
+                "github",
+                "facebook",
+                "instagram",
+                "youtube",
+                "tiktok",
+                "linkedin",
+                "other"
+              ],
+              "title": "OrganizationSocialPlatforms",
+              "type": "string"
+            },
+            "url": {
+              "description": "The URL to the organization profile",
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "title": "Url",
+              "type": "string"
+            }
+          },
+          "required": [
+            "platform",
+            "url"
+          ],
+          "title": "OrganizationSocialLink",
+          "type": "object"
+        },
+        "title": "Socials",
+        "type": "array"
+      },
+      "status": {
+        "description": "Current organization status",
+        "enum": [
+          "created",
+          "onboarding_started",
+          "under_review",
+          "denied",
+          "active"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "subscription_settings": {
+        "description": "Settings related to subscriptions management",
+        "properties": {
+          "allow_customer_updates": {
+            "title": "Allow Customer Updates",
+            "type": "boolean"
+          },
+          "allow_multiple_subscriptions": {
+            "title": "Allow Multiple Subscriptions",
+            "type": "boolean"
+          },
+          "proration_behavior": {
+            "enum": [
+              "invoice",
+              "prorate"
+            ],
+            "title": "SubscriptionProrationBehavior",
+            "type": "string"
+          }
+        },
+        "required": [
+          "allow_multiple_subscriptions",
+          "allow_customer_updates",
+          "proration_behavior"
+        ],
+        "title": "OrganizationSubscriptionSettings",
+        "type": "object"
+      },
+      "website": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Official website of the organization.",
+        "title": "Website"
+      }
+    },
+    "required": [
+      "created_at",
+      "modified_at",
+      "id",
+      "name",
+      "slug",
+      "avatar_url",
+      "email",
+      "website",
+      "socials",
+      "status",
+      "details_submitted_at",
+      "feature_settings",
+      "subscription_settings",
+      "notification_settings",
+      "customer_email_settings"
+    ],
+    "title": "Organization",
+    "type": "object"
+  },
+  "stream": "organizations",
+  "tap_stream_id": "organizations"
+}
