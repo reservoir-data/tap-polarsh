@@ -1,0 +1,2294 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trial_interval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trial_interval_count"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "metadata"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "payment_processor"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "client_secret"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "success_url"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "label"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allow_discount_codes"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "require_billing_address"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "discount_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "products"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "discount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "url"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "description": "Checkout link data.",
+    "properties": {
+      "allow_discount_codes": {
+        "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
+        "title": "Allow Discount Codes",
+        "type": "boolean"
+      },
+      "client_secret": {
+        "description": "Client secret used to access the checkout link.",
+        "title": "Client Secret",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "discount": {
+        "anyOf": [
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "amount": {
+                    "title": "Amount",
+                    "type": "integer"
+                  },
+                  "code": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Code customers can use to apply the discount during checkout.",
+                    "title": "Code"
+                  },
+                  "created_at": {
+                    "description": "Creation timestamp of the object.",
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "currency": {
+                    "title": "Currency",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
+                    "title": "DiscountDuration",
+                    "type": "string"
+                  },
+                  "ends_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is no longer redeemable.",
+                    "title": "Ends At"
+                  },
+                  "id": {
+                    "description": "The ID of the object.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "max_redemptions": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Maximum number of times the discount can be redeemed.",
+                    "title": "Max Redemptions"
+                  },
+                  "metadata": {
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "title": "Metadata",
+                    "type": "object"
+                  },
+                  "modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Last modification timestamp of the object.",
+                    "title": "Modified At"
+                  },
+                  "name": {
+                    "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "organization_id": {
+                    "description": "The organization ID.",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string",
+                    "x-polar-selector-widget": {
+                      "displayProperty": "name",
+                      "resourceName": "Organization",
+                      "resourceRoot": "/v1/organizations"
+                    }
+                  },
+                  "redemptions_count": {
+                    "description": "Number of times the discount has been redeemed.",
+                    "title": "Redemptions Count",
+                    "type": "integer"
+                  },
+                  "starts_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is redeemable.",
+                    "title": "Starts At"
+                  },
+                  "type": {
+                    "enum": [
+                      "fixed",
+                      "percentage"
+                    ],
+                    "title": "DiscountType",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "duration",
+                  "type",
+                  "amount",
+                  "currency",
+                  "created_at",
+                  "modified_at",
+                  "id",
+                  "metadata",
+                  "name",
+                  "code",
+                  "starts_at",
+                  "ends_at",
+                  "max_redemptions",
+                  "redemptions_count",
+                  "organization_id"
+                ],
+                "title": "DiscountFixedOnceForeverDurationBase",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "amount": {
+                    "title": "Amount",
+                    "type": "integer"
+                  },
+                  "code": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Code customers can use to apply the discount during checkout.",
+                    "title": "Code"
+                  },
+                  "created_at": {
+                    "description": "Creation timestamp of the object.",
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "currency": {
+                    "title": "Currency",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
+                    "title": "DiscountDuration",
+                    "type": "string"
+                  },
+                  "duration_in_months": {
+                    "title": "Duration In Months",
+                    "type": "integer"
+                  },
+                  "ends_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is no longer redeemable.",
+                    "title": "Ends At"
+                  },
+                  "id": {
+                    "description": "The ID of the object.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "max_redemptions": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Maximum number of times the discount can be redeemed.",
+                    "title": "Max Redemptions"
+                  },
+                  "metadata": {
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "title": "Metadata",
+                    "type": "object"
+                  },
+                  "modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Last modification timestamp of the object.",
+                    "title": "Modified At"
+                  },
+                  "name": {
+                    "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "organization_id": {
+                    "description": "The organization ID.",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string",
+                    "x-polar-selector-widget": {
+                      "displayProperty": "name",
+                      "resourceName": "Organization",
+                      "resourceRoot": "/v1/organizations"
+                    }
+                  },
+                  "redemptions_count": {
+                    "description": "Number of times the discount has been redeemed.",
+                    "title": "Redemptions Count",
+                    "type": "integer"
+                  },
+                  "starts_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is redeemable.",
+                    "title": "Starts At"
+                  },
+                  "type": {
+                    "enum": [
+                      "fixed",
+                      "percentage"
+                    ],
+                    "title": "DiscountType",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "duration",
+                  "duration_in_months",
+                  "type",
+                  "amount",
+                  "currency",
+                  "created_at",
+                  "modified_at",
+                  "id",
+                  "metadata",
+                  "name",
+                  "code",
+                  "starts_at",
+                  "ends_at",
+                  "max_redemptions",
+                  "redemptions_count",
+                  "organization_id"
+                ],
+                "title": "DiscountFixedRepeatDurationBase",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "basis_points": {
+                    "title": "Basis Points",
+                    "type": "integer"
+                  },
+                  "code": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Code customers can use to apply the discount during checkout.",
+                    "title": "Code"
+                  },
+                  "created_at": {
+                    "description": "Creation timestamp of the object.",
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
+                    "title": "DiscountDuration",
+                    "type": "string"
+                  },
+                  "ends_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is no longer redeemable.",
+                    "title": "Ends At"
+                  },
+                  "id": {
+                    "description": "The ID of the object.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "max_redemptions": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Maximum number of times the discount can be redeemed.",
+                    "title": "Max Redemptions"
+                  },
+                  "metadata": {
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "title": "Metadata",
+                    "type": "object"
+                  },
+                  "modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Last modification timestamp of the object.",
+                    "title": "Modified At"
+                  },
+                  "name": {
+                    "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "organization_id": {
+                    "description": "The organization ID.",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string",
+                    "x-polar-selector-widget": {
+                      "displayProperty": "name",
+                      "resourceName": "Organization",
+                      "resourceRoot": "/v1/organizations"
+                    }
+                  },
+                  "redemptions_count": {
+                    "description": "Number of times the discount has been redeemed.",
+                    "title": "Redemptions Count",
+                    "type": "integer"
+                  },
+                  "starts_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is redeemable.",
+                    "title": "Starts At"
+                  },
+                  "type": {
+                    "enum": [
+                      "fixed",
+                      "percentage"
+                    ],
+                    "title": "DiscountType",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "duration",
+                  "type",
+                  "basis_points",
+                  "created_at",
+                  "modified_at",
+                  "id",
+                  "metadata",
+                  "name",
+                  "code",
+                  "starts_at",
+                  "ends_at",
+                  "max_redemptions",
+                  "redemptions_count",
+                  "organization_id"
+                ],
+                "title": "DiscountPercentageOnceForeverDurationBase",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "basis_points": {
+                    "title": "Basis Points",
+                    "type": "integer"
+                  },
+                  "code": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Code customers can use to apply the discount during checkout.",
+                    "title": "Code"
+                  },
+                  "created_at": {
+                    "description": "Creation timestamp of the object.",
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
+                    "title": "DiscountDuration",
+                    "type": "string"
+                  },
+                  "duration_in_months": {
+                    "title": "Duration In Months",
+                    "type": "integer"
+                  },
+                  "ends_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is no longer redeemable.",
+                    "title": "Ends At"
+                  },
+                  "id": {
+                    "description": "The ID of the object.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "max_redemptions": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Maximum number of times the discount can be redeemed.",
+                    "title": "Max Redemptions"
+                  },
+                  "metadata": {
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "title": "Metadata",
+                    "type": "object"
+                  },
+                  "modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Last modification timestamp of the object.",
+                    "title": "Modified At"
+                  },
+                  "name": {
+                    "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "organization_id": {
+                    "description": "The organization ID.",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string",
+                    "x-polar-selector-widget": {
+                      "displayProperty": "name",
+                      "resourceName": "Organization",
+                      "resourceRoot": "/v1/organizations"
+                    }
+                  },
+                  "redemptions_count": {
+                    "description": "Number of times the discount has been redeemed.",
+                    "title": "Redemptions Count",
+                    "type": "integer"
+                  },
+                  "starts_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Timestamp after which the discount is redeemable.",
+                    "title": "Starts At"
+                  },
+                  "type": {
+                    "enum": [
+                      "fixed",
+                      "percentage"
+                    ],
+                    "title": "DiscountType",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "duration",
+                  "duration_in_months",
+                  "type",
+                  "basis_points",
+                  "created_at",
+                  "modified_at",
+                  "id",
+                  "metadata",
+                  "name",
+                  "code",
+                  "starts_at",
+                  "ends_at",
+                  "max_redemptions",
+                  "redemptions_count",
+                  "organization_id"
+                ],
+                "title": "DiscountPercentageRepeatDurationBase",
+                "type": "object"
+              }
+            ],
+            "title": "CheckoutLinkDiscount"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Discount"
+      },
+      "discount_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "ID of the discount to apply to the checkout. If the discount is not applicable anymore when opening the checkout link, it'll be ignored.",
+        "title": "Discount Id"
+      },
+      "id": {
+        "description": "The ID of the object.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Optional label to distinguish links internally",
+        "title": "Label"
+      },
+      "metadata": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Metadata",
+        "type": "object"
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "organization_id": {
+        "description": "The organization ID.",
+        "format": "uuid4",
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "payment_processor": {
+        "description": "Payment processor used.",
+        "enum": [
+          "stripe"
+        ],
+        "title": "PaymentProcessor",
+        "type": "string"
+      },
+      "products": {
+        "items": {
+          "description": "Product data for a checkout link.",
+          "properties": {
+            "benefits": {
+              "description": "List of benefits granted by the product.",
+              "items": {
+                "properties": {
+                  "created_at": {
+                    "description": "Creation timestamp of the object.",
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "deletable": {
+                    "description": "Whether the benefit is deletable.",
+                    "title": "Deletable",
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "description": "The description of the benefit.",
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The ID of the benefit.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Last modification timestamp of the object.",
+                    "title": "Modified At"
+                  },
+                  "organization_id": {
+                    "description": "The ID of the organization owning the benefit.",
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string"
+                  },
+                  "selectable": {
+                    "description": "Whether the benefit is selectable when creating a product.",
+                    "title": "Selectable",
+                    "type": "boolean"
+                  },
+                  "type": {
+                    "description": "The type of the benefit.",
+                    "enum": [
+                      "custom",
+                      "discord",
+                      "github_repository",
+                      "downloadables",
+                      "license_keys",
+                      "meter_credit"
+                    ],
+                    "title": "BenefitType",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "created_at",
+                  "modified_at",
+                  "type",
+                  "description",
+                  "selectable",
+                  "deletable",
+                  "organization_id"
+                ],
+                "title": "BenefitPublic",
+                "type": "object"
+              },
+              "title": "BenefitPublic",
+              "type": "array"
+            },
+            "created_at": {
+              "description": "Creation timestamp of the object.",
+              "format": "date-time",
+              "title": "Created At",
+              "type": "string"
+            },
+            "description": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The description of the product.",
+              "title": "Description"
+            },
+            "id": {
+              "description": "The ID of the object.",
+              "format": "uuid4",
+              "title": "Id",
+              "type": "string"
+            },
+            "is_archived": {
+              "description": "Whether the product is archived and no longer available.",
+              "title": "Is Archived",
+              "type": "boolean"
+            },
+            "is_recurring": {
+              "description": "Whether the product is a subscription.",
+              "title": "Is Recurring",
+              "type": "boolean"
+            },
+            "medias": {
+              "description": "List of medias associated to the product.",
+              "items": {
+                "description": "File to be used as a product media file.",
+                "properties": {
+                  "checksum_etag": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Checksum Etag"
+                  },
+                  "checksum_sha256_base64": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Checksum Sha256 Base64"
+                  },
+                  "checksum_sha256_hex": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Checksum Sha256 Hex"
+                  },
+                  "created_at": {
+                    "format": "date-time",
+                    "title": "Created At",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The ID of the object.",
+                    "format": "uuid4",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "is_uploaded": {
+                    "title": "Is Uploaded",
+                    "type": "boolean"
+                  },
+                  "last_modified_at": {
+                    "anyOf": [
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Last Modified At"
+                  },
+                  "mime_type": {
+                    "title": "Mime Type",
+                    "type": "string"
+                  },
+                  "name": {
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "organization_id": {
+                    "format": "uuid4",
+                    "title": "Organization Id",
+                    "type": "string"
+                  },
+                  "path": {
+                    "title": "Path",
+                    "type": "string"
+                  },
+                  "public_url": {
+                    "title": "Public Url",
+                    "type": "string"
+                  },
+                  "service": {
+                    "title": "Service",
+                    "type": "string"
+                  },
+                  "size": {
+                    "title": "Size",
+                    "type": "integer"
+                  },
+                  "size_readable": {
+                    "title": "Size Readable",
+                    "type": "string"
+                  },
+                  "storage_version": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Storage Version"
+                  },
+                  "version": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Version"
+                  }
+                },
+                "required": [
+                  "id",
+                  "organization_id",
+                  "name",
+                  "path",
+                  "mime_type",
+                  "size",
+                  "storage_version",
+                  "checksum_etag",
+                  "checksum_sha256_base64",
+                  "checksum_sha256_hex",
+                  "last_modified_at",
+                  "version",
+                  "service",
+                  "is_uploaded",
+                  "created_at",
+                  "size_readable",
+                  "public_url"
+                ],
+                "title": "ProductMediaFileRead",
+                "type": "object"
+              },
+              "title": "Medias",
+              "type": "array"
+            },
+            "metadata": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "title": "Metadata",
+              "type": "object"
+            },
+            "modified_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Last modification timestamp of the object.",
+              "title": "Modified At"
+            },
+            "name": {
+              "description": "The name of the product.",
+              "title": "Name",
+              "type": "string"
+            },
+            "organization_id": {
+              "description": "The ID of the organization owning the product.",
+              "format": "uuid4",
+              "title": "Organization Id",
+              "type": "string"
+            },
+            "prices": {
+              "description": "List of prices for this product.",
+              "items": {
+                "oneOf": [
+                  {
+                    "discriminator": {
+                      "mapping": {
+                        "custom": "#/components/schemas/LegacyRecurringProductPriceCustom",
+                        "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed",
+                        "free": "#/components/schemas/LegacyRecurringProductPriceFree"
+                      },
+                      "propertyName": "amount_type"
+                    },
+                    "oneOf": [
+                      {
+                        "description": "A recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "fixed",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "legacy": {
+                            "const": true,
+                            "readOnly": true,
+                            "title": "Legacy",
+                            "type": "boolean"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "price_amount": {
+                            "description": "The price in cents.",
+                            "title": "Price Amount",
+                            "type": "integer"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "description": "The recurring interval of the price.",
+                            "enum": [
+                              "day",
+                              "week",
+                              "month",
+                              "year"
+                            ],
+                            "title": "SubscriptionRecurringInterval",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "recurring",
+                            "description": "The type of the price.",
+                            "title": "Type",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "price_amount",
+                          "legacy"
+                        ],
+                        "title": "LegacyRecurringProductPriceFixed",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A pay-what-you-want recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "custom",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "legacy": {
+                            "const": true,
+                            "readOnly": true,
+                            "title": "Legacy",
+                            "type": "boolean"
+                          },
+                          "maximum_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The maximum amount the customer can pay.",
+                            "title": "Maximum Amount"
+                          },
+                          "minimum_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The minimum amount the customer can pay.",
+                            "title": "Minimum Amount"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "preset_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The initial amount shown to the customer.",
+                            "title": "Preset Amount"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "description": "The recurring interval of the price.",
+                            "enum": [
+                              "day",
+                              "week",
+                              "month",
+                              "year"
+                            ],
+                            "title": "SubscriptionRecurringInterval",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "recurring",
+                            "description": "The type of the price.",
+                            "title": "Type",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "minimum_amount",
+                          "maximum_amount",
+                          "preset_amount",
+                          "legacy"
+                        ],
+                        "title": "LegacyRecurringProductPriceCustom",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "free",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "legacy": {
+                            "const": true,
+                            "readOnly": true,
+                            "title": "Legacy",
+                            "type": "boolean"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "description": "The recurring interval of the price.",
+                            "enum": [
+                              "day",
+                              "week",
+                              "month",
+                              "year"
+                            ],
+                            "title": "SubscriptionRecurringInterval",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "recurring",
+                            "description": "The type of the price.",
+                            "title": "Type",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "legacy"
+                        ],
+                        "title": "LegacyRecurringProductPriceFree",
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  {
+                    "discriminator": {
+                      "mapping": {
+                        "custom": "#/components/schemas/ProductPriceCustom",
+                        "fixed": "#/components/schemas/ProductPriceFixed",
+                        "free": "#/components/schemas/ProductPriceFree",
+                        "metered_unit": "#/components/schemas/ProductPriceMeteredUnit",
+                        "seat_based": "#/components/schemas/ProductPriceSeatBased"
+                      },
+                      "propertyName": "amount_type"
+                    },
+                    "oneOf": [
+                      {
+                        "description": "A fixed price for a product.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "fixed",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "price_amount": {
+                            "description": "The price in cents.",
+                            "title": "Price Amount",
+                            "type": "integer"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "anyOf": [
+                              {
+                                "enum": [
+                                  "day",
+                                  "week",
+                                  "month",
+                                  "year"
+                                ],
+                                "title": "SubscriptionRecurringInterval",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "deprecated": true
+                          },
+                          "type": {
+                            "deprecated": true,
+                            "enum": [
+                              "one_time",
+                              "recurring"
+                            ],
+                            "title": "ProductPriceType",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "price_amount"
+                        ],
+                        "title": "ProductPriceFixed",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A pay-what-you-want price for a product.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "custom",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "maximum_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The maximum amount the customer can pay.",
+                            "title": "Maximum Amount"
+                          },
+                          "minimum_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The minimum amount the customer can pay.",
+                            "title": "Minimum Amount"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "preset_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The initial amount shown to the customer.",
+                            "title": "Preset Amount"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "anyOf": [
+                              {
+                                "enum": [
+                                  "day",
+                                  "week",
+                                  "month",
+                                  "year"
+                                ],
+                                "title": "SubscriptionRecurringInterval",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "deprecated": true
+                          },
+                          "type": {
+                            "deprecated": true,
+                            "enum": [
+                              "one_time",
+                              "recurring"
+                            ],
+                            "title": "ProductPriceType",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "minimum_amount",
+                          "maximum_amount",
+                          "preset_amount"
+                        ],
+                        "title": "ProductPriceCustom",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A free price for a product.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "free",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "anyOf": [
+                              {
+                                "enum": [
+                                  "day",
+                                  "week",
+                                  "month",
+                                  "year"
+                                ],
+                                "title": "SubscriptionRecurringInterval",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "deprecated": true
+                          },
+                          "type": {
+                            "deprecated": true,
+                            "enum": [
+                              "one_time",
+                              "recurring"
+                            ],
+                            "title": "ProductPriceType",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval"
+                        ],
+                        "title": "ProductPriceFree",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A seat-based price for a product.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "seat_based",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "price_per_seat": {
+                            "description": "The price per seat in cents.",
+                            "title": "Price Per Seat",
+                            "type": "integer"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "anyOf": [
+                              {
+                                "enum": [
+                                  "day",
+                                  "week",
+                                  "month",
+                                  "year"
+                                ],
+                                "title": "SubscriptionRecurringInterval",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "deprecated": true
+                          },
+                          "type": {
+                            "deprecated": true,
+                            "enum": [
+                              "one_time",
+                              "recurring"
+                            ],
+                            "title": "ProductPriceType",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "price_per_seat"
+                        ],
+                        "title": "ProductPriceSeatBased",
+                        "type": "object"
+                      },
+                      {
+                        "description": "A metered, usage-based, price for a product, with a fixed unit price.",
+                        "properties": {
+                          "amount_type": {
+                            "const": "metered_unit",
+                            "title": "Amount Type",
+                            "type": "string"
+                          },
+                          "cap_amount": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "The maximum amount in cents that can be charged, regardless of the number of units consumed.",
+                            "title": "Cap Amount"
+                          },
+                          "created_at": {
+                            "description": "Creation timestamp of the object.",
+                            "format": "date-time",
+                            "title": "Created At",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The ID of the price.",
+                            "format": "uuid4",
+                            "title": "Id",
+                            "type": "string"
+                          },
+                          "is_archived": {
+                            "description": "Whether the price is archived and no longer available.",
+                            "title": "Is Archived",
+                            "type": "boolean"
+                          },
+                          "meter": {
+                            "description": "A meter associated to a metered price.",
+                            "properties": {
+                              "id": {
+                                "description": "The ID of the object.",
+                                "format": "uuid4",
+                                "title": "Id",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "The name of the meter.",
+                                "title": "Name",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "title": "ProductPriceMeter",
+                            "type": "object"
+                          },
+                          "meter_id": {
+                            "description": "The ID of the meter associated to the price.",
+                            "format": "uuid4",
+                            "title": "Meter Id",
+                            "type": "string"
+                          },
+                          "modified_at": {
+                            "anyOf": [
+                              {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Last modification timestamp of the object.",
+                            "title": "Modified At"
+                          },
+                          "price_currency": {
+                            "description": "The currency.",
+                            "title": "Price Currency",
+                            "type": "string"
+                          },
+                          "product_id": {
+                            "description": "The ID of the product owning the price.",
+                            "format": "uuid4",
+                            "title": "Product Id",
+                            "type": "string"
+                          },
+                          "recurring_interval": {
+                            "anyOf": [
+                              {
+                                "enum": [
+                                  "day",
+                                  "week",
+                                  "month",
+                                  "year"
+                                ],
+                                "title": "SubscriptionRecurringInterval",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "deprecated": true
+                          },
+                          "type": {
+                            "deprecated": true,
+                            "enum": [
+                              "one_time",
+                              "recurring"
+                            ],
+                            "title": "ProductPriceType",
+                            "type": "string"
+                          },
+                          "unit_amount": {
+                            "description": "The price per unit in cents.",
+                            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                            "title": "Unit Amount",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "created_at",
+                          "modified_at",
+                          "id",
+                          "amount_type",
+                          "is_archived",
+                          "product_id",
+                          "type",
+                          "recurring_interval",
+                          "price_currency",
+                          "unit_amount",
+                          "cap_amount",
+                          "meter_id",
+                          "meter"
+                        ],
+                        "title": "ProductPriceMeteredUnit",
+                        "type": "object"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "title": "Prices",
+              "type": "array"
+            },
+            "recurring_interval": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "day",
+                    "week",
+                    "month",
+                    "year"
+                  ],
+                  "title": "SubscriptionRecurringInterval",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
+            },
+            "trial_interval": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "day",
+                    "week",
+                    "month",
+                    "year"
+                  ],
+                  "title": "TrialInterval",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The interval unit for the trial period."
+            },
+            "trial_interval_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The number of interval units for the trial period.",
+              "title": "Trial Interval Count"
+            }
+          },
+          "required": [
+            "metadata",
+            "id",
+            "created_at",
+            "modified_at",
+            "trial_interval",
+            "trial_interval_count",
+            "name",
+            "description",
+            "recurring_interval",
+            "is_recurring",
+            "is_archived",
+            "organization_id",
+            "prices",
+            "benefits",
+            "medias"
+          ],
+          "title": "CheckoutLinkProduct",
+          "type": "object"
+        },
+        "title": "Products",
+        "type": "array"
+      },
+      "require_billing_address": {
+        "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
+        "title": "Require Billing Address",
+        "type": "boolean"
+      },
+      "success_url": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "URL where the customer will be redirected after a successful payment.",
+        "title": "Success Url"
+      },
+      "trial_interval": {
+        "anyOf": [
+          {
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ],
+            "title": "TrialInterval",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The interval unit for the trial period."
+      },
+      "trial_interval_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The number of interval units for the trial period.",
+        "title": "Trial Interval Count"
+      },
+      "url": {
+        "title": "Url",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "modified_at",
+      "trial_interval",
+      "trial_interval_count",
+      "metadata",
+      "payment_processor",
+      "client_secret",
+      "success_url",
+      "label",
+      "allow_discount_codes",
+      "require_billing_address",
+      "discount_id",
+      "organization_id",
+      "products",
+      "discount",
+      "url"
+    ],
+    "title": "CheckoutLink",
+    "type": "object"
+  },
+  "stream": "checkout_links",
+  "tap_stream_id": "checkout_links"
+}

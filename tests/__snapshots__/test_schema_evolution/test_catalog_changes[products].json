@@ -1,0 +1,2805 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trial_interval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "trial_interval_count"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "recurring_interval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_recurring"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_archived"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "metadata"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "prices"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "benefits"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "medias"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "attached_custom_fields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "description": "A product.",
+    "properties": {
+      "attached_custom_fields": {
+        "description": "List of custom fields attached to the product.",
+        "items": {
+          "description": "Schema of a custom field attached to a resource.",
+          "properties": {
+            "custom_field": {
+              "oneOf": [
+                {
+                  "description": "Schema for a custom field of type text.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the object.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "title": "Metadata",
+                      "type": "object"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "name": {
+                      "description": "Name of the custom field.",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the custom field.",
+                      "examples": [
+                        "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                      ],
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": "string",
+                      "x-polar-selector-widget": {
+                        "displayProperty": "name",
+                        "resourceName": "Organization",
+                        "resourceRoot": "/v1/organizations"
+                      }
+                    },
+                    "properties": {
+                      "properties": {
+                        "form_help_text": {
+                          "minLength": 1,
+                          "title": "Form Help Text",
+                          "type": "string"
+                        },
+                        "form_label": {
+                          "minLength": 1,
+                          "title": "Form Label",
+                          "type": "string"
+                        },
+                        "form_placeholder": {
+                          "minLength": 1,
+                          "title": "Form Placeholder",
+                          "type": "string"
+                        },
+                        "max_length": {
+                          "minimum": 0.0,
+                          "title": "Max Length",
+                          "type": "integer"
+                        },
+                        "min_length": {
+                          "minimum": 0.0,
+                          "title": "Min Length",
+                          "type": "integer"
+                        },
+                        "textarea": {
+                          "title": "Textarea",
+                          "type": "boolean"
+                        }
+                      },
+                      "title": "CustomFieldTextProperties",
+                      "type": "object"
+                    },
+                    "slug": {
+                      "description": "Identifier of the custom field. It'll be used as key when storing the value.",
+                      "title": "Slug",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "text",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "metadata",
+                    "type",
+                    "slug",
+                    "name",
+                    "organization_id",
+                    "properties"
+                  ],
+                  "title": "CustomFieldText",
+                  "type": "object"
+                },
+                {
+                  "description": "Schema for a custom field of type number.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the object.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "title": "Metadata",
+                      "type": "object"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "name": {
+                      "description": "Name of the custom field.",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the custom field.",
+                      "examples": [
+                        "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                      ],
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": "string",
+                      "x-polar-selector-widget": {
+                        "displayProperty": "name",
+                        "resourceName": "Organization",
+                        "resourceRoot": "/v1/organizations"
+                      }
+                    },
+                    "properties": {
+                      "properties": {
+                        "form_help_text": {
+                          "minLength": 1,
+                          "title": "Form Help Text",
+                          "type": "string"
+                        },
+                        "form_label": {
+                          "minLength": 1,
+                          "title": "Form Label",
+                          "type": "string"
+                        },
+                        "form_placeholder": {
+                          "minLength": 1,
+                          "title": "Form Placeholder",
+                          "type": "string"
+                        },
+                        "ge": {
+                          "title": "Ge",
+                          "type": "integer"
+                        },
+                        "le": {
+                          "title": "Le",
+                          "type": "integer"
+                        }
+                      },
+                      "title": "CustomFieldNumberProperties",
+                      "type": "object"
+                    },
+                    "slug": {
+                      "description": "Identifier of the custom field. It'll be used as key when storing the value.",
+                      "title": "Slug",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "number",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "metadata",
+                    "type",
+                    "slug",
+                    "name",
+                    "organization_id",
+                    "properties"
+                  ],
+                  "title": "CustomFieldNumber",
+                  "type": "object"
+                },
+                {
+                  "description": "Schema for a custom field of type date.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the object.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "title": "Metadata",
+                      "type": "object"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "name": {
+                      "description": "Name of the custom field.",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the custom field.",
+                      "examples": [
+                        "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                      ],
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": "string",
+                      "x-polar-selector-widget": {
+                        "displayProperty": "name",
+                        "resourceName": "Organization",
+                        "resourceRoot": "/v1/organizations"
+                      }
+                    },
+                    "properties": {
+                      "properties": {
+                        "form_help_text": {
+                          "minLength": 1,
+                          "title": "Form Help Text",
+                          "type": "string"
+                        },
+                        "form_label": {
+                          "minLength": 1,
+                          "title": "Form Label",
+                          "type": "string"
+                        },
+                        "form_placeholder": {
+                          "minLength": 1,
+                          "title": "Form Placeholder",
+                          "type": "string"
+                        },
+                        "ge": {
+                          "title": "Ge",
+                          "type": "integer"
+                        },
+                        "le": {
+                          "title": "Le",
+                          "type": "integer"
+                        }
+                      },
+                      "title": "CustomFieldDateProperties",
+                      "type": "object"
+                    },
+                    "slug": {
+                      "description": "Identifier of the custom field. It'll be used as key when storing the value.",
+                      "title": "Slug",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "date",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "metadata",
+                    "type",
+                    "slug",
+                    "name",
+                    "organization_id",
+                    "properties"
+                  ],
+                  "title": "CustomFieldDate",
+                  "type": "object"
+                },
+                {
+                  "description": "Schema for a custom field of type checkbox.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the object.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "title": "Metadata",
+                      "type": "object"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "name": {
+                      "description": "Name of the custom field.",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the custom field.",
+                      "examples": [
+                        "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                      ],
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": "string",
+                      "x-polar-selector-widget": {
+                        "displayProperty": "name",
+                        "resourceName": "Organization",
+                        "resourceRoot": "/v1/organizations"
+                      }
+                    },
+                    "properties": {
+                      "properties": {
+                        "form_help_text": {
+                          "minLength": 1,
+                          "title": "Form Help Text",
+                          "type": "string"
+                        },
+                        "form_label": {
+                          "minLength": 1,
+                          "title": "Form Label",
+                          "type": "string"
+                        },
+                        "form_placeholder": {
+                          "minLength": 1,
+                          "title": "Form Placeholder",
+                          "type": "string"
+                        }
+                      },
+                      "title": "CustomFieldCheckboxProperties",
+                      "type": "object"
+                    },
+                    "slug": {
+                      "description": "Identifier of the custom field. It'll be used as key when storing the value.",
+                      "title": "Slug",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "checkbox",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "metadata",
+                    "type",
+                    "slug",
+                    "name",
+                    "organization_id",
+                    "properties"
+                  ],
+                  "title": "CustomFieldCheckbox",
+                  "type": "object"
+                },
+                {
+                  "description": "Schema for a custom field of type select.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the object.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "title": "Metadata",
+                      "type": "object"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "name": {
+                      "description": "Name of the custom field.",
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the custom field.",
+                      "examples": [
+                        "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                      ],
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": "string",
+                      "x-polar-selector-widget": {
+                        "displayProperty": "name",
+                        "resourceName": "Organization",
+                        "resourceRoot": "/v1/organizations"
+                      }
+                    },
+                    "properties": {
+                      "properties": {
+                        "form_help_text": {
+                          "minLength": 1,
+                          "title": "Form Help Text",
+                          "type": "string"
+                        },
+                        "form_label": {
+                          "minLength": 1,
+                          "title": "Form Label",
+                          "type": "string"
+                        },
+                        "form_placeholder": {
+                          "minLength": 1,
+                          "title": "Form Placeholder",
+                          "type": "string"
+                        },
+                        "options": {
+                          "items": {
+                            "properties": {
+                              "label": {
+                                "minLength": 1,
+                                "title": "Label",
+                                "type": "string"
+                              },
+                              "value": {
+                                "minLength": 1,
+                                "title": "Value",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "label"
+                            ],
+                            "title": "CustomFieldSelectOption",
+                            "type": "object"
+                          },
+                          "minItems": 1,
+                          "title": "Options",
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "options"
+                      ],
+                      "title": "CustomFieldSelectProperties",
+                      "type": "object"
+                    },
+                    "slug": {
+                      "description": "Identifier of the custom field. It'll be used as key when storing the value.",
+                      "title": "Slug",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "select",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "metadata",
+                    "type",
+                    "slug",
+                    "name",
+                    "organization_id",
+                    "properties"
+                  ],
+                  "title": "CustomFieldSelect",
+                  "type": "object"
+                }
+              ],
+              "title": "CustomField"
+            },
+            "custom_field_id": {
+              "description": "ID of the custom field.",
+              "format": "uuid4",
+              "title": "Custom Field Id",
+              "type": "string"
+            },
+            "order": {
+              "description": "Order of the custom field in the resource.",
+              "title": "Order",
+              "type": "integer"
+            },
+            "required": {
+              "description": "Whether the value is required for this custom field.",
+              "title": "Required",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "custom_field_id",
+            "custom_field",
+            "order",
+            "required"
+          ],
+          "title": "AttachedCustomField",
+          "type": "object"
+        },
+        "title": "Attached Custom Fields",
+        "type": "array"
+      },
+      "benefits": {
+        "description": "List of benefits granted by the product.",
+        "items": {
+          "anyOf": [
+            {
+              "description": "A benefit of type `custom`.\n\nUse it to grant any kind of benefit that doesn't fit in the other types.",
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "description": "Properties for a benefit of type `custom`.",
+                  "properties": {
+                    "note": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Private note to be shared with customers who have this benefit granted."
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "title": "Note"
+                    }
+                  },
+                  "required": [
+                    "note"
+                  ],
+                  "title": "BenefitCustomProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "custom",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitCustom",
+              "type": "object"
+            },
+            {
+              "description": "A benefit of type `discord`.\n\nUse it to automatically invite your backers to a Discord server.",
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "description": "Properties for a benefit of type `discord`.",
+                  "properties": {
+                    "guild_id": {
+                      "description": "The ID of the Discord server.",
+                      "title": "Guild Id",
+                      "type": "string"
+                    },
+                    "guild_token": {
+                      "readOnly": true,
+                      "title": "Guild Token",
+                      "type": "string"
+                    },
+                    "kick_member": {
+                      "description": "Whether to kick the member from the Discord server on revocation.",
+                      "title": "Kick Member",
+                      "type": "boolean"
+                    },
+                    "role_id": {
+                      "description": "The ID of the Discord role to grant.",
+                      "title": "Role Id",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guild_id",
+                    "role_id",
+                    "kick_member",
+                    "guild_token"
+                  ],
+                  "title": "BenefitDiscordProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "discord",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitDiscord",
+              "type": "object"
+            },
+            {
+              "description": "A benefit of type `github_repository`.\n\nUse it to automatically invite your backers to a private GitHub repository.",
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "description": "Properties for a benefit of type `github_repository`.",
+                  "properties": {
+                    "permission": {
+                      "description": "The permission level to grant. Read more about roles and their permissions on [GitHub documentation](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role).",
+                      "enum": [
+                        "pull",
+                        "triage",
+                        "push",
+                        "maintain",
+                        "admin"
+                      ],
+                      "title": "Permission",
+                      "type": "string"
+                    },
+                    "repository_name": {
+                      "description": "The name of the repository.",
+                      "examples": [
+                        "private_repo"
+                      ],
+                      "title": "Repository Name",
+                      "type": "string"
+                    },
+                    "repository_owner": {
+                      "description": "The owner of the repository.",
+                      "examples": [
+                        "polarsource"
+                      ],
+                      "title": "Repository Owner",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "repository_owner",
+                    "repository_name",
+                    "permission"
+                  ],
+                  "title": "BenefitGitHubRepositoryProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "github_repository",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitGitHubRepository",
+              "type": "object"
+            },
+            {
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "properties": {
+                    "archived": {
+                      "additionalProperties": {
+                        "type": "boolean"
+                      },
+                      "propertyNames": {
+                        "format": "uuid4"
+                      },
+                      "title": "Archived",
+                      "type": "object"
+                    },
+                    "files": {
+                      "items": {
+                        "format": "uuid4",
+                        "type": "string"
+                      },
+                      "title": "Files",
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "archived",
+                    "files"
+                  ],
+                  "title": "BenefitDownloadablesProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "downloadables",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitDownloadables",
+              "type": "object"
+            },
+            {
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "properties": {
+                    "activations": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "enable_customer_admin": {
+                              "title": "Enable Customer Admin",
+                              "type": "boolean"
+                            },
+                            "limit": {
+                              "title": "Limit",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "enable_customer_admin"
+                          ],
+                          "title": "BenefitLicenseKeyActivationProperties",
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "expires": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "timeframe": {
+                              "enum": [
+                                "year",
+                                "month",
+                                "day"
+                              ],
+                              "title": "Timeframe",
+                              "type": "string"
+                            },
+                            "ttl": {
+                              "exclusiveMinimum": 0.0,
+                              "title": "Ttl",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "ttl",
+                            "timeframe"
+                          ],
+                          "title": "BenefitLicenseKeyExpirationProperties",
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "limit_usage": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "title": "Limit Usage"
+                    },
+                    "prefix": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "title": "Prefix"
+                    }
+                  },
+                  "required": [
+                    "prefix",
+                    "expires",
+                    "activations",
+                    "limit_usage"
+                  ],
+                  "title": "BenefitLicenseKeysProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "license_keys",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitLicenseKeys",
+              "type": "object"
+            },
+            {
+              "description": "A benefit of type `meter_unit`.\n\nUse it to grant a number of units on a specific meter.",
+              "properties": {
+                "created_at": {
+                  "description": "Creation timestamp of the object.",
+                  "format": "date-time",
+                  "title": "Created At",
+                  "type": "string"
+                },
+                "deletable": {
+                  "description": "Whether the benefit is deletable.",
+                  "title": "Deletable",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "The description of the benefit.",
+                  "title": "Description",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "The ID of the benefit.",
+                  "format": "uuid4",
+                  "title": "Id",
+                  "type": "string"
+                },
+                "metadata": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Metadata",
+                  "type": "object"
+                },
+                "modified_at": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Last modification timestamp of the object.",
+                  "title": "Modified At"
+                },
+                "organization_id": {
+                  "description": "The ID of the organization owning the benefit.",
+                  "format": "uuid4",
+                  "title": "Organization Id",
+                  "type": "string"
+                },
+                "properties": {
+                  "description": "Properties for a benefit of type `meter_unit`.",
+                  "properties": {
+                    "meter_id": {
+                      "format": "uuid4",
+                      "title": "Meter Id",
+                      "type": "string"
+                    },
+                    "rollover": {
+                      "title": "Rollover",
+                      "type": "boolean"
+                    },
+                    "units": {
+                      "title": "Units",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "units",
+                    "rollover",
+                    "meter_id"
+                  ],
+                  "title": "BenefitMeterCreditProperties",
+                  "type": "object"
+                },
+                "selectable": {
+                  "description": "Whether the benefit is selectable when creating a product.",
+                  "title": "Selectable",
+                  "type": "boolean"
+                },
+                "type": {
+                  "const": "meter_credit",
+                  "title": "Type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "created_at",
+                "modified_at",
+                "type",
+                "description",
+                "selectable",
+                "deletable",
+                "organization_id",
+                "metadata",
+                "properties"
+              ],
+              "title": "BenefitMeterCredit",
+              "type": "object"
+            }
+          ],
+          "title": "Benefit"
+        },
+        "title": "Benefits",
+        "type": "array"
+      },
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The description of the product.",
+        "title": "Description"
+      },
+      "id": {
+        "description": "The ID of the object.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "is_archived": {
+        "description": "Whether the product is archived and no longer available.",
+        "title": "Is Archived",
+        "type": "boolean"
+      },
+      "is_recurring": {
+        "description": "Whether the product is a subscription.",
+        "title": "Is Recurring",
+        "type": "boolean"
+      },
+      "medias": {
+        "description": "List of medias associated to the product.",
+        "items": {
+          "description": "File to be used as a product media file.",
+          "properties": {
+            "checksum_etag": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Checksum Etag"
+            },
+            "checksum_sha256_base64": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Checksum Sha256 Base64"
+            },
+            "checksum_sha256_hex": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Checksum Sha256 Hex"
+            },
+            "created_at": {
+              "format": "date-time",
+              "title": "Created At",
+              "type": "string"
+            },
+            "id": {
+              "description": "The ID of the object.",
+              "format": "uuid4",
+              "title": "Id",
+              "type": "string"
+            },
+            "is_uploaded": {
+              "title": "Is Uploaded",
+              "type": "boolean"
+            },
+            "last_modified_at": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Last Modified At"
+            },
+            "mime_type": {
+              "title": "Mime Type",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "organization_id": {
+              "format": "uuid4",
+              "title": "Organization Id",
+              "type": "string"
+            },
+            "path": {
+              "title": "Path",
+              "type": "string"
+            },
+            "public_url": {
+              "title": "Public Url",
+              "type": "string"
+            },
+            "service": {
+              "title": "Service",
+              "type": "string"
+            },
+            "size": {
+              "title": "Size",
+              "type": "integer"
+            },
+            "size_readable": {
+              "title": "Size Readable",
+              "type": "string"
+            },
+            "storage_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Storage Version"
+            },
+            "version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Version"
+            }
+          },
+          "required": [
+            "id",
+            "organization_id",
+            "name",
+            "path",
+            "mime_type",
+            "size",
+            "storage_version",
+            "checksum_etag",
+            "checksum_sha256_base64",
+            "checksum_sha256_hex",
+            "last_modified_at",
+            "version",
+            "service",
+            "is_uploaded",
+            "created_at",
+            "size_readable",
+            "public_url"
+          ],
+          "title": "ProductMediaFileRead",
+          "type": "object"
+        },
+        "title": "Medias",
+        "type": "array"
+      },
+      "metadata": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Metadata",
+        "type": "object"
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "name": {
+        "description": "The name of the product.",
+        "title": "Name",
+        "type": "string"
+      },
+      "organization_id": {
+        "description": "The ID of the organization owning the product.",
+        "format": "uuid4",
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "prices": {
+        "description": "List of prices for this product.",
+        "items": {
+          "oneOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "custom": "#/components/schemas/LegacyRecurringProductPriceCustom",
+                  "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed",
+                  "free": "#/components/schemas/LegacyRecurringProductPriceFree"
+                },
+                "propertyName": "amount_type"
+              },
+              "oneOf": [
+                {
+                  "description": "A recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "fixed",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "legacy": {
+                      "const": true,
+                      "readOnly": true,
+                      "title": "Legacy",
+                      "type": "boolean"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "price_amount": {
+                      "description": "The price in cents.",
+                      "title": "Price Amount",
+                      "type": "integer"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "description": "The recurring interval of the price.",
+                      "enum": [
+                        "day",
+                        "week",
+                        "month",
+                        "year"
+                      ],
+                      "title": "SubscriptionRecurringInterval",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "recurring",
+                      "description": "The type of the price.",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "price_amount",
+                    "legacy"
+                  ],
+                  "title": "LegacyRecurringProductPriceFixed",
+                  "type": "object"
+                },
+                {
+                  "description": "A pay-what-you-want recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "custom",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "legacy": {
+                      "const": true,
+                      "readOnly": true,
+                      "title": "Legacy",
+                      "type": "boolean"
+                    },
+                    "maximum_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The maximum amount the customer can pay.",
+                      "title": "Maximum Amount"
+                    },
+                    "minimum_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The minimum amount the customer can pay.",
+                      "title": "Minimum Amount"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "preset_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The initial amount shown to the customer.",
+                      "title": "Preset Amount"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "description": "The recurring interval of the price.",
+                      "enum": [
+                        "day",
+                        "week",
+                        "month",
+                        "year"
+                      ],
+                      "title": "SubscriptionRecurringInterval",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "recurring",
+                      "description": "The type of the price.",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "minimum_amount",
+                    "maximum_amount",
+                    "preset_amount",
+                    "legacy"
+                  ],
+                  "title": "LegacyRecurringProductPriceCustom",
+                  "type": "object"
+                },
+                {
+                  "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "free",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "legacy": {
+                      "const": true,
+                      "readOnly": true,
+                      "title": "Legacy",
+                      "type": "boolean"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "description": "The recurring interval of the price.",
+                      "enum": [
+                        "day",
+                        "week",
+                        "month",
+                        "year"
+                      ],
+                      "title": "SubscriptionRecurringInterval",
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "recurring",
+                      "description": "The type of the price.",
+                      "title": "Type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "legacy"
+                  ],
+                  "title": "LegacyRecurringProductPriceFree",
+                  "type": "object"
+                }
+              ]
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "custom": "#/components/schemas/ProductPriceCustom",
+                  "fixed": "#/components/schemas/ProductPriceFixed",
+                  "free": "#/components/schemas/ProductPriceFree",
+                  "metered_unit": "#/components/schemas/ProductPriceMeteredUnit",
+                  "seat_based": "#/components/schemas/ProductPriceSeatBased"
+                },
+                "propertyName": "amount_type"
+              },
+              "oneOf": [
+                {
+                  "description": "A fixed price for a product.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "fixed",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "price_amount": {
+                      "description": "The price in cents.",
+                      "title": "Price Amount",
+                      "type": "integer"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                          ],
+                          "title": "SubscriptionRecurringInterval",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "deprecated": true
+                    },
+                    "type": {
+                      "deprecated": true,
+                      "enum": [
+                        "one_time",
+                        "recurring"
+                      ],
+                      "title": "ProductPriceType",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "price_amount"
+                  ],
+                  "title": "ProductPriceFixed",
+                  "type": "object"
+                },
+                {
+                  "description": "A pay-what-you-want price for a product.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "custom",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "maximum_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The maximum amount the customer can pay.",
+                      "title": "Maximum Amount"
+                    },
+                    "minimum_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The minimum amount the customer can pay.",
+                      "title": "Minimum Amount"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "preset_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The initial amount shown to the customer.",
+                      "title": "Preset Amount"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                          ],
+                          "title": "SubscriptionRecurringInterval",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "deprecated": true
+                    },
+                    "type": {
+                      "deprecated": true,
+                      "enum": [
+                        "one_time",
+                        "recurring"
+                      ],
+                      "title": "ProductPriceType",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "minimum_amount",
+                    "maximum_amount",
+                    "preset_amount"
+                  ],
+                  "title": "ProductPriceCustom",
+                  "type": "object"
+                },
+                {
+                  "description": "A free price for a product.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "free",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                          ],
+                          "title": "SubscriptionRecurringInterval",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "deprecated": true
+                    },
+                    "type": {
+                      "deprecated": true,
+                      "enum": [
+                        "one_time",
+                        "recurring"
+                      ],
+                      "title": "ProductPriceType",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval"
+                  ],
+                  "title": "ProductPriceFree",
+                  "type": "object"
+                },
+                {
+                  "description": "A seat-based price for a product.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "seat_based",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "price_per_seat": {
+                      "description": "The price per seat in cents.",
+                      "title": "Price Per Seat",
+                      "type": "integer"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                          ],
+                          "title": "SubscriptionRecurringInterval",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "deprecated": true
+                    },
+                    "type": {
+                      "deprecated": true,
+                      "enum": [
+                        "one_time",
+                        "recurring"
+                      ],
+                      "title": "ProductPriceType",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "price_per_seat"
+                  ],
+                  "title": "ProductPriceSeatBased",
+                  "type": "object"
+                },
+                {
+                  "description": "A metered, usage-based, price for a product, with a fixed unit price.",
+                  "properties": {
+                    "amount_type": {
+                      "const": "metered_unit",
+                      "title": "Amount Type",
+                      "type": "string"
+                    },
+                    "cap_amount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The maximum amount in cents that can be charged, regardless of the number of units consumed.",
+                      "title": "Cap Amount"
+                    },
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The ID of the price.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": "string"
+                    },
+                    "is_archived": {
+                      "description": "Whether the price is archived and no longer available.",
+                      "title": "Is Archived",
+                      "type": "boolean"
+                    },
+                    "meter": {
+                      "description": "A meter associated to a metered price.",
+                      "properties": {
+                        "id": {
+                          "description": "The ID of the object.",
+                          "format": "uuid4",
+                          "title": "Id",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the meter.",
+                          "title": "Name",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "title": "ProductPriceMeter",
+                      "type": "object"
+                    },
+                    "meter_id": {
+                      "description": "The ID of the meter associated to the price.",
+                      "format": "uuid4",
+                      "title": "Meter Id",
+                      "type": "string"
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "price_currency": {
+                      "description": "The currency.",
+                      "title": "Price Currency",
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "description": "The ID of the product owning the price.",
+                      "format": "uuid4",
+                      "title": "Product Id",
+                      "type": "string"
+                    },
+                    "recurring_interval": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                          ],
+                          "title": "SubscriptionRecurringInterval",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "deprecated": true
+                    },
+                    "type": {
+                      "deprecated": true,
+                      "enum": [
+                        "one_time",
+                        "recurring"
+                      ],
+                      "title": "ProductPriceType",
+                      "type": "string"
+                    },
+                    "unit_amount": {
+                      "description": "The price per unit in cents.",
+                      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                      "title": "Unit Amount",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created_at",
+                    "modified_at",
+                    "id",
+                    "amount_type",
+                    "is_archived",
+                    "product_id",
+                    "type",
+                    "recurring_interval",
+                    "price_currency",
+                    "unit_amount",
+                    "cap_amount",
+                    "meter_id",
+                    "meter"
+                  ],
+                  "title": "ProductPriceMeteredUnit",
+                  "type": "object"
+                }
+              ]
+            }
+          ]
+        },
+        "title": "Prices",
+        "type": "array"
+      },
+      "recurring_interval": {
+        "anyOf": [
+          {
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ],
+            "title": "SubscriptionRecurringInterval",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
+      },
+      "trial_interval": {
+        "anyOf": [
+          {
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ],
+            "title": "TrialInterval",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The interval unit for the trial period."
+      },
+      "trial_interval_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The number of interval units for the trial period.",
+        "title": "Trial Interval Count"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "modified_at",
+      "trial_interval",
+      "trial_interval_count",
+      "name",
+      "description",
+      "recurring_interval",
+      "is_recurring",
+      "is_archived",
+      "organization_id",
+      "metadata",
+      "prices",
+      "benefits",
+      "medias",
+      "attached_custom_fields"
+    ],
+    "title": "Product",
+    "type": "object"
+  },
+  "stream": "products",
+  "tap_stream_id": "products"
+}
