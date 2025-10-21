@@ -1469,6 +1469,9 @@
               {
                 "properties": {
                   "amount": {
+                    "examples": [
+                      1000
+                    ],
                     "title": "Amount",
                     "type": "integer"
                   },
@@ -1491,6 +1494,9 @@
                     "type": "string"
                   },
                   "currency": {
+                    "examples": [
+                      "usd"
+                    ],
                     "title": "Currency",
                     "type": "string"
                   },
@@ -1636,6 +1642,9 @@
               {
                 "properties": {
                   "amount": {
+                    "examples": [
+                      1000
+                    ],
                     "title": "Amount",
                     "type": "integer"
                   },
@@ -1658,6 +1667,9 @@
                     "type": "string"
                   },
                   "currency": {
+                    "examples": [
+                      "usd"
+                    ],
                     "title": "Currency",
                     "type": "string"
                   },
@@ -1808,6 +1820,10 @@
               {
                 "properties": {
                   "basis_points": {
+                    "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+                    "examples": [
+                      1000
+                    ],
                     "title": "Basis Points",
                     "type": "integer"
                   },
@@ -1970,6 +1986,10 @@
               {
                 "properties": {
                   "basis_points": {
+                    "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+                    "examples": [
+                      1000
+                    ],
                     "title": "Basis Points",
                     "type": "integer"
                   },
@@ -3196,11 +3216,6 @@
                       "title": "Price Currency",
                       "type": "string"
                     },
-                    "price_per_seat": {
-                      "description": "The price per seat in cents.",
-                      "title": "Price Per Seat",
-                      "type": "integer"
-                    },
                     "product_id": {
                       "description": "The ID of the product owning the price.",
                       "format": "uuid4",
@@ -3225,6 +3240,59 @@
                       ],
                       "deprecated": true
                     },
+                    "seat_tiers": {
+                      "description": "List of pricing tiers for seat-based pricing.",
+                      "properties": {
+                        "tiers": {
+                          "description": "List of pricing tiers",
+                          "items": {
+                            "description": "A pricing tier for seat-based pricing.",
+                            "properties": {
+                              "max_seats": {
+                                "anyOf": [
+                                  {
+                                    "minimum": 1.0,
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ],
+                                "description": "Maximum number of seats (inclusive). None for unlimited.",
+                                "title": "Max Seats"
+                              },
+                              "min_seats": {
+                                "description": "Minimum number of seats (inclusive)",
+                                "minimum": 1.0,
+                                "title": "Min Seats",
+                                "type": "integer"
+                              },
+                              "price_per_seat": {
+                                "description": "Price per seat in cents for this tier",
+                                "maximum": 99999999.0,
+                                "minimum": 50.0,
+                                "title": "Price Per Seat",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "min_seats",
+                              "price_per_seat"
+                            ],
+                            "title": "ProductPriceSeatTier",
+                            "type": "object"
+                          },
+                          "minItems": 1,
+                          "title": "Tiers",
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "tiers"
+                      ],
+                      "title": "ProductPriceSeatTiers",
+                      "type": "object"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3245,7 +3313,7 @@
                     "type",
                     "recurring_interval",
                     "price_currency",
-                    "price_per_seat"
+                    "seat_tiers"
                   ],
                   "title": "ProductPriceSeatBased",
                   "type": "object"
@@ -5766,11 +5834,6 @@
                           "title": "Price Currency",
                           "type": "string"
                         },
-                        "price_per_seat": {
-                          "description": "The price per seat in cents.",
-                          "title": "Price Per Seat",
-                          "type": "integer"
-                        },
                         "product_id": {
                           "description": "The ID of the product owning the price.",
                           "format": "uuid4",
@@ -5795,6 +5858,59 @@
                           ],
                           "deprecated": true
                         },
+                        "seat_tiers": {
+                          "description": "List of pricing tiers for seat-based pricing.",
+                          "properties": {
+                            "tiers": {
+                              "description": "List of pricing tiers",
+                              "items": {
+                                "description": "A pricing tier for seat-based pricing.",
+                                "properties": {
+                                  "max_seats": {
+                                    "anyOf": [
+                                      {
+                                        "minimum": 1.0,
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "description": "Maximum number of seats (inclusive). None for unlimited.",
+                                    "title": "Max Seats"
+                                  },
+                                  "min_seats": {
+                                    "description": "Minimum number of seats (inclusive)",
+                                    "minimum": 1.0,
+                                    "title": "Min Seats",
+                                    "type": "integer"
+                                  },
+                                  "price_per_seat": {
+                                    "description": "Price per seat in cents for this tier",
+                                    "maximum": 99999999.0,
+                                    "minimum": 50.0,
+                                    "title": "Price Per Seat",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "min_seats",
+                                  "price_per_seat"
+                                ],
+                                "title": "ProductPriceSeatTier",
+                                "type": "object"
+                              },
+                              "minItems": 1,
+                              "title": "Tiers",
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "tiers"
+                          ],
+                          "title": "ProductPriceSeatTiers",
+                          "type": "object"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -5815,7 +5931,7 @@
                         "type",
                         "recurring_interval",
                         "price_currency",
-                        "price_per_seat"
+                        "seat_tiers"
                       ],
                       "title": "ProductPriceSeatBased",
                       "type": "object"

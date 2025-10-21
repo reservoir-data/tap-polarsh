@@ -185,6 +185,103 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "order_confirmation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_cancellation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_confirmation"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_cycled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_past_due"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_revoked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_uncanceled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_updated"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -216,6 +313,55 @@
         "format": "date-time",
         "title": "Created At",
         "type": "string"
+      },
+      "customer_email_settings": {
+        "description": "Settings related to customer emails",
+        "properties": {
+          "order_confirmation": {
+            "title": "Order Confirmation",
+            "type": "boolean"
+          },
+          "subscription_cancellation": {
+            "title": "Subscription Cancellation",
+            "type": "boolean"
+          },
+          "subscription_confirmation": {
+            "title": "Subscription Confirmation",
+            "type": "boolean"
+          },
+          "subscription_cycled": {
+            "title": "Subscription Cycled",
+            "type": "boolean"
+          },
+          "subscription_past_due": {
+            "title": "Subscription Past Due",
+            "type": "boolean"
+          },
+          "subscription_revoked": {
+            "title": "Subscription Revoked",
+            "type": "boolean"
+          },
+          "subscription_uncanceled": {
+            "title": "Subscription Uncanceled",
+            "type": "boolean"
+          },
+          "subscription_updated": {
+            "title": "Subscription Updated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "order_confirmation",
+          "subscription_cancellation",
+          "subscription_confirmation",
+          "subscription_cycled",
+          "subscription_past_due",
+          "subscription_revoked",
+          "subscription_uncanceled",
+          "subscription_updated"
+        ],
+        "title": "OrganizationCustomerEmailSettings",
+        "type": "object"
       },
       "details_submitted_at": {
         "anyOf": [
@@ -421,7 +567,8 @@
       "details_submitted_at",
       "feature_settings",
       "subscription_settings",
-      "notification_settings"
+      "notification_settings",
+      "customer_email_settings"
     ],
     "title": "Organization",
     "type": "object"

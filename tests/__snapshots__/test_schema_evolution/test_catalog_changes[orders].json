@@ -249,6 +249,15 @@
     {
       "breadcrumb": [
         "properties",
+        "platform_fee_amount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customer"
       ],
       "metadata": {
@@ -1994,6 +2003,9 @@
               {
                 "properties": {
                   "amount": {
+                    "examples": [
+                      1000
+                    ],
                     "title": "Amount",
                     "type": "integer"
                   },
@@ -2016,6 +2028,9 @@
                     "type": "string"
                   },
                   "currency": {
+                    "examples": [
+                      "usd"
+                    ],
                     "title": "Currency",
                     "type": "string"
                   },
@@ -2161,6 +2176,9 @@
               {
                 "properties": {
                   "amount": {
+                    "examples": [
+                      1000
+                    ],
                     "title": "Amount",
                     "type": "integer"
                   },
@@ -2183,6 +2201,9 @@
                     "type": "string"
                   },
                   "currency": {
+                    "examples": [
+                      "usd"
+                    ],
                     "title": "Currency",
                     "type": "string"
                   },
@@ -2333,6 +2354,10 @@
               {
                 "properties": {
                   "basis_points": {
+                    "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+                    "examples": [
+                      1000
+                    ],
                     "title": "Basis Points",
                     "type": "integer"
                   },
@@ -2495,6 +2520,10 @@
               {
                 "properties": {
                   "basis_points": {
+                    "description": "Discount percentage in basis points. A basis point is 1/100th of a percent. For example, 1000 basis points equals a 10% discount.",
+                    "examples": [
+                      1000
+                    ],
                     "title": "Basis Points",
                     "type": "integer"
                   },
@@ -2829,6 +2858,11 @@
         "title": "Paid",
         "type": "boolean"
       },
+      "platform_fee_amount": {
+        "description": "Platform fee amount in cents.",
+        "title": "Platform Fee Amount",
+        "type": "integer"
+      },
       "product": {
         "properties": {
           "created_at": {
@@ -3006,6 +3040,9 @@
             "properties": {
               "amount": {
                 "description": "The amount of the subscription.",
+                "examples": [
+                  10000
+                ],
                 "title": "Amount",
                 "type": "integer"
               },
@@ -3047,6 +3084,9 @@
               },
               "currency": {
                 "description": "The currency of the subscription.",
+                "examples": [
+                  "usd"
+                ],
                 "title": "Currency",
                 "type": "string"
               },
@@ -3199,6 +3239,9 @@
                   "month",
                   "year"
                 ],
+                "examples": [
+                  "month"
+                ],
                 "title": "SubscriptionRecurringInterval",
                 "type": "string"
               },
@@ -3225,6 +3268,9 @@
                   "past_due",
                   "canceled",
                   "unpaid"
+                ],
+                "examples": [
+                  "active"
                 ],
                 "title": "SubscriptionStatus",
                 "type": "string"
@@ -3350,6 +3396,7 @@
       "subscription_id",
       "checkout_id",
       "metadata",
+      "platform_fee_amount",
       "customer",
       "user_id",
       "product",
