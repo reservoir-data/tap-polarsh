@@ -35,7 +35,7 @@ dynamic = [
 ]
 dependencies = [
   "requests~=2.31",
-  "singer-sdk~=0.50.2",
+  "singer-sdk~=0.51.0",
   "typing-extensions>=4.14.1; python_full_version<'3.12'",
 ]
 urls.Documentation = "https://github.com/reservoir-data/tap-polarsh#readme"
@@ -63,6 +63,11 @@ typing = [
 
 [tool.hatch.version]
 source = "vcs"
+
+[tool.uv]
+prerelease = "allow"
+preview = true
+required-version = ">=0.5.19"
 
 [tool.ruff]
 line-length = 88
@@ -154,8 +159,3 @@ warn_no_return = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
-
-[tool.uv]
-prerelease = "allow"
-preview = true
-required-version = ">=0.5.19"
