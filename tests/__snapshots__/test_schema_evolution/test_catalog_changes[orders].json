@@ -186,6 +186,15 @@
     {
       "breadcrumb": [
         "properties",
+        "seats"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customer_id"
       ],
       "metadata": {
@@ -428,138 +437,6 @@
     {
       "breadcrumb": [
         "properties",
-        "product",
-        "properties",
-        "metadata"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "created_at"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "modified_at"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "trial_interval"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "trial_interval_count"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "name"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "description"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "recurring_interval"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "is_recurring"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "is_archived"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "product",
-        "properties",
-        "organization_id"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "discount"
       ],
       "metadata": {
@@ -579,6 +456,15 @@
       "breadcrumb": [
         "properties",
         "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
       ],
       "metadata": {
         "inclusion": "available"
@@ -1996,6 +1882,11 @@
         "title": "Customer Id",
         "type": "string"
       },
+      "description": {
+        "description": "A summary description of the order.",
+        "title": "Description",
+        "type": "string"
+      },
       "discount": {
         "anyOf": [
           {
@@ -2864,155 +2755,182 @@
         "type": "integer"
       },
       "product": {
-        "properties": {
-          "created_at": {
-            "description": "Creation timestamp of the object.",
-            "format": "date-time",
-            "title": "Created At",
-            "type": "string"
-          },
-          "description": {
-            "anyOf": [
-              {
+        "anyOf": [
+          {
+            "properties": {
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
                 "type": "string"
               },
-              {
-                "type": "null"
+              "description": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The description of the product.",
+                "title": "Description"
+              },
+              "id": {
+                "description": "The ID of the object.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": "string"
+              },
+              "is_archived": {
+                "description": "Whether the product is archived and no longer available.",
+                "title": "Is Archived",
+                "type": "boolean"
+              },
+              "is_recurring": {
+                "description": "Whether the product is a subscription.",
+                "title": "Is Recurring",
+                "type": "boolean"
+              },
+              "metadata": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "title": "Metadata",
+                "type": "object"
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "name": {
+                "description": "The name of the product.",
+                "title": "Name",
+                "type": "string"
+              },
+              "organization_id": {
+                "description": "The ID of the organization owning the product.",
+                "format": "uuid4",
+                "title": "Organization Id",
+                "type": "string"
+              },
+              "recurring_interval": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "day",
+                      "week",
+                      "month",
+                      "year"
+                    ],
+                    "title": "SubscriptionRecurringInterval",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+              },
+              "recurring_interval_count": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. None for one-time products.",
+                "title": "Recurring Interval Count"
+              },
+              "trial_interval": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "day",
+                      "week",
+                      "month",
+                      "year"
+                    ],
+                    "title": "TrialInterval",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The interval unit for the trial period."
+              },
+              "trial_interval_count": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The number of interval units for the trial period.",
+                "title": "Trial Interval Count"
               }
-            ],
-            "description": "The description of the product.",
-            "title": "Description"
-          },
-          "id": {
-            "description": "The ID of the object.",
-            "format": "uuid4",
-            "title": "Id",
-            "type": "string"
-          },
-          "is_archived": {
-            "description": "Whether the product is archived and no longer available.",
-            "title": "Is Archived",
-            "type": "boolean"
-          },
-          "is_recurring": {
-            "description": "Whether the product is a subscription.",
-            "title": "Is Recurring",
-            "type": "boolean"
-          },
-          "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
             },
-            "title": "Metadata",
+            "required": [
+              "metadata",
+              "id",
+              "created_at",
+              "modified_at",
+              "trial_interval",
+              "trial_interval_count",
+              "name",
+              "description",
+              "recurring_interval",
+              "recurring_interval_count",
+              "is_recurring",
+              "is_archived",
+              "organization_id"
+            ],
+            "title": "OrderProduct",
             "type": "object"
           },
-          "modified_at": {
-            "anyOf": [
-              {
-                "format": "date-time",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Last modification timestamp of the object.",
-            "title": "Modified At"
-          },
-          "name": {
-            "description": "The name of the product.",
-            "title": "Name",
-            "type": "string"
-          },
-          "organization_id": {
-            "description": "The ID of the organization owning the product.",
-            "format": "uuid4",
-            "title": "Organization Id",
-            "type": "string"
-          },
-          "recurring_interval": {
-            "anyOf": [
-              {
-                "enum": [
-                  "day",
-                  "week",
-                  "month",
-                  "year"
-                ],
-                "title": "SubscriptionRecurringInterval",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
-          },
-          "trial_interval": {
-            "anyOf": [
-              {
-                "enum": [
-                  "day",
-                  "week",
-                  "month",
-                  "year"
-                ],
-                "title": "TrialInterval",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The interval unit for the trial period."
-          },
-          "trial_interval_count": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The number of interval units for the trial period.",
-            "title": "Trial Interval Count"
+          {
+            "type": "null"
           }
-        },
-        "required": [
-          "metadata",
-          "id",
-          "created_at",
-          "modified_at",
-          "trial_interval",
-          "trial_interval_count",
-          "name",
-          "description",
-          "recurring_interval",
-          "is_recurring",
-          "is_archived",
-          "organization_id"
-        ],
-        "title": "OrderProduct",
-        "type": "object"
+        ]
       },
       "product_id": {
-        "format": "uuid4",
-        "title": "Product Id",
-        "type": "string"
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Product Id"
       },
       "refunded_amount": {
         "description": "Amount refunded in cents.",
@@ -3023,6 +2941,18 @@
         "description": "Sales tax refunded in cents.",
         "title": "Refunded Tax Amount",
         "type": "integer"
+      },
+      "seats": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Number of seats purchased (for seat-based one-time orders).",
+        "title": "Seats"
       },
       "status": {
         "enum": [
@@ -3245,6 +3175,23 @@
                 "title": "SubscriptionRecurringInterval",
                 "type": "string"
               },
+              "recurring_interval_count": {
+                "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on.",
+                "title": "Recurring Interval Count",
+                "type": "integer"
+              },
+              "seats": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The number of seats for seat-based subscriptions. None for non-seat subscriptions.",
+                "title": "Seats"
+              },
               "started_at": {
                 "anyOf": [
                   {
@@ -3310,6 +3257,7 @@
               "amount",
               "currency",
               "recurring_interval",
+              "recurring_interval_count",
               "status",
               "current_period_start",
               "current_period_end",
@@ -3402,7 +3350,8 @@
       "product",
       "discount",
       "subscription",
-      "items"
+      "items",
+      "description"
     ],
     "title": "Order",
     "type": "object"

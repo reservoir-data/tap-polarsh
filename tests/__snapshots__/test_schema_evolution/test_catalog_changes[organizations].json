@@ -60,6 +60,24 @@
     {
       "breadcrumb": [
         "properties",
+        "proration_behavior"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allow_customer_updates"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "email"
       ],
       "metadata": {
@@ -148,6 +166,28 @@
         "subscription_settings",
         "properties",
         "proration_behavior"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "benefit_revocation_grace_period"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "prevent_trial_abuse"
       ],
       "metadata": {
         "inclusion": "available"
@@ -296,6 +336,11 @@
   "replication_method": "FULL_TABLE",
   "schema": {
     "properties": {
+      "allow_customer_updates": {
+        "description": "Whether customers can update their subscriptions from the customer portal.",
+        "title": "Allow Customer Updates",
+        "type": "boolean"
+      },
       "avatar_url": {
         "anyOf": [
           {
@@ -398,10 +443,22 @@
                 "title": "Issue Funding Enabled",
                 "type": "boolean"
               },
+              "revops_enabled": {
+                "default": false,
+                "description": "If this organization has RevOps enabled",
+                "title": "Revops Enabled",
+                "type": "boolean"
+              },
               "seat_based_pricing_enabled": {
                 "default": false,
                 "description": "If this organization has seat-based pricing enabled",
                 "title": "Seat Based Pricing Enabled",
+                "type": "boolean"
+              },
+              "wallets_enabled": {
+                "default": false,
+                "description": "If this organization has Wallets enabled",
+                "title": "Wallets Enabled",
                 "type": "boolean"
               }
             },
@@ -415,7 +472,7 @@
         "description": "Organization feature settings"
       },
       "id": {
-        "description": "The organization ID.",
+        "description": "The ID of the object.",
         "format": "uuid4",
         "title": "Id",
         "type": "string"
@@ -456,6 +513,15 @@
         ],
         "title": "OrganizationNotificationSettings",
         "type": "object"
+      },
+      "proration_behavior": {
+        "description": "Proration behavior applied when customer updates their subscription from the portal.",
+        "enum": [
+          "invoice",
+          "prorate"
+        ],
+        "title": "SubscriptionProrationBehavior",
+        "type": "string"
       },
       "slug": {
         "description": "Unique organization slug in checkout, customer portal and credit card statements.",
@@ -505,11 +571,12 @@
         "enum": [
           "created",
           "onboarding_started",
-          "under_review",
+          "initial_review",
+          "ongoing_review",
           "denied",
           "active"
         ],
-        "title": "Status",
+        "title": "OrganizationStatus",
         "type": "string"
       },
       "subscription_settings": {
@@ -521,6 +588,14 @@
           },
           "allow_multiple_subscriptions": {
             "title": "Allow Multiple Subscriptions",
+            "type": "boolean"
+          },
+          "benefit_revocation_grace_period": {
+            "title": "Benefit Revocation Grace Period",
+            "type": "integer"
+          },
+          "prevent_trial_abuse": {
+            "title": "Prevent Trial Abuse",
             "type": "boolean"
           },
           "proration_behavior": {
@@ -535,7 +610,9 @@
         "required": [
           "allow_multiple_subscriptions",
           "allow_customer_updates",
-          "proration_behavior"
+          "proration_behavior",
+          "benefit_revocation_grace_period",
+          "prevent_trial_abuse"
         ],
         "title": "OrganizationSubscriptionSettings",
         "type": "object"
@@ -560,6 +637,8 @@
       "name",
       "slug",
       "avatar_url",
+      "proration_behavior",
+      "allow_customer_updates",
       "email",
       "website",
       "socials",
