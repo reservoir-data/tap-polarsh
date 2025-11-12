@@ -60,6 +60,15 @@
     {
       "breadcrumb": [
         "properties",
+        "recurring_interval_count"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "status"
       ],
       "metadata": {
@@ -178,6 +187,15 @@
       "breadcrumb": [
         "properties",
         "checkout_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "seats"
       ],
       "metadata": {
         "inclusion": "available"
@@ -463,6 +481,17 @@
         "product",
         "properties",
         "recurring_interval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "product",
+        "properties",
+        "recurring_interval_count"
       ],
       "metadata": {
         "inclusion": "available"
@@ -3270,7 +3299,7 @@
                               "price_per_seat": {
                                 "description": "Price per seat in cents for this tier",
                                 "maximum": 99999999.0,
-                                "minimum": 50.0,
+                                "minimum": 0.0,
                                 "title": "Price Per Seat",
                                 "type": "integer"
                               }
@@ -5888,7 +5917,7 @@
                                   "price_per_seat": {
                                     "description": "Price per seat in cents for this tier",
                                     "maximum": 99999999.0,
-                                    "minimum": 50.0,
+                                    "minimum": 0.0,
                                     "title": "Price Per Seat",
                                     "type": "integer"
                                   }
@@ -6100,7 +6129,19 @@
                 "type": "null"
               }
             ],
-            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
+            "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+          },
+          "recurring_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. None for one-time products.",
+            "title": "Recurring Interval Count"
           },
           "trial_interval": {
             "anyOf": [
@@ -6142,6 +6183,7 @@
           "name",
           "description",
           "recurring_interval",
+          "recurring_interval_count",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -6170,6 +6212,23 @@
         ],
         "title": "SubscriptionRecurringInterval",
         "type": "string"
+      },
+      "recurring_interval_count": {
+        "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on.",
+        "title": "Recurring Interval Count",
+        "type": "integer"
+      },
+      "seats": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The number of seats for seat-based subscriptions. None for non-seat subscriptions.",
+        "title": "Seats"
       },
       "started_at": {
         "anyOf": [
@@ -6232,6 +6291,7 @@
       "amount",
       "currency",
       "recurring_interval",
+      "recurring_interval_count",
       "status",
       "current_period_start",
       "current_period_end",

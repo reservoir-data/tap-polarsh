@@ -50,8 +50,7 @@ dev = [
 ]
 testing = [
   "deptry>=0.12",
-  "pytest>=8",
-  "pytest-subtests>=0.15",
+  "pytest>=9",
   "singer-sdk[testing]",
   "syrupy>=5",
 ]
@@ -117,6 +116,7 @@ DEP002 = [
 max_supported_python = "3.14"
 
 [tool.pytest.ini_options]
+minversion = "9.0"
 addopts = [
   "-vvv",
   "--durations=10",

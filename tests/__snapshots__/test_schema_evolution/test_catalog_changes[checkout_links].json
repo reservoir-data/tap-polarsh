@@ -2015,7 +2015,7 @@
                                     "price_per_seat": {
                                       "description": "Price per seat in cents for this tier",
                                       "maximum": 99999999.0,
-                                      "minimum": 50.0,
+                                      "minimum": 0.0,
                                       "title": "Price Per Seat",
                                       "type": "integer"
                                     }
@@ -2227,7 +2227,19 @@
                   "type": "null"
                 }
               ],
-              "description": "The recurring interval of the product. If `None`, the product is a one-time purchase.Note that the `day` and `week` values are for internal Polar staff use only."
+              "description": "The recurring interval of the product. If `None`, the product is a one-time purchase."
+            },
+            "recurring_interval_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. None for one-time products.",
+              "title": "Recurring Interval Count"
             },
             "trial_interval": {
               "anyOf": [
@@ -2270,6 +2282,7 @@
             "name",
             "description",
             "recurring_interval",
+            "recurring_interval_count",
             "is_recurring",
             "is_archived",
             "organization_id",
