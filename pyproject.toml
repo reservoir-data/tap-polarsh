@@ -103,13 +103,12 @@ lint.pydocstyle.convention = "google"
 mypy = "mypy"
 pytest = "pytest"
 tap-polarsh = "tap_polarsh"
+ty = "ty"
 types-requests = "requests"
 
 [tool.deptry.per_rule_ignores]
 DEP002 = [
-  "deptry",
-  "mypy",
-  "pytest",
+  "requests",
 ]
 
 [tool.pyproject-fmt]
