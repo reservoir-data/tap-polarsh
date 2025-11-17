@@ -52236,12 +52236,30 @@
             "$ref": "#/components/schemas/SubscriptionUpdateSeats"
           },
           {
+            "$ref": "#/components/schemas/SubscriptionUpdateBillingPeriod"
+          },
+          {
             "$ref": "#/components/schemas/SubscriptionCancel"
           },
           {
             "$ref": "#/components/schemas/SubscriptionRevoke"
           }
         ]
+      },
+      "SubscriptionUpdateBillingPeriod": {
+        "properties": {
+          "current_billing_period_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Current Billing Period End",
+            "description": "Set a new date for the end of the current billing period. The subscription will renew on this date. Needs to be later than the current value.\n\nIt is not possible to update the current billing period on a canceled subscription."
+          }
+        },
+        "type": "object",
+        "required": [
+          "current_billing_period_end"
+        ],
+        "title": "SubscriptionUpdateBillingPeriod"
       },
       "SubscriptionUpdateDiscount": {
         "properties": {
@@ -53923,6 +53941,11 @@
             "title": "Succeeded",
             "description": "Whether this event was successfully delivered. `null` if no delivery has been attempted."
           },
+          "skipped": {
+            "type": "boolean",
+            "title": "Skipped",
+            "description": "Whether this event was skipped because the webhook endpoint was disabled."
+          },
           "payload": {
             "anyOf": [
               {
@@ -53950,6 +53973,7 @@
           "created_at",
           "modified_at",
           "id",
+          "skipped",
           "payload",
           "type",
           "is_archived"
