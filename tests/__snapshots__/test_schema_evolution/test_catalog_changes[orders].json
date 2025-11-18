@@ -186,6 +186,15 @@
     {
       "breadcrumb": [
         "properties",
+        "receipt_number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "seats"
       ],
       "metadata": {
@@ -364,6 +373,17 @@
         "properties",
         "customer",
         "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
         "name"
       ],
       "metadata": {
@@ -397,6 +417,17 @@
         "properties",
         "customer",
         "properties",
+        "locale"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
         "organization_id"
       ],
       "metadata": {
@@ -420,15 +451,6 @@
         "customer",
         "properties",
         "avatar_url"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "user_id"
       ],
       "metadata": {
         "inclusion": "available"
@@ -474,6 +496,24 @@
       "breadcrumb": [
         "properties",
         "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "refundable_amount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "refundable_tax_amount"
       ],
       "metadata": {
         "inclusion": "available"
@@ -1283,12 +1323,16 @@
             "title": "Deleted At"
           },
           "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "The email address of the customer. This must be unique within the organization.",
-            "title": "Email",
-            "type": [
-              "string",
-              "null"
-            ]
+            "title": "Email"
           },
           "email_verified": {
             "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
@@ -1318,6 +1362,17 @@
               "string",
               "null"
             ]
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale"
           },
           "metadata": {
             "additionalProperties": {
@@ -1442,6 +1497,7 @@
                       "kr_brn",
                       "kz_bin",
                       "li_uid",
+                      "mk_vat",
                       "mx_rfc",
                       "my_frp",
                       "my_itn",
@@ -1483,6 +1539,14 @@
               }
             ],
             "title": "Tax Id"
+          },
+          "type": {
+            "description": "The type of customer: 'individual' for single users, 'team' for customers with multiple members.",
+            "title": "CustomerType",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -1490,9 +1554,8 @@
           "created_at",
           "modified_at",
           "metadata",
-          "external_id",
-          "email",
           "email_verified",
+          "type",
           "name",
           "billing_address",
           "tax_id",
@@ -1529,12 +1592,30 @@
               {
                 "properties": {
                   "amount": {
+                    "deprecated": true,
                     "examples": [
                       1000
                     ],
                     "title": "Amount",
                     "type": [
                       "integer",
+                      "null"
+                    ]
+                  },
+                  "amounts": {
+                    "additionalProperties": {
+                      "type": "integer"
+                    },
+                    "description": "Map of currency to fixed amount to discount from the total.",
+                    "examples": [
+                      {
+                        "eur": 900,
+                        "usd": 1000
+                      }
+                    ],
+                    "title": "Amounts",
+                    "type": [
+                      "object",
                       "null"
                     ]
                   },
@@ -1560,6 +1641,7 @@
                     ]
                   },
                   "currency": {
+                    "deprecated": true,
                     "examples": [
                       "usd"
                     ],
@@ -1704,6 +1786,7 @@
                   "type",
                   "amount",
                   "currency",
+                  "amounts",
                   "created_at",
                   "modified_at",
                   "id",
@@ -1725,12 +1808,30 @@
               {
                 "properties": {
                   "amount": {
+                    "deprecated": true,
                     "examples": [
                       1000
                     ],
                     "title": "Amount",
                     "type": [
                       "integer",
+                      "null"
+                    ]
+                  },
+                  "amounts": {
+                    "additionalProperties": {
+                      "type": "integer"
+                    },
+                    "description": "Map of currency to fixed amount to discount from the total.",
+                    "examples": [
+                      {
+                        "eur": 900,
+                        "usd": 1000
+                      }
+                    ],
+                    "title": "Amounts",
+                    "type": [
+                      "object",
                       "null"
                     ]
                   },
@@ -1756,6 +1857,7 @@
                     ]
                   },
                   "currency": {
+                    "deprecated": true,
                     "examples": [
                       "usd"
                     ],
@@ -1908,6 +2010,7 @@
                   "type",
                   "amount",
                   "currency",
+                  "amounts",
                   "created_at",
                   "modified_at",
                   "id",
@@ -2689,6 +2792,14 @@
                 ],
                 "description": "The number of interval units for the trial period.",
                 "title": "Trial Interval Count"
+              },
+              "visibility": {
+                "description": "The visibility of the product.",
+                "title": "ProductVisibility",
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
             },
             "required": [
@@ -2700,6 +2811,7 @@
               "trial_interval_count",
               "name",
               "description",
+              "visibility",
               "recurring_interval",
               "recurring_interval_count",
               "is_recurring",
@@ -2728,6 +2840,34 @@
           }
         ],
         "title": "Product Id"
+      },
+      "receipt_number": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The receipt number for this order. Set once the order is paid for organizations with receipts enabled. When set, a downloadable receipt PDF can be obtained via the receipt endpoint.",
+        "title": "Receipt Number"
+      },
+      "refundable_amount": {
+        "description": "Amount in cents that can still be refunded (net, before taxes). Accounts for any applied customer balance and previous refunds.",
+        "title": "Refundable Amount",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "refundable_tax_amount": {
+        "description": "Sales tax in cents that would be refunded if the full refundable amount is refunded.",
+        "title": "Refundable Tax Amount",
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "refunded_amount": {
         "description": "Amount refunded in cents.",
@@ -2833,17 +2973,13 @@
                 ]
               },
               "current_period_end": {
-                "anyOf": [
-                  {
-                    "format": "date-time",
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
                 "description": "The end timestamp of the current billing period.",
-                "title": "Current Period End"
+                "format": "date-time",
+                "title": "Current Period End",
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "current_period_start": {
                 "description": "The start timestamp of the current billing period.",
@@ -3131,15 +3267,6 @@
           "integer",
           "null"
         ]
-      },
-      "user_id": {
-        "deprecated": true,
-        "format": "uuid4",
-        "title": "User Id",
-        "type": [
-          "string",
-          "null"
-        ]
       }
     },
     "required": [
@@ -3163,6 +3290,7 @@
       "billing_address",
       "invoice_number",
       "is_invoice_generated",
+      "receipt_number",
       "customer_id",
       "product_id",
       "discount_id",
@@ -3172,12 +3300,13 @@
       "platform_fee_amount",
       "platform_fee_currency",
       "customer",
-      "user_id",
       "product",
       "discount",
       "subscription",
       "items",
-      "description"
+      "description",
+      "refundable_amount",
+      "refundable_tax_amount"
     ],
     "title": "Order",
     "type": "object"

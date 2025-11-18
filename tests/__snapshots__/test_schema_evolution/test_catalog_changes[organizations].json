@@ -123,6 +123,24 @@
     {
       "breadcrumb": [
         "properties",
+        "default_presentment_currency"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "default_tax_behavior"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "feature_settings"
       ],
       "metadata": {
@@ -144,17 +162,6 @@
         "subscription_settings",
         "properties",
         "allow_multiple_subscriptions"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "subscription_settings",
-        "properties",
-        "allow_customer_updates"
       ],
       "metadata": {
         "inclusion": "available"
@@ -188,6 +195,17 @@
         "subscription_settings",
         "properties",
         "prevent_trial_abuse"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "subscription_settings",
+        "properties",
+        "allow_customer_updates"
       ],
       "metadata": {
         "inclusion": "available"
@@ -282,6 +300,17 @@
         "properties",
         "customer_email_settings",
         "properties",
+        "subscription_cycled_after_trial"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
         "subscription_past_due"
       ],
       "metadata": {
@@ -293,7 +322,29 @@
         "properties",
         "customer_email_settings",
         "properties",
+        "subscription_renewal_reminder"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
         "subscription_revoked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_trial_conversion_reminder"
       ],
       "metadata": {
         "inclusion": "available"
@@ -392,6 +443,132 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "customer"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "customer",
+        "properties",
+        "allow_email_change"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "country"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "account_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "payout_account_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "checkout_payments"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "subscription_renewals"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "payouts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "refunds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "api_access"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "capabilities",
+        "properties",
+        "dashboard_access"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -406,6 +583,19 @@
   "replication_method": "FULL_TABLE",
   "schema": {
     "properties": {
+      "account_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "ID of the transactions account.",
+        "title": "Account Id"
+      },
       "allow_customer_updates": {
         "description": "Whether customers can update their subscriptions from the customer portal.",
         "title": "Allow Customer Updates",
@@ -425,6 +615,335 @@
         ],
         "description": "Avatar URL shown in checkout, customer portal, emails etc.",
         "title": "Avatar Url"
+      },
+      "capabilities": {
+        "description": "Capabilities currently granted to the organization.",
+        "properties": {
+          "api_access": {
+            "description": "Whether the organization can access the API.",
+            "title": "Api Access",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "checkout_payments": {
+            "description": "Whether the organization can accept new checkout payments.",
+            "title": "Checkout Payments",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "dashboard_access": {
+            "description": "Whether the organization can access the dashboard.",
+            "title": "Dashboard Access",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "payouts": {
+            "description": "Whether the organization can withdraw its balance.",
+            "title": "Payouts",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "refunds": {
+            "description": "Whether the organization can issue refunds.",
+            "title": "Refunds",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "subscription_renewals": {
+            "description": "Whether the organization can process subscription renewals.",
+            "title": "Subscription Renewals",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "checkout_payments",
+          "subscription_renewals",
+          "payouts",
+          "refunds",
+          "api_access",
+          "dashboard_access"
+        ],
+        "title": "OrganizationCapabilities",
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "country": {
+        "anyOf": [
+          {
+            "title": "CountryAlpha2",
+            "type": "string",
+            "x-speakeasy-enums": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BQ",
+              "BR",
+              "BS",
+              "BT",
+              "BV",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CU",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HM",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IR",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KP",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SY",
+              "SZ",
+              "TC",
+              "TD",
+              "TF",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "UM",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Two-letter country code (ISO 3166-1 alpha-2)."
       },
       "created_at": {
         "description": "Creation timestamp of the object.",
@@ -466,6 +985,13 @@
               "null"
             ]
           },
+          "subscription_cycled_after_trial": {
+            "title": "Subscription Cycled After Trial",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "subscription_past_due": {
             "title": "Subscription Past Due",
             "type": [
@@ -473,8 +999,22 @@
               "null"
             ]
           },
+          "subscription_renewal_reminder": {
+            "title": "Subscription Renewal Reminder",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "subscription_revoked": {
             "title": "Subscription Revoked",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "subscription_trial_conversion_reminder": {
+            "title": "Subscription Trial Conversion Reminder",
             "type": [
               "boolean",
               "null"
@@ -500,8 +1040,11 @@
           "subscription_cancellation",
           "subscription_confirmation",
           "subscription_cycled",
+          "subscription_cycled_after_trial",
           "subscription_past_due",
+          "subscription_renewal_reminder",
           "subscription_revoked",
+          "subscription_trial_conversion_reminder",
           "subscription_uncanceled",
           "subscription_updated"
         ],
@@ -514,6 +1057,22 @@
       "customer_portal_settings": {
         "description": "Settings related to the customer portal",
         "properties": {
+          "customer": {
+            "properties": {
+              "allow_email_change": {
+                "title": "Allow Email Change",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            },
+            "title": "CustomerPortalCustomerSettings",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
           "subscription": {
             "properties": {
               "update_plan": {
@@ -571,6 +1130,22 @@
           "null"
         ]
       },
+      "default_presentment_currency": {
+        "description": "Default presentment currency. Used as fallback in checkout and customer portal, if the customer's local currency is not available.",
+        "title": "Default Presentment Currency",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "default_tax_behavior": {
+        "description": "Default tax behavior applied on products.",
+        "title": "TaxBehaviorOption",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "details_submitted_at": {
         "anyOf": [
           {
@@ -581,7 +1156,7 @@
             "type": "null"
           }
         ],
-        "description": "When the business details were submitted.",
+        "description": "When the business details were submitted for review.",
         "title": "Details Submitted At"
       },
       "email": {
@@ -600,6 +1175,15 @@
         "anyOf": [
           {
             "properties": {
+              "checkout_localization_enabled": {
+                "default": false,
+                "description": "If this organization has checkout localization enabled",
+                "title": "Checkout Localization Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
               "issue_funding_enabled": {
                 "default": false,
                 "description": "If this organization has issue funding enabled",
@@ -618,10 +1202,25 @@
                   "null"
                 ]
               },
-              "revops_enabled": {
+              "overview_metrics": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Ordered list of metric slugs shown on the dashboard overview.",
+                "title": "Overview Metrics"
+              },
+              "reset_proration_behavior_enabled": {
                 "default": false,
-                "description": "If this organization has RevOps enabled",
-                "title": "Revops Enabled",
+                "description": "If this organization has access to reset proration behavior.",
+                "title": "Reset Proration Behavior Enabled",
                 "type": [
                   "boolean",
                   "null"
@@ -712,6 +1311,19 @@
           "object",
           "null"
         ]
+      },
+      "payout_account_id": {
+        "anyOf": [
+          {
+            "format": "uuid4",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "ID of the payout account.",
+        "title": "Payout Account Id"
       },
       "proration_behavior": {
         "description": "Proration behavior applied when customer updates their subscription from the portal.",
@@ -809,7 +1421,7 @@
             ]
           },
           "proration_behavior": {
-            "title": "SubscriptionProrationBehavior",
+            "title": "PublicSubscriptionProrationBehavior",
             "type": [
               "string",
               "null"
@@ -818,10 +1430,10 @@
         },
         "required": [
           "allow_multiple_subscriptions",
-          "allow_customer_updates",
           "proration_behavior",
           "benefit_revocation_grace_period",
-          "prevent_trial_abuse"
+          "prevent_trial_abuse",
+          "allow_customer_updates"
         ],
         "title": "OrganizationSubscriptionSettings",
         "type": [
@@ -856,11 +1468,16 @@
       "socials",
       "status",
       "details_submitted_at",
+      "default_presentment_currency",
+      "default_tax_behavior",
       "feature_settings",
       "subscription_settings",
       "notification_settings",
       "customer_email_settings",
-      "customer_portal_settings"
+      "customer_portal_settings",
+      "account_id",
+      "payout_account_id",
+      "capabilities"
     ],
     "title": "Organization",
     "type": "object"

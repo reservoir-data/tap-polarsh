@@ -328,6 +328,17 @@
         "properties",
         "customer",
         "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
         "name"
       ],
       "metadata": {
@@ -351,6 +362,17 @@
         "customer",
         "properties",
         "tax_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
+        "locale"
       ],
       "metadata": {
         "inclusion": "available"
@@ -470,6 +492,17 @@
         "product",
         "properties",
         "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "product",
+        "properties",
+        "visibility"
       ],
       "metadata": {
         "inclusion": "available"
@@ -613,6 +646,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "pending_update"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -686,17 +728,13 @@
         ]
       },
       "current_period_end": {
-        "anyOf": [
-          {
-            "format": "date-time",
-            "type": "string"
-          },
-          {
-            "type": "null"
-          }
-        ],
         "description": "The end timestamp of the current billing period.",
-        "title": "Current Period End"
+        "format": "date-time",
+        "title": "Current Period End",
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "current_period_start": {
         "description": "The start timestamp of the current billing period.",
@@ -1104,12 +1142,16 @@
             "title": "Deleted At"
           },
           "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "The email address of the customer. This must be unique within the organization.",
-            "title": "Email",
-            "type": [
-              "string",
-              "null"
-            ]
+            "title": "Email"
           },
           "email_verified": {
             "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
@@ -1139,6 +1181,17 @@
               "string",
               "null"
             ]
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Locale"
           },
           "metadata": {
             "additionalProperties": {
@@ -1263,6 +1316,7 @@
                       "kr_brn",
                       "kz_bin",
                       "li_uid",
+                      "mk_vat",
                       "mx_rfc",
                       "my_frp",
                       "my_itn",
@@ -1304,6 +1358,14 @@
               }
             ],
             "title": "Tax Id"
+          },
+          "type": {
+            "description": "The type of customer: 'individual' for single users, 'team' for customers with multiple members.",
+            "title": "CustomerType",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -1311,9 +1373,8 @@
           "created_at",
           "modified_at",
           "metadata",
-          "external_id",
-          "email",
           "email_verified",
+          "type",
           "name",
           "billing_address",
           "tax_id",
@@ -1365,12 +1426,30 @@
               {
                 "properties": {
                   "amount": {
+                    "deprecated": true,
                     "examples": [
                       1000
                     ],
                     "title": "Amount",
                     "type": [
                       "integer",
+                      "null"
+                    ]
+                  },
+                  "amounts": {
+                    "additionalProperties": {
+                      "type": "integer"
+                    },
+                    "description": "Map of currency to fixed amount to discount from the total.",
+                    "examples": [
+                      {
+                        "eur": 900,
+                        "usd": 1000
+                      }
+                    ],
+                    "title": "Amounts",
+                    "type": [
+                      "object",
                       "null"
                     ]
                   },
@@ -1396,6 +1475,7 @@
                     ]
                   },
                   "currency": {
+                    "deprecated": true,
                     "examples": [
                       "usd"
                     ],
@@ -1540,6 +1620,7 @@
                   "type",
                   "amount",
                   "currency",
+                  "amounts",
                   "created_at",
                   "modified_at",
                   "id",
@@ -1561,12 +1642,30 @@
               {
                 "properties": {
                   "amount": {
+                    "deprecated": true,
                     "examples": [
                       1000
                     ],
                     "title": "Amount",
                     "type": [
                       "integer",
+                      "null"
+                    ]
+                  },
+                  "amounts": {
+                    "additionalProperties": {
+                      "type": "integer"
+                    },
+                    "description": "Map of currency to fixed amount to discount from the total.",
+                    "examples": [
+                      {
+                        "eur": 900,
+                        "usd": 1000
+                      }
+                    ],
+                    "title": "Amounts",
+                    "type": [
+                      "object",
                       "null"
                     ]
                   },
@@ -1592,6 +1691,7 @@
                     ]
                   },
                   "currency": {
+                    "deprecated": true,
                     "examples": [
                       "usd"
                     ],
@@ -1744,6 +1844,7 @@
                   "type",
                   "amount",
                   "currency",
+                  "amounts",
                   "created_at",
                   "modified_at",
                   "id",
@@ -2369,6 +2470,30 @@
                     "null"
                   ]
                 },
+                "custom_label": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "The label for the custom unit.",
+                  "title": "Custom Label"
+                },
+                "custom_multiplier": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "The multiplier to convert from base unit to display scale.",
+                  "title": "Custom Multiplier"
+                },
                 "filter": {
                   "description": "The filter to apply on events that'll be used to calculate the meter.",
                   "properties": {
@@ -2507,6 +2632,14 @@
                     "string",
                     "null"
                   ]
+                },
+                "unit": {
+                  "description": "The unit of the meter.",
+                  "title": "MeterUnit",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -2515,6 +2648,7 @@
                 "modified_at",
                 "id",
                 "name",
+                "unit",
                 "filter",
                 "aggregation",
                 "organization_id"
@@ -2582,6 +2716,97 @@
         ],
         "description": "Last modification timestamp of the object.",
         "title": "Modified At"
+      },
+      "pending_update": {
+        "anyOf": [
+          {
+            "description": "Pending update to be applied to a subscription at the beginning of the next period.",
+            "properties": {
+              "applies_at": {
+                "description": "The date and time when the subscription update will be applied.",
+                "format": "date-time",
+                "title": "Applies At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "created_at": {
+                "description": "Creation timestamp of the object.",
+                "format": "date-time",
+                "title": "Created At",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "The ID of the object.",
+                "format": "uuid4",
+                "title": "Id",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "modified_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Last modification timestamp of the object.",
+                "title": "Modified At"
+              },
+              "product_id": {
+                "anyOf": [
+                  {
+                    "format": "uuid4",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "ID of the new product to apply to the subscription. If `null`, the product won't be changed.",
+                "title": "Product Id"
+              },
+              "seats": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Number of seats to apply to the subscription. If `null`, the number of seats won't be changed.",
+                "title": "Seats"
+              }
+            },
+            "required": [
+              "created_at",
+              "modified_at",
+              "id",
+              "applies_at",
+              "product_id",
+              "seats"
+            ],
+            "title": "PendingSubscriptionUpdate",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Pending subscription update that will be applied at the beginning of the next period. If `null`, there is no pending update."
       },
       "prices": {
         "description": "List of enabled prices for the subscription.",
@@ -2665,7 +2890,7 @@
                       ]
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -2697,6 +2922,18 @@
                         "null"
                       ]
                     },
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2713,11 +2950,12 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
                     "type",
                     "recurring_interval",
-                    "price_currency",
                     "price_amount",
                     "legacy"
                   ],
@@ -2819,7 +3057,7 @@
                       "title": "Preset Amount"
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -2851,6 +3089,18 @@
                         "null"
                       ]
                     },
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2867,11 +3117,12 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
                     "type",
                     "recurring_interval",
-                    "price_currency",
                     "minimum_amount",
                     "maximum_amount",
                     "preset_amount",
@@ -2942,6 +3193,14 @@
                       "description": "Last modification timestamp of the object.",
                       "title": "Modified At"
                     },
+                    "price_currency": {
+                      "description": "The currency in which the customer will be charged.",
+                      "title": "Price Currency",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
                     "product_id": {
                       "description": "The ID of the product owning the price.",
                       "format": "uuid4",
@@ -2967,6 +3226,18 @@
                         "null"
                       ]
                     },
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2983,6 +3254,8 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
                     "type",
@@ -3068,7 +3341,7 @@
                       ]
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -3084,18 +3357,6 @@
                         "null"
                       ]
                     },
-                    "recurring_interval": {
-                      "anyOf": [
-                        {
-                          "title": "SubscriptionRecurringInterval",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "deprecated": true
-                    },
                     "source": {
                       "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                       "title": "ProductPriceSource",
@@ -3104,13 +3365,17 @@
                         "null"
                       ]
                     },
-                    "type": {
-                      "deprecated": true,
-                      "title": "ProductPriceType",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                     }
                   },
                   "required": [
@@ -3119,11 +3384,10 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
-                    "type",
-                    "recurring_interval",
-                    "price_currency",
                     "price_amount"
                   ],
                   "title": "ProductPriceFixed",
@@ -3215,7 +3479,7 @@
                       "title": "Preset Amount"
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -3231,18 +3495,6 @@
                         "null"
                       ]
                     },
-                    "recurring_interval": {
-                      "anyOf": [
-                        {
-                          "title": "SubscriptionRecurringInterval",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "deprecated": true
-                    },
                     "source": {
                       "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                       "title": "ProductPriceSource",
@@ -3251,13 +3503,17 @@
                         "null"
                       ]
                     },
-                    "type": {
-                      "deprecated": true,
-                      "title": "ProductPriceType",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                     }
                   },
                   "required": [
@@ -3266,11 +3522,10 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
-                    "type",
-                    "recurring_interval",
-                    "price_currency",
                     "minimum_amount",
                     "maximum_amount",
                     "preset_amount"
@@ -3331,6 +3586,14 @@
                       "description": "Last modification timestamp of the object.",
                       "title": "Modified At"
                     },
+                    "price_currency": {
+                      "description": "The currency in which the customer will be charged.",
+                      "title": "Price Currency",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
                     "product_id": {
                       "description": "The ID of the product owning the price.",
                       "format": "uuid4",
@@ -3340,18 +3603,6 @@
                         "null"
                       ]
                     },
-                    "recurring_interval": {
-                      "anyOf": [
-                        {
-                          "title": "SubscriptionRecurringInterval",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "deprecated": true
-                    },
                     "source": {
                       "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                       "title": "ProductPriceSource",
@@ -3360,13 +3611,17 @@
                         "null"
                       ]
                     },
-                    "type": {
-                      "deprecated": true,
-                      "title": "ProductPriceType",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                     }
                   },
                   "required": [
@@ -3375,10 +3630,10 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
-                    "product_id",
-                    "type",
-                    "recurring_interval"
+                    "product_id"
                   ],
                   "title": "ProductPriceFree",
                   "type": [
@@ -3437,7 +3692,7 @@
                       "title": "Modified At"
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -3452,18 +3707,6 @@
                         "string",
                         "null"
                       ]
-                    },
-                    "recurring_interval": {
-                      "anyOf": [
-                        {
-                          "title": "SubscriptionRecurringInterval",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "deprecated": true
                     },
                     "seat_tiers": {
                       "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)",
@@ -3487,6 +3730,15 @@
                           "title": "Minimum Seats",
                           "type": [
                             "integer",
+                            "null"
+                          ]
+                        },
+                        "seat_tier_type": {
+                          "default": "volume",
+                          "description": "How tiers are applied. 'volume' prices all seats at the matching tier's rate. 'graduated' prices each tier's range independently.",
+                          "title": "SeatTierType",
+                          "type": [
+                            "string",
                             "null"
                           ]
                         },
@@ -3565,13 +3817,17 @@
                         "null"
                       ]
                     },
-                    "type": {
-                      "deprecated": true,
-                      "title": "ProductPriceType",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                     }
                   },
                   "required": [
@@ -3580,11 +3836,10 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
-                    "type",
-                    "recurring_interval",
-                    "price_currency",
                     "seat_tiers"
                   ],
                   "title": "ProductPriceSeatBased",
@@ -3645,6 +3900,30 @@
                     "meter": {
                       "description": "A meter associated to a metered price.",
                       "properties": {
+                        "custom_label": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The label for the custom unit.",
+                          "title": "Custom Label"
+                        },
+                        "custom_multiplier": {
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The multiplier to convert from base unit to display scale.",
+                          "title": "Custom Multiplier"
+                        },
                         "id": {
                           "description": "The ID of the object.",
                           "format": "uuid4",
@@ -3661,11 +3940,20 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "unit": {
+                          "description": "The unit of the meter.",
+                          "title": "MeterUnit",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       },
                       "required": [
                         "id",
-                        "name"
+                        "name",
+                        "unit"
                       ],
                       "title": "ProductPriceMeter",
                       "type": [
@@ -3696,7 +3984,7 @@
                       "title": "Modified At"
                     },
                     "price_currency": {
-                      "description": "The currency.",
+                      "description": "The currency in which the customer will be charged.",
                       "title": "Price Currency",
                       "type": [
                         "string",
@@ -3712,18 +4000,6 @@
                         "null"
                       ]
                     },
-                    "recurring_interval": {
-                      "anyOf": [
-                        {
-                          "title": "SubscriptionRecurringInterval",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "deprecated": true
-                    },
                     "source": {
                       "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                       "title": "ProductPriceSource",
@@ -3732,13 +4008,17 @@
                         "null"
                       ]
                     },
-                    "type": {
-                      "deprecated": true,
-                      "title": "ProductPriceType",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "tax_behavior": {
+                      "anyOf": [
+                        {
+                          "title": "TaxBehaviorOption",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                     },
                     "unit_amount": {
                       "description": "The price per unit in cents.",
@@ -3755,11 +4035,10 @@
                     "id",
                     "source",
                     "amount_type",
+                    "price_currency",
+                    "tax_behavior",
                     "is_archived",
                     "product_id",
-                    "type",
-                    "recurring_interval",
-                    "price_currency",
                     "unit_amount",
                     "cap_amount",
                     "meter_id",
@@ -4682,7 +4961,7 @@
           "benefits": {
             "description": "List of benefits granted by the product.",
             "items": {
-              "anyOf": [
+              "oneOf": [
                 {
                   "description": "A benefit of type `custom`.\n\nUse it to grant any kind of benefit that doesn't fit in the other types.",
                   "properties": {
@@ -4717,6 +4996,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -4821,6 +5108,7 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
@@ -4865,6 +5153,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -4985,6 +5281,7 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
@@ -5029,6 +5326,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -5146,6 +5451,7 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
@@ -5189,6 +5495,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -5298,6 +5612,7 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
@@ -5341,6 +5656,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -5519,6 +5842,7 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
@@ -5563,6 +5887,14 @@
                       "title": "Id",
                       "type": [
                         "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
                         "null"
                       ]
                     },
@@ -5672,11 +6004,146 @@
                     "description",
                     "selectable",
                     "deletable",
+                    "is_deleted",
                     "organization_id",
                     "metadata",
                     "properties"
                   ],
                   "title": "BenefitMeterCredit",
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                {
+                  "description": "A benefit of type `feature_flag`.\n\nUse it to grant feature flags with key-value metadata\nthat can be queried via the API and webhooks.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "deletable": {
+                      "description": "Whether the benefit is deletable.",
+                      "title": "Deletable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "The description of the benefit.",
+                      "title": "Description",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "id": {
+                      "description": "The ID of the benefit.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the benefit.",
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "properties": {
+                      "description": "Properties for a benefit of type `feature_flag`.",
+                      "properties": {},
+                      "title": "BenefitFeatureFlagProperties",
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "selectable": {
+                      "description": "Whether the benefit is selectable when creating a product.",
+                      "title": "Selectable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "const": "feature_flag",
+                      "title": "Type",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "created_at",
+                    "modified_at",
+                    "type",
+                    "description",
+                    "selectable",
+                    "deletable",
+                    "is_deleted",
+                    "organization_id",
+                    "metadata",
+                    "properties"
+                  ],
+                  "title": "BenefitFeatureFlag",
                   "type": [
                     "object",
                     "null"
@@ -6056,7 +6523,7 @@
                           ]
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -6088,6 +6555,18 @@
                             "null"
                           ]
                         },
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -6104,11 +6583,12 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
                         "type",
                         "recurring_interval",
-                        "price_currency",
                         "price_amount",
                         "legacy"
                       ],
@@ -6210,7 +6690,7 @@
                           "title": "Preset Amount"
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -6242,6 +6722,18 @@
                             "null"
                           ]
                         },
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -6258,11 +6750,12 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
                         "type",
                         "recurring_interval",
-                        "price_currency",
                         "minimum_amount",
                         "maximum_amount",
                         "preset_amount",
@@ -6333,6 +6826,14 @@
                           "description": "Last modification timestamp of the object.",
                           "title": "Modified At"
                         },
+                        "price_currency": {
+                          "description": "The currency in which the customer will be charged.",
+                          "title": "Price Currency",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
                         "product_id": {
                           "description": "The ID of the product owning the price.",
                           "format": "uuid4",
@@ -6358,6 +6859,18 @@
                             "null"
                           ]
                         },
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -6374,6 +6887,8 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
                         "type",
@@ -6459,7 +6974,7 @@
                           ]
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -6475,18 +6990,6 @@
                             "null"
                           ]
                         },
-                        "recurring_interval": {
-                          "anyOf": [
-                            {
-                              "title": "SubscriptionRecurringInterval",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "deprecated": true
-                        },
                         "source": {
                           "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                           "title": "ProductPriceSource",
@@ -6495,13 +6998,17 @@
                             "null"
                           ]
                         },
-                        "type": {
-                          "deprecated": true,
-                          "title": "ProductPriceType",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                         }
                       },
                       "required": [
@@ -6510,11 +7017,10 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
-                        "type",
-                        "recurring_interval",
-                        "price_currency",
                         "price_amount"
                       ],
                       "title": "ProductPriceFixed",
@@ -6606,7 +7112,7 @@
                           "title": "Preset Amount"
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -6622,18 +7128,6 @@
                             "null"
                           ]
                         },
-                        "recurring_interval": {
-                          "anyOf": [
-                            {
-                              "title": "SubscriptionRecurringInterval",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "deprecated": true
-                        },
                         "source": {
                           "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                           "title": "ProductPriceSource",
@@ -6642,13 +7136,17 @@
                             "null"
                           ]
                         },
-                        "type": {
-                          "deprecated": true,
-                          "title": "ProductPriceType",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                         }
                       },
                       "required": [
@@ -6657,11 +7155,10 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
-                        "type",
-                        "recurring_interval",
-                        "price_currency",
                         "minimum_amount",
                         "maximum_amount",
                         "preset_amount"
@@ -6722,6 +7219,14 @@
                           "description": "Last modification timestamp of the object.",
                           "title": "Modified At"
                         },
+                        "price_currency": {
+                          "description": "The currency in which the customer will be charged.",
+                          "title": "Price Currency",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
                         "product_id": {
                           "description": "The ID of the product owning the price.",
                           "format": "uuid4",
@@ -6731,18 +7236,6 @@
                             "null"
                           ]
                         },
-                        "recurring_interval": {
-                          "anyOf": [
-                            {
-                              "title": "SubscriptionRecurringInterval",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "deprecated": true
-                        },
                         "source": {
                           "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                           "title": "ProductPriceSource",
@@ -6751,13 +7244,17 @@
                             "null"
                           ]
                         },
-                        "type": {
-                          "deprecated": true,
-                          "title": "ProductPriceType",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                         }
                       },
                       "required": [
@@ -6766,10 +7263,10 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
-                        "product_id",
-                        "type",
-                        "recurring_interval"
+                        "product_id"
                       ],
                       "title": "ProductPriceFree",
                       "type": [
@@ -6828,7 +7325,7 @@
                           "title": "Modified At"
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -6843,18 +7340,6 @@
                             "string",
                             "null"
                           ]
-                        },
-                        "recurring_interval": {
-                          "anyOf": [
-                            {
-                              "title": "SubscriptionRecurringInterval",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "deprecated": true
                         },
                         "seat_tiers": {
                           "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)",
@@ -6878,6 +7363,15 @@
                               "title": "Minimum Seats",
                               "type": [
                                 "integer",
+                                "null"
+                              ]
+                            },
+                            "seat_tier_type": {
+                              "default": "volume",
+                              "description": "How tiers are applied. 'volume' prices all seats at the matching tier's rate. 'graduated' prices each tier's range independently.",
+                              "title": "SeatTierType",
+                              "type": [
+                                "string",
                                 "null"
                               ]
                             },
@@ -6956,13 +7450,17 @@
                             "null"
                           ]
                         },
-                        "type": {
-                          "deprecated": true,
-                          "title": "ProductPriceType",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                         }
                       },
                       "required": [
@@ -6971,11 +7469,10 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
-                        "type",
-                        "recurring_interval",
-                        "price_currency",
                         "seat_tiers"
                       ],
                       "title": "ProductPriceSeatBased",
@@ -7036,6 +7533,30 @@
                         "meter": {
                           "description": "A meter associated to a metered price.",
                           "properties": {
+                            "custom_label": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "description": "The label for the custom unit.",
+                              "title": "Custom Label"
+                            },
+                            "custom_multiplier": {
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "description": "The multiplier to convert from base unit to display scale.",
+                              "title": "Custom Multiplier"
+                            },
                             "id": {
                               "description": "The ID of the object.",
                               "format": "uuid4",
@@ -7052,11 +7573,20 @@
                                 "string",
                                 "null"
                               ]
+                            },
+                            "unit": {
+                              "description": "The unit of the meter.",
+                              "title": "MeterUnit",
+                              "type": [
+                                "string",
+                                "null"
+                              ]
                             }
                           },
                           "required": [
                             "id",
-                            "name"
+                            "name",
+                            "unit"
                           ],
                           "title": "ProductPriceMeter",
                           "type": [
@@ -7087,7 +7617,7 @@
                           "title": "Modified At"
                         },
                         "price_currency": {
-                          "description": "The currency.",
+                          "description": "The currency in which the customer will be charged.",
                           "title": "Price Currency",
                           "type": [
                             "string",
@@ -7103,18 +7633,6 @@
                             "null"
                           ]
                         },
-                        "recurring_interval": {
-                          "anyOf": [
-                            {
-                              "title": "SubscriptionRecurringInterval",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "deprecated": true
-                        },
                         "source": {
                           "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
                           "title": "ProductPriceSource",
@@ -7123,13 +7641,17 @@
                             "null"
                           ]
                         },
-                        "type": {
-                          "deprecated": true,
-                          "title": "ProductPriceType",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                        "tax_behavior": {
+                          "anyOf": [
+                            {
+                              "title": "TaxBehaviorOption",
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
                         },
                         "unit_amount": {
                           "description": "The price per unit in cents.",
@@ -7146,11 +7668,10 @@
                         "id",
                         "source",
                         "amount_type",
+                        "price_currency",
+                        "tax_behavior",
                         "is_archived",
                         "product_id",
-                        "type",
-                        "recurring_interval",
-                        "price_currency",
                         "unit_amount",
                         "cap_amount",
                         "meter_id",
@@ -7219,6 +7740,14 @@
             ],
             "description": "The number of interval units for the trial period.",
             "title": "Trial Interval Count"
+          },
+          "visibility": {
+            "description": "The visibility of the product.",
+            "title": "ProductVisibility",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -7229,6 +7758,7 @@
           "trial_interval_count",
           "name",
           "description",
+          "visibility",
           "recurring_interval",
           "recurring_interval_count",
           "is_recurring",
@@ -7360,7 +7890,8 @@
       "product",
       "discount",
       "prices",
-      "meters"
+      "meters",
+      "pending_update"
     ],
     "title": "Subscription",
     "type": "object"

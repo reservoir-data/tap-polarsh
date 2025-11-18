@@ -12,7 +12,12 @@ import json
 import logging
 import pathlib
 import sys
+import tempfile
 import urllib.request
+from typing import TYPE_CHECKING, cast
+
+if TYPE_CHECKING:
+    from http.client import HTTPResponse
 
 OPENAPI_URL = "https://api.polar.sh/openapi.json"
 PATH = "tap_polarsh/openapi/openapi.json"
@@ -24,13 +29,20 @@ logger = logging.getLogger()
 def main() -> None:
     """Update the OpenAPI schema from the Polar API."""
     logger.info("Updating OpenAPI schema from %s", OPENAPI_URL)
-    with urllib.request.urlopen(OPENAPI_URL) as f_req:
+    request = urllib.request.Request(OPENAPI_URL, headers={"User-Agent": "tap-polarsh"})  # noqa: S310
+    with (
+        tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8") as f_out,
+        urllib.request.urlopen(request) as f_req,  # noqa: S310
+    ):
+        f_req = cast("HTTPResponse", f_req)
         if f_req.status != http.HTTPStatus.OK:
             logger.error("Failed to fetch OpenAPI spec: %s", f_req.reason)
             sys.exit()
         spec = json.load(f_req)
         content = json.dumps(spec, indent=2) + "\n"
-        pathlib.Path(PATH).write_text(content, encoding="utf-8")
+        f_out.write(content)
+
+    pathlib.Path(f_out.name).rename(PATH)
 
 
 if __name__ == "__main__":
