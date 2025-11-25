@@ -175,18 +175,27 @@
       "allow_discount_codes": {
         "description": "Whether to allow the customer to apply discount codes. If you apply a discount through `discount_id`, it'll still be applied, but the customer won't be able to change it.",
         "title": "Allow Discount Codes",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "client_secret": {
         "description": "Client secret used to access the checkout link.",
         "title": "Client Secret",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "created_at": {
         "description": "Creation timestamp of the object.",
         "format": "date-time",
         "title": "Created At",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "discount": {
         "anyOf": [
@@ -938,7 +947,10 @@
           ]
         },
         "title": "Metadata",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "modified_at": {
         "anyOf": [
@@ -957,15 +969,18 @@
         "description": "The organization ID.",
         "format": "uuid4",
         "title": "Organization Id",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "payment_processor": {
         "description": "Payment processor used.",
-        "enum": [
-          "stripe"
-        ],
         "title": "PaymentProcessor",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "products": {
         "items": {
@@ -979,23 +994,35 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "deletable": {
                     "description": "Whether the benefit is deletable.",
                     "title": "Deletable",
-                    "type": "boolean"
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   },
                   "description": {
                     "description": "The description of the benefit.",
                     "title": "Description",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "id": {
                     "description": "The ID of the benefit.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -1014,25 +1041,26 @@
                     "description": "The ID of the organization owning the benefit.",
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "selectable": {
                     "description": "Whether the benefit is selectable when creating a product.",
                     "title": "Selectable",
-                    "type": "boolean"
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   },
                   "type": {
                     "description": "The type of the benefit.",
-                    "enum": [
-                      "custom",
-                      "discord",
-                      "github_repository",
-                      "downloadables",
-                      "license_keys",
-                      "meter_credit"
-                    ],
                     "title": "BenefitType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -1046,16 +1074,25 @@
                   "organization_id"
                 ],
                 "title": "BenefitPublic",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "title": "BenefitPublic",
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "created_at": {
               "description": "Creation timestamp of the object.",
               "format": "date-time",
               "title": "Created At",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "description": {
               "anyOf": [
@@ -1073,17 +1110,26 @@
               "description": "The ID of the object.",
               "format": "uuid4",
               "title": "Id",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "is_archived": {
               "description": "Whether the product is archived and no longer available.",
               "title": "Is Archived",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "is_recurring": {
               "description": "Whether the product is a subscription.",
               "title": "Is Recurring",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "medias": {
               "description": "List of medias associated to the product.",
@@ -1126,17 +1172,26 @@
                   "created_at": {
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "id": {
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "is_uploaded": {
                     "title": "Is Uploaded",
-                    "type": "boolean"
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   },
                   "last_modified_at": {
                     "anyOf": [
@@ -1152,36 +1207,60 @@
                   },
                   "mime_type": {
                     "title": "Mime Type",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "name": {
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "path": {
                     "title": "Path",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "public_url": {
                     "title": "Public Url",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "service": {
                     "title": "Service",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "size": {
                     "title": "Size",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "size_readable": {
                     "title": "Size Readable",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "storage_version": {
                     "anyOf": [
@@ -1226,10 +1305,16 @@
                   "public_url"
                 ],
                 "title": "ProductMediaFileRead",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "title": "Medias",
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "metadata": {
               "additionalProperties": {
@@ -1249,7 +1334,10 @@
                 ]
               },
               "title": "Metadata",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "modified_at": {
               "anyOf": [
@@ -1267,13 +1355,19 @@
             "name": {
               "description": "The name of the product.",
               "title": "Name",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "organization_id": {
               "description": "The ID of the organization owning the product.",
               "format": "uuid4",
               "title": "Organization Id",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "prices": {
               "description": "List of prices for this product.",
@@ -2209,7 +2303,10 @@
                 ]
               },
               "title": "Prices",
-              "type": "array"
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "recurring_interval": {
               "anyOf": [
@@ -2291,15 +2388,24 @@
             "medias"
           ],
           "title": "CheckoutLinkProduct",
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "title": "Products",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "require_billing_address": {
         "description": "Whether to require the customer to fill their full billing address, instead of just the country. Customers in the US will always be required to fill their full address, regardless of this setting.",
         "title": "Require Billing Address",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "success_url": {
         "anyOf": [
@@ -2345,7 +2451,10 @@
       },
       "url": {
         "title": "Url",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "required": [
