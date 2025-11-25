@@ -488,7 +488,10 @@
       "applied_balance_amount": {
         "description": "Customer's balance amount applied to this invoice. Can increase the total amount paid, if the customer has a negative balance,  or decrease it, if the customer has a positive balance.Amount in cents.",
         "title": "Applied Balance Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "billing_address": {
         "anyOf": [
@@ -1085,14 +1088,11 @@
         "title": "Billing Name"
       },
       "billing_reason": {
-        "enum": [
-          "purchase",
-          "subscription_create",
-          "subscription_cycle",
-          "subscription_update"
-        ],
         "title": "OrderBillingReason",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "checkout_id": {
         "anyOf": [
@@ -1110,11 +1110,17 @@
         "description": "Creation timestamp of the object.",
         "format": "date-time",
         "title": "Created At",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "currency": {
         "title": "Currency",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "custom_field_data": {
         "additionalProperties": {
@@ -1139,13 +1145,19 @@
         },
         "description": "Key-value object storing custom field values.",
         "title": "Custom Field Data",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "customer": {
         "properties": {
           "avatar_url": {
             "title": "Avatar Url",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -1733,7 +1745,10 @@
             "description": "Creation timestamp of the object.",
             "format": "date-time",
             "title": "Created At",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "deleted_at": {
             "anyOf": [
@@ -1751,12 +1766,18 @@
           "email": {
             "description": "The email address of the customer. This must be unique within the organization.",
             "title": "Email",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "email_verified": {
             "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
             "title": "Email Verified",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "external_id": {
             "anyOf": [
@@ -1774,7 +1795,10 @@
             "description": "The ID of the customer.",
             "format": "uuid4",
             "title": "Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "metadata": {
             "additionalProperties": {
@@ -1794,7 +1818,10 @@
               ]
             },
             "title": "Metadata",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           "modified_at": {
             "anyOf": [
@@ -1825,7 +1852,10 @@
             "description": "The ID of the organization owning the customer.",
             "format": "uuid4",
             "title": "Organization Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "tax_id": {
             "anyOf": [
@@ -1875,17 +1905,26 @@
           "avatar_url"
         ],
         "title": "OrderCustomer",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "customer_id": {
         "format": "uuid4",
         "title": "Customer Id",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "description": {
         "description": "A summary description of the order.",
         "title": "Description",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "discount": {
         "anyOf": [
@@ -2591,7 +2630,10 @@
       "discount_amount": {
         "description": "Discount amount in cents.",
         "title": "Discount Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "discount_id": {
         "anyOf": [
@@ -2608,7 +2650,10 @@
       "due_amount": {
         "description": "Amount in cents that is due for this order.",
         "title": "Due Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "id": {
         "description": "The ID of the object.",
@@ -2619,12 +2664,18 @@
       "invoice_number": {
         "description": "The invoice number associated with this order.",
         "title": "Invoice Number",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "is_invoice_generated": {
         "description": "Whether an invoice has been generated for this order.",
         "title": "Is Invoice Generated",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "items": {
         "description": "Line items composing the order.",
@@ -2634,24 +2685,36 @@
             "amount": {
               "description": "Amount in cents, before discounts and taxes.",
               "title": "Amount",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "created_at": {
               "description": "Creation timestamp of the object.",
               "format": "date-time",
               "title": "Created At",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "id": {
               "description": "The ID of the object.",
               "format": "uuid4",
               "title": "Id",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "label": {
               "description": "Description of the line item charge.",
               "title": "Label",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modified_at": {
               "anyOf": [
@@ -2682,12 +2745,18 @@
             "proration": {
               "description": "Whether this charge is due to a proration.",
               "title": "Proration",
-              "type": "boolean"
+              "type": [
+                "boolean",
+                "null"
+              ]
             },
             "tax_amount": {
               "description": "Sales tax amount in cents.",
               "title": "Tax Amount",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           },
           "required": [
@@ -2701,10 +2770,16 @@
             "product_price_id"
           ],
           "title": "OrderItemSchema",
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "title": "Items",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "metadata": {
         "additionalProperties": {
@@ -2724,7 +2799,10 @@
           ]
         },
         "title": "Metadata",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "modified_at": {
         "anyOf": [
@@ -2742,17 +2820,26 @@
       "net_amount": {
         "description": "Amount in cents, after discounts but before taxes.",
         "title": "Net Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "paid": {
         "description": "Whether the order has been paid for.",
         "title": "Paid",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "platform_fee_amount": {
         "description": "Platform fee amount in cents.",
         "title": "Platform Fee Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "product": {
         "anyOf": [
@@ -2935,12 +3022,18 @@
       "refunded_amount": {
         "description": "Amount refunded in cents.",
         "title": "Refunded Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "refunded_tax_amount": {
         "description": "Sales tax refunded in cents.",
         "title": "Refunded Tax Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "seats": {
         "anyOf": [
@@ -2955,14 +3048,11 @@
         "title": "Seats"
       },
       "status": {
-        "enum": [
-          "pending",
-          "paid",
-          "refunded",
-          "partially_refunded"
-        ],
         "title": "OrderStatus",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "subscription": {
         "anyOf": [
@@ -3298,23 +3388,35 @@
       "subtotal_amount": {
         "description": "Amount in cents, before discounts and taxes.",
         "title": "Subtotal Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "tax_amount": {
         "description": "Sales tax amount in cents.",
         "title": "Tax Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "total_amount": {
         "description": "Amount in cents, after discounts and taxes.",
         "title": "Total Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "user_id": {
         "deprecated": true,
         "format": "uuid4",
         "title": "User Id",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "required": [

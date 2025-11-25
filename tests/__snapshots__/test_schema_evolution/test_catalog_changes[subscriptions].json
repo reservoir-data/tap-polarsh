@@ -630,12 +630,18 @@
       "amount": {
         "description": "The amount of the subscription.",
         "title": "Amount",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "cancel_at_period_end": {
         "description": "Whether the subscription will be canceled at the end of the current period.",
         "title": "Cancel At Period End",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "canceled_at": {
         "anyOf": [
@@ -666,12 +672,18 @@
         "description": "Creation timestamp of the object.",
         "format": "date-time",
         "title": "Created At",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "currency": {
         "description": "The currency of the subscription.",
         "title": "Currency",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "current_period_end": {
         "anyOf": [
@@ -690,7 +702,10 @@
         "description": "The start timestamp of the current billing period.",
         "format": "date-time",
         "title": "Current Period Start",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "custom_field_data": {
         "additionalProperties": {
@@ -715,13 +730,19 @@
         },
         "description": "Key-value object storing custom field values.",
         "title": "Custom Field Data",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "customer": {
         "properties": {
           "avatar_url": {
             "title": "Avatar Url",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "billing_address": {
             "anyOf": [
@@ -1309,7 +1330,10 @@
             "description": "Creation timestamp of the object.",
             "format": "date-time",
             "title": "Created At",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "deleted_at": {
             "anyOf": [
@@ -1327,12 +1351,18 @@
           "email": {
             "description": "The email address of the customer. This must be unique within the organization.",
             "title": "Email",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "email_verified": {
             "description": "Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address.",
             "title": "Email Verified",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "external_id": {
             "anyOf": [
@@ -1350,7 +1380,10 @@
             "description": "The ID of the customer.",
             "format": "uuid4",
             "title": "Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "metadata": {
             "additionalProperties": {
@@ -1370,7 +1403,10 @@
               ]
             },
             "title": "Metadata",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           "modified_at": {
             "anyOf": [
@@ -1401,7 +1437,10 @@
             "description": "The ID of the organization owning the customer.",
             "format": "uuid4",
             "title": "Organization Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "tax_id": {
             "anyOf": [
@@ -1451,7 +1490,10 @@
           "avatar_url"
         ],
         "title": "SubscriptionCustomer",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "customer_cancellation_comment": {
         "anyOf": [
@@ -1489,7 +1531,10 @@
         "description": "The ID of the subscribed customer.",
         "format": "uuid4",
         "title": "Customer Id",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "discount": {
         "anyOf": [
@@ -2255,7 +2300,10 @@
           ]
         },
         "title": "Metadata",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "meters": {
         "description": "List of meters associated with the subscription.",
@@ -2265,29 +2313,44 @@
             "amount": {
               "description": "The amount due in cents so far in this billing period.",
               "title": "Amount",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "consumed_units": {
               "description": "The number of consumed units so far in this billing period.",
               "title": "Consumed Units",
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "created_at": {
               "description": "Creation timestamp of the object.",
               "format": "date-time",
               "title": "Created At",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "credited_units": {
               "description": "The number of credited units so far in this billing period.",
               "title": "Credited Units",
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "id": {
               "description": "The ID of the object.",
               "format": "uuid4",
               "title": "Id",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "meter": {
               "description": "The meter associated with this subscription.",
@@ -2370,7 +2433,10 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "filter": {
                   "description": "The filter to apply on events that'll be used to calculate the meter.",
@@ -2428,15 +2494,17 @@
                         ]
                       },
                       "title": "Clauses",
-                      "type": "array"
+                      "type": [
+                        "array",
+                        "null"
+                      ]
                     },
                     "conjunction": {
-                      "enum": [
-                        "and",
-                        "or"
-                      ],
                       "title": "FilterConjunction",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -2444,13 +2512,19 @@
                     "clauses"
                   ],
                   "title": "Filter",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the object.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -2470,7 +2544,10 @@
                     ]
                   },
                   "title": "Metadata",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -2488,13 +2565,19 @@
                 "name": {
                   "description": "The name of the meter. Will be shown on customer's invoices and usage.",
                   "title": "Name",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "organization_id": {
                   "description": "The ID of the organization owning the meter.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -2508,13 +2591,19 @@
                 "organization_id"
               ],
               "title": "Meter",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "meter_id": {
               "description": "The ID of the meter.",
               "format": "uuid4",
               "title": "Meter Id",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "modified_at": {
               "anyOf": [
@@ -2541,10 +2630,16 @@
             "meter"
           ],
           "title": "SubscriptionMeter",
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "title": "Meters",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "modified_at": {
         "anyOf": [
@@ -3493,7 +3588,10 @@
           ]
         },
         "title": "Prices",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "product": {
         "description": "A product.",
@@ -4135,17 +4233,26 @@
                   "description": "ID of the custom field.",
                   "format": "uuid4",
                   "title": "Custom Field Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "order": {
                   "description": "Order of the custom field in the resource.",
                   "title": "Order",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "required": {
                   "description": "Whether the value is required for this custom field.",
                   "title": "Required",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -4155,10 +4262,16 @@
                 "required"
               ],
               "title": "AttachedCustomField",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "title": "Attached Custom Fields",
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "benefits": {
             "description": "List of benefits granted by the product.",
@@ -4951,13 +5064,19 @@
               "title": "Benefit"
             },
             "title": "Benefits",
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "created_at": {
             "description": "Creation timestamp of the object.",
             "format": "date-time",
             "title": "Created At",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "description": {
             "anyOf": [
@@ -4975,17 +5094,26 @@
             "description": "The ID of the object.",
             "format": "uuid4",
             "title": "Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "is_archived": {
             "description": "Whether the product is archived and no longer available.",
             "title": "Is Archived",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "is_recurring": {
             "description": "Whether the product is a subscription.",
             "title": "Is Recurring",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "medias": {
             "description": "List of medias associated to the product.",
@@ -5028,17 +5156,26 @@
                 "created_at": {
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the object.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "is_uploaded": {
                   "title": "Is Uploaded",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "last_modified_at": {
                   "anyOf": [
@@ -5054,36 +5191,60 @@
                 },
                 "mime_type": {
                   "title": "Mime Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "name": {
                   "title": "Name",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "organization_id": {
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "path": {
                   "title": "Path",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "public_url": {
                   "title": "Public Url",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "service": {
                   "title": "Service",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "size": {
                   "title": "Size",
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "size_readable": {
                   "title": "Size Readable",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "storage_version": {
                   "anyOf": [
@@ -5128,10 +5289,16 @@
                 "public_url"
               ],
               "title": "ProductMediaFileRead",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "title": "Medias",
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "metadata": {
             "additionalProperties": {
@@ -5151,7 +5318,10 @@
               ]
             },
             "title": "Metadata",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           "modified_at": {
             "anyOf": [
@@ -5169,13 +5339,19 @@
           "name": {
             "description": "The name of the product.",
             "title": "Name",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "The ID of the organization owning the product.",
             "format": "uuid4",
             "title": "Organization Id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "prices": {
             "description": "List of prices for this product.",
@@ -6111,7 +6287,10 @@
               ]
             },
             "title": "Prices",
-            "type": "array"
+            "type": [
+              "array",
+              "null"
+            ]
           },
           "recurring_interval": {
             "anyOf": [
@@ -6194,29 +6373,35 @@
           "attached_custom_fields"
         ],
         "title": "Product",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "product_id": {
         "description": "The ID of the subscribed product.",
         "format": "uuid4",
         "title": "Product Id",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "recurring_interval": {
         "description": "The interval at which the subscription recurs.",
-        "enum": [
-          "day",
-          "week",
-          "month",
-          "year"
-        ],
         "title": "SubscriptionRecurringInterval",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "recurring_interval_count": {
         "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on.",
         "title": "Recurring Interval Count",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "seats": {
         "anyOf": [
@@ -6245,17 +6430,11 @@
       },
       "status": {
         "description": "The status of the subscription.",
-        "enum": [
-          "incomplete",
-          "incomplete_expired",
-          "trialing",
-          "active",
-          "past_due",
-          "canceled",
-          "unpaid"
-        ],
         "title": "SubscriptionStatus",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "trial_end": {
         "anyOf": [

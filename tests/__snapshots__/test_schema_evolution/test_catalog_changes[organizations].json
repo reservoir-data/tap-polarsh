@@ -339,7 +339,10 @@
       "allow_customer_updates": {
         "description": "Whether customers can update their subscriptions from the customer portal.",
         "title": "Allow Customer Updates",
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       },
       "avatar_url": {
         "anyOf": [
@@ -357,42 +360,69 @@
         "description": "Creation timestamp of the object.",
         "format": "date-time",
         "title": "Created At",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "customer_email_settings": {
         "description": "Settings related to customer emails",
         "properties": {
           "order_confirmation": {
             "title": "Order Confirmation",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_cancellation": {
             "title": "Subscription Cancellation",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_confirmation": {
             "title": "Subscription Confirmation",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_cycled": {
             "title": "Subscription Cycled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_past_due": {
             "title": "Subscription Past Due",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_revoked": {
             "title": "Subscription Revoked",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_uncanceled": {
             "title": "Subscription Uncanceled",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "subscription_updated": {
             "title": "Subscription Updated",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "required": [
@@ -406,7 +436,10 @@
           "subscription_updated"
         ],
         "title": "OrganizationCustomerEmailSettings",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "details_submitted_at": {
         "anyOf": [
@@ -493,18 +526,27 @@
       "name": {
         "description": "Organization name shown in checkout, customer portal, emails etc.",
         "title": "Name",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "notification_settings": {
         "description": "Settings related to notifications",
         "properties": {
           "new_order": {
             "title": "New Order",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "new_subscription": {
             "title": "New Subscription",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "required": [
@@ -512,21 +554,26 @@
           "new_subscription"
         ],
         "title": "OrganizationNotificationSettings",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "proration_behavior": {
         "description": "Proration behavior applied when customer updates their subscription from the portal.",
-        "enum": [
-          "invoice",
-          "prorate"
-        ],
         "title": "SubscriptionProrationBehavior",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "slug": {
         "description": "Unique organization slug in checkout, customer portal and credit card statements.",
         "title": "Slug",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "socials": {
         "description": "Links to social profiles.",
@@ -534,18 +581,11 @@
           "properties": {
             "platform": {
               "description": "The social platform of the URL",
-              "enum": [
-                "x",
-                "github",
-                "facebook",
-                "instagram",
-                "youtube",
-                "tiktok",
-                "linkedin",
-                "other"
-              ],
               "title": "OrganizationSocialPlatforms",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "url": {
               "description": "The URL to the organization profile",
@@ -553,7 +593,10 @@
               "maxLength": 2083,
               "minLength": 1,
               "title": "Url",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "required": [
@@ -561,50 +604,62 @@
             "url"
           ],
           "title": "OrganizationSocialLink",
-          "type": "object"
+          "type": [
+            "object",
+            "null"
+          ]
         },
         "title": "Socials",
-        "type": "array"
+        "type": [
+          "array",
+          "null"
+        ]
       },
       "status": {
         "description": "Current organization status",
-        "enum": [
-          "created",
-          "onboarding_started",
-          "initial_review",
-          "ongoing_review",
-          "denied",
-          "active"
-        ],
         "title": "OrganizationStatus",
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "subscription_settings": {
         "description": "Settings related to subscriptions management",
         "properties": {
           "allow_customer_updates": {
             "title": "Allow Customer Updates",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "allow_multiple_subscriptions": {
             "title": "Allow Multiple Subscriptions",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "benefit_revocation_grace_period": {
             "title": "Benefit Revocation Grace Period",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "prevent_trial_abuse": {
             "title": "Prevent Trial Abuse",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "proration_behavior": {
-            "enum": [
-              "invoice",
-              "prorate"
-            ],
             "title": "SubscriptionProrationBehavior",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -615,7 +670,10 @@
           "prevent_trial_abuse"
         ],
         "title": "OrganizationSubscriptionSettings",
-        "type": "object"
+        "type": [
+          "object",
+          "null"
+        ]
       },
       "website": {
         "anyOf": [
