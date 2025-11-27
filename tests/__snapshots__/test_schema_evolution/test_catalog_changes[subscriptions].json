@@ -2739,6 +2739,15 @@
                       "title": "SubscriptionRecurringInterval",
                       "type": "string"
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2750,6 +2759,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -2864,6 +2874,15 @@
                       "title": "SubscriptionRecurringInterval",
                       "type": "string"
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2875,6 +2894,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -2950,6 +2970,15 @@
                       "title": "SubscriptionRecurringInterval",
                       "type": "string"
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "const": "recurring",
                       "description": "The type of the price.",
@@ -2961,6 +2990,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -3057,6 +3087,15 @@
                       ],
                       "deprecated": true
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3071,6 +3110,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -3185,6 +3225,15 @@
                       ],
                       "deprecated": true
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3199,6 +3248,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -3274,6 +3324,15 @@
                       ],
                       "deprecated": true
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3288,6 +3347,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -3417,6 +3477,15 @@
                       "title": "ProductPriceSeatTiers",
                       "type": "object"
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3431,6 +3500,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -3549,6 +3619,15 @@
                       ],
                       "deprecated": true
                     },
+                    "source": {
+                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                      "enum": [
+                        "catalog",
+                        "ad_hoc"
+                      ],
+                      "title": "ProductPriceSource",
+                      "type": "string"
+                    },
                     "type": {
                       "deprecated": true,
                       "enum": [
@@ -3569,6 +3648,7 @@
                     "created_at",
                     "modified_at",
                     "id",
+                    "source",
                     "amount_type",
                     "is_archived",
                     "product_id",
@@ -5438,6 +5518,15 @@
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -5449,6 +5538,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -5563,6 +5653,15 @@
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -5574,6 +5673,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -5649,6 +5749,15 @@
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "const": "recurring",
                           "description": "The type of the price.",
@@ -5660,6 +5769,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -5756,6 +5866,15 @@
                           ],
                           "deprecated": true
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -5770,6 +5889,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -5884,6 +6004,15 @@
                           ],
                           "deprecated": true
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -5898,6 +6027,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -5973,6 +6103,15 @@
                           ],
                           "deprecated": true
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -5987,6 +6126,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -6116,6 +6256,15 @@
                           "title": "ProductPriceSeatTiers",
                           "type": "object"
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -6130,6 +6279,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
@@ -6248,6 +6398,15 @@
                           ],
                           "deprecated": true
                         },
+                        "source": {
+                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
+                          "enum": [
+                            "catalog",
+                            "ad_hoc"
+                          ],
+                          "title": "ProductPriceSource",
+                          "type": "string"
+                        },
                         "type": {
                           "deprecated": true,
                           "enum": [
@@ -6268,6 +6427,7 @@
                         "created_at",
                         "modified_at",
                         "id",
+                        "source",
                         "amount_type",
                         "is_archived",
                         "product_id",
