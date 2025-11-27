@@ -267,6 +267,15 @@
     {
       "breadcrumb": [
         "properties",
+        "platform_fee_currency"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customer"
       ],
       "metadata": {
@@ -2841,6 +2850,18 @@
           "null"
         ]
       },
+      "platform_fee_currency": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Currency of the platform fee.",
+        "title": "Platform Fee Currency"
+      },
       "product": {
         "anyOf": [
           {
@@ -3447,6 +3468,7 @@
       "checkout_id",
       "metadata",
       "platform_fee_amount",
+      "platform_fee_currency",
       "customer",
       "user_id",
       "product",

@@ -476,6 +476,12 @@
                 "title": "Issue Funding Enabled",
                 "type": "boolean"
               },
+              "member_model_enabled": {
+                "default": false,
+                "description": "If this organization has the Member model enabled",
+                "title": "Member Model Enabled",
+                "type": "boolean"
+              },
               "revops_enabled": {
                 "default": false,
                 "description": "If this organization has RevOps enabled",
