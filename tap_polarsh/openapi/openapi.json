@@ -4941,7 +4941,7 @@
           "public"
         ],
         "summary": "List Refunds",
-        "description": "List products.\n\n**Scopes**: `refunds:read` `refunds:write`",
+        "description": "List refunds.\n\n**Scopes**: `refunds:read` `refunds:write`",
         "operationId": "refunds:list",
         "security": [
           {
@@ -5279,16 +5279,6 @@
           "201": {
             "description": "Refund created."
           },
-          "400": {
-            "description": "Refund amount exceeds remaining order balance.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RefundAmountTooHigh"
-                }
-              }
-            }
-          },
           "403": {
             "description": "Order is already fully refunded.",
             "content": {
@@ -5319,6 +5309,307 @@
         },
         "x-speakeasy-group": "refunds",
         "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1/disputes/": {
+      "get": {
+        "tags": [
+          "disputes",
+          "public"
+        ],
+        "summary": "List Disputes",
+        "description": "List disputes.\n\n**Scopes**: `disputes:read`",
+        "operationId": "disputes:list",
+        "security": [
+          {
+            "oidc": [
+              "disputes:read"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "examples": [
+                    "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                  ],
+                  "description": "The organization ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/organizations",
+                    "resourceName": "Organization",
+                    "displayProperty": "name"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "examples": [
+                      "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+                    ],
+                    "description": "The organization ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/organizations",
+                      "resourceName": "Organization",
+                      "displayProperty": "name"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrganizationID Filter",
+              "description": "Filter by organization ID."
+            },
+            "description": "Filter by organization ID."
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The order ID."
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The order ID."
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "OrderID Filter",
+              "description": "Filter by order ID."
+            },
+            "description": "Filter by order ID."
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/DisputeStatus"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisputeStatus"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status Filter",
+              "description": "Filter by dispute status."
+            },
+            "description": "Filter by dispute status."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number, defaults to 1.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number, defaults to 1."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Size of a page, defaults to 10. Maximum is 100.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Size of a page, defaults to 10. Maximum is 100."
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisputeSortProperty"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order.",
+              "default": [
+                "-created_at"
+              ],
+              "title": "Sorting"
+            },
+            "description": "Sorting criterion. Several criteria can be used simultaneously and will be applied in order. Add a minus sign `-` before the criteria name to sort by descending order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResource_Dispute_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-pagination": {
+          "type": "offsetLimit",
+          "inputs": [
+            {
+              "name": "page",
+              "in": "parameters",
+              "type": "page"
+            },
+            {
+              "name": "limit",
+              "in": "parameters",
+              "type": "limit"
+            }
+          ],
+          "outputs": {
+            "results": "$.items",
+            "numPages": "$.pagination.max_page"
+          }
+        },
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "disputes",
+        "x-speakeasy-name-override": "list"
+      }
+    },
+    "/v1/disputes/{id}": {
+      "get": {
+        "tags": [
+          "disputes",
+          "public"
+        ],
+        "summary": "Get Dispute",
+        "description": "Get a dispute by ID.\n\n**Scopes**: `disputes:read`",
+        "operationId": "disputes:get",
+        "security": [
+          {
+            "oidc": [
+              "disputes:read"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The dispute ID.",
+              "title": "Id"
+            },
+            "description": "The dispute ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dispute"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dispute not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "disputes",
+        "x-speakeasy-name-override": "get"
       }
     },
     "/v1/checkouts/": {
@@ -7468,6 +7759,27 @@
               "description": "Filter by customer ID."
             },
             "description": "Filter by customer ID."
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Metrics",
+              "description": "List of metric slugs to focus on. When provided, only the queries needed for these metrics will be executed, improving performance. If not provided, all metrics are returned."
+            },
+            "description": "List of metric slugs to focus on. When provided, only the queries needed for these metrics will be executed, improving performance. If not provided, all metrics are returned."
           }
         ],
         "responses": {
@@ -11075,6 +11387,87 @@
         },
         "x-speakeasy-group": "members",
         "x-speakeasy-name-override": "list_members"
+      },
+      "post": {
+        "tags": [
+          "members",
+          "public",
+          "mcp"
+        ],
+        "summary": "Create Member",
+        "description": "Create a new member for a customer.\n\nOnly B2B customers with the member management feature enabled can add members.\nThe authenticated user or organization must have access to the customer's organization.\n\n**Scopes**: `members:write`",
+        "operationId": "members:create_member",
+        "security": [
+          {
+            "oidc": [
+              "members:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Member created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not permitted to add members."
+          },
+          "404": {
+            "description": "Member not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "write",
+            "members"
+          ]
+        },
+        "x-speakeasy-group": "members",
+        "x-speakeasy-name-override": "create_member"
       }
     },
     "/v1/customer-portal/benefit-grants/": {
@@ -15161,22 +15554,30 @@
                   "type": "null"
                 }
               ],
-              "description": "Filter events by parent event ID when hierarchical is set to true. When not specified or null, returns root events only.",
+              "description": "When combined with depth, use this event as the anchor instead of root events.",
               "title": "Parent Id"
             },
-            "description": "Filter events by parent event ID when hierarchical is set to true. When not specified or null, returns root events only."
+            "description": "When combined with depth, use this event as the anchor instead of root events."
           },
           {
-            "name": "hierarchical",
+            "name": "depth",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "boolean",
-              "description": "When true, filters by parent_id (root events if not specified). When false, returns all events regardless of hierarchy.",
-              "default": false,
-              "title": "Hierarchical"
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 5,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Fetch descendants up to this depth. When set: 0=root events only, 1=roots+children, etc. Max 5. When not set, returns all events.",
+              "title": "Depth"
             },
-            "description": "When true, filters by parent_id (root events if not specified). When false, returns all events regardless of hierarchy."
+            "description": "Fetch descendants up to this depth. When set: 0=root events only, 1=roots+children, etc. Max 5. When not set, returns all events."
           },
           {
             "name": "page",
@@ -15245,7 +15646,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListResource_Event_"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ListResource_Event_"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ListResourceWithCursorPagination_Event_"
+                    }
+                  ],
+                  "title": "Response Events:List"
                 }
               }
             }
@@ -15265,25 +15674,6 @@
           "Organization",
           "User"
         ],
-        "x-speakeasy-pagination": {
-          "type": "offsetLimit",
-          "inputs": [
-            {
-              "name": "page",
-              "in": "parameters",
-              "type": "page"
-            },
-            {
-              "name": "limit",
-              "in": "parameters",
-              "type": "limit"
-            }
-          ],
-          "outputs": {
-            "results": "$.items",
-            "numPages": "$.pagination.max_page"
-          }
-        },
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -17772,7 +18162,7 @@
     "order.created": {
       "post": {
         "summary": "order.created",
-        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n<Warning>The order might not be paid yet, so the `status` field might be `pending`.</Warning>\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n> [!WARNING]\n> The order might not be paid yet, so the `status` field might be `pending`.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointorder_created_post",
         "requestBody": {
           "content": {
@@ -30406,6 +30796,19 @@
         ],
         "title": "CountryAlpha2Input"
       },
+      "CursorPagination": {
+        "properties": {
+          "has_next_page": {
+            "type": "boolean",
+            "title": "Has Next Page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_next_page"
+        ],
+        "title": "CursorPagination"
+      },
       "CustomField": {
         "oneOf": [
           {
@@ -31114,10 +31517,14 @@
           },
           "ge": {
             "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
             "title": "Ge"
           },
           "le": {
             "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
             "title": "Le"
           }
         },
@@ -31238,10 +31645,14 @@
           },
           "ge": {
             "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
             "title": "Ge"
           },
           "le": {
             "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
             "title": "Le"
           }
         },
@@ -31527,11 +31938,13 @@
           },
           "min_length": {
             "type": "integer",
+            "maximum": 2147483647.0,
             "minimum": 0.0,
             "title": "Min Length"
           },
           "max_length": {
             "type": "integer",
+            "maximum": 2147483647.0,
             "minimum": 0.0,
             "title": "Max Length"
           }
@@ -40218,6 +40631,139 @@
         "title": "DiscountUpdate",
         "description": "Schema to update a discount."
       },
+      "Dispute": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "status": {
+            "$ref": "#/components/schemas/DisputeStatus",
+            "description": "Status of the dispute. `prevented` means we issued a refund before the dispute was escalated, avoiding any fees.",
+            "examples": [
+              "needs_response",
+              "prevented"
+            ]
+          },
+          "resolved": {
+            "type": "boolean",
+            "title": "Resolved",
+            "description": "Whether the dispute has been resolved (won or lost).",
+            "examples": [
+              false
+            ]
+          },
+          "closed": {
+            "type": "boolean",
+            "title": "Closed",
+            "description": "Whether the dispute is closed (prevented, won, or lost).",
+            "examples": [
+              false
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents disputed.",
+            "examples": [
+              1000
+            ]
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount",
+            "description": "Tax amount in cents disputed.",
+            "examples": [
+              200
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "Currency code of the dispute.",
+            "examples": [
+              "usd"
+            ]
+          },
+          "order_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Order Id",
+            "description": "The ID of the order associated with the dispute.",
+            "examples": [
+              "57107b74-8400-4d80-a2fc-54c2b4239cb3"
+            ]
+          },
+          "payment_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Payment Id",
+            "description": "The ID of the payment associated with the dispute.",
+            "examples": [
+              "42b94870-36b9-4573-96b6-b90b1c99a353"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "status",
+          "resolved",
+          "closed",
+          "amount",
+          "tax_amount",
+          "currency",
+          "order_id",
+          "payment_id"
+        ],
+        "title": "Dispute",
+        "description": "Schema representing a dispute.\n\nA dispute is a challenge raised by a customer or their bank regarding a payment."
+      },
+      "DisputeSortProperty": {
+        "type": "string",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "amount",
+          "-amount"
+        ],
+        "title": "DisputeSortProperty"
+      },
+      "DisputeStatus": {
+        "type": "string",
+        "enum": [
+          "prevented",
+          "early_warning",
+          "needs_response",
+          "under_review",
+          "lost",
+          "won"
+        ],
+        "title": "DisputeStatus"
+      },
       "DownloadableFileCreate": {
         "properties": {
           "organization_id": {
@@ -43018,6 +43564,26 @@
         ],
         "title": "LicenseKeyWithActivations"
       },
+      "ListResourceWithCursorPagination_Event_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/CursorPagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResourceWithCursorPagination[Event]"
+      },
       "ListResource_BenefitGrant_": {
         "properties": {
           "items": {
@@ -43302,6 +43868,26 @@
           "pagination"
         ],
         "title": "ListResource[Discount]"
+      },
+      "ListResource_Dispute_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Dispute"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "ListResource[Dispute]"
       },
       "ListResource_DownloadableRead_": {
         "properties": {
@@ -43734,6 +44320,71 @@
         ],
         "title": "Member",
         "description": "A member of a customer."
+      },
+      "MemberCreate": {
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "The ID of the customer this member belongs to."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email",
+            "description": "The email address of the member.",
+            "examples": [
+              "member@example.com"
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 256,
+                "description": "The name of the member.",
+                "examples": [
+                  "Jane Doe"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Id",
+            "description": "The ID of the member in your system. This must be unique within the customer. ",
+            "examples": [
+              "usr_1337"
+            ]
+          },
+          "role": {
+            "$ref": "#/components/schemas/MemberRole",
+            "description": "The role of the member within the customer.",
+            "default": "member",
+            "examples": [
+              "member"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "customer_id",
+          "email"
+        ],
+        "title": "MemberCreate",
+        "description": "Schema for creating a new member."
       },
       "MemberRole": {
         "type": "string",
@@ -44444,6 +45095,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Orders"
@@ -44455,6 +45109,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Revenue"
@@ -44466,6 +45123,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Revenue"
@@ -44477,6 +45137,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cumulative Revenue"
@@ -44488,6 +45151,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Cumulative Revenue"
@@ -44499,6 +45165,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Costs"
@@ -44510,6 +45179,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cumulative Costs"
@@ -44521,6 +45193,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Average Order Value"
@@ -44532,6 +45207,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Average Order Value"
@@ -44543,6 +45221,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Average Revenue Per User"
@@ -44554,6 +45235,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cost Per User"
@@ -44565,6 +45249,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Active User By Event"
@@ -44576,6 +45263,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products"
@@ -44587,6 +45277,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products Revenue"
@@ -44598,6 +45291,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products Net Revenue"
@@ -44609,6 +45305,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions"
@@ -44620,6 +45319,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions Revenue"
@@ -44631,6 +45333,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions Net Revenue"
@@ -44642,6 +45347,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions"
@@ -44653,6 +45361,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions Revenue"
@@ -44664,6 +45375,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions Net Revenue"
@@ -44675,9 +45389,26 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Active Subscriptions"
+          },
+          "committed_subscriptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Committed Subscriptions"
           },
           "monthly_recurring_revenue": {
             "anyOf": [
@@ -44686,6 +45417,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Monthly Recurring Revenue"
@@ -44697,6 +45431,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Committed Monthly Recurring Revenue"
@@ -44708,6 +45445,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Checkouts"
@@ -44719,6 +45459,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Succeeded Checkouts"
@@ -44730,6 +45473,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Checkouts Conversion"
@@ -44741,6 +45487,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions"
@@ -44752,6 +45501,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Customer Service"
@@ -44763,6 +45515,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Low Quality"
@@ -44774,6 +45529,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Missing Features"
@@ -44785,6 +45543,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Switched Service"
@@ -44796,6 +45557,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Too Complex"
@@ -44807,6 +45571,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Too Expensive"
@@ -44818,6 +45585,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Unused"
@@ -44829,6 +45599,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Other"
@@ -44840,6 +45613,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Churned Subscriptions"
@@ -44851,6 +45627,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Churn Rate"
@@ -44862,6 +45641,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Ltv"
@@ -44873,6 +45655,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Gross Margin"
@@ -44884,6 +45669,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Gross Margin Percentage"
@@ -44895,6 +45683,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cashflow"
@@ -44902,49 +45693,7 @@
         },
         "type": "object",
         "required": [
-          "timestamp",
-          "orders",
-          "revenue",
-          "net_revenue",
-          "cumulative_revenue",
-          "net_cumulative_revenue",
-          "costs",
-          "cumulative_costs",
-          "average_order_value",
-          "net_average_order_value",
-          "average_revenue_per_user",
-          "cost_per_user",
-          "active_user_by_event",
-          "one_time_products",
-          "one_time_products_revenue",
-          "one_time_products_net_revenue",
-          "new_subscriptions",
-          "new_subscriptions_revenue",
-          "new_subscriptions_net_revenue",
-          "renewed_subscriptions",
-          "renewed_subscriptions_revenue",
-          "renewed_subscriptions_net_revenue",
-          "active_subscriptions",
-          "monthly_recurring_revenue",
-          "committed_monthly_recurring_revenue",
-          "checkouts",
-          "succeeded_checkouts",
-          "checkouts_conversion",
-          "canceled_subscriptions",
-          "canceled_subscriptions_customer_service",
-          "canceled_subscriptions_low_quality",
-          "canceled_subscriptions_missing_features",
-          "canceled_subscriptions_switched_service",
-          "canceled_subscriptions_too_complex",
-          "canceled_subscriptions_too_expensive",
-          "canceled_subscriptions_unused",
-          "canceled_subscriptions_other",
-          "churned_subscriptions",
-          "churn_rate",
-          "ltv",
-          "gross_margin",
-          "gross_margin_percentage",
-          "cashflow"
+          "timestamp"
         ],
         "title": "MetricPeriod"
       },
@@ -44961,177 +45710,437 @@
       "Metrics": {
         "properties": {
           "orders": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "net_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "cumulative_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "net_cumulative_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "costs": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "cumulative_costs": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "average_order_value": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "net_average_order_value": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "average_revenue_per_user": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "cost_per_user": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "active_user_by_event": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "one_time_products": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "one_time_products_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "one_time_products_net_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "new_subscriptions": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "new_subscriptions_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "new_subscriptions_net_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "renewed_subscriptions": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "renewed_subscriptions_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "renewed_subscriptions_net_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "active_subscriptions": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "committed_subscriptions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "monthly_recurring_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "committed_monthly_recurring_revenue": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "checkouts": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "succeeded_checkouts": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "checkouts_conversion": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_customer_service": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_low_quality": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_missing_features": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_switched_service": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_too_complex": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_too_expensive": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_unused": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "canceled_subscriptions_other": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "churned_subscriptions": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "churn_rate": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "ltv": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "gross_margin": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "gross_margin_percentage": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "cashflow": {
-            "$ref": "#/components/schemas/Metric"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
-        "required": [
-          "orders",
-          "revenue",
-          "net_revenue",
-          "cumulative_revenue",
-          "net_cumulative_revenue",
-          "costs",
-          "cumulative_costs",
-          "average_order_value",
-          "net_average_order_value",
-          "average_revenue_per_user",
-          "cost_per_user",
-          "active_user_by_event",
-          "one_time_products",
-          "one_time_products_revenue",
-          "one_time_products_net_revenue",
-          "new_subscriptions",
-          "new_subscriptions_revenue",
-          "new_subscriptions_net_revenue",
-          "renewed_subscriptions",
-          "renewed_subscriptions_revenue",
-          "renewed_subscriptions_net_revenue",
-          "active_subscriptions",
-          "monthly_recurring_revenue",
-          "committed_monthly_recurring_revenue",
-          "checkouts",
-          "succeeded_checkouts",
-          "checkouts_conversion",
-          "canceled_subscriptions",
-          "canceled_subscriptions_customer_service",
-          "canceled_subscriptions_low_quality",
-          "canceled_subscriptions_missing_features",
-          "canceled_subscriptions_switched_service",
-          "canceled_subscriptions_too_complex",
-          "canceled_subscriptions_too_expensive",
-          "canceled_subscriptions_unused",
-          "canceled_subscriptions_other",
-          "churned_subscriptions",
-          "churn_rate",
-          "ltv",
-          "gross_margin",
-          "gross_margin_percentage",
-          "cashflow"
-        ],
         "title": "Metrics"
       },
       "MetricsIntervalLimit": {
@@ -45247,6 +46256,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Orders"
@@ -45258,6 +46270,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Revenue"
@@ -45269,6 +46284,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Revenue"
@@ -45280,6 +46298,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cumulative Revenue"
@@ -45291,6 +46312,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Cumulative Revenue"
@@ -45302,6 +46326,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Costs"
@@ -45313,6 +46340,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cumulative Costs"
@@ -45324,6 +46354,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Average Order Value"
@@ -45335,6 +46368,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Net Average Order Value"
@@ -45346,6 +46382,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Average Revenue Per User"
@@ -45357,6 +46396,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cost Per User"
@@ -45368,6 +46410,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Active User By Event"
@@ -45379,6 +46424,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products"
@@ -45390,6 +46438,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products Revenue"
@@ -45401,6 +46452,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "One Time Products Net Revenue"
@@ -45412,6 +46466,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions"
@@ -45423,6 +46480,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions Revenue"
@@ -45434,6 +46494,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "New Subscriptions Net Revenue"
@@ -45445,6 +46508,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions"
@@ -45456,6 +46522,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions Revenue"
@@ -45467,6 +46536,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Renewed Subscriptions Net Revenue"
@@ -45478,9 +46550,26 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Active Subscriptions"
+          },
+          "committed_subscriptions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Committed Subscriptions"
           },
           "monthly_recurring_revenue": {
             "anyOf": [
@@ -45489,6 +46578,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Monthly Recurring Revenue"
@@ -45500,6 +46592,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Committed Monthly Recurring Revenue"
@@ -45511,6 +46606,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Checkouts"
@@ -45522,6 +46620,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Succeeded Checkouts"
@@ -45533,6 +46634,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Checkouts Conversion"
@@ -45544,6 +46648,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions"
@@ -45555,6 +46662,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Customer Service"
@@ -45566,6 +46676,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Low Quality"
@@ -45577,6 +46690,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Missing Features"
@@ -45588,6 +46704,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Switched Service"
@@ -45599,6 +46718,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Too Complex"
@@ -45610,6 +46732,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Too Expensive"
@@ -45621,6 +46746,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Unused"
@@ -45632,6 +46760,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Canceled Subscriptions Other"
@@ -45643,6 +46774,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Churned Subscriptions"
@@ -45654,6 +46788,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Churn Rate"
@@ -45665,6 +46802,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Ltv"
@@ -45676,6 +46816,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Gross Margin"
@@ -45687,6 +46830,9 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Gross Margin Percentage"
@@ -45698,56 +46844,15 @@
               },
               {
                 "type": "number"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Cashflow"
           }
         },
         "type": "object",
-        "required": [
-          "orders",
-          "revenue",
-          "net_revenue",
-          "cumulative_revenue",
-          "net_cumulative_revenue",
-          "costs",
-          "cumulative_costs",
-          "average_order_value",
-          "net_average_order_value",
-          "average_revenue_per_user",
-          "cost_per_user",
-          "active_user_by_event",
-          "one_time_products",
-          "one_time_products_revenue",
-          "one_time_products_net_revenue",
-          "new_subscriptions",
-          "new_subscriptions_revenue",
-          "new_subscriptions_net_revenue",
-          "renewed_subscriptions",
-          "renewed_subscriptions_revenue",
-          "renewed_subscriptions_net_revenue",
-          "active_subscriptions",
-          "monthly_recurring_revenue",
-          "committed_monthly_recurring_revenue",
-          "checkouts",
-          "succeeded_checkouts",
-          "checkouts_conversion",
-          "canceled_subscriptions",
-          "canceled_subscriptions_customer_service",
-          "canceled_subscriptions_low_quality",
-          "canceled_subscriptions_missing_features",
-          "canceled_subscriptions_switched_service",
-          "canceled_subscriptions_too_complex",
-          "canceled_subscriptions_too_expensive",
-          "canceled_subscriptions_unused",
-          "canceled_subscriptions_other",
-          "churned_subscriptions",
-          "churn_rate",
-          "ltv",
-          "gross_margin",
-          "gross_margin_percentage",
-          "cashflow"
-        ],
         "title": "MetricsTotals"
       },
       "MissingInvoiceBillingDetails": {
@@ -45888,7 +46993,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -46009,7 +47114,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -51060,6 +52165,16 @@
           "revoke_benefits": {
             "type": "boolean",
             "title": "Revoke Benefits"
+          },
+          "dispute": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RefundDispute"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -51077,31 +52192,10 @@
           "order_id",
           "subscription_id",
           "customer_id",
-          "revoke_benefits"
+          "revoke_benefits",
+          "dispute"
         ],
         "title": "Refund"
-      },
-      "RefundAmountTooHigh": {
-        "properties": {
-          "error": {
-            "type": "string",
-            "const": "RefundAmountTooHigh",
-            "title": "Error",
-            "examples": [
-              "RefundAmountTooHigh"
-            ]
-          },
-          "detail": {
-            "type": "string",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "required": [
-          "error",
-          "detail"
-        ],
-        "title": "RefundAmountTooHigh"
       },
       "RefundCreate": {
         "properties": {
@@ -51174,6 +52268,117 @@
         ],
         "title": "RefundCreate"
       },
+      "RefundDispute": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "status": {
+            "$ref": "#/components/schemas/DisputeStatus",
+            "description": "Status of the dispute. `prevented` means we issued a refund before the dispute was escalated, avoiding any fees.",
+            "examples": [
+              "needs_response",
+              "prevented"
+            ]
+          },
+          "resolved": {
+            "type": "boolean",
+            "title": "Resolved",
+            "description": "Whether the dispute has been resolved (won or lost).",
+            "examples": [
+              false
+            ]
+          },
+          "closed": {
+            "type": "boolean",
+            "title": "Closed",
+            "description": "Whether the dispute is closed (prevented, won, or lost).",
+            "examples": [
+              false
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "Amount in cents disputed.",
+            "examples": [
+              1000
+            ]
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount",
+            "description": "Tax amount in cents disputed.",
+            "examples": [
+              200
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "Currency code of the dispute.",
+            "examples": [
+              "usd"
+            ]
+          },
+          "order_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Order Id",
+            "description": "The ID of the order associated with the dispute.",
+            "examples": [
+              "57107b74-8400-4d80-a2fc-54c2b4239cb3"
+            ]
+          },
+          "payment_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Payment Id",
+            "description": "The ID of the payment associated with the dispute.",
+            "examples": [
+              "42b94870-36b9-4573-96b6-b90b1c99a353"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "status",
+          "resolved",
+          "closed",
+          "amount",
+          "tax_amount",
+          "currency",
+          "order_id",
+          "payment_id"
+        ],
+        "title": "RefundDispute",
+        "description": "Dispute associated with a refund,\nin case we prevented a dispute by issuing a refund."
+      },
       "RefundReason": {
         "type": "string",
         "enum": [
@@ -51182,6 +52387,7 @@
           "customer_request",
           "service_disruption",
           "satisfaction_guarantee",
+          "dispute_prevention",
           "other"
         ],
         "title": "RefundReason"
@@ -51483,6 +52689,7 @@
           "members:write",
           "wallets:read",
           "wallets:write",
+          "disputes:read",
           "customer_meters:read",
           "customer_sessions:write",
           "customer_seats:read",
@@ -51529,6 +52736,7 @@
           "customers:write": "Create or modify customers",
           "discounts:read": "Read discounts",
           "discounts:write": "Create or modify discounts",
+          "disputes:read": "Read disputes",
           "email": "Read your email address",
           "events:read": "Read events",
           "events:write": "Create events",
@@ -54966,7 +56174,7 @@
           "data"
         ],
         "title": "WebhookOrderCreatedPayload",
-        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n<Warning>The order might not be paid yet, so the `status` field might be `pending`.</Warning>\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a new order is created.\n\nA new order is created when:\n\n* A customer purchases a one-time product. In this case, `billing_reason` is set to `purchase`.\n* A customer starts a subscription. In this case, `billing_reason` is set to `subscription_create`.\n* A subscription is renewed. In this case, `billing_reason` is set to `subscription_cycle`.\n* A subscription is upgraded or downgraded with an immediate proration invoice. In this case, `billing_reason` is set to `subscription_update`.\n\n> [!WARNING]\n> The order might not be paid yet, so the `status` field might be `pending`.\n\n**Discord & Slack support:** Full"
       },
       "WebhookOrderPaidPayload": {
         "properties": {
