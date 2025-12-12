@@ -20,11 +20,11 @@
   </a>
 </div>
 
-</div>
-
 Singer tap for [Polar.sh](https://polar.sh).
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+
+</div>
 
 ## Capabilities
 
