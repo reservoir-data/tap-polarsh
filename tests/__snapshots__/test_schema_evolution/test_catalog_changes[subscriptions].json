@@ -3768,11 +3768,13 @@
                               "type": "string"
                             },
                             "max_length": {
+                              "maximum": 2147483647.0,
                               "minimum": 0.0,
                               "title": "Max Length",
                               "type": "integer"
                             },
                             "min_length": {
+                              "maximum": 2147483647.0,
                               "minimum": 0.0,
                               "title": "Min Length",
                               "type": "integer"
@@ -3895,10 +3897,14 @@
                               "type": "string"
                             },
                             "ge": {
+                              "maximum": 2147483647.0,
+                              "minimum": -2147483648.0,
                               "title": "Ge",
                               "type": "integer"
                             },
                             "le": {
+                              "maximum": 2147483647.0,
+                              "minimum": -2147483648.0,
                               "title": "Le",
                               "type": "integer"
                             }
@@ -4016,10 +4022,14 @@
                               "type": "string"
                             },
                             "ge": {
+                              "maximum": 2147483647.0,
+                              "minimum": -2147483648.0,
                               "title": "Ge",
                               "type": "integer"
                             },
                             "le": {
+                              "maximum": 2147483647.0,
+                              "minimum": -2147483648.0,
                               "title": "Le",
                               "type": "integer"
                             }
