@@ -5,19 +5,14 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
-import sys
 import typing as t
 from importlib import resources
+from typing import override
 
 from singer_sdk import OpenAPISchema, StreamSchema
 
 from tap_polarsh import openapi
 from tap_polarsh.client import PolarStream
-
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
