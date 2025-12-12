@@ -5,17 +5,12 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
-import sys
+from typing import override
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 
 from tap_polarsh import streams
-
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
 
 
 class TapPolar(Tap):
