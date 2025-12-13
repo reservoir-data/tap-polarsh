@@ -47,7 +47,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m openai/gpt-5-mini -s \
+        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-4o-mini -s \
         "Review the catalog changes and provide a concise one-line title for a PR, and a summary of the changes to be used as body.
         Report field additions, removals, and changes by stream (e.g. 'Added field \`name\` to stream \`customers\`').
         The stream name is part of the filename in tests/__snapshots__.
