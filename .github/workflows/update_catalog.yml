@@ -47,7 +47,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
       run: |
-        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-4.1-mini -s \
+        GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-5-nano -s \
         "Review the catalog changes and provide a concise one-line title for a PR, and a summary of the changes to be used as body.
         Report field additions, removals, and changes by stream (e.g. 'Added field \`name\` to stream \`customers\`').
         The stream name is part of the filename in tests/__snapshots__.
