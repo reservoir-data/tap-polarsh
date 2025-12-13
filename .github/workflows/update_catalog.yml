@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: write  # Required by peter-evans/create-pull-request
+      models: read  # Required by llm-github-models
       pull-requests: write  # Required by peter-evans/create-pull-request
     steps:
     - uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
