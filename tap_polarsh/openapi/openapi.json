@@ -2365,6 +2365,32 @@
             "description": "Filter by customer."
           },
           {
+            "name": "member_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "MemberID Filter",
+              "description": "Filter by member."
+            },
+            "description": "Filter by member."
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -11470,6 +11496,81 @@
         "x-speakeasy-name-override": "create_member"
       }
     },
+    "/v1/members/{id}": {
+      "delete": {
+        "tags": [
+          "members",
+          "public",
+          "mcp"
+        ],
+        "summary": "Delete Member",
+        "description": "Delete a member.\n\nThe authenticated user or organization must have access to the member's organization.\n\n**Scopes**: `members:write`",
+        "operationId": "members:delete_member",
+        "security": [
+          {
+            "oidc": [
+              "members:write"
+            ]
+          },
+          {
+            "pat": []
+          },
+          {
+            "oat": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Member deleted."
+          },
+          "404": {
+            "description": "Member not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "write",
+            "members"
+          ]
+        },
+        "x-speakeasy-group": "members",
+        "x-speakeasy-name-override": "delete_member"
+      }
+    },
     "/v1/customer-portal/benefit-grants/": {
       "get": {
         "tags": [
@@ -11617,6 +11718,32 @@
               "description": "Filter by subscription ID."
             },
             "description": "Filter by subscription ID."
+          },
+          {
+            "name": "member_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "MemberID Filter",
+              "description": "Filter by member ID."
+            },
+            "description": "Filter by member ID."
           },
           {
             "name": "page",
@@ -22301,6 +22428,19 @@
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -22462,6 +22602,19 @@
             "format": "uuid4",
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
           },
           "benefit_id": {
             "type": "string",
@@ -22641,6 +22794,19 @@
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -22802,6 +22968,19 @@
             "format": "uuid4",
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
           },
           "benefit_id": {
             "type": "string",
@@ -23015,6 +23194,19 @@
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -23177,6 +23369,19 @@
             "format": "uuid4",
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
           },
           "benefit_id": {
             "type": "string",
@@ -23366,6 +23571,19 @@
             "format": "uuid4",
             "title": "Customer Id",
             "description": "The ID of the customer concerned by this grant."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The ID of the member concerned by this grant."
           },
           "benefit_id": {
             "type": "string",
@@ -26027,6 +26245,148 @@
       },
       "CheckoutCreate": {
         "$ref": "#/components/schemas/CheckoutProductsCreate"
+      },
+      "CheckoutCreatedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "checkout.created",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/CheckoutCreatedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "CheckoutCreatedEvent",
+        "description": "An event created by Polar when a checkout is created."
+      },
+      "CheckoutCreatedMetadata": {
+        "properties": {
+          "checkout_id": {
+            "type": "string",
+            "title": "Checkout Id"
+          },
+          "checkout_status": {
+            "type": "string",
+            "title": "Checkout Status"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "checkout_id",
+          "checkout_status"
+        ],
+        "title": "CheckoutCreatedMetadata"
       },
       "CheckoutCustomerBillingAddressFields": {
         "properties": {
@@ -32657,6 +33017,18 @@
             "format": "uuid4",
             "title": "Customer Id"
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -32792,6 +33164,18 @@
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
           },
           "benefit_id": {
             "type": "string",
@@ -32953,6 +33337,18 @@
             "format": "uuid4",
             "title": "Customer Id"
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -33088,6 +33484,18 @@
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
           },
           "benefit_id": {
             "type": "string",
@@ -33249,6 +33657,18 @@
             "format": "uuid4",
             "title": "Customer Id"
           },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
+          },
           "benefit_id": {
             "type": "string",
             "format": "uuid4",
@@ -33384,6 +33804,18 @@
             "type": "string",
             "format": "uuid4",
             "title": "Customer Id"
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id"
           },
           "benefit_id": {
             "type": "string",
@@ -48141,6 +48573,14 @@
             "type": "string",
             "title": "Order Id"
           },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "billing_type": {
+            "type": "string",
+            "title": "Billing Type"
+          },
           "amount": {
             "type": "integer",
             "title": "Amount"
@@ -48149,16 +48589,47 @@
             "type": "string",
             "title": "Currency"
           },
-          "backfilled": {
-            "type": "boolean",
-            "title": "Backfilled"
+          "net_amount": {
+            "type": "integer",
+            "title": "Net Amount"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "applied_balance_amount": {
+            "type": "integer",
+            "title": "Applied Balance Amount"
+          },
+          "discount_amount": {
+            "type": "integer",
+            "title": "Discount Amount"
+          },
+          "discount_id": {
+            "type": "string",
+            "title": "Discount Id"
+          },
+          "platform_fee": {
+            "type": "integer",
+            "title": "Platform Fee"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
           }
         },
         "type": "object",
         "required": [
           "order_id",
-          "amount",
-          "currency"
+          "amount"
         ],
         "title": "OrderPaidMetadata"
       },
@@ -48440,10 +48911,6 @@
           "currency": {
             "type": "string",
             "title": "Currency"
-          },
-          "backfilled": {
-            "type": "boolean",
-            "title": "Backfilled"
           }
         },
         "type": "object",
@@ -53394,6 +53861,181 @@
         ],
         "title": "SubscriptionCancel"
       },
+      "SubscriptionCanceledEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.canceled",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionCanceledMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionCanceledEvent",
+        "description": "An event created by Polar when a subscription is canceled."
+      },
+      "SubscriptionCanceledMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
+          },
+          "customer_cancellation_reason": {
+            "type": "string",
+            "title": "Customer Cancellation Reason"
+          },
+          "customer_cancellation_comment": {
+            "type": "string",
+            "title": "Customer Cancellation Comment"
+          },
+          "canceled_at": {
+            "type": "string",
+            "title": "Canceled At"
+          },
+          "ends_at": {
+            "type": "string",
+            "title": "Ends At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id",
+          "product_id",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "recurring_interval_count",
+          "canceled_at"
+        ],
+        "title": "SubscriptionCanceledMetadata"
+      },
       "SubscriptionCreateCustomer": {
         "properties": {
           "metadata": {
@@ -53503,6 +54145,169 @@
         ],
         "title": "SubscriptionCreateExternalCustomer",
         "description": "Create a subscription for an existing customer identified by an external ID."
+      },
+      "SubscriptionCreatedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.created",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionCreatedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionCreatedEvent",
+        "description": "An event created by Polar when a subscription is created."
+      },
+      "SubscriptionCreatedMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
+          },
+          "started_at": {
+            "type": "string",
+            "title": "Started At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id",
+          "product_id",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "recurring_interval_count",
+          "started_at"
+        ],
+        "title": "SubscriptionCreatedMetadata"
       },
       "SubscriptionCustomer": {
         "properties": {
@@ -53815,11 +54620,36 @@
           "subscription_id": {
             "type": "string",
             "title": "Subscription Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
           }
         },
         "type": "object",
         "required": [
-          "subscription_id"
+          "subscription_id",
+          "product_id",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "recurring_interval_count"
         ],
         "title": "SubscriptionCycledMetadata"
       },
@@ -54248,11 +55078,36 @@
           "subscription_id": {
             "type": "string",
             "title": "Subscription Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
           }
         },
         "type": "object",
         "required": [
-          "subscription_id"
+          "subscription_id",
+          "product_id",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "recurring_interval_count"
         ],
         "title": "SubscriptionRevokedMetadata"
       },
@@ -54644,7 +55499,13 @@
             "$ref": "#/components/schemas/BenefitRevokedEvent"
           },
           {
+            "$ref": "#/components/schemas/SubscriptionCreatedEvent"
+          },
+          {
             "$ref": "#/components/schemas/SubscriptionCycledEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionCanceledEvent"
           },
           {
             "$ref": "#/components/schemas/SubscriptionRevokedEvent"
@@ -54660,6 +55521,9 @@
           },
           {
             "$ref": "#/components/schemas/OrderRefundedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CheckoutCreatedEvent"
           },
           {
             "$ref": "#/components/schemas/CustomerCreatedEvent"
@@ -54678,6 +55542,7 @@
             "benefit.granted": "#/components/schemas/BenefitGrantedEvent",
             "benefit.revoked": "#/components/schemas/BenefitRevokedEvent",
             "benefit.updated": "#/components/schemas/BenefitUpdatedEvent",
+            "checkout.created": "#/components/schemas/CheckoutCreatedEvent",
             "customer.created": "#/components/schemas/CustomerCreatedEvent",
             "customer.deleted": "#/components/schemas/CustomerDeletedEvent",
             "customer.updated": "#/components/schemas/CustomerUpdatedEvent",
@@ -54685,6 +55550,8 @@
             "meter.reset": "#/components/schemas/MeterResetEvent",
             "order.paid": "#/components/schemas/OrderPaidEvent",
             "order.refunded": "#/components/schemas/OrderRefundedEvent",
+            "subscription.canceled": "#/components/schemas/SubscriptionCanceledEvent",
+            "subscription.created": "#/components/schemas/SubscriptionCreatedEvent",
             "subscription.cycled": "#/components/schemas/SubscriptionCycledEvent",
             "subscription.product_updated": "#/components/schemas/SubscriptionProductUpdatedEvent",
             "subscription.revoked": "#/components/schemas/SubscriptionRevokedEvent",
