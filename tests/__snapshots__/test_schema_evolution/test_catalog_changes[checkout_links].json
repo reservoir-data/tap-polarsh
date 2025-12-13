@@ -190,7 +190,6 @@
       },
       "created_at": {
         "description": "Creation timestamp of the object.",
-        "format": "date-time",
         "title": "Created At",
         "type": [
           "string",
