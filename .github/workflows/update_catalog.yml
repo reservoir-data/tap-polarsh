@@ -45,7 +45,7 @@ jobs:
       if: steps.check_snapshot_changes.outcome == 'failure'
       id: review-catalog-changes
       env:
-        GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-5-nano -s \
         "Review the catalog changes and provide a concise one-line title for a PR, and a summary of the changes to be used as body.
