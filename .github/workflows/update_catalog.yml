@@ -46,8 +46,9 @@ jobs:
       id: review-catalog-changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WORKSPACE_PATH: ${{ github.workspace }}
       run: |
-        SYSTEM_PROMPT=$(cat .github/prompts/update_catalog_prompt.txt)
+        SYSTEM_PROMPT=$(cat $WORKSPACE_PATH/.github/prompts/update_catalog_prompt.txt)
         GENERATED_CONTENT=$(git --no-pager diff -p --no-color HEAD tests/__snapshots__ | llm prompt -m github/gpt-4o-mini -s "$SYSTEM_PROMPT")
 
         PR_TITLE=$(echo "$GENERATED_CONTENT" | head -n 1)
