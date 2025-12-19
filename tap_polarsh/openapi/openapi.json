@@ -1803,6 +1803,82 @@
             "description": "Filter by benefit type."
           },
           {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The benefit ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/benefits",
+                    "resourceName": "Benefit",
+                    "displayProperty": "description"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The benefit ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/benefits",
+                      "resourceName": "Benefit",
+                      "displayProperty": "description"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Filter IDs",
+              "description": "Filter by benefit IDs."
+            },
+            "description": "Filter by benefit IDs."
+          },
+          {
+            "name": "exclude_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4",
+                  "description": "The benefit ID.",
+                  "x-polar-selector-widget": {
+                    "resourceRoot": "/v1/benefits",
+                    "resourceName": "Benefit",
+                    "displayProperty": "description"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid4",
+                    "description": "The benefit ID.",
+                    "x-polar-selector-widget": {
+                      "resourceRoot": "/v1/benefits",
+                      "resourceName": "Benefit",
+                      "displayProperty": "description"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Exclude IDs",
+              "description": "Exclude benefits with these IDs."
+            },
+            "description": "Exclude benefits with these IDs."
+          },
+          {
             "name": "query",
             "in": "query",
             "required": false,
@@ -18474,7 +18550,7 @@
     "subscription.updated": {
       "post": {
         "summary": "subscription.updated",
-        "description": "Sent when a subscription is updated. This event fires for all changes to the subscription, including renewals.\n\nIf you want more specific events, you can listen to `subscription.active`, `subscription.canceled`, and `subscription.revoked`.\n\nTo listen specifically for renewals, you can listen to `order.created` events and check the `billing_reason` field.\n\n**Discord & Slack support:** On cancellation and revocation. Renewals are skipped.",
+        "description": "Sent when a subscription is updated. This event fires for all changes to the subscription, including renewals.\n\nIf you want more specific events, you can listen to `subscription.active`, `subscription.canceled`, `subscription.past_due`, and `subscription.revoked`.\n\nTo listen specifically for renewals, you can listen to `order.created` events and check the `billing_reason` field.\n\n**Discord & Slack support:** On cancellation, past due, and revocation. Renewals are skipped.",
         "operationId": "_endpointsubscription_updated_post",
         "requestBody": {
           "content": {
@@ -18622,13 +18698,50 @@
     "subscription.revoked": {
       "post": {
         "summary": "subscription.revoked",
-        "description": "Sent when a subscription is revoked, the user loses access immediately.\nHappens when the subscription is canceled, or payment is past due.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a subscription is revoked and the user loses access immediately.\nHappens when the subscription is canceled or payment retries are exhausted (status becomes `unpaid`).\n\nFor payment failures that can still be recovered, see `subscription.past_due`.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointsubscription_revoked_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/WebhookSubscriptionRevokedPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subscription.past_due": {
+      "post": {
+        "summary": "subscription.past_due",
+        "description": "Sent when a subscription payment fails and the subscription enters `past_due` status.\n\nThis is a recoverable state - the customer can update their payment method to restore the subscription.\nBenefits may be revoked depending on the organization's grace period settings.\n\nIf payment retries are exhausted, a `subscription.revoked` event will be sent.\n\n**Discord & Slack support:** Full",
+        "operationId": "_endpointsubscription_past_due_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookSubscriptionPastDuePayload"
               }
             }
           },
@@ -20604,24 +20717,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitCustomProperties"
@@ -20829,24 +20925,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -21140,24 +21219,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitDiscordProperties"
@@ -21368,24 +21430,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -21545,24 +21590,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitDownloadablesProperties"
@@ -21770,24 +21798,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -21949,24 +21960,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitGitHubRepositoryProperties"
@@ -22198,24 +22192,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -23909,24 +23886,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitLicenseKeysProperties"
@@ -24180,24 +24140,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -24396,24 +24339,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "properties": {
             "$ref": "#/components/schemas/BenefitMeterCreditProperties"
@@ -24618,24 +24544,7 @@
             "description": "The ID of the organization owning the benefit."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "organization": {
             "$ref": "#/components/schemas/BenefitSubscriberOrganization"
@@ -24945,7 +24854,9 @@
           "description",
           "-description",
           "type",
-          "-type"
+          "-type",
+          "user_order",
+          "-user_order"
         ],
         "title": "BenefitSortProperty"
       },
@@ -25774,24 +25685,7 @@
             "description": "The number of interval units for the trial period."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_customer_id": {
             "anyOf": [
@@ -26718,24 +26612,7 @@
             "description": "The number of interval units for the trial period."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "payment_processor": {
             "$ref": "#/components/schemas/PaymentProcessor",
@@ -27270,24 +27147,7 @@
       "CheckoutLinkProduct": {
         "properties": {
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "id": {
             "type": "string",
@@ -31226,24 +31086,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "type": {
             "type": "string",
@@ -31791,24 +31634,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "type": {
             "type": "string",
@@ -31919,24 +31745,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "type": {
             "type": "string",
@@ -32047,24 +31856,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "type": {
             "type": "string",
@@ -32208,24 +32000,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "type": {
             "type": "string",
@@ -32783,24 +32558,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -36555,24 +36313,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -36794,24 +36535,7 @@
             ]
           },
           "benefit_metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Benefit Metadata",
+            "$ref": "#/components/schemas/MetadataOutputType",
             "description": "The metadata of the benefit concerned by this grant.",
             "examples": [
               {
@@ -36984,24 +36708,7 @@
             "description": "Key-value object storing custom field values."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "status": {
             "type": "string",
@@ -37540,12 +37247,6 @@
             "type": "array",
             "title": "Meters",
             "description": "List of meters associated with the subscription."
-          },
-          "is_polar_managed": {
-            "type": "boolean",
-            "title": "Is Polar Managed",
-            "description": "Whether the subscription is managed by Polar.",
-            "readOnly": true
           }
         },
         "type": "object",
@@ -37575,8 +37276,7 @@
           "customer_cancellation_comment",
           "product",
           "prices",
-          "meters",
-          "is_polar_managed"
+          "meters"
         ],
         "title": "CustomerSubscription"
       },
@@ -38546,24 +38246,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -38799,24 +38482,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -38970,24 +38636,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -39293,24 +38942,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -39469,24 +39101,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -39791,24 +39406,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -39955,24 +39553,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -40264,24 +39845,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -40433,24 +39997,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "name": {
             "type": "string",
@@ -40708,24 +40255,7 @@
       "DiscountProduct": {
         "properties": {
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "id": {
             "type": "string",
@@ -43330,24 +42860,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -44835,27 +44348,29 @@
         ],
         "title": "MemberSortProperty"
       },
+      "MetadataOutputType": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "type": "object"
+      },
       "Meter": {
         "properties": {
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "created_at": {
             "type": "string",
@@ -47937,24 +47452,7 @@
             "title": "Checkout Id"
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -48168,24 +47666,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -48636,24 +48117,7 @@
       "OrderProduct": {
         "properties": {
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "id": {
             "type": "string",
@@ -48958,24 +48422,7 @@
       "OrderSubscription": {
         "properties": {
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "created_at": {
             "type": "string",
@@ -50809,24 +50256,7 @@
             "description": "The ID of the organization owning the product."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "prices": {
             "items": {
@@ -52565,24 +51995,7 @@
             "description": "The ID of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "status": {
             "$ref": "#/components/schemas/RefundStatus"
@@ -53691,24 +53104,7 @@
             "title": "Customer Cancellation Comment"
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "custom_field_data": {
             "additionalProperties": {
@@ -53823,6 +53219,149 @@
           "meters"
         ],
         "title": "Subscription"
+      },
+      "SubscriptionBillingPeriodUpdatedEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.billing_period_updated",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionBillingPeriodUpdatedMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionBillingPeriodUpdatedEvent",
+        "description": "An event created by Polar when a subscription billing period is updated."
+      },
+      "SubscriptionBillingPeriodUpdatedMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "old_period_end": {
+            "type": "string",
+            "title": "Old Period End"
+          },
+          "new_period_end": {
+            "type": "string",
+            "title": "New Period End"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id",
+          "old_period_end",
+          "new_period_end"
+        ],
+        "title": "SubscriptionBillingPeriodUpdatedMetadata"
       },
       "SubscriptionCancel": {
         "properties": {
@@ -54022,12 +53561,15 @@
           "ends_at": {
             "type": "string",
             "title": "Ends At"
+          },
+          "cancel_at_period_end": {
+            "type": "boolean",
+            "title": "Cancel At Period End"
           }
         },
         "type": "object",
         "required": [
           "subscription_id",
-          "product_id",
           "amount",
           "currency",
           "recurring_interval",
@@ -54340,24 +53882,7 @@
             "description": "Last modification timestamp of the object."
           },
           "metadata": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/MetadataOutputType"
           },
           "external_id": {
             "anyOf": [
@@ -54644,12 +54169,7 @@
         },
         "type": "object",
         "required": [
-          "subscription_id",
-          "product_id",
-          "amount",
-          "currency",
-          "recurring_interval",
-          "recurring_interval_count"
+          "subscription_id"
         ],
         "title": "SubscriptionCycledMetadata"
       },
@@ -55102,12 +54622,7 @@
         },
         "type": "object",
         "required": [
-          "subscription_id",
-          "product_id",
-          "amount",
-          "currency",
-          "recurring_interval",
-          "recurring_interval_count"
+          "subscription_id"
         ],
         "title": "SubscriptionRevokedMetadata"
       },
@@ -55270,6 +54785,10 @@
           "-started_at",
           "current_period_end",
           "-current_period_end",
+          "ended_at",
+          "-ended_at",
+          "ends_at",
+          "-ends_at",
           "amount",
           "-amount",
           "product",
@@ -55291,6 +54810,164 @@
           "unpaid"
         ],
         "title": "SubscriptionStatus"
+      },
+      "SubscriptionUncanceledEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "subscription.uncanceled",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SubscriptionUncanceledMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "SubscriptionUncanceledEvent",
+        "description": "An event created by Polar when a subscription cancellation is reversed."
+      },
+      "SubscriptionUncanceledMetadata": {
+        "properties": {
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "recurring_interval": {
+            "type": "string",
+            "title": "Recurring Interval"
+          },
+          "recurring_interval_count": {
+            "type": "integer",
+            "title": "Recurring Interval Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subscription_id",
+          "product_id",
+          "amount",
+          "currency",
+          "recurring_interval",
+          "recurring_interval_count"
+        ],
+        "title": "SubscriptionUncanceledMetadata"
       },
       "SubscriptionUpdate": {
         "anyOf": [
@@ -55511,10 +55188,16 @@
             "$ref": "#/components/schemas/SubscriptionRevokedEvent"
           },
           {
+            "$ref": "#/components/schemas/SubscriptionUncanceledEvent"
+          },
+          {
             "$ref": "#/components/schemas/SubscriptionProductUpdatedEvent"
           },
           {
             "$ref": "#/components/schemas/SubscriptionSeatsUpdatedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/SubscriptionBillingPeriodUpdatedEvent"
           },
           {
             "$ref": "#/components/schemas/OrderPaidEvent"
@@ -55550,12 +55233,14 @@
             "meter.reset": "#/components/schemas/MeterResetEvent",
             "order.paid": "#/components/schemas/OrderPaidEvent",
             "order.refunded": "#/components/schemas/OrderRefundedEvent",
+            "subscription.billing_period_updated": "#/components/schemas/SubscriptionBillingPeriodUpdatedEvent",
             "subscription.canceled": "#/components/schemas/SubscriptionCanceledEvent",
             "subscription.created": "#/components/schemas/SubscriptionCreatedEvent",
             "subscription.cycled": "#/components/schemas/SubscriptionCycledEvent",
             "subscription.product_updated": "#/components/schemas/SubscriptionProductUpdatedEvent",
             "subscription.revoked": "#/components/schemas/SubscriptionRevokedEvent",
-            "subscription.seats_updated": "#/components/schemas/SubscriptionSeatsUpdatedEvent"
+            "subscription.seats_updated": "#/components/schemas/SubscriptionSeatsUpdatedEvent",
+            "subscription.uncanceled": "#/components/schemas/SubscriptionUncanceledEvent"
           }
         }
       },
@@ -56992,6 +56677,7 @@
           "subscription.canceled",
           "subscription.uncanceled",
           "subscription.revoked",
+          "subscription.past_due",
           "refund.created",
           "refund.updated",
           "product.created",
@@ -57351,6 +57037,34 @@
         "title": "WebhookSubscriptionCreatedPayload",
         "description": "Sent when a new subscription is created.\n\nWhen this event occurs, the subscription `status` might not be `active` yet, as we can still have to wait for the first payment to be processed.\n\n**Discord & Slack support:** Full"
       },
+      "WebhookSubscriptionPastDuePayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "subscription.past_due",
+            "title": "Type",
+            "examples": [
+              "subscription.past_due"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Subscription"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "data"
+        ],
+        "title": "WebhookSubscriptionPastDuePayload",
+        "description": "Sent when a subscription payment fails and the subscription enters `past_due` status.\n\nThis is a recoverable state - the customer can update their payment method to restore the subscription.\nBenefits may be revoked depending on the organization's grace period settings.\n\nIf payment retries are exhausted, a `subscription.revoked` event will be sent.\n\n**Discord & Slack support:** Full"
+      },
       "WebhookSubscriptionRevokedPayload": {
         "properties": {
           "type": {
@@ -57377,7 +57091,7 @@
           "data"
         ],
         "title": "WebhookSubscriptionRevokedPayload",
-        "description": "Sent when a subscription is revoked, the user loses access immediately.\nHappens when the subscription is canceled, or payment is past due.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a subscription is revoked and the user loses access immediately.\nHappens when the subscription is canceled or payment retries are exhausted (status becomes `unpaid`).\n\nFor payment failures that can still be recovered, see `subscription.past_due`.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionUncanceledPayload": {
         "properties": {
@@ -57433,7 +57147,7 @@
           "data"
         ],
         "title": "WebhookSubscriptionUpdatedPayload",
-        "description": "Sent when a subscription is updated. This event fires for all changes to the subscription, including renewals.\n\nIf you want more specific events, you can listen to `subscription.active`, `subscription.canceled`, and `subscription.revoked`.\n\nTo listen specifically for renewals, you can listen to `order.created` events and check the `billing_reason` field.\n\n**Discord & Slack support:** On cancellation and revocation. Renewals are skipped."
+        "description": "Sent when a subscription is updated. This event fires for all changes to the subscription, including renewals.\n\nIf you want more specific events, you can listen to `subscription.active`, `subscription.canceled`, `subscription.past_due`, and `subscription.revoked`.\n\nTo listen specifically for renewals, you can listen to `order.created` events and check the `billing_reason` field.\n\n**Discord & Slack support:** On cancellation, past due, and revocation. Renewals are skipped."
       },
       "MetadataQuery": {
         "anyOf": [
