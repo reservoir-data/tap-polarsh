@@ -211,7 +211,6 @@
                           }
                         ]
                       },
-                      "title": "Metadata",
                       "type": "object"
                     },
                     "modified_at": {
@@ -340,7 +339,6 @@
                           }
                         ]
                       },
-                      "title": "Metadata",
                       "type": "object"
                     },
                     "modified_at": {
@@ -465,7 +463,6 @@
                           }
                         ]
                       },
-                      "title": "Metadata",
                       "type": "object"
                     },
                     "modified_at": {
@@ -590,7 +587,6 @@
                           }
                         ]
                       },
-                      "title": "Metadata",
                       "type": "object"
                     },
                     "modified_at": {
@@ -703,7 +699,6 @@
                           }
                         ]
                       },
-                      "title": "Metadata",
                       "type": "object"
                     },
                     "modified_at": {
@@ -905,7 +900,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1024,7 +1018,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1147,7 +1140,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1276,7 +1268,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1393,7 +1384,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1573,7 +1563,6 @@
                       }
                     ]
                   },
-                  "title": "Metadata",
                   "type": "object"
                 },
                 "modified_at": {
@@ -1900,7 +1889,6 @@
             }
           ]
         },
-        "title": "Metadata",
         "type": [
           "object",
           "null"
