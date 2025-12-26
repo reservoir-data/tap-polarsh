@@ -322,6 +322,76 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "usage"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "usage",
+        "properties",
+        "show"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "subscription"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "subscription",
+        "properties",
+        "update_seats"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "subscription",
+        "properties",
+        "update_plan"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -436,6 +506,66 @@
           "subscription_updated"
         ],
         "title": "OrganizationCustomerEmailSettings",
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "customer_portal_settings": {
+        "description": "Settings related to the customer portal",
+        "properties": {
+          "subscription": {
+            "properties": {
+              "update_plan": {
+                "title": "Update Plan",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "update_seats": {
+                "title": "Update Seats",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "update_seats",
+              "update_plan"
+            ],
+            "title": "CustomerPortalSubscriptionSettings",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "usage": {
+            "properties": {
+              "show": {
+                "title": "Show",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "show"
+            ],
+            "title": "CustomerPortalUsageSettings",
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "usage",
+          "subscription"
+        ],
+        "title": "OrganizationCustomerPortalSettings",
         "type": [
           "object",
           "null"
@@ -711,7 +841,8 @@
       "feature_settings",
       "subscription_settings",
       "notification_settings",
-      "customer_email_settings"
+      "customer_email_settings",
+      "customer_portal_settings"
     ],
     "title": "Organization",
     "type": "object"

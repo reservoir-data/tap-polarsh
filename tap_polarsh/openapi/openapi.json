@@ -10308,18 +10308,6 @@
             "description": "Filter by name, email, or external ID."
           },
           {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
-          },
-          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -10455,20 +10443,6 @@
           },
           {
             "oat": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
           }
         ],
         "requestBody": {
@@ -10659,18 +10633,6 @@
               "title": "Id"
             },
             "description": "The customer ID."
-          },
-          {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
           }
         ],
         "responses": {
@@ -10753,18 +10715,6 @@
               "title": "Id"
             },
             "description": "The customer ID."
-          },
-          {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
           }
         ],
         "requestBody": {
@@ -10934,18 +10884,6 @@
               "title": "External Id"
             },
             "description": "The customer external ID."
-          },
-          {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
           }
         ],
         "responses": {
@@ -11027,18 +10965,6 @@
               "title": "External Id"
             },
             "description": "The customer external ID."
-          },
-          {
-            "name": "include_members",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Include members in the response. Only populated when set to true.",
-              "default": false,
-              "title": "Include Members"
-            },
-            "description": "Include members in the response. Only populated when set to true."
           }
         ],
         "requestBody": {
@@ -18661,7 +18587,7 @@
     "subscription.uncanceled": {
       "post": {
         "summary": "subscription.uncanceled",
-        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a customer revokes a pending cancellation.\n\nWhen a customer cancels with \"at period end\", they retain access until the\nsubscription would renew. During this time, they can change their mind and\nundo the cancellation. This event is triggered when they do so.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointsubscription_uncanceled_post",
         "requestBody": {
           "content": {
@@ -35467,6 +35393,10 @@
             "type": "boolean",
             "title": "Allow Customer Updates",
             "description": "Whether customers can update their subscriptions from the customer portal."
+          },
+          "customer_portal_settings": {
+            "$ref": "#/components/schemas/OrganizationCustomerPortalSettings",
+            "description": "Settings related to the customer portal"
           }
         },
         "type": "object",
@@ -35478,7 +35408,8 @@
           "slug",
           "avatar_url",
           "proration_behavior",
-          "allow_customer_updates"
+          "allow_customer_updates",
+          "customer_portal_settings"
         ],
         "title": "CustomerOrganization"
       },
@@ -35804,6 +35735,37 @@
           "account_username"
         ],
         "title": "CustomerPortalOAuthAccount"
+      },
+      "CustomerPortalSubscriptionSettings": {
+        "properties": {
+          "update_seats": {
+            "type": "boolean",
+            "title": "Update Seats"
+          },
+          "update_plan": {
+            "type": "boolean",
+            "title": "Update Plan"
+          }
+        },
+        "type": "object",
+        "required": [
+          "update_seats",
+          "update_plan"
+        ],
+        "title": "CustomerPortalSubscriptionSettings"
+      },
+      "CustomerPortalUsageSettings": {
+        "properties": {
+          "show": {
+            "type": "boolean",
+            "title": "Show"
+          }
+        },
+        "type": "object",
+        "required": [
+          "show"
+        ],
+        "title": "CustomerPortalUsageSettings"
       },
       "CustomerProduct": {
         "properties": {
@@ -48895,6 +48857,10 @@
           "customer_email_settings": {
             "$ref": "#/components/schemas/OrganizationCustomerEmailSettings",
             "description": "Settings related to customer emails"
+          },
+          "customer_portal_settings": {
+            "$ref": "#/components/schemas/OrganizationCustomerPortalSettings",
+            "description": "Settings related to the customer portal"
           }
         },
         "type": "object",
@@ -48915,7 +48881,8 @@
           "feature_settings",
           "subscription_settings",
           "notification_settings",
-          "customer_email_settings"
+          "customer_email_settings",
+          "customer_portal_settings"
         ],
         "title": "Organization"
       },
@@ -49263,6 +49230,16 @@
                 "type": "null"
               }
             ]
+          },
+          "customer_portal_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationCustomerPortalSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -49319,6 +49296,22 @@
           "subscription_updated"
         ],
         "title": "OrganizationCustomerEmailSettings"
+      },
+      "OrganizationCustomerPortalSettings": {
+        "properties": {
+          "usage": {
+            "$ref": "#/components/schemas/CustomerPortalUsageSettings"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/CustomerPortalSubscriptionSettings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "usage",
+          "subscription"
+        ],
+        "title": "OrganizationCustomerPortalSettings"
       },
       "OrganizationDetails": {
         "properties": {
@@ -49793,6 +49786,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/OrganizationCustomerEmailSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customer_portal_settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationCustomerPortalSettings"
               },
               {
                 "type": "null"
@@ -57119,7 +57122,7 @@
           "data"
         ],
         "title": "WebhookSubscriptionUncanceledPayload",
-        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a customer revokes a pending cancellation.\n\nWhen a customer cancels with \"at period end\", they retain access until the\nsubscription would renew. During this time, they can change their mind and\nundo the cancellation. This event is triggered when they do so.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionUpdatedPayload": {
         "properties": {
