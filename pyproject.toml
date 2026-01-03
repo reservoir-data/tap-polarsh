@@ -112,11 +112,23 @@ DEP002 = [
 max_supported_python = "3.14"
 
 [tool.pytest.ini_options]
-minversion = "9.0"
 addopts = [
   "-vvv",
   "--durations=10",
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
 ]
+log_level = "INFO"
+minversion = "9.0"
+filterwarnings = [
+  "error",
+  "ignore:No records were available to test:UserWarning",
+]
+testpaths = [
+  "tests",
+]
+xfail_strict = true
 
 [tool.tox]
 min_version = "4.22"
@@ -146,7 +158,12 @@ commands = [
 ]
 
 [tool.mypy]
-python_version = "3.13"
+enable_error_code = [
+  "ignore-without-code",
+  "redundant-expr",
+  "truthy-bool",
+]
+strict = true
 warn_redundant_casts = true
 warn_return_any = true
 warn_no_return = true

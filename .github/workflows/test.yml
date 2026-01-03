@@ -10,7 +10,6 @@ on:
     - uv.lock
     - .github/workflows/test.yml
   pull_request:
-    types: [opened, synchronize, reopened]
     paths:
     - tap_polarsh/**
     - tests/**
@@ -37,6 +36,7 @@ env:
 
 jobs:
   test:
+    name: Integration
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -77,6 +77,7 @@ jobs:
         report_paths: junit.xml
 
   lint:
+    name: Lint
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
