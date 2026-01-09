@@ -2695,8 +2695,27 @@
                       "deprecated": true
                     },
                     "seat_tiers": {
-                      "description": "List of pricing tiers for seat-based pricing.",
+                      "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)",
                       "properties": {
+                        "maximum_seats": {
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Maximum number of seats allowed for purchase, derived from last tier. None for unlimited.",
+                          "readOnly": true,
+                          "title": "Maximum Seats"
+                        },
+                        "minimum_seats": {
+                          "description": "Minimum number of seats required for purchase, derived from first tier.",
+                          "readOnly": true,
+                          "title": "Minimum Seats",
+                          "type": "integer"
+                        },
                         "tiers": {
                           "description": "List of pricing tiers",
                           "items": {
@@ -2742,7 +2761,9 @@
                         }
                       },
                       "required": [
-                        "tiers"
+                        "tiers",
+                        "minimum_seats",
+                        "maximum_seats"
                       ],
                       "title": "ProductPriceSeatTiers",
                       "type": "object"

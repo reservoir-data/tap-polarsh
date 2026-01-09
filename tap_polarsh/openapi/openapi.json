@@ -20447,6 +20447,76 @@
             "type": "array",
             "title": "Scopes"
           },
+          "scope_display_names": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Scope Display Names",
+            "default": {
+              "openid": "OpenID",
+              "profile": "Read your profile",
+              "email": "Read your email address",
+              "web:read": "Web Read Access",
+              "web:write": "Web Write Access",
+              "user:read": "User Read",
+              "user:write": "Delete your user account",
+              "organizations:read": "Read your organizations",
+              "organizations:write": "Create or modify organizations",
+              "custom_fields:read": "Read custom fields",
+              "custom_fields:write": "Create or modify custom fields",
+              "discounts:read": "Read discounts",
+              "discounts:write": "Create or modify discounts",
+              "checkout_links:read": "Read checkout links",
+              "checkout_links:write": "Create or modify checkout links",
+              "checkouts:read": "Read checkout sessions",
+              "checkouts:write": "Create or modify checkout sessions",
+              "transactions:read": "Read transactions",
+              "transactions:write": "Create or modify transactions",
+              "payouts:read": "Read payouts",
+              "payouts:write": "Create or modify payouts",
+              "products:read": "Read products",
+              "products:write": "Create or modify products",
+              "benefits:read": "Read benefits",
+              "benefits:write": "Create or modify benefits",
+              "events:read": "Read events",
+              "events:write": "Create events",
+              "meters:read": "Read meters",
+              "meters:write": "Create or modify meters",
+              "files:read": "Read file uploads",
+              "files:write": "Create or modify file uploads",
+              "subscriptions:read": "Read subscriptions made on your organizations",
+              "subscriptions:write": "Create or modify subscriptions made on your organizations",
+              "customers:read": "Read customers",
+              "customers:write": "Create or modify customers",
+              "members:read": "Read members",
+              "members:write": "Create or modify members",
+              "wallets:read": "Read wallets",
+              "wallets:write": "Create or modify wallets",
+              "disputes:read": "Read disputes",
+              "customer_meters:read": "Read customer meters",
+              "customer_sessions:write": "Create or modify customer sessions",
+              "customer_seats:read": "Read customer seats",
+              "customer_seats:write": "Create or modify customer seats",
+              "orders:read": "Read orders made on your organizations",
+              "orders:write": "Modify orders made on your organizations",
+              "refunds:read": "Read refunds made on your organizations",
+              "refunds:write": "Create or modify refunds",
+              "payments:read": "Read payments made on your organizations",
+              "metrics:read": "Read metrics",
+              "webhooks:read": "Read webhooks",
+              "webhooks:write": "Create or modify webhooks",
+              "external_organizations:read": "Read external organizations",
+              "license_keys:read": "Read license keys",
+              "license_keys:write": "Modify license keys",
+              "customer_portal:read": "Read your orders, subscriptions and benefits",
+              "customer_portal:write": "Create or modify your orders, subscriptions and benefits",
+              "notifications:read": "Read notifications",
+              "notifications:write": "Mark notifications as read",
+              "notification_recipients:read": "Read notification recipients",
+              "notification_recipients:write": "Create or modify notification recipients"
+            }
+          },
           "organizations": {
             "items": {
               "$ref": "#/components/schemas/AuthorizeOrganization"
@@ -20491,6 +20561,76 @@
             },
             "type": "array",
             "title": "Scopes"
+          },
+          "scope_display_names": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Scope Display Names",
+            "default": {
+              "openid": "OpenID",
+              "profile": "Read your profile",
+              "email": "Read your email address",
+              "web:read": "Web Read Access",
+              "web:write": "Web Write Access",
+              "user:read": "User Read",
+              "user:write": "Delete your user account",
+              "organizations:read": "Read your organizations",
+              "organizations:write": "Create or modify organizations",
+              "custom_fields:read": "Read custom fields",
+              "custom_fields:write": "Create or modify custom fields",
+              "discounts:read": "Read discounts",
+              "discounts:write": "Create or modify discounts",
+              "checkout_links:read": "Read checkout links",
+              "checkout_links:write": "Create or modify checkout links",
+              "checkouts:read": "Read checkout sessions",
+              "checkouts:write": "Create or modify checkout sessions",
+              "transactions:read": "Read transactions",
+              "transactions:write": "Create or modify transactions",
+              "payouts:read": "Read payouts",
+              "payouts:write": "Create or modify payouts",
+              "products:read": "Read products",
+              "products:write": "Create or modify products",
+              "benefits:read": "Read benefits",
+              "benefits:write": "Create or modify benefits",
+              "events:read": "Read events",
+              "events:write": "Create events",
+              "meters:read": "Read meters",
+              "meters:write": "Create or modify meters",
+              "files:read": "Read file uploads",
+              "files:write": "Create or modify file uploads",
+              "subscriptions:read": "Read subscriptions made on your organizations",
+              "subscriptions:write": "Create or modify subscriptions made on your organizations",
+              "customers:read": "Read customers",
+              "customers:write": "Create or modify customers",
+              "members:read": "Read members",
+              "members:write": "Create or modify members",
+              "wallets:read": "Read wallets",
+              "wallets:write": "Create or modify wallets",
+              "disputes:read": "Read disputes",
+              "customer_meters:read": "Read customer meters",
+              "customer_sessions:write": "Create or modify customer sessions",
+              "customer_seats:read": "Read customer seats",
+              "customer_seats:write": "Create or modify customer seats",
+              "orders:read": "Read orders made on your organizations",
+              "orders:write": "Modify orders made on your organizations",
+              "refunds:read": "Read refunds made on your organizations",
+              "refunds:write": "Create or modify refunds",
+              "payments:read": "Read payments made on your organizations",
+              "metrics:read": "Read metrics",
+              "webhooks:read": "Read webhooks",
+              "webhooks:write": "Create or modify webhooks",
+              "external_organizations:read": "Read external organizations",
+              "license_keys:read": "Read license keys",
+              "license_keys:write": "Modify license keys",
+              "customer_portal:read": "Read your orders, subscriptions and benefits",
+              "customer_portal:write": "Create or modify your orders, subscriptions and benefits",
+              "notifications:read": "Read notifications",
+              "notifications:write": "Mark notifications as read",
+              "notification_recipients:read": "Read notification recipients",
+              "notification_recipients:write": "Create or modify notification recipients"
+            }
           }
         },
         "type": "object",
@@ -20533,6 +20673,814 @@
           "avatar_url"
         ],
         "title": "AuthorizeUser"
+      },
+      "BalanceDisputeEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.dispute",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceDisputeMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceDisputeEvent",
+        "description": "An event created by Polar when an order is disputed."
+      },
+      "BalanceDisputeMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "dispute_id": {
+            "type": "string",
+            "title": "Dispute Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "type": "string",
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "type": "string",
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "dispute_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "tax_state",
+          "tax_country",
+          "fee"
+        ],
+        "title": "BalanceDisputeMetadata"
+      },
+      "BalanceDisputeReversalEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.dispute_reversal",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceDisputeMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceDisputeReversalEvent",
+        "description": "An event created by Polar when a dispute is won and funds are reinstated."
+      },
+      "BalanceOrderEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.order",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceOrderMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceOrderEvent",
+        "description": "An event created by Polar when an order is paid."
+      },
+      "BalanceOrderMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "type": "string",
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "type": "string",
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "order_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "fee"
+        ],
+        "title": "BalanceOrderMetadata"
+      },
+      "BalanceRefundEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.refund",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceRefundMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceRefundEvent",
+        "description": "An event created by Polar when an order is refunded."
+      },
+      "BalanceRefundMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "refund_id": {
+            "type": "string",
+            "title": "Refund Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "refundable_amount": {
+            "type": "integer",
+            "title": "Refundable Amount"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "type": "string",
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "type": "string",
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "refund_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "tax_state",
+          "tax_country",
+          "fee"
+        ],
+        "title": "BalanceRefundMetadata"
+      },
+      "BalanceRefundReversalEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.refund_reversal",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceRefundMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceRefundReversalEvent",
+        "description": "An event created by Polar when a refund is reverted."
       },
       "Benefit": {
         "anyOf": [
@@ -35994,7 +36942,32 @@
               }
             ],
             "title": "Customer Id",
-            "description": "The assigned customer ID"
+            "description": "The customer ID. When member_model_enabled is true, this is the billing customer (purchaser). When false, this is the seat member customer."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The member ID of the seat occupant"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "Email of the seat member (set when member_model_enabled is true)"
           },
           "customer_email": {
             "anyOf": [
@@ -51611,7 +52584,7 @@
             "description": "The currency."
           },
           "seat_tiers": {
-            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "$ref": "#/components/schemas/ProductPriceSeatTiers-Output",
             "description": "Tiered pricing based on seat quantity"
           }
         },
@@ -51647,7 +52620,7 @@
             "default": "usd"
           },
           "seat_tiers": {
-            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "$ref": "#/components/schemas/ProductPriceSeatTiers-Input",
             "description": "Tiered pricing based on seat quantity"
           }
         },
@@ -51696,7 +52669,7 @@
         "title": "ProductPriceSeatTier",
         "description": "A pricing tier for seat-based pricing."
       },
-      "ProductPriceSeatTiers": {
+      "ProductPriceSeatTiers-Input": {
         "properties": {
           "tiers": {
             "items": {
@@ -51713,7 +52686,47 @@
           "tiers"
         ],
         "title": "ProductPriceSeatTiers",
-        "description": "List of pricing tiers for seat-based pricing."
+        "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)"
+      },
+      "ProductPriceSeatTiers-Output": {
+        "properties": {
+          "tiers": {
+            "items": {
+              "$ref": "#/components/schemas/ProductPriceSeatTier"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tiers",
+            "description": "List of pricing tiers"
+          },
+          "minimum_seats": {
+            "type": "integer",
+            "title": "Minimum Seats",
+            "description": "Minimum number of seats required for purchase, derived from first tier.",
+            "readOnly": true
+          },
+          "maximum_seats": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum Seats",
+            "description": "Maximum number of seats allowed for purchase, derived from last tier. None for unlimited.",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "tiers",
+          "minimum_seats",
+          "maximum_seats"
+        ],
+        "title": "ProductPriceSeatTiers",
+        "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)"
       },
       "ProductPriceSource": {
         "type": "string",
@@ -55219,11 +56232,31 @@
           },
           {
             "$ref": "#/components/schemas/CustomerDeletedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceOrderEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceRefundEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceRefundReversalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceDisputeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceDisputeReversalEvent"
           }
         ],
         "discriminator": {
           "propertyName": "name",
           "mapping": {
+            "balance.dispute": "#/components/schemas/BalanceDisputeEvent",
+            "balance.dispute_reversal": "#/components/schemas/BalanceDisputeReversalEvent",
+            "balance.order": "#/components/schemas/BalanceOrderEvent",
+            "balance.refund": "#/components/schemas/BalanceRefundEvent",
+            "balance.refund_reversal": "#/components/schemas/BalanceRefundReversalEvent",
             "benefit.cycled": "#/components/schemas/BenefitCycledEvent",
             "benefit.granted": "#/components/schemas/BenefitGrantedEvent",
             "benefit.revoked": "#/components/schemas/BenefitRevokedEvent",
