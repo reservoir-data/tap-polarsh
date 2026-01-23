@@ -2086,16 +2086,9 @@
                       "title": "Maximum Amount"
                     },
                     "minimum_amount": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "The minimum amount the customer can pay.",
-                      "title": "Minimum Amount"
+                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                      "title": "Minimum Amount",
+                      "type": "integer"
                     },
                     "modified_at": {
                       "anyOf": [
@@ -2430,16 +2423,9 @@
                       "title": "Maximum Amount"
                     },
                     "minimum_amount": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "The minimum amount the customer can pay.",
-                      "title": "Minimum Amount"
+                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                      "title": "Minimum Amount",
+                      "type": "integer"
                     },
                     "modified_at": {
                       "anyOf": [
