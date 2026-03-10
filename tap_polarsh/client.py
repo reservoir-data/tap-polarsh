@@ -10,7 +10,7 @@ from typing import override
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
-from singer_sdk.pagination import BasePageNumberPaginator
+from singer_sdk.pagination import PageNumberPaginator
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
@@ -36,13 +36,13 @@ class PolarStream(RESTStream[t.Any]):
         """
         return BearerTokenAuthenticator(token=self.config["token"])
 
-    def get_new_paginator(self) -> BasePageNumberPaginator:  # noqa: PLR6301
+    def get_new_paginator(self) -> PageNumberPaginator:  # noqa: PLR6301
         """Get a new paginator object.
 
         Returns:
             A new paginator object.
         """
-        return BasePageNumberPaginator(start_value=1)
+        return PageNumberPaginator(start_value=1)
 
     @override
     def get_url_params(
