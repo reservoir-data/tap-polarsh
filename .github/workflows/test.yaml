@@ -12,14 +12,14 @@ on:
     - tests/**
     - pyproject.toml
     - uv.lock
-    - .github/workflows/test.yml
+    - .github/workflows/test.yaml
   pull_request:
     paths:
     - tap_polarsh/**
     - tests/**
     - pyproject.toml
     - uv.lock
-    - .github/workflows/test.yml
+    - .github/workflows/test.yaml
   workflow_dispatch:
   schedule:
   # Run weekly on Monday at 12:00 PM UTC
@@ -53,12 +53,12 @@ jobs:
         id: baipp
 
   test:
-    name: Integration
+    name: Test
     runs-on: ubuntu-24.04
     needs: build-package
     strategy:
-      fail-fast: false
-      max-parallel: 3
+      fail-fast: true
+      max-parallel: 1
       matrix:
         python-version: ${{ fromJson(needs.build-package.outputs.supported-python-versions) }}
 
