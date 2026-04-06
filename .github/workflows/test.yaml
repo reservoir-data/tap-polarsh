@@ -1,9 +1,5 @@
 name: Test tap-polarsh
 
-permissions:
-  contents: read
-  pull-requests: write
-
 on:
   push:
     branches: [main]
@@ -24,6 +20,10 @@ on:
   schedule:
   # Run weekly on Monday at 12:00 PM UTC
   - cron: "0 12 * * 1"
+
+permissions:
+  contents: read
+  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -64,6 +64,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
       with:
         python-version: ${{ matrix.python-version }}
@@ -86,16 +88,22 @@ jobs:
         include_passed: true
         report_paths: junit.xml
 
-  lint:
-    name: Lint
+  static:
     runs-on: ubuntu-24.04
+    name: Static Analysis
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
       with:
         version: ${{ env.UV_VERSION }}
-    - run: uv tool install --with tox-uv==${{ env.TOX_UV_VERSION }} --from tox==${{ env.TOX_VERSION }} tox
-    - name: Static type checking
-      run: tox -e typing
-    - name: Unused, missing and transitive dependencies
-      run: tox -e dependencies
+    - name: Install tools
+      run: >
+          uv tool install
+          --managed-python
+          --with tox-uv==${TOX_UV_VERSION}
+          --with tox==${TOX_VERSION}
+          tox
+    - name: Static Analysis
+      run: tox -m check

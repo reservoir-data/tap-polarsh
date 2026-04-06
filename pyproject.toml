@@ -41,7 +41,7 @@ tap-polarsh = "tap_polarsh.tap:TapPolar.cli"
 [project.urls]
 Documentation = "https://github.com/reservoir-data/tap-polarsh#readme"
 Homepage = "https://github.com/reservoir-data/tap-polarsh"
-Repository = "https://github.com/reservoir-data/tap-polarsh"
+Source = "https://github.com/reservoir-data/tap-polarsh"
 
 [dependency-groups]
 dev = [
@@ -58,10 +58,11 @@ typing = [
   "mypy~=1.19.0",
   "ty>=0.0.1a23",
   "types-requests~=2.31",
+  { include-group = "testing" },
 ]
 
-[tool.hatch]
 [tool.hatch.version]
+fallback-version = "0.1.0.dev0"
 source = "vcs"
 
 [tool.uv]
@@ -92,15 +93,8 @@ unfixable = [
   "ERA001", # commented-out-code
 ]
 flake8-annotations.allow-star-arg-any = true
-isort.known-first-party = [
-  "tap_polarsh",
-]
-isort.required-imports = [
-  "from __future__ import annotations",
-]
 pydocstyle.convention = "google"
 
-[tool.deptry]
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
 pytest = "pytest"
@@ -134,31 +128,33 @@ addopts = [
   "-v",
   "-ra",
 ]
-log_level = "INFO"
-minversion = "9"
 filterwarnings = [
   "error",
   "once:No records were available to test:UserWarning",
 ]
-testpaths = [
-  "tests",
-]
+log_level = "INFO"
+minversion = "9"
 strict = true
+testpaths = [ "tests" ]
 
 [tool.tox]
-min_version = "4.43"
+requires = [
+  "tox>=4.51",
+  "tox-uv",
+]
 env_list = [
   "dependencies",
   "typing",
-  { product = [
-    { prefix = "3.", start = 12 },
-  ] },
+  "test",
 ]
 [tool.tox.env.dependencies]
 description = "check for unused, missing and transitive dependencies"
 dependency_groups = [ "testing" ]
 labels = [ "check" ]
 commands = [ [ "deptry", "." ] ]
+[tool.tox.env.test]
+description = "run tests on Python {py_dot_ver}"
+base_python = "3.14"  # TODO: Use .python-version (https://github.com/tox-dev/tox/issues/3894)
 [tool.tox.env.typing]
 description = "type checks with mypy and ty"
 dependency_groups = [ "testing", "typing" ]
