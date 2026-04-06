@@ -1383,30 +1383,45 @@
                           "amount_type": {
                             "const": "fixed",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "legacy": {
                             "const": true,
                             "readOnly": true,
                             "title": "Legacy",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1424,44 +1439,52 @@
                           "price_amount": {
                             "description": "The price in cents.",
                             "title": "Price Amount",
-                            "type": "integer"
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           },
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "description": "The recurring interval of the price.",
-                            "enum": [
-                              "day",
-                              "week",
-                              "month",
-                              "year"
-                            ],
                             "title": "SubscriptionRecurringInterval",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "const": "recurring",
                             "description": "The type of the price.",
                             "title": "Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -1479,7 +1502,10 @@
                           "legacy"
                         ],
                         "title": "LegacyRecurringProductPriceFixed",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A pay-what-you-want recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
@@ -1487,30 +1513,45 @@
                           "amount_type": {
                             "const": "custom",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "legacy": {
                             "const": true,
                             "readOnly": true,
                             "title": "Legacy",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "maximum_amount": {
                             "anyOf": [
@@ -1527,7 +1568,10 @@
                           "minimum_amount": {
                             "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
                             "title": "Minimum Amount",
-                            "type": "integer"
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1557,39 +1601,44 @@
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "description": "The recurring interval of the price.",
-                            "enum": [
-                              "day",
-                              "week",
-                              "month",
-                              "year"
-                            ],
                             "title": "SubscriptionRecurringInterval",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "const": "recurring",
                             "description": "The type of the price.",
                             "title": "Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -1609,7 +1658,10 @@
                           "legacy"
                         ],
                         "title": "LegacyRecurringProductPriceCustom",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
@@ -1617,30 +1669,45 @@
                           "amount_type": {
                             "const": "free",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "legacy": {
                             "const": true,
                             "readOnly": true,
                             "title": "Legacy",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1659,33 +1726,35 @@
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "description": "The recurring interval of the price.",
-                            "enum": [
-                              "day",
-                              "week",
-                              "month",
-                              "year"
-                            ],
                             "title": "SubscriptionRecurringInterval",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "const": "recurring",
                             "description": "The type of the price.",
                             "title": "Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -1701,7 +1770,10 @@
                           "legacy"
                         ],
                         "title": "LegacyRecurringProductPriceFree",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       }
                     ]
                   },
@@ -1723,24 +1795,36 @@
                           "amount_type": {
                             "const": "fixed",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1758,18 +1842,27 @@
                           "price_amount": {
                             "description": "The price in cents.",
                             "title": "Price Amount",
-                            "type": "integer"
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           },
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "anyOf": [
@@ -1791,21 +1884,19 @@
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "deprecated": true,
-                            "enum": [
-                              "one_time",
-                              "recurring"
-                            ],
                             "title": "ProductPriceType",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -1822,7 +1913,10 @@
                           "price_amount"
                         ],
                         "title": "ProductPriceFixed",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A pay-what-you-want price for a product.",
@@ -1830,24 +1924,36 @@
                           "amount_type": {
                             "const": "custom",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "maximum_amount": {
                             "anyOf": [
@@ -1864,7 +1970,10 @@
                           "minimum_amount": {
                             "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
                             "title": "Minimum Amount",
-                            "type": "integer"
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1894,13 +2003,19 @@
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "anyOf": [
@@ -1922,21 +2037,19 @@
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "deprecated": true,
-                            "enum": [
-                              "one_time",
-                              "recurring"
-                            ],
                             "title": "ProductPriceType",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -1955,7 +2068,10 @@
                           "preset_amount"
                         ],
                         "title": "ProductPriceCustom",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A free price for a product.",
@@ -1963,24 +2079,36 @@
                           "amount_type": {
                             "const": "free",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -1999,7 +2127,10 @@
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "anyOf": [
@@ -2021,21 +2152,19 @@
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "deprecated": true,
-                            "enum": [
-                              "one_time",
-                              "recurring"
-                            ],
                             "title": "ProductPriceType",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -2050,7 +2179,10 @@
                           "recurring_interval"
                         ],
                         "title": "ProductPriceFree",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A seat-based price for a product.",
@@ -2058,24 +2190,36 @@
                           "amount_type": {
                             "const": "seat_based",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "created_at": {
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -2093,13 +2237,19 @@
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "anyOf": [
@@ -2139,7 +2289,10 @@
                                 "description": "Minimum number of seats required for purchase, derived from first tier.",
                                 "readOnly": true,
                                 "title": "Minimum Seats",
-                                "type": "integer"
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
                               },
                               "tiers": {
                                 "description": "List of pricing tiers",
@@ -2163,14 +2316,20 @@
                                       "description": "Minimum number of seats (inclusive)",
                                       "minimum": 1.0,
                                       "title": "Min Seats",
-                                      "type": "integer"
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ]
                                     },
                                     "price_per_seat": {
                                       "description": "Price per seat in cents for this tier",
                                       "maximum": 99999999.0,
                                       "minimum": 0.0,
                                       "title": "Price Per Seat",
-                                      "type": "integer"
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ]
                                     }
                                   },
                                   "required": [
@@ -2178,11 +2337,17 @@
                                     "price_per_seat"
                                   ],
                                   "title": "ProductPriceSeatTier",
-                                  "type": "object"
+                                  "type": [
+                                    "object",
+                                    "null"
+                                  ]
                                 },
                                 "minItems": 1,
                                 "title": "Tiers",
-                                "type": "array"
+                                "type": [
+                                  "array",
+                                  "null"
+                                ]
                               }
                             },
                             "required": [
@@ -2191,25 +2356,26 @@
                               "maximum_seats"
                             ],
                             "title": "ProductPriceSeatTiers",
-                            "type": "object"
+                            "type": [
+                              "object",
+                              "null"
+                            ]
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "deprecated": true,
-                            "enum": [
-                              "one_time",
-                              "recurring"
-                            ],
                             "title": "ProductPriceType",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -2226,7 +2392,10 @@
                           "seat_tiers"
                         ],
                         "title": "ProductPriceSeatBased",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       },
                       {
                         "description": "A metered, usage-based, price for a product, with a fixed unit price.",
@@ -2234,7 +2403,10 @@
                           "amount_type": {
                             "const": "metered_unit",
                             "title": "Amount Type",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "cap_amount": {
                             "anyOf": [
@@ -2252,18 +2424,27 @@
                             "description": "Creation timestamp of the object.",
                             "format": "date-time",
                             "title": "Created At",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "id": {
                             "description": "The ID of the price.",
                             "format": "uuid4",
                             "title": "Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "is_archived": {
                             "description": "Whether the price is archived and no longer available.",
                             "title": "Is Archived",
-                            "type": "boolean"
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           },
                           "meter": {
                             "description": "A meter associated to a metered price.",
@@ -2272,12 +2453,18 @@
                                 "description": "The ID of the object.",
                                 "format": "uuid4",
                                 "title": "Id",
-                                "type": "string"
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               },
                               "name": {
                                 "description": "The name of the meter.",
                                 "title": "Name",
-                                "type": "string"
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               }
                             },
                             "required": [
@@ -2285,13 +2472,19 @@
                               "name"
                             ],
                             "title": "ProductPriceMeter",
-                            "type": "object"
+                            "type": [
+                              "object",
+                              "null"
+                            ]
                           },
                           "meter_id": {
                             "description": "The ID of the meter associated to the price.",
                             "format": "uuid4",
                             "title": "Meter Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "modified_at": {
                             "anyOf": [
@@ -2309,13 +2502,19 @@
                           "price_currency": {
                             "description": "The currency.",
                             "title": "Price Currency",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "product_id": {
                             "description": "The ID of the product owning the price.",
                             "format": "uuid4",
                             "title": "Product Id",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "recurring_interval": {
                             "anyOf": [
@@ -2337,27 +2536,27 @@
                           },
                           "source": {
                             "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                            "enum": [
-                              "catalog",
-                              "ad_hoc"
-                            ],
                             "title": "ProductPriceSource",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "type": {
                             "deprecated": true,
-                            "enum": [
-                              "one_time",
-                              "recurring"
-                            ],
                             "title": "ProductPriceType",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "unit_amount": {
                             "description": "The price per unit in cents.",
-                            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
                             "title": "Unit Amount",
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
@@ -2377,7 +2576,10 @@
                           "meter"
                         ],
                         "title": "ProductPriceMeteredUnit",
-                        "type": "object"
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       }
                     ]
                   }

@@ -721,7 +721,11 @@ testing = [
     { name = "syrupy" },
 ]
 typing = [
+    { name = "deptry" },
     { name = "mypy" },
+    { name = "pytest" },
+    { name = "singer-sdk", extra = ["testing"] },
+    { name = "syrupy" },
     { name = "ty" },
     { name = "types-requests" },
 ]
@@ -749,7 +753,11 @@ testing = [
     { name = "syrupy", specifier = ">=5" },
 ]
 typing = [
+    { name = "deptry", specifier = ">=0.12" },
     { name = "mypy", specifier = "~=1.19.0" },
+    { name = "pytest", specifier = ">=9" },
+    { name = "singer-sdk", extras = ["testing"] },
+    { name = "syrupy", specifier = ">=5" },
     { name = "ty", specifier = ">=0.0.1a23" },
     { name = "types-requests", specifier = "~=2.31" },
 ]
