@@ -518,264 +518,16 @@
                 "title": "City"
               },
               "country": {
-                "enum": [
-                  "AD",
-                  "AE",
-                  "AF",
-                  "AG",
-                  "AI",
-                  "AL",
-                  "AM",
-                  "AO",
-                  "AQ",
-                  "AR",
-                  "AS",
-                  "AT",
-                  "AU",
-                  "AW",
-                  "AX",
-                  "AZ",
-                  "BA",
-                  "BB",
-                  "BD",
-                  "BE",
-                  "BF",
-                  "BG",
-                  "BH",
-                  "BI",
-                  "BJ",
-                  "BL",
-                  "BM",
-                  "BN",
-                  "BO",
-                  "BQ",
-                  "BR",
-                  "BS",
-                  "BT",
-                  "BV",
-                  "BW",
-                  "BY",
-                  "BZ",
-                  "CA",
-                  "CC",
-                  "CD",
-                  "CF",
-                  "CG",
-                  "CH",
-                  "CI",
-                  "CK",
-                  "CL",
-                  "CM",
-                  "CN",
-                  "CO",
-                  "CR",
-                  "CU",
-                  "CV",
-                  "CW",
-                  "CX",
-                  "CY",
-                  "CZ",
-                  "DE",
-                  "DJ",
-                  "DK",
-                  "DM",
-                  "DO",
-                  "DZ",
-                  "EC",
-                  "EE",
-                  "EG",
-                  "EH",
-                  "ER",
-                  "ES",
-                  "ET",
-                  "FI",
-                  "FJ",
-                  "FK",
-                  "FM",
-                  "FO",
-                  "FR",
-                  "GA",
-                  "GB",
-                  "GD",
-                  "GE",
-                  "GF",
-                  "GG",
-                  "GH",
-                  "GI",
-                  "GL",
-                  "GM",
-                  "GN",
-                  "GP",
-                  "GQ",
-                  "GR",
-                  "GS",
-                  "GT",
-                  "GU",
-                  "GW",
-                  "GY",
-                  "HK",
-                  "HM",
-                  "HN",
-                  "HR",
-                  "HT",
-                  "HU",
-                  "ID",
-                  "IE",
-                  "IL",
-                  "IM",
-                  "IN",
-                  "IO",
-                  "IQ",
-                  "IR",
-                  "IS",
-                  "IT",
-                  "JE",
-                  "JM",
-                  "JO",
-                  "JP",
-                  "KE",
-                  "KG",
-                  "KH",
-                  "KI",
-                  "KM",
-                  "KN",
-                  "KP",
-                  "KR",
-                  "KW",
-                  "KY",
-                  "KZ",
-                  "LA",
-                  "LB",
-                  "LC",
-                  "LI",
-                  "LK",
-                  "LR",
-                  "LS",
-                  "LT",
-                  "LU",
-                  "LV",
-                  "LY",
-                  "MA",
-                  "MC",
-                  "MD",
-                  "ME",
-                  "MF",
-                  "MG",
-                  "MH",
-                  "MK",
-                  "ML",
-                  "MM",
-                  "MN",
-                  "MO",
-                  "MP",
-                  "MQ",
-                  "MR",
-                  "MS",
-                  "MT",
-                  "MU",
-                  "MV",
-                  "MW",
-                  "MX",
-                  "MY",
-                  "MZ",
-                  "NA",
-                  "NC",
-                  "NE",
-                  "NF",
-                  "NG",
-                  "NI",
-                  "NL",
-                  "NO",
-                  "NP",
-                  "NR",
-                  "NU",
-                  "NZ",
-                  "OM",
-                  "PA",
-                  "PE",
-                  "PF",
-                  "PG",
-                  "PH",
-                  "PK",
-                  "PL",
-                  "PM",
-                  "PN",
-                  "PR",
-                  "PS",
-                  "PT",
-                  "PW",
-                  "PY",
-                  "QA",
-                  "RE",
-                  "RO",
-                  "RS",
-                  "RU",
-                  "RW",
-                  "SA",
-                  "SB",
-                  "SC",
-                  "SD",
-                  "SE",
-                  "SG",
-                  "SH",
-                  "SI",
-                  "SJ",
-                  "SK",
-                  "SL",
-                  "SM",
-                  "SN",
-                  "SO",
-                  "SR",
-                  "SS",
-                  "ST",
-                  "SV",
-                  "SX",
-                  "SY",
-                  "SZ",
-                  "TC",
-                  "TD",
-                  "TF",
-                  "TG",
-                  "TH",
-                  "TJ",
-                  "TK",
-                  "TL",
-                  "TM",
-                  "TN",
-                  "TO",
-                  "TR",
-                  "TT",
-                  "TV",
-                  "TW",
-                  "TZ",
-                  "UA",
-                  "UG",
-                  "UM",
-                  "US",
-                  "UY",
-                  "UZ",
-                  "VA",
-                  "VC",
-                  "VE",
-                  "VG",
-                  "VI",
-                  "VN",
-                  "VU",
-                  "WF",
-                  "WS",
-                  "YE",
-                  "YT",
-                  "ZA",
-                  "ZM",
-                  "ZW"
-                ],
                 "examples": [
                   "US",
                   "SE",
                   "FR"
                 ],
                 "title": "CountryAlpha2",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "x-speakeasy-enums": [
                   "AD",
                   "AE",
@@ -1077,7 +829,10 @@
               "country"
             ],
             "title": "Address",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           {
             "type": "null"
@@ -1184,264 +939,16 @@
                     "title": "City"
                   },
                   "country": {
-                    "enum": [
-                      "AD",
-                      "AE",
-                      "AF",
-                      "AG",
-                      "AI",
-                      "AL",
-                      "AM",
-                      "AO",
-                      "AQ",
-                      "AR",
-                      "AS",
-                      "AT",
-                      "AU",
-                      "AW",
-                      "AX",
-                      "AZ",
-                      "BA",
-                      "BB",
-                      "BD",
-                      "BE",
-                      "BF",
-                      "BG",
-                      "BH",
-                      "BI",
-                      "BJ",
-                      "BL",
-                      "BM",
-                      "BN",
-                      "BO",
-                      "BQ",
-                      "BR",
-                      "BS",
-                      "BT",
-                      "BV",
-                      "BW",
-                      "BY",
-                      "BZ",
-                      "CA",
-                      "CC",
-                      "CD",
-                      "CF",
-                      "CG",
-                      "CH",
-                      "CI",
-                      "CK",
-                      "CL",
-                      "CM",
-                      "CN",
-                      "CO",
-                      "CR",
-                      "CU",
-                      "CV",
-                      "CW",
-                      "CX",
-                      "CY",
-                      "CZ",
-                      "DE",
-                      "DJ",
-                      "DK",
-                      "DM",
-                      "DO",
-                      "DZ",
-                      "EC",
-                      "EE",
-                      "EG",
-                      "EH",
-                      "ER",
-                      "ES",
-                      "ET",
-                      "FI",
-                      "FJ",
-                      "FK",
-                      "FM",
-                      "FO",
-                      "FR",
-                      "GA",
-                      "GB",
-                      "GD",
-                      "GE",
-                      "GF",
-                      "GG",
-                      "GH",
-                      "GI",
-                      "GL",
-                      "GM",
-                      "GN",
-                      "GP",
-                      "GQ",
-                      "GR",
-                      "GS",
-                      "GT",
-                      "GU",
-                      "GW",
-                      "GY",
-                      "HK",
-                      "HM",
-                      "HN",
-                      "HR",
-                      "HT",
-                      "HU",
-                      "ID",
-                      "IE",
-                      "IL",
-                      "IM",
-                      "IN",
-                      "IO",
-                      "IQ",
-                      "IR",
-                      "IS",
-                      "IT",
-                      "JE",
-                      "JM",
-                      "JO",
-                      "JP",
-                      "KE",
-                      "KG",
-                      "KH",
-                      "KI",
-                      "KM",
-                      "KN",
-                      "KP",
-                      "KR",
-                      "KW",
-                      "KY",
-                      "KZ",
-                      "LA",
-                      "LB",
-                      "LC",
-                      "LI",
-                      "LK",
-                      "LR",
-                      "LS",
-                      "LT",
-                      "LU",
-                      "LV",
-                      "LY",
-                      "MA",
-                      "MC",
-                      "MD",
-                      "ME",
-                      "MF",
-                      "MG",
-                      "MH",
-                      "MK",
-                      "ML",
-                      "MM",
-                      "MN",
-                      "MO",
-                      "MP",
-                      "MQ",
-                      "MR",
-                      "MS",
-                      "MT",
-                      "MU",
-                      "MV",
-                      "MW",
-                      "MX",
-                      "MY",
-                      "MZ",
-                      "NA",
-                      "NC",
-                      "NE",
-                      "NF",
-                      "NG",
-                      "NI",
-                      "NL",
-                      "NO",
-                      "NP",
-                      "NR",
-                      "NU",
-                      "NZ",
-                      "OM",
-                      "PA",
-                      "PE",
-                      "PF",
-                      "PG",
-                      "PH",
-                      "PK",
-                      "PL",
-                      "PM",
-                      "PN",
-                      "PR",
-                      "PS",
-                      "PT",
-                      "PW",
-                      "PY",
-                      "QA",
-                      "RE",
-                      "RO",
-                      "RS",
-                      "RU",
-                      "RW",
-                      "SA",
-                      "SB",
-                      "SC",
-                      "SD",
-                      "SE",
-                      "SG",
-                      "SH",
-                      "SI",
-                      "SJ",
-                      "SK",
-                      "SL",
-                      "SM",
-                      "SN",
-                      "SO",
-                      "SR",
-                      "SS",
-                      "ST",
-                      "SV",
-                      "SX",
-                      "SY",
-                      "SZ",
-                      "TC",
-                      "TD",
-                      "TF",
-                      "TG",
-                      "TH",
-                      "TJ",
-                      "TK",
-                      "TL",
-                      "TM",
-                      "TN",
-                      "TO",
-                      "TR",
-                      "TT",
-                      "TV",
-                      "TW",
-                      "TZ",
-                      "UA",
-                      "UG",
-                      "UM",
-                      "US",
-                      "UY",
-                      "UZ",
-                      "VA",
-                      "VC",
-                      "VE",
-                      "VG",
-                      "VI",
-                      "VN",
-                      "VU",
-                      "WF",
-                      "WS",
-                      "YE",
-                      "YT",
-                      "ZA",
-                      "ZM",
-                      "ZW"
-                    ],
                     "examples": [
                       "US",
                       "SE",
                       "FR"
                     ],
                     "title": "CountryAlpha2",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-speakeasy-enums": [
                       "AD",
                       "AE",
@@ -1743,7 +1250,10 @@
                   "country"
                 ],
                 "title": "Address",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "type": "null"
@@ -2023,7 +1533,10 @@
                       1000
                     ],
                     "title": "Amount",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -2041,23 +1554,27 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "currency": {
                     "examples": [
                       "usd"
                     ],
                     "title": "Currency",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -2076,7 +1593,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -2107,7 +1627,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -2125,7 +1648,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -2134,7 +1660,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -2144,7 +1673,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -2160,12 +1692,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -2186,7 +1717,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountFixedOnceForeverDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -2195,7 +1729,10 @@
                       1000
                     ],
                     "title": "Amount",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -2213,27 +1750,34 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "currency": {
                     "examples": [
                       "usd"
                     ],
                     "title": "Currency",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration_in_months": {
                     "title": "Duration In Months",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -2252,7 +1796,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -2283,7 +1830,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -2301,7 +1851,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -2310,7 +1863,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -2320,7 +1876,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -2336,12 +1895,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -2363,7 +1921,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountFixedRepeatDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -2373,7 +1934,10 @@
                       1000
                     ],
                     "title": "Basis Points",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -2391,16 +1955,17 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -2419,7 +1984,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -2450,7 +2018,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -2468,7 +2039,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -2477,7 +2051,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -2487,7 +2064,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -2503,12 +2083,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -2528,7 +2107,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountPercentageOnceForeverDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -2538,7 +2120,10 @@
                       1000
                     ],
                     "title": "Basis Points",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -2556,20 +2141,24 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration_in_months": {
                     "title": "Duration In Months",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -2588,7 +2177,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -2619,7 +2211,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -2637,7 +2232,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -2646,7 +2244,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -2656,7 +2257,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -2672,12 +2276,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -2698,7 +2301,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountPercentageRepeatDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               }
             ],
             "title": "OrderDiscount"
@@ -2942,7 +2548,10 @@
                 "description": "Creation timestamp of the object.",
                 "format": "date-time",
                 "title": "Created At",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "description": {
                 "anyOf": [
@@ -2960,17 +2569,26 @@
                 "description": "The ID of the object.",
                 "format": "uuid4",
                 "title": "Id",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "is_archived": {
                 "description": "Whether the product is archived and no longer available.",
                 "title": "Is Archived",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "is_recurring": {
                 "description": "Whether the product is a subscription.",
                 "title": "Is Recurring",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "metadata": {
                 "additionalProperties": {
@@ -2989,7 +2607,10 @@
                     }
                   ]
                 },
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "modified_at": {
                 "anyOf": [
@@ -3007,23 +2628,23 @@
               "name": {
                 "description": "The name of the product.",
                 "title": "Name",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "organization_id": {
                 "description": "The ID of the organization owning the product.",
                 "format": "uuid4",
                 "title": "Organization Id",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "recurring_interval": {
                 "anyOf": [
                   {
-                    "enum": [
-                      "day",
-                      "week",
-                      "month",
-                      "year"
-                    ],
                     "title": "SubscriptionRecurringInterval",
                     "type": "string"
                   },
@@ -3048,12 +2669,6 @@
               "trial_interval": {
                 "anyOf": [
                   {
-                    "enum": [
-                      "day",
-                      "week",
-                      "month",
-                      "year"
-                    ],
                     "title": "TrialInterval",
                     "type": "string"
                   },
@@ -3092,7 +2707,10 @@
               "organization_id"
             ],
             "title": "OrderProduct",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           {
             "type": "null"
@@ -3156,12 +2774,18 @@
                   10000
                 ],
                 "title": "Amount",
-                "type": "integer"
+                "type": [
+                  "integer",
+                  "null"
+                ]
               },
               "cancel_at_period_end": {
                 "description": "Whether the subscription will be canceled at the end of the current period.",
                 "title": "Cancel At Period End",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "canceled_at": {
                 "anyOf": [
@@ -3192,7 +2816,10 @@
                 "description": "Creation timestamp of the object.",
                 "format": "date-time",
                 "title": "Created At",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "currency": {
                 "description": "The currency of the subscription.",
@@ -3200,7 +2827,10 @@
                   "usd"
                 ],
                 "title": "Currency",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "current_period_end": {
                 "anyOf": [
@@ -3219,7 +2849,10 @@
                 "description": "The start timestamp of the current billing period.",
                 "format": "date-time",
                 "title": "Current Period Start",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "customer_cancellation_comment": {
                 "anyOf": [
@@ -3235,16 +2868,6 @@
               "customer_cancellation_reason": {
                 "anyOf": [
                   {
-                    "enum": [
-                      "customer_service",
-                      "low_quality",
-                      "missing_features",
-                      "switched_service",
-                      "too_complex",
-                      "too_expensive",
-                      "unused",
-                      "other"
-                    ],
                     "title": "CustomerCancellationReason",
                     "type": "string"
                   },
@@ -3257,7 +2880,10 @@
                 "description": "The ID of the subscribed customer.",
                 "format": "uuid4",
                 "title": "Customer Id",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "discount_id": {
                 "anyOf": [
@@ -3302,7 +2928,10 @@
                 "description": "The ID of the object.",
                 "format": "uuid4",
                 "title": "Id",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "metadata": {
                 "additionalProperties": {
@@ -3321,7 +2950,10 @@
                     }
                   ]
                 },
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               "modified_at": {
                 "anyOf": [
@@ -3340,26 +2972,29 @@
                 "description": "The ID of the subscribed product.",
                 "format": "uuid4",
                 "title": "Product Id",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "recurring_interval": {
                 "description": "The interval at which the subscription recurs.",
-                "enum": [
-                  "day",
-                  "week",
-                  "month",
-                  "year"
-                ],
                 "examples": [
                   "month"
                 ],
                 "title": "SubscriptionRecurringInterval",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "recurring_interval_count": {
                 "description": "Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on.",
                 "title": "Recurring Interval Count",
-                "type": "integer"
+                "type": [
+                  "integer",
+                  "null"
+                ]
               },
               "seats": {
                 "anyOf": [
@@ -3388,20 +3023,14 @@
               },
               "status": {
                 "description": "The status of the subscription.",
-                "enum": [
-                  "incomplete",
-                  "incomplete_expired",
-                  "trialing",
-                  "active",
-                  "past_due",
-                  "canceled",
-                  "unpaid"
-                ],
                 "examples": [
                   "active"
                 ],
                 "title": "SubscriptionStatus",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "trial_end": {
                 "anyOf": [
@@ -3457,7 +3086,10 @@
               "customer_cancellation_comment"
             ],
             "title": "OrderSubscription",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           {
             "type": "null"

@@ -604,35 +604,53 @@
                 "default": false,
                 "description": "If this organization has issue funding enabled",
                 "title": "Issue Funding Enabled",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "member_model_enabled": {
                 "default": false,
                 "description": "If this organization has the Member model enabled",
                 "title": "Member Model Enabled",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "revops_enabled": {
                 "default": false,
                 "description": "If this organization has RevOps enabled",
                 "title": "Revops Enabled",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "seat_based_pricing_enabled": {
                 "default": false,
                 "description": "If this organization has seat-based pricing enabled",
                 "title": "Seat Based Pricing Enabled",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "wallets_enabled": {
                 "default": false,
                 "description": "If this organization has Wallets enabled",
                 "title": "Wallets Enabled",
-                "type": "boolean"
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               }
             },
             "title": "OrganizationFeatureSettings",
-            "type": "object"
+            "type": [
+              "object",
+              "null"
+            ]
           },
           {
             "type": "null"

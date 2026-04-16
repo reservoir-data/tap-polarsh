@@ -1078,23 +1078,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1113,7 +1125,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1132,7 +1147,10 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "description": "Properties for a benefit of type `custom`.",
@@ -1161,17 +1179,26 @@
                     "note"
                   ],
                   "title": "BenefitCustomProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "custom",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1187,7 +1214,10 @@
                 "properties"
               ],
               "title": "BenefitCustom",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             {
               "description": "A benefit of type `discord`.\n\nUse it to automatically invite your backers to a Discord server.",
@@ -1196,23 +1226,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1231,7 +1273,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1250,7 +1295,10 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "description": "Properties for a benefit of type `discord`.",
@@ -1258,22 +1306,34 @@
                     "guild_id": {
                       "description": "The ID of the Discord server.",
                       "title": "Guild Id",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "guild_token": {
                       "readOnly": true,
                       "title": "Guild Token",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "kick_member": {
                       "description": "Whether to kick the member from the Discord server on revocation.",
                       "title": "Kick Member",
-                      "type": "boolean"
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     },
                     "role_id": {
                       "description": "The ID of the Discord role to grant.",
                       "title": "Role Id",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -1283,17 +1343,26 @@
                     "guild_token"
                   ],
                   "title": "BenefitDiscordProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "discord",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1309,7 +1378,10 @@
                 "properties"
               ],
               "title": "BenefitDiscord",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             {
               "description": "A benefit of type `github_repository`.\n\nUse it to automatically invite your backers to a private GitHub repository.",
@@ -1318,23 +1390,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1353,7 +1437,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1372,22 +1459,21 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "description": "Properties for a benefit of type `github_repository`.",
                   "properties": {
                     "permission": {
                       "description": "The permission level to grant. Read more about roles and their permissions on [GitHub documentation](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role).",
-                      "enum": [
-                        "pull",
-                        "triage",
-                        "push",
-                        "maintain",
-                        "admin"
-                      ],
                       "title": "Permission",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "repository_name": {
                       "description": "The name of the repository.",
@@ -1395,7 +1481,10 @@
                         "private_repo"
                       ],
                       "title": "Repository Name",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "repository_owner": {
                       "description": "The owner of the repository.",
@@ -1403,7 +1492,10 @@
                         "polarsource"
                       ],
                       "title": "Repository Owner",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -1412,17 +1504,26 @@
                     "permission"
                   ],
                   "title": "BenefitGitHubRepositoryProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "github_repository",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1438,7 +1539,10 @@
                 "properties"
               ],
               "title": "BenefitGitHubRepository",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             {
               "properties": {
@@ -1446,23 +1550,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1481,7 +1597,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1500,7 +1619,10 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "properties": {
@@ -1512,7 +1634,10 @@
                         "format": "uuid4"
                       },
                       "title": "Archived",
-                      "type": "object"
+                      "type": [
+                        "object",
+                        "null"
+                      ]
                     },
                     "files": {
                       "items": {
@@ -1520,7 +1645,10 @@
                         "type": "string"
                       },
                       "title": "Files",
-                      "type": "array"
+                      "type": [
+                        "array",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -1528,17 +1656,26 @@
                     "files"
                   ],
                   "title": "BenefitDownloadablesProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "downloadables",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1554,7 +1691,10 @@
                 "properties"
               ],
               "title": "BenefitDownloadables",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             {
               "properties": {
@@ -1562,23 +1702,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1597,7 +1749,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1616,7 +1771,10 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "properties": {
@@ -1626,11 +1784,17 @@
                           "properties": {
                             "enable_customer_admin": {
                               "title": "Enable Customer Admin",
-                              "type": "boolean"
+                              "type": [
+                                "boolean",
+                                "null"
+                              ]
                             },
                             "limit": {
                               "title": "Limit",
-                              "type": "integer"
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
                             }
                           },
                           "required": [
@@ -1638,7 +1802,10 @@
                             "enable_customer_admin"
                           ],
                           "title": "BenefitLicenseKeyActivationProperties",
-                          "type": "object"
+                          "type": [
+                            "object",
+                            "null"
+                          ]
                         },
                         {
                           "type": "null"
@@ -1650,18 +1817,19 @@
                         {
                           "properties": {
                             "timeframe": {
-                              "enum": [
-                                "year",
-                                "month",
-                                "day"
-                              ],
                               "title": "Timeframe",
-                              "type": "string"
+                              "type": [
+                                "string",
+                                "null"
+                              ]
                             },
                             "ttl": {
                               "exclusiveMinimum": 0.0,
                               "title": "Ttl",
-                              "type": "integer"
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
                             }
                           },
                           "required": [
@@ -1669,7 +1837,10 @@
                             "timeframe"
                           ],
                           "title": "BenefitLicenseKeyExpirationProperties",
-                          "type": "object"
+                          "type": [
+                            "object",
+                            "null"
+                          ]
                         },
                         {
                           "type": "null"
@@ -1706,17 +1877,26 @@
                     "limit_usage"
                   ],
                   "title": "BenefitLicenseKeysProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "license_keys",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1732,7 +1912,10 @@
                 "properties"
               ],
               "title": "BenefitLicenseKeys",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             },
             {
               "description": "A benefit of type `meter_unit`.\n\nUse it to grant a number of units on a specific meter.",
@@ -1741,23 +1924,35 @@
                   "description": "Creation timestamp of the object.",
                   "format": "date-time",
                   "title": "Created At",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "deletable": {
                   "description": "Whether the benefit is deletable.",
                   "title": "Deletable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "description": {
                   "description": "The description of the benefit.",
                   "title": "Description",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "id": {
                   "description": "The ID of the benefit.",
                   "format": "uuid4",
                   "title": "Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metadata": {
                   "additionalProperties": {
@@ -1776,7 +1971,10 @@
                       }
                     ]
                   },
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "modified_at": {
                   "anyOf": [
@@ -1795,7 +1993,10 @@
                   "description": "The ID of the organization owning the benefit.",
                   "format": "uuid4",
                   "title": "Organization Id",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "properties": {
                   "description": "Properties for a benefit of type `meter_unit`.",
@@ -1803,15 +2004,24 @@
                     "meter_id": {
                       "format": "uuid4",
                       "title": "Meter Id",
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "rollover": {
                       "title": "Rollover",
-                      "type": "boolean"
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     },
                     "units": {
                       "title": "Units",
-                      "type": "integer"
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -1820,17 +2030,26 @@
                     "meter_id"
                   ],
                   "title": "BenefitMeterCreditProperties",
-                  "type": "object"
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 },
                 "selectable": {
                   "description": "Whether the benefit is selectable when creating a product.",
                   "title": "Selectable",
-                  "type": "boolean"
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "type": {
                   "const": "meter_credit",
                   "title": "Type",
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -1846,7 +2065,10 @@
                 "properties"
               ],
               "title": "BenefitMeterCredit",
-              "type": "object"
+              "type": [
+                "object",
+                "null"
+              ]
             }
           ],
           "title": "Benefit"
@@ -2641,12 +2863,6 @@
                     "recurring_interval": {
                       "anyOf": [
                         {
-                          "enum": [
-                            "day",
-                            "week",
-                            "month",
-                            "year"
-                          ],
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
@@ -2794,12 +3010,6 @@
                     "recurring_interval": {
                       "anyOf": [
                         {
-                          "enum": [
-                            "day",
-                            "week",
-                            "month",
-                            "year"
-                          ],
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
@@ -2909,12 +3119,6 @@
                     "recurring_interval": {
                       "anyOf": [
                         {
-                          "enum": [
-                            "day",
-                            "week",
-                            "month",
-                            "year"
-                          ],
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
@@ -3028,12 +3232,6 @@
                     "recurring_interval": {
                       "anyOf": [
                         {
-                          "enum": [
-                            "day",
-                            "week",
-                            "month",
-                            "year"
-                          ],
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
@@ -3293,12 +3491,6 @@
                     "recurring_interval": {
                       "anyOf": [
                         {
-                          "enum": [
-                            "day",
-                            "week",
-                            "month",
-                            "year"
-                          ],
                           "title": "SubscriptionRecurringInterval",
                           "type": "string"
                         },
@@ -3368,12 +3560,6 @@
       "recurring_interval": {
         "anyOf": [
           {
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ],
             "title": "SubscriptionRecurringInterval",
             "type": "string"
           },
@@ -3398,12 +3584,6 @@
       "trial_interval": {
         "anyOf": [
           {
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ],
             "title": "TrialInterval",
             "type": "string"
           },

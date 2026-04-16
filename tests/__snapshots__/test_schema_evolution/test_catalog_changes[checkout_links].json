@@ -208,7 +208,10 @@
                       1000
                     ],
                     "title": "Amount",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -226,23 +229,27 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "currency": {
                     "examples": [
                       "usd"
                     ],
                     "title": "Currency",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -261,7 +268,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -292,7 +302,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -310,7 +323,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -319,7 +335,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -329,7 +348,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -345,12 +367,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -371,7 +392,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountFixedOnceForeverDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -380,7 +404,10 @@
                       1000
                     ],
                     "title": "Amount",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -398,27 +425,34 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "currency": {
                     "examples": [
                       "usd"
                     ],
                     "title": "Currency",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration_in_months": {
                     "title": "Duration In Months",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -437,7 +471,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -468,7 +505,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -486,7 +526,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -495,7 +538,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -505,7 +551,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -521,12 +570,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -548,7 +596,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountFixedRepeatDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -558,7 +609,10 @@
                       1000
                     ],
                     "title": "Basis Points",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -576,16 +630,17 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -604,7 +659,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -635,7 +693,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -653,7 +714,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -662,7 +726,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -672,7 +739,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -688,12 +758,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -713,7 +782,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountPercentageOnceForeverDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               },
               {
                 "properties": {
@@ -723,7 +795,10 @@
                       1000
                     ],
                     "title": "Basis Points",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "code": {
                     "anyOf": [
@@ -741,20 +816,24 @@
                     "description": "Creation timestamp of the object.",
                     "format": "date-time",
                     "title": "Created At",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration": {
-                    "enum": [
-                      "once",
-                      "forever",
-                      "repeating"
-                    ],
                     "title": "DiscountDuration",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "duration_in_months": {
                     "title": "Duration In Months",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "ends_at": {
                     "anyOf": [
@@ -773,7 +852,10 @@
                     "description": "The ID of the object.",
                     "format": "uuid4",
                     "title": "Id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "max_redemptions": {
                     "anyOf": [
@@ -804,7 +886,10 @@
                         }
                       ]
                     },
-                    "type": "object"
+                    "type": [
+                      "object",
+                      "null"
+                    ]
                   },
                   "modified_at": {
                     "anyOf": [
@@ -822,7 +907,10 @@
                   "name": {
                     "description": "Name of the discount. Will be displayed to the customer when the discount is applied.",
                     "title": "Name",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "The organization ID.",
@@ -831,7 +919,10 @@
                     ],
                     "format": "uuid4",
                     "title": "Organization Id",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "x-polar-selector-widget": {
                       "displayProperty": "name",
                       "resourceName": "Organization",
@@ -841,7 +932,10 @@
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
                     "title": "Redemptions Count",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "starts_at": {
                     "anyOf": [
@@ -857,12 +951,11 @@
                     "title": "Starts At"
                   },
                   "type": {
-                    "enum": [
-                      "fixed",
-                      "percentage"
-                    ],
                     "title": "DiscountType",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -883,7 +976,10 @@
                   "organization_id"
                 ],
                 "title": "DiscountPercentageRepeatDurationBase",
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               }
             ],
             "title": "CheckoutLinkDiscount"
@@ -1867,12 +1963,6 @@
                           "recurring_interval": {
                             "anyOf": [
                               {
-                                "enum": [
-                                  "day",
-                                  "week",
-                                  "month",
-                                  "year"
-                                ],
                                 "title": "SubscriptionRecurringInterval",
                                 "type": "string"
                               },
@@ -2020,12 +2110,6 @@
                           "recurring_interval": {
                             "anyOf": [
                               {
-                                "enum": [
-                                  "day",
-                                  "week",
-                                  "month",
-                                  "year"
-                                ],
                                 "title": "SubscriptionRecurringInterval",
                                 "type": "string"
                               },
@@ -2135,12 +2219,6 @@
                           "recurring_interval": {
                             "anyOf": [
                               {
-                                "enum": [
-                                  "day",
-                                  "week",
-                                  "month",
-                                  "year"
-                                ],
                                 "title": "SubscriptionRecurringInterval",
                                 "type": "string"
                               },
@@ -2254,12 +2332,6 @@
                           "recurring_interval": {
                             "anyOf": [
                               {
-                                "enum": [
-                                  "day",
-                                  "week",
-                                  "month",
-                                  "year"
-                                ],
                                 "title": "SubscriptionRecurringInterval",
                                 "type": "string"
                               },
@@ -2519,12 +2591,6 @@
                           "recurring_interval": {
                             "anyOf": [
                               {
-                                "enum": [
-                                  "day",
-                                  "week",
-                                  "month",
-                                  "year"
-                                ],
                                 "title": "SubscriptionRecurringInterval",
                                 "type": "string"
                               },
@@ -2594,12 +2660,6 @@
             "recurring_interval": {
               "anyOf": [
                 {
-                  "enum": [
-                    "day",
-                    "week",
-                    "month",
-                    "year"
-                  ],
                   "title": "SubscriptionRecurringInterval",
                   "type": "string"
                 },
@@ -2624,12 +2684,6 @@
             "trial_interval": {
               "anyOf": [
                 {
-                  "enum": [
-                    "day",
-                    "week",
-                    "month",
-                    "year"
-                  ],
                   "title": "TrialInterval",
                   "type": "string"
                 },
@@ -2705,12 +2759,6 @@
       "trial_interval": {
         "anyOf": [
           {
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ],
             "title": "TrialInterval",
             "type": "string"
           },
