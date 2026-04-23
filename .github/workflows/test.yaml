@@ -74,11 +74,12 @@ jobs:
       env:
         TAP_POLARSH_TOKEN: ${{ secrets.TAP_POLARSH_TOKEN }}
         TAP_POLARSH_START_DATE: ${{ secrets.TAP_POLARSH_START_DATE }}
+        MATRIX_PYTHON_VERSION: ${{ matrix.python-version }}
       run: >
         uvx
-        --with tox-uv==${{ env.TOX_UV_VERSION }}
-        --with tox==${{ env.TOX_VERSION }}
-        tox -e ${{ matrix.python-version }} -- --junit-xml=junit.xml
+        --with tox-uv==${TOX_UV_VERSION}
+        --with tox==${TOX_VERSION}
+        tox -e ${MATRIX_PYTHON_VERSION} -- --junit-xml=junit.xml
     - uses: mikepenz/action-junit-report@74626db7353a25a20a72816467ebf035f674c5f8 # v6.2.0
       if: ${{ matrix.python-version == '3.14' && success() || failure() }} #  always run even if the previous step fails
       with:
