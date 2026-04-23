@@ -42,7 +42,7 @@ jobs:
       run: git diff --quiet tests/__snapshots__
     - name: Install LLM with GitHub Models
       if: steps.check_snapshot_changes.outcome == 'failure'
-      run: uv tool install --with llm-github-models==${{ env.LLM_GITHUB_MODELS_VERSION }} --with llm==${{ env.LLM_VERSION }} llm
+      run: uv tool install --with llm-github-models==${LLM_GITHUB_MODELS_VERSION} --with llm==${LLM_VERSION} llm
     - name: Review catalog changes
       if: steps.check_snapshot_changes.outcome == 'failure'
       id: review-catalog-changes

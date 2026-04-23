@@ -5,17 +5,19 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
-import typing as t
 from importlib import resources
-from typing import override
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import OpenAPISchema, StreamSchema
 
 from tap_polarsh import openapi
 from tap_polarsh.client import PolarStream
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
     from singer_sdk.helpers.types import Context
+    from singer_sdk.streams.rest import HTTPRequest, PageContext
 
 OPENAPI_SCHEMA = OpenAPISchema(resources.files(openapi) / "openapi.json")
 
@@ -25,44 +27,21 @@ class Organizations(PolarStream):
 
     name = "organizations"
     path = "/api/v1/organizations"
-    replication_key = None
 
     schema = StreamSchema(OPENAPI_SCHEMA, key="Organization")
 
     @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: int | None,
-    ) -> dict[str, t.Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: The context of the stream.
-            next_page_token: The next page token.
-
-        Returns:
-            The URL query parameters.
-        """
-        params = super().get_url_params(context, next_page_token)
-        params["is_member"] = self.config.get("is_member", False)
-        return params
+    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
+        req = super().get_http_request(context=context)
+        req.params["is_member"] = self.config.get("is_member", False)
+        return req
 
     @override
     def generate_child_contexts(
         self,
-        record: dict[str, t.Any],
+        record: dict[str, Any],
         context: Context | None,
-    ) -> t.Iterable[dict[str, t.Any] | None]:
-        """Generate child contexts.
-
-        Args:
-            record: The record.
-            context: The context of the stream.
-
-        Yields:
-            The child contexts.
-        """
+    ) -> Iterable[dict[str, Any] | None]:
         yield {
             "organization_id": record["id"],
         }
@@ -74,24 +53,12 @@ class _OrganizationStream(PolarStream):
     parent_stream_type = Organizations
 
     @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: int | None,
-    ) -> dict[str, t.Any]:
-        """Get URL query parameters.
+    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
+        assert context.stream_context is not None  # noqa: S101
 
-        Args:
-            context: The context of the stream.
-            next_page_token: The next page token.
-
-        Returns:
-            The URL query parameters.
-        """
-        return {
-            **super().get_url_params(context, next_page_token),
-            "organization_id": context["organization_id"] if context else None,
-        }
+        req = super().get_http_request(context=context)
+        req.params["organization_id"] = context.stream_context["organization_id"]
+        return req
 
 
 class CheckoutLinks(_OrganizationStream):

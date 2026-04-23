@@ -5,18 +5,17 @@ Copyright (c) 2024 Edgar Ramírez-Mondragón
 
 from __future__ import annotations
 
-import typing as t
-from typing import override
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
 from singer_sdk.pagination import PageNumberPaginator
 
-if t.TYPE_CHECKING:
-    from singer_sdk.helpers.types import Context
+if TYPE_CHECKING:
+    from singer_sdk.streams.rest import HTTPRequest, PageContext
 
 
-class PolarStream(RESTStream[t.Any]):
+class PolarStream(RESTStream[Any]):
     """Polar stream class."""
 
     url_base = "https://api.polar.sh"
@@ -29,37 +28,15 @@ class PolarStream(RESTStream[t.Any]):
     @property
     @override
     def authenticator(self) -> BearerTokenAuthenticator:
-        """Get an authenticator object.
-
-        Returns:
-            The authenticator instance for this REST stream.
-        """
         return BearerTokenAuthenticator(token=self.config["token"])
 
-    def get_new_paginator(self) -> PageNumberPaginator:  # noqa: PLR6301
-        """Get a new paginator object.
-
-        Returns:
-            A new paginator object.
-        """
+    @override
+    def get_new_paginator(self) -> PageNumberPaginator:
         return PageNumberPaginator(start_value=1)
 
     @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: int | None,
-    ) -> dict[str, t.Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: Stream sync context.
-            next_page_token: Next offset.
-
-        Returns:
-            Mapping of URL query parameters.
-        """
-        return {
-            "page": next_page_token,
-            "limit": self.page_size,
-        }
+    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
+        req = super().get_http_request(context=context)
+        req.params["page"] = context.next_page_token
+        req.params["limit"] = self.page_size
+        return req
