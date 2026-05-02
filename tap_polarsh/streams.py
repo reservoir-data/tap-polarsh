@@ -191,3 +191,5 @@ class BenefitGrants(PolarStream):
     primary_keys = ("id",)
 
     schema = StreamSchema(OPENAPI_SCHEMA, key="BenefitGrant")
+
+    parent_stream_type = BenefitsGitHubRepo

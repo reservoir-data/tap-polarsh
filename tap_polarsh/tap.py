@@ -54,21 +54,17 @@ class TapPolar(Tap):
             streams.Products,
             streams.Subscriptions,
             streams.Orders,
-            streams.BenefitsCustom,
-            streams.BenefitsDiscord,
+            # streams.BenefitsCustom,
+            # streams.BenefitsDiscord,
             streams.BenefitsGitHubRepo,
-            streams.BenefitsDownloadables,
-            streams.BenefitsLicenseKeys,
-            streams.BenefitsMeterCredit,
+            # streams.BenefitsDownloadables,
+            # streams.BenefitsLicenseKeys,
+            # streams.BenefitsMeterCredit,
             streams.BenefitGrants,
         ]
         streams_dict: dict[str, Stream] = {}
         for stream_type in stream_classes:
-            _stream = stream_type(tap=self)
-            streams_dict[_stream.name] = _stream
-
-        for stream_name, stream in streams_dict.items():
-            if stream_name.startswith("benefits_"):
-                stream.child_streams.append(streams_dict["benefit_grants"])
+            stream = stream_type(tap=self)
+            streams_dict[stream.name] = stream
 
         return sorted(streams_dict.values(), key=lambda x: x.name)
