@@ -31,8 +31,8 @@ class Organizations(PolarStream):
     schema = StreamSchema(OPENAPI_SCHEMA, key="Organization")
 
     @override
-    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
-        req = super().get_http_request(context=context)
+    def get_http_request(self, *, page: PageContext) -> HTTPRequest:
+        req = super().get_http_request(page=page)
         req.params["is_member"] = self.config.get("is_member", False)
         return req
 
@@ -53,11 +53,11 @@ class _OrganizationStream(PolarStream):
     parent_stream_type = Organizations
 
     @override
-    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
-        assert context.stream_context is not None  # noqa: S101
+    def get_http_request(self, *, page: PageContext) -> HTTPRequest:
+        assert page.stream_context is not None  # noqa: S101
 
-        req = super().get_http_request(context=context)
-        req.params["organization_id"] = context.stream_context["organization_id"]
+        req = super().get_http_request(page=page)
+        req.params["organization_id"] = page.stream_context["organization_id"]
         return req
 
 

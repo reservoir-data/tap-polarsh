@@ -35,8 +35,8 @@ class PolarStream(RESTStream[Any]):
         return PageNumberPaginator(start_value=1)
 
     @override
-    def get_http_request(self, *, context: PageContext) -> HTTPRequest:
-        req = super().get_http_request(context=context)
-        req.params["page"] = context.next_page_token
+    def get_http_request(self, *, page: PageContext) -> HTTPRequest:
+        req = super().get_http_request(page=page)
+        req.params["page"] = page.next_page_token
         req.params["limit"] = self.page_size
         return req
