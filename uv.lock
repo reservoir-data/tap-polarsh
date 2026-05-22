@@ -768,7 +768,6 @@ dev = [
     { name = "singer-sdk", extra = ["testing"] },
     { name = "syrupy" },
     { name = "ty" },
-    { name = "types-requests" },
 ]
 testing = [
     { name = "deptry" },
@@ -783,7 +782,6 @@ typing = [
     { name = "singer-sdk", extra = ["testing"] },
     { name = "syrupy" },
     { name = "ty" },
-    { name = "types-requests" },
 ]
 
 [package.metadata]
@@ -800,7 +798,6 @@ dev = [
     { name = "singer-sdk", extras = ["testing"] },
     { name = "syrupy", specifier = ">=5" },
     { name = "ty", specifier = ">=0.0.1a23" },
-    { name = "types-requests", specifier = "~=2.31" },
 ]
 testing = [
     { name = "deptry", specifier = ">=0.12" },
@@ -815,7 +812,6 @@ typing = [
     { name = "singer-sdk", extras = ["testing"] },
     { name = "syrupy", specifier = ">=5" },
     { name = "ty", specifier = ">=0.0.1a23" },
-    { name = "types-requests", specifier = "~=2.31" },
 ]
 
 [[package]]
@@ -885,18 +881,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/12/20812e1ad930b8d4af70eebf19ad23cff6e31efcfa613ef884531fcdbaa1/ty-0.0.34-py3-none-win32.whl", hash = "sha256:97b77ddf007271b812a313a8f0a14929bc5590958433e1fb83ef585676f53342", size = 10436048, upload-time = "2026-05-01T23:06:49.108Z" },
     { url = "https://files.pythonhosted.org/packages/b0/6a/afa095c5987868fbda27c0f731146ac8e3d07b357adfa83daccaee5b1a16/ty-0.0.34-py3-none-win_amd64.whl", hash = "sha256:1f543968accb952705134028d1fda8656882787dbbc667ad4d6c3ba23791d604", size = 11462526, upload-time = "2026-05-01T23:06:28.514Z" },
     { url = "https://files.pythonhosted.org/packages/63/8f/bf041a06260d77662c0605e56dacfe90b786bf824cbe1aed238d15fe5e84/ty-0.0.34-py3-none-win_arm64.whl", hash = "sha256:ea09108cbcb16b6b06d7596312b433bf49681e78d30e4dc7fb3c1b248a95e09a", size = 10846945, upload-time = "2026-05-01T23:06:44.428Z" },
-]
-
-[[package]]
-name = "types-requests"
-version = "2.33.0.20260508"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "urllib3" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c7/6b/eb226bdd61a982c9a03e02c657fb4ab001733506e6423906ac142331f2e3/types_requests-2.33.0.20260508.tar.gz", hash = "sha256:81b2ae5f0d20967714a6aa5ef9284c05570d7cb06b7de8f2a77b918b63ddd411", size = 23991, upload-time = "2026-05-08T04:50:56.818Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/96/080db0afdf2c5cc5fe512b41354e8d114fe8f65e9510c56ff8dfd40216ce/types_requests-2.33.0.20260508-py3-none-any.whl", hash = "sha256:fa01459cca184229713df03709db46a905325906d27e042cd4fd7ea3d15d3400", size = 20722, upload-time = "2026-05-08T04:50:55.548Z" },
 ]
 
 [[package]]

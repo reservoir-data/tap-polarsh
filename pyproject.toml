@@ -57,7 +57,6 @@ testing = [
 typing = [
   "mypy~=1.20.0",
   "ty>=0.0.1a23",
-  "types-requests~=2.31",
   { include-group = "testing" },
 ]
 
@@ -100,7 +99,6 @@ mypy = "mypy"
 pytest = "pytest"
 tap-polarsh = "tap_polarsh"
 ty = "ty"
-types-requests = "requests"
 [tool.deptry.per_rule_ignores]
 DEP002 = [
   "requests",
