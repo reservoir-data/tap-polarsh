@@ -249,6 +249,15 @@
     {
       "breadcrumb": [
         "properties",
+        "next_payment_attempt_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "metadata"
       ],
       "metadata": {
@@ -395,6 +404,17 @@
         "properties",
         "customer",
         "properties",
+        "billing_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
         "billing_address"
       ],
       "metadata": {
@@ -429,6 +449,17 @@
         "customer",
         "properties",
         "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
+        "default_payment_method_id"
       ],
       "metadata": {
         "inclusion": "available"
@@ -957,11 +988,15 @@
       "customer": {
         "properties": {
           "avatar_url": {
-            "title": "Avatar Url",
-            "type": [
-              "string",
-              "null"
-            ]
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
           },
           "billing_address": {
             "anyOf": [
@@ -1300,6 +1335,18 @@
               }
             ]
           },
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The name that should appear on the customer's invoices. Falls back to the customer name when not explicitly set.",
+            "title": "Billing Name"
+          },
           "created_at": {
             "description": "Creation timestamp of the object.",
             "format": "date-time",
@@ -1308,6 +1355,19 @@
               "string",
               "null"
             ]
+          },
+          "default_payment_method_id": {
+            "anyOf": [
+              {
+                "format": "uuid4",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The ID of the customer's default payment method, if any. Use the payment methods endpoint to retrieve its details.",
+            "title": "Default Payment Method Id"
           },
           "deleted_at": {
             "anyOf": [
@@ -1526,7 +1586,8 @@
                       "uy_ruc",
                       "ve_rif",
                       "vn_tin",
-                      "za_vat"
+                      "za_vat",
+                      "mu_tan"
                     ],
                     "title": "TaxIDFormat",
                     "type": "string"
@@ -1557,6 +1618,7 @@
           "email_verified",
           "type",
           "name",
+          "billing_name",
           "billing_address",
           "tax_id",
           "organization_id",
@@ -1745,12 +1807,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -1968,12 +2025,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -2157,12 +2209,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -2350,12 +2397,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -2453,12 +2495,16 @@
         "type": "string"
       },
       "invoice_number": {
-        "description": "The invoice number associated with this order.",
-        "title": "Invoice Number",
-        "type": [
-          "string",
-          "null"
-        ]
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The invoice number associated with this order. `null` while the order is in `draft` status; assigned at finalize.",
+        "title": "Invoice Number"
       },
       "is_invoice_generated": {
         "description": "Whether an invoice has been generated for this order.",
@@ -2615,6 +2661,19 @@
           "null"
         ]
       },
+      "next_payment_attempt_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "When the next automatic payment retry is scheduled. `null` if the order is not in dunning or all retries have been exhausted.",
+        "title": "Next Payment Attempt At"
+      },
       "paid": {
         "description": "Whether the order has been paid for.",
         "title": "Paid",
@@ -2715,6 +2774,30 @@
                   "null"
                 ]
               },
+              "meter_interval": {
+                "anyOf": [
+                  {
+                    "title": "RecurringInterval",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The meter cycle of the product, independent of the billing interval. If `None`, metered concerns follow the billing interval."
+              },
+              "meter_interval_count": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Number of meter interval units. None when no meter cycle is set.",
+                "title": "Meter Interval Count"
+              },
               "modified_at": {
                 "anyOf": [
                   {
@@ -2748,7 +2831,7 @@
               "recurring_interval": {
                 "anyOf": [
                   {
-                    "title": "SubscriptionRecurringInterval",
+                    "title": "RecurringInterval",
                     "type": "string"
                   },
                   {
@@ -2795,7 +2878,7 @@
               },
               "visibility": {
                 "description": "The visibility of the product.",
-                "title": "ProductVisibility",
+                "title": "Visibility",
                 "type": [
                   "string",
                   "null"
@@ -2814,6 +2897,8 @@
               "visibility",
               "recurring_interval",
               "recurring_interval_count",
+              "meter_interval",
+              "meter_interval_count",
               "is_recurring",
               "is_archived",
               "organization_id"
@@ -2972,6 +3057,32 @@
                   "null"
                 ]
               },
+              "current_meter_period_end": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The end timestamp of the current meter period, if the product has a meter cycle set. This is when credits next renew.",
+                "title": "Current Meter Period End"
+              },
+              "current_meter_period_start": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The start timestamp of the current meter period, if the product has a meter cycle set. Metered credits are granted and overage is settled on this cadence.",
+                "title": "Current Meter Period Start"
+              },
               "current_period_end": {
                 "description": "The end timestamp of the current billing period.",
                 "format": "date-time",
@@ -3104,6 +3215,40 @@
                 "description": "Last modification timestamp of the object.",
                 "title": "Modified At"
               },
+              "past_due_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The timestamp when the subscription entered `past_due` status.",
+                "title": "Past Due At"
+              },
+              "pause_at_period_end": {
+                "description": "Whether the subscription will be paused at the end of the current period.",
+                "title": "Pause At Period End",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "paused_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The timestamp when the subscription was paused.",
+                "title": "Paused At"
+              },
               "product_id": {
                 "description": "The ID of the subscribed product.",
                 "format": "uuid4",
@@ -3118,7 +3263,7 @@
                 "examples": [
                   "month"
                 ],
-                "title": "SubscriptionRecurringInterval",
+                "title": "RecurringInterval",
                 "type": [
                   "string",
                   "null"
@@ -3131,6 +3276,19 @@
                   "integer",
                   "null"
                 ]
+              },
+              "resumes_at": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The timestamp when a paused subscription is scheduled to automatically resume, if set.",
+                "title": "Resumes At"
               },
               "seats": {
                 "anyOf": [
@@ -3207,6 +3365,8 @@
               "status",
               "current_period_start",
               "current_period_end",
+              "current_meter_period_start",
+              "current_meter_period_end",
               "trial_start",
               "trial_end",
               "cancel_at_period_end",
@@ -3214,6 +3374,9 @@
               "started_at",
               "ends_at",
               "ended_at",
+              "pause_at_period_end",
+              "paused_at",
+              "resumes_at",
               "customer_id",
               "product_id",
               "discount_id",

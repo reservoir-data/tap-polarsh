@@ -55,6 +55,9 @@ jobs:
     name: Test
     runs-on: ubuntu-24.04
     needs: build-package
+    permissions:
+      checks: write # Required by mikepenz/action-junit-report
+      pull-requests: write # Required by mikepenz/action-junit-report for writing a comment in the PR
     strategy:
       fail-fast: true
       max-parallel: 1

@@ -96,6 +96,24 @@
     {
       "breadcrumb": [
         "properties",
+        "current_meter_period_start"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "current_meter_period_end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "trial_start"
       ],
       "metadata": {
@@ -151,6 +169,42 @@
       "breadcrumb": [
         "properties",
         "ended_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "past_due_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "pause_at_period_end"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "paused_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "resumes_at"
       ],
       "metadata": {
         "inclusion": "available"
@@ -350,6 +404,17 @@
         "properties",
         "customer",
         "properties",
+        "billing_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
         "billing_address"
       ],
       "metadata": {
@@ -384,6 +449,17 @@
         "customer",
         "properties",
         "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer",
+        "properties",
+        "default_payment_method_id"
       ],
       "metadata": {
         "inclusion": "available"
@@ -525,6 +601,28 @@
         "product",
         "properties",
         "recurring_interval_count"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "product",
+        "properties",
+        "meter_interval"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "product",
+        "properties",
+        "meter_interval_count"
       ],
       "metadata": {
         "inclusion": "available"
@@ -727,6 +825,32 @@
           "null"
         ]
       },
+      "current_meter_period_end": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The end timestamp of the current meter period, if the product has a meter cycle set. This is when credits next renew.",
+        "title": "Current Meter Period End"
+      },
+      "current_meter_period_start": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The start timestamp of the current meter period, if the product has a meter cycle set. Metered credits are granted and overage is settled on this cadence.",
+        "title": "Current Meter Period Start"
+      },
       "current_period_end": {
         "description": "The end timestamp of the current billing period.",
         "format": "date-time",
@@ -776,11 +900,15 @@
       "customer": {
         "properties": {
           "avatar_url": {
-            "title": "Avatar Url",
-            "type": [
-              "string",
-              "null"
-            ]
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
           },
           "billing_address": {
             "anyOf": [
@@ -1119,6 +1247,18 @@
               }
             ]
           },
+          "billing_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The name that should appear on the customer's invoices. Falls back to the customer name when not explicitly set.",
+            "title": "Billing Name"
+          },
           "created_at": {
             "description": "Creation timestamp of the object.",
             "format": "date-time",
@@ -1127,6 +1267,19 @@
               "string",
               "null"
             ]
+          },
+          "default_payment_method_id": {
+            "anyOf": [
+              {
+                "format": "uuid4",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The ID of the customer's default payment method, if any. Use the payment methods endpoint to retrieve its details.",
+            "title": "Default Payment Method Id"
           },
           "deleted_at": {
             "anyOf": [
@@ -1345,7 +1498,8 @@
                       "uy_ruc",
                       "ve_rif",
                       "vn_tin",
-                      "za_vat"
+                      "za_vat",
+                      "mu_tan"
                     ],
                     "title": "TaxIDFormat",
                     "type": "string"
@@ -1376,6 +1530,7 @@
           "email_verified",
           "type",
           "name",
+          "billing_name",
           "billing_address",
           "tax_id",
           "organization_id",
@@ -1579,12 +1734,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -1802,12 +1952,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -1991,12 +2136,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -2184,12 +2324,7 @@
                     "type": [
                       "string",
                       "null"
-                    ],
-                    "x-polar-selector-widget": {
-                      "displayProperty": "name",
-                      "resourceName": "Organization",
-                      "resourceRoot": "/v1/organizations"
-                    }
+                    ]
                   },
                   "redemptions_count": {
                     "description": "Number of times the discount has been redeemed.",
@@ -2717,6 +2852,40 @@
         "description": "Last modification timestamp of the object.",
         "title": "Modified At"
       },
+      "past_due_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The timestamp when the subscription entered `past_due` status.",
+        "title": "Past Due At"
+      },
+      "pause_at_period_end": {
+        "description": "Whether the subscription will be paused at the end of the current period.",
+        "title": "Pause At Period End",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "paused_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The timestamp when the subscription was paused.",
+        "title": "Paused At"
+      },
       "pending_update": {
         "anyOf": [
           {
@@ -2816,8 +2985,7 @@
               "discriminator": {
                 "mapping": {
                   "custom": "#/components/schemas/LegacyRecurringProductPriceCustom",
-                  "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed",
-                  "free": "#/components/schemas/LegacyRecurringProductPriceFree"
+                  "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed"
                 },
                 "propertyName": "amount_type"
               },
@@ -2908,7 +3076,7 @@
                     },
                     "recurring_interval": {
                       "description": "The recurring interval of the price.",
-                      "title": "SubscriptionRecurringInterval",
+                      "title": "RecurringInterval",
                       "type": [
                         "string",
                         "null"
@@ -3024,7 +3192,7 @@
                       "title": "Maximum Amount"
                     },
                     "minimum_amount": {
-                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'.",
                       "title": "Minimum Amount",
                       "type": [
                         "integer",
@@ -3075,7 +3243,7 @@
                     },
                     "recurring_interval": {
                       "description": "The recurring interval of the price.",
-                      "title": "SubscriptionRecurringInterval",
+                      "title": "RecurringInterval",
                       "type": [
                         "string",
                         "null"
@@ -3133,140 +3301,6 @@
                     "object",
                     "null"
                   ]
-                },
-                {
-                  "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
-                  "properties": {
-                    "amount_type": {
-                      "const": "free",
-                      "title": "Amount Type",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "created_at": {
-                      "description": "Creation timestamp of the object.",
-                      "format": "date-time",
-                      "title": "Created At",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "id": {
-                      "description": "The ID of the price.",
-                      "format": "uuid4",
-                      "title": "Id",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "is_archived": {
-                      "description": "Whether the price is archived and no longer available.",
-                      "title": "Is Archived",
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
-                    },
-                    "legacy": {
-                      "const": true,
-                      "readOnly": true,
-                      "title": "Legacy",
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
-                    },
-                    "modified_at": {
-                      "anyOf": [
-                        {
-                          "format": "date-time",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "Last modification timestamp of the object.",
-                      "title": "Modified At"
-                    },
-                    "price_currency": {
-                      "description": "The currency in which the customer will be charged.",
-                      "title": "Price Currency",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "product_id": {
-                      "description": "The ID of the product owning the price.",
-                      "format": "uuid4",
-                      "title": "Product Id",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "recurring_interval": {
-                      "description": "The recurring interval of the price.",
-                      "title": "SubscriptionRecurringInterval",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "source": {
-                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                      "title": "ProductPriceSource",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "tax_behavior": {
-                      "anyOf": [
-                        {
-                          "title": "TaxBehaviorOption",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
-                    },
-                    "type": {
-                      "const": "recurring",
-                      "description": "The type of the price.",
-                      "title": "Type",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "created_at",
-                    "modified_at",
-                    "id",
-                    "source",
-                    "amount_type",
-                    "price_currency",
-                    "tax_behavior",
-                    "is_archived",
-                    "product_id",
-                    "type",
-                    "recurring_interval",
-                    "legacy"
-                  ],
-                  "title": "LegacyRecurringProductPriceFree",
-                  "type": [
-                    "object",
-                    "null"
-                  ]
                 }
               ]
             },
@@ -3275,7 +3309,6 @@
                 "mapping": {
                   "custom": "#/components/schemas/ProductPriceCustom",
                   "fixed": "#/components/schemas/ProductPriceFixed",
-                  "free": "#/components/schemas/ProductPriceFree",
                   "metered_unit": "#/components/schemas/ProductPriceMeteredUnit",
                   "seat_based": "#/components/schemas/ProductPriceSeatBased"
                 },
@@ -3446,7 +3479,7 @@
                       "title": "Maximum Amount"
                     },
                     "minimum_amount": {
-                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                      "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'.",
                       "title": "Minimum Amount",
                       "type": [
                         "integer",
@@ -3531,111 +3564,6 @@
                     "preset_amount"
                   ],
                   "title": "ProductPriceCustom",
-                  "type": [
-                    "object",
-                    "null"
-                  ]
-                },
-                {
-                  "description": "A free price for a product.",
-                  "properties": {
-                    "amount_type": {
-                      "const": "free",
-                      "title": "Amount Type",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "created_at": {
-                      "description": "Creation timestamp of the object.",
-                      "format": "date-time",
-                      "title": "Created At",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "id": {
-                      "description": "The ID of the price.",
-                      "format": "uuid4",
-                      "title": "Id",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "is_archived": {
-                      "description": "Whether the price is archived and no longer available.",
-                      "title": "Is Archived",
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
-                    },
-                    "modified_at": {
-                      "anyOf": [
-                        {
-                          "format": "date-time",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "Last modification timestamp of the object.",
-                      "title": "Modified At"
-                    },
-                    "price_currency": {
-                      "description": "The currency in which the customer will be charged.",
-                      "title": "Price Currency",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "product_id": {
-                      "description": "The ID of the product owning the price.",
-                      "format": "uuid4",
-                      "title": "Product Id",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "source": {
-                      "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                      "title": "ProductPriceSource",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "tax_behavior": {
-                      "anyOf": [
-                        {
-                          "title": "TaxBehaviorOption",
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ],
-                      "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
-                    }
-                  },
-                  "required": [
-                    "created_at",
-                    "modified_at",
-                    "id",
-                    "source",
-                    "amount_type",
-                    "price_currency",
-                    "tax_behavior",
-                    "is_archived",
-                    "product_id"
-                  ],
-                  "title": "ProductPriceFree",
                   "type": [
                     "object",
                     "null"
@@ -3771,7 +3699,6 @@
                               },
                               "price_per_seat": {
                                 "description": "Price per seat in cents for this tier",
-                                "maximum": 99999999.0,
                                 "minimum": 0.0,
                                 "title": "Price Per Seat",
                                 "type": [
@@ -3953,7 +3880,9 @@
                       "required": [
                         "id",
                         "name",
-                        "unit"
+                        "unit",
+                        "custom_label",
+                        "custom_multiplier"
                       ],
                       "title": "ProductPriceMeter",
                       "type": [
@@ -4144,12 +4073,7 @@
                           "type": [
                             "string",
                             "null"
-                          ],
-                          "x-polar-selector-widget": {
-                            "displayProperty": "name",
-                            "resourceName": "Organization",
-                            "resourceRoot": "/v1/organizations"
-                          }
+                          ]
                         },
                         "properties": {
                           "properties": {
@@ -4317,12 +4241,7 @@
                           "type": [
                             "string",
                             "null"
-                          ],
-                          "x-polar-selector-widget": {
-                            "displayProperty": "name",
-                            "resourceName": "Organization",
-                            "resourceRoot": "/v1/organizations"
-                          }
+                          ]
                         },
                         "properties": {
                           "properties": {
@@ -4483,12 +4402,7 @@
                           "type": [
                             "string",
                             "null"
-                          ],
-                          "x-polar-selector-widget": {
-                            "displayProperty": "name",
-                            "resourceName": "Organization",
-                            "resourceRoot": "/v1/organizations"
-                          }
+                          ]
                         },
                         "properties": {
                           "properties": {
@@ -4649,12 +4563,7 @@
                           "type": [
                             "string",
                             "null"
-                          ],
-                          "x-polar-selector-widget": {
-                            "displayProperty": "name",
-                            "resourceName": "Organization",
-                            "resourceRoot": "/v1/organizations"
-                          }
+                          ]
                         },
                         "properties": {
                           "properties": {
@@ -4797,12 +4706,7 @@
                           "type": [
                             "string",
                             "null"
-                          ],
-                          "x-polar-selector-widget": {
-                            "displayProperty": "name",
-                            "resourceName": "Organization",
-                            "resourceRoot": "/v1/organizations"
-                          }
+                          ]
                         },
                         "properties": {
                           "properties": {
@@ -5098,6 +5002,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -5111,7 +5031,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitCustom",
                   "type": [
@@ -5271,6 +5193,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -5284,7 +5222,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitDiscord",
                   "type": [
@@ -5441,6 +5381,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -5454,7 +5410,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitGitHubRepository",
                   "type": [
@@ -5602,6 +5560,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -5615,7 +5589,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitDownloadables",
                   "type": [
@@ -5832,6 +5808,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -5845,7 +5837,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitLicenseKeys",
                   "type": [
@@ -5994,6 +5988,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -6007,7 +6017,9 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitMeterCredit",
                   "type": [
@@ -6128,6 +6140,22 @@
                         "string",
                         "null"
                       ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "required": [
@@ -6141,9 +6169,227 @@
                     "is_deleted",
                     "organization_id",
                     "metadata",
-                    "properties"
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
                   ],
                   "title": "BenefitFeatureFlag",
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                {
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation timestamp of the object.",
+                      "format": "date-time",
+                      "title": "Created At",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "deletable": {
+                      "description": "Whether the benefit is deletable.",
+                      "title": "Deletable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "The description of the benefit.",
+                      "title": "Description",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "id": {
+                      "description": "The ID of the benefit.",
+                      "format": "uuid4",
+                      "title": "Id",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "is_deleted": {
+                      "description": "Whether the benefit is deleted.",
+                      "title": "Is Deleted",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "metadata": {
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "modified_at": {
+                      "anyOf": [
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Last modification timestamp of the object.",
+                      "title": "Modified At"
+                    },
+                    "organization_id": {
+                      "description": "The ID of the organization owning the benefit.",
+                      "format": "uuid4",
+                      "title": "Organization Id",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "properties": {
+                      "properties": {
+                        "archive_on_revoke": {
+                          "default": true,
+                          "description": "Archive the channel when the benefit is revoked.",
+                          "title": "Archive On Revoke",
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        },
+                        "channel_name_template": {
+                          "description": "Template for the channel name. Supports placeholders: {customer_name}, {customer_email_local}, and {metadata.<key>} for any value stored in customer user metadata.",
+                          "maxLength": 80,
+                          "minLength": 1,
+                          "title": "Channel Name Template",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "private": {
+                          "default": true,
+                          "description": "Create the channel as private (recommended).",
+                          "title": "Private",
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        },
+                        "slack_integration_id": {
+                          "description": "Polar Slack integration linked to this benefit.",
+                          "format": "uuid4",
+                          "title": "Slack Integration Id",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "team_invitees": {
+                          "description": "Slack user IDs from the merchant workspace to invite to every channel created for this benefit.",
+                          "items": {
+                            "type": "string"
+                          },
+                          "title": "Team Invitees",
+                          "type": [
+                            "array",
+                            "null"
+                          ]
+                        },
+                        "welcome_message": {
+                          "anyOf": [
+                            {
+                              "maxLength": 4000,
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Optional message posted to the channel right after creation.",
+                          "title": "Welcome Message"
+                        }
+                      },
+                      "required": [
+                        "slack_integration_id",
+                        "channel_name_template"
+                      ],
+                      "title": "BenefitSlackSharedChannelProperties",
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "selectable": {
+                      "description": "Whether the benefit is selectable when creating a product.",
+                      "title": "Selectable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "const": "slack_shared_channel",
+                      "title": "Type",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility": {
+                      "description": "The visibility of the benefit in the customer portal.",
+                      "title": "Visibility",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "visibility_configurable": {
+                      "readOnly": true,
+                      "title": "Visibility Configurable",
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "created_at",
+                    "modified_at",
+                    "type",
+                    "description",
+                    "selectable",
+                    "deletable",
+                    "is_deleted",
+                    "organization_id",
+                    "metadata",
+                    "visibility",
+                    "properties",
+                    "visibility_configurable"
+                  ],
+                  "title": "BenefitSlackSharedChannel",
                   "type": [
                     "object",
                     "null"
@@ -6411,6 +6657,30 @@
               "null"
             ]
           },
+          "meter_interval": {
+            "anyOf": [
+              {
+                "title": "RecurringInterval",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The meter cycle of the product, independent of the billing interval. If `None`, metered concerns follow the billing interval."
+          },
+          "meter_interval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Number of meter interval units. None when no meter cycle is set.",
+            "title": "Meter Interval Count"
+          },
           "modified_at": {
             "anyOf": [
               {
@@ -6449,8 +6719,7 @@
                   "discriminator": {
                     "mapping": {
                       "custom": "#/components/schemas/LegacyRecurringProductPriceCustom",
-                      "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed",
-                      "free": "#/components/schemas/LegacyRecurringProductPriceFree"
+                      "fixed": "#/components/schemas/LegacyRecurringProductPriceFixed"
                     },
                     "propertyName": "amount_type"
                   },
@@ -6541,7 +6810,7 @@
                         },
                         "recurring_interval": {
                           "description": "The recurring interval of the price.",
-                          "title": "SubscriptionRecurringInterval",
+                          "title": "RecurringInterval",
                           "type": [
                             "string",
                             "null"
@@ -6657,7 +6926,7 @@
                           "title": "Maximum Amount"
                         },
                         "minimum_amount": {
-                          "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                          "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'.",
                           "title": "Minimum Amount",
                           "type": [
                             "integer",
@@ -6708,7 +6977,7 @@
                         },
                         "recurring_interval": {
                           "description": "The recurring interval of the price.",
-                          "title": "SubscriptionRecurringInterval",
+                          "title": "RecurringInterval",
                           "type": [
                             "string",
                             "null"
@@ -6766,140 +7035,6 @@
                         "object",
                         "null"
                       ]
-                    },
-                    {
-                      "description": "A free recurring price for a product, i.e. a subscription.\n\n**Deprecated**: The recurring interval should be set on the product itself.",
-                      "properties": {
-                        "amount_type": {
-                          "const": "free",
-                          "title": "Amount Type",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "created_at": {
-                          "description": "Creation timestamp of the object.",
-                          "format": "date-time",
-                          "title": "Created At",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "id": {
-                          "description": "The ID of the price.",
-                          "format": "uuid4",
-                          "title": "Id",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "is_archived": {
-                          "description": "Whether the price is archived and no longer available.",
-                          "title": "Is Archived",
-                          "type": [
-                            "boolean",
-                            "null"
-                          ]
-                        },
-                        "legacy": {
-                          "const": true,
-                          "readOnly": true,
-                          "title": "Legacy",
-                          "type": [
-                            "boolean",
-                            "null"
-                          ]
-                        },
-                        "modified_at": {
-                          "anyOf": [
-                            {
-                              "format": "date-time",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Last modification timestamp of the object.",
-                          "title": "Modified At"
-                        },
-                        "price_currency": {
-                          "description": "The currency in which the customer will be charged.",
-                          "title": "Price Currency",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "product_id": {
-                          "description": "The ID of the product owning the price.",
-                          "format": "uuid4",
-                          "title": "Product Id",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "recurring_interval": {
-                          "description": "The recurring interval of the price.",
-                          "title": "SubscriptionRecurringInterval",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "source": {
-                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                          "title": "ProductPriceSource",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "tax_behavior": {
-                          "anyOf": [
-                            {
-                              "title": "TaxBehaviorOption",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
-                        },
-                        "type": {
-                          "const": "recurring",
-                          "description": "The type of the price.",
-                          "title": "Type",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "created_at",
-                        "modified_at",
-                        "id",
-                        "source",
-                        "amount_type",
-                        "price_currency",
-                        "tax_behavior",
-                        "is_archived",
-                        "product_id",
-                        "type",
-                        "recurring_interval",
-                        "legacy"
-                      ],
-                      "title": "LegacyRecurringProductPriceFree",
-                      "type": [
-                        "object",
-                        "null"
-                      ]
                     }
                   ]
                 },
@@ -6908,7 +7043,6 @@
                     "mapping": {
                       "custom": "#/components/schemas/ProductPriceCustom",
                       "fixed": "#/components/schemas/ProductPriceFixed",
-                      "free": "#/components/schemas/ProductPriceFree",
                       "metered_unit": "#/components/schemas/ProductPriceMeteredUnit",
                       "seat_based": "#/components/schemas/ProductPriceSeatBased"
                     },
@@ -7079,7 +7213,7 @@
                           "title": "Maximum Amount"
                         },
                         "minimum_amount": {
-                          "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. Defaults to 50 cents.",
+                          "description": "The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'.",
                           "title": "Minimum Amount",
                           "type": [
                             "integer",
@@ -7164,111 +7298,6 @@
                         "preset_amount"
                       ],
                       "title": "ProductPriceCustom",
-                      "type": [
-                        "object",
-                        "null"
-                      ]
-                    },
-                    {
-                      "description": "A free price for a product.",
-                      "properties": {
-                        "amount_type": {
-                          "const": "free",
-                          "title": "Amount Type",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "created_at": {
-                          "description": "Creation timestamp of the object.",
-                          "format": "date-time",
-                          "title": "Created At",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "id": {
-                          "description": "The ID of the price.",
-                          "format": "uuid4",
-                          "title": "Id",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "is_archived": {
-                          "description": "Whether the price is archived and no longer available.",
-                          "title": "Is Archived",
-                          "type": [
-                            "boolean",
-                            "null"
-                          ]
-                        },
-                        "modified_at": {
-                          "anyOf": [
-                            {
-                              "format": "date-time",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "Last modification timestamp of the object.",
-                          "title": "Modified At"
-                        },
-                        "price_currency": {
-                          "description": "The currency in which the customer will be charged.",
-                          "title": "Price Currency",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "product_id": {
-                          "description": "The ID of the product owning the price.",
-                          "format": "uuid4",
-                          "title": "Product Id",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "source": {
-                          "description": "The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session.",
-                          "title": "ProductPriceSource",
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "tax_behavior": {
-                          "anyOf": [
-                            {
-                              "title": "TaxBehaviorOption",
-                              "type": "string"
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ],
-                          "description": "The tax behavior of the price. If null, it defaults to the organization's default tax behavior."
-                        }
-                      },
-                      "required": [
-                        "created_at",
-                        "modified_at",
-                        "id",
-                        "source",
-                        "amount_type",
-                        "price_currency",
-                        "tax_behavior",
-                        "is_archived",
-                        "product_id"
-                      ],
-                      "title": "ProductPriceFree",
                       "type": [
                         "object",
                         "null"
@@ -7404,7 +7433,6 @@
                                   },
                                   "price_per_seat": {
                                     "description": "Price per seat in cents for this tier",
-                                    "maximum": 99999999.0,
                                     "minimum": 0.0,
                                     "title": "Price Per Seat",
                                     "type": [
@@ -7586,7 +7614,9 @@
                           "required": [
                             "id",
                             "name",
-                            "unit"
+                            "unit",
+                            "custom_label",
+                            "custom_multiplier"
                           ],
                           "title": "ProductPriceMeter",
                           "type": [
@@ -7696,7 +7726,7 @@
           "recurring_interval": {
             "anyOf": [
               {
-                "title": "SubscriptionRecurringInterval",
+                "title": "RecurringInterval",
                 "type": "string"
               },
               {
@@ -7743,7 +7773,7 @@
           },
           "visibility": {
             "description": "The visibility of the product.",
-            "title": "ProductVisibility",
+            "title": "Visibility",
             "type": [
               "string",
               "null"
@@ -7761,6 +7791,8 @@
           "visibility",
           "recurring_interval",
           "recurring_interval_count",
+          "meter_interval",
+          "meter_interval_count",
           "is_recurring",
           "is_archived",
           "organization_id",
@@ -7787,7 +7819,7 @@
       },
       "recurring_interval": {
         "description": "The interval at which the subscription recurs.",
-        "title": "SubscriptionRecurringInterval",
+        "title": "RecurringInterval",
         "type": [
           "string",
           "null"
@@ -7800,6 +7832,19 @@
           "integer",
           "null"
         ]
+      },
+      "resumes_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "The timestamp when a paused subscription is scheduled to automatically resume, if set.",
+        "title": "Resumes At"
       },
       "seats": {
         "anyOf": [
@@ -7872,6 +7917,8 @@
       "status",
       "current_period_start",
       "current_period_end",
+      "current_meter_period_start",
+      "current_meter_period_end",
       "trial_start",
       "trial_end",
       "cancel_at_period_end",
@@ -7879,6 +7926,9 @@
       "started_at",
       "ends_at",
       "ended_at",
+      "pause_at_period_end",
+      "paused_at",
+      "resumes_at",
       "customer_id",
       "product_id",
       "discount_id",

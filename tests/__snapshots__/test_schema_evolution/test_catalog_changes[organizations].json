@@ -123,6 +123,15 @@
     {
       "breadcrumb": [
         "properties",
+        "sso_enforced"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "default_presentment_currency"
       ],
       "metadata": {
@@ -214,37 +223,6 @@
     {
       "breadcrumb": [
         "properties",
-        "notification_settings"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "notification_settings",
-        "properties",
-        "new_order"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "notification_settings",
-        "properties",
-        "new_subscription"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
         "customer_email_settings"
       ],
       "metadata": {
@@ -312,6 +290,28 @@
         "customer_email_settings",
         "properties",
         "subscription_past_due"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_paused"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_email_settings",
+        "properties",
+        "subscription_resumed"
       ],
       "metadata": {
         "inclusion": "available"
@@ -437,6 +437,19 @@
         "subscription",
         "properties",
         "update_plan"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customer_portal_settings",
+        "properties",
+        "subscription",
+        "properties",
+        "pause"
       ],
       "metadata": {
         "inclusion": "available"
@@ -999,8 +1012,22 @@
               "null"
             ]
           },
+          "subscription_paused": {
+            "title": "Subscription Paused",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "subscription_renewal_reminder": {
             "title": "Subscription Renewal Reminder",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "subscription_resumed": {
+            "title": "Subscription Resumed",
             "type": [
               "boolean",
               "null"
@@ -1042,6 +1069,8 @@
           "subscription_cycled",
           "subscription_cycled_after_trial",
           "subscription_past_due",
+          "subscription_paused",
+          "subscription_resumed",
           "subscription_renewal_reminder",
           "subscription_revoked",
           "subscription_trial_conversion_reminder",
@@ -1075,6 +1104,13 @@
           },
           "subscription": {
             "properties": {
+              "pause": {
+                "title": "Pause",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
               "update_plan": {
                 "title": "Update Plan",
                 "type": [
@@ -1184,6 +1220,24 @@
                   "null"
                 ]
               },
+              "compass_enabled": {
+                "default": false,
+                "description": "If this organization has the split product navigation (Billing / Compass / Customers) enabled in the dashboard",
+                "title": "Compass Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "disputes_enabled": {
+                "default": false,
+                "description": "If this organization has the disputes dashboard enabled",
+                "title": "Disputes Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
               "issue_funding_enabled": {
                 "default": false,
                 "description": "If this organization has issue funding enabled",
@@ -1197,6 +1251,24 @@
                 "default": false,
                 "description": "If this organization has the Member model enabled",
                 "title": "Member Model Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "merchant_migration_enabled": {
+                "default": false,
+                "description": "If this organization can migrate its billing from another provider (e.g. Stripe) to Polar.",
+                "title": "Merchant Migration Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "off_session_charges_enabled": {
+                "default": false,
+                "description": "If this organization can create and finalize draft orders via the API (off-session charges against a saved payment method).",
+                "title": "Off Session Charges Enabled",
                 "type": [
                   "boolean",
                   "null"
@@ -1217,6 +1289,15 @@
                 "description": "Ordered list of metric slugs shown on the dashboard overview.",
                 "title": "Overview Metrics"
               },
+              "preview_access_enabled": {
+                "default": false,
+                "description": "If this organization has preview access to new features enabled",
+                "title": "Preview Access Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
               "reset_proration_behavior_enabled": {
                 "default": false,
                 "description": "If this organization has access to reset proration behavior.",
@@ -1230,6 +1311,24 @@
                 "default": false,
                 "description": "If this organization has seat-based pricing enabled",
                 "title": "Seat Based Pricing Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "slack_benefit_enabled": {
+                "default": false,
+                "description": "Enables the slack shared channel benefit",
+                "title": "Slack Benefit Enabled",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "sso_enabled": {
+                "default": false,
+                "description": "If this organization has single sign-on configuration enabled",
+                "title": "Sso Enabled",
                 "type": [
                   "boolean",
                   "null"
@@ -1281,34 +1380,6 @@
         "title": "Name",
         "type": [
           "string",
-          "null"
-        ]
-      },
-      "notification_settings": {
-        "description": "Settings related to notifications",
-        "properties": {
-          "new_order": {
-            "title": "New Order",
-            "type": [
-              "boolean",
-              "null"
-            ]
-          },
-          "new_subscription": {
-            "title": "New Subscription",
-            "type": [
-              "boolean",
-              "null"
-            ]
-          }
-        },
-        "required": [
-          "new_order",
-          "new_subscription"
-        ],
-        "title": "OrganizationNotificationSettings",
-        "type": [
-          "object",
           "null"
         ]
       },
@@ -1378,6 +1449,14 @@
         "title": "Socials",
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "sso_enforced": {
+        "description": "Whether members must access this organization through its SSO connection.",
+        "title": "Sso Enforced",
+        "type": [
+          "boolean",
           "null"
         ]
       },
@@ -1468,11 +1547,11 @@
       "socials",
       "status",
       "details_submitted_at",
+      "sso_enforced",
       "default_presentment_currency",
       "default_tax_behavior",
       "feature_settings",
       "subscription_settings",
-      "notification_settings",
       "customer_email_settings",
       "customer_portal_settings",
       "account_id",
