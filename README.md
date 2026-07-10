@@ -74,7 +74,6 @@ Get a [Personal Access Token](https://polar.sh/settings) and provide it as the `
 
 ## Supported Python Versions
 
-- 3.12
 - 3.13
 - 3.14
 
