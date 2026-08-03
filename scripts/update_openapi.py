@@ -32,7 +32,7 @@ def main() -> None:
     request = urllib.request.Request(OPENAPI_URL, headers={"User-Agent": "tap-polarsh"})
     with (
         tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8") as f_out,
-        urllib.request.urlopen(request) as f_req,  # noqa: S310
+        urllib.request.urlopen(request) as f_req,  # ruff: ignore[suspicious-url-open-usage]
     ):
         f_req = cast("HTTPResponse", f_req)
         if f_req.status != http.HTTPStatus.OK:
