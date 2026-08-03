@@ -54,7 +54,7 @@ class _OrganizationStream(PolarStream):
 
     @override
     def get_http_request(self, *, page: PageContext) -> HTTPRequest:
-        assert page.stream_context is not None  # noqa: S101
+        assert page.stream_context is not None  # ruff: ignore[assert]
 
         req = super().get_http_request(page=page)
         req.params["organization_id"] = page.stream_context["organization_id"]
