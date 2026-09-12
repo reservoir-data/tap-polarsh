@@ -1,0 +1,310 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "created_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modified_at"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "description"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "selectable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "deletable"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "is_deleted"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "organization_id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "metadata"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "repository_owner"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "repository_name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "properties",
+        "properties",
+        "permission"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "replication_method": "FULL_TABLE",
+  "schema": {
+    "description": "A benefit of type `github_repository`.\n\nUse it to automatically invite your backers to a private GitHub repository.",
+    "properties": {
+      "created_at": {
+        "description": "Creation timestamp of the object.",
+        "format": "date-time",
+        "title": "Created At",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "deletable": {
+        "description": "Whether the benefit is deletable.",
+        "title": "Deletable",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "description": {
+        "description": "The description of the benefit.",
+        "title": "Description",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "The ID of the benefit.",
+        "format": "uuid4",
+        "title": "Id",
+        "type": "string"
+      },
+      "is_deleted": {
+        "description": "Whether the benefit is deleted.",
+        "title": "Is Deleted",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "metadata": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "modified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Last modification timestamp of the object.",
+        "title": "Modified At"
+      },
+      "organization_id": {
+        "description": "The ID of the organization owning the benefit.",
+        "format": "uuid4",
+        "title": "Organization Id",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "properties": {
+        "description": "Properties for a benefit of type `github_repository`.",
+        "properties": {
+          "permission": {
+            "description": "The permission level to grant. Read more about roles and their permissions on [GitHub documentation](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role).",
+            "title": "Permission",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "repository_name": {
+            "description": "The name of the repository.",
+            "title": "Repository Name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "repository_owner": {
+            "description": "The owner of the repository.",
+            "title": "Repository Owner",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "repository_owner",
+          "repository_name",
+          "permission"
+        ],
+        "title": "BenefitGitHubRepositoryProperties",
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "selectable": {
+        "description": "Whether the benefit is selectable when creating a product.",
+        "title": "Selectable",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "type": {
+        "title": "Type",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "modified_at",
+      "type",
+      "description",
+      "selectable",
+      "deletable",
+      "is_deleted",
+      "organization_id",
+      "metadata",
+      "properties"
+    ],
+    "title": "BenefitGitHubRepository",
+    "type": "object"
+  },
+  "stream": "benefits_github_repo",
+  "tap_stream_id": "benefits_github_repo"
+}
