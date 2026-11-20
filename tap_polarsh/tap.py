@@ -48,10 +48,23 @@ class TapPolar(Tap):
         Returns:
             A list of Neon Serverless Postgres streams.
         """
-        return [
-            streams.Organizations(tap=self),
-            streams.CheckoutLinks(tap=self),
-            streams.Products(tap=self),
-            streams.Subscriptions(tap=self),
-            streams.Orders(tap=self),
+        stream_classes = [
+            streams.Organizations,
+            streams.CheckoutLinks,
+            streams.Products,
+            streams.Subscriptions,
+            streams.Orders,
+            # streams.BenefitsCustom,
+            # streams.BenefitsDiscord,
+            streams.BenefitsGitHubRepo,
+            # streams.BenefitsDownloadables,
+            # streams.BenefitsLicenseKeys,
+            # streams.BenefitsMeterCredit,
+            streams.BenefitGrants,
         ]
+        streams_dict: dict[str, Stream] = {}
+        for stream_type in stream_classes:
+            stream = stream_type(tap=self)
+            streams_dict[stream.name] = stream
+
+        return sorted(streams_dict.values(), key=lambda x: x.name)
